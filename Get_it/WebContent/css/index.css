@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap');
 
 * {
-    
+    border: 1px solid black;
 }
 
 #menu {
@@ -83,6 +83,10 @@
 
 #search_button {
     margin-left: 50px;
+}
+
+#sec {
+    text-align: center;
 }
 
 #foot {
