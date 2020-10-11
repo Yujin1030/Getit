@@ -2,7 +2,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap');
 
+<<<<<<< HEAD
 
+=======
+* {
+    border: 1px solid black;
+}
+>>>>>>> branch 'master' of https://github.com/Yujin1030/Getit.git
 
 #menu {
     width: 1900px;
@@ -81,6 +87,10 @@
 
 #search_button {
     margin-left: 50px;
+}
+
+#sec {
+    text-align: center;
 }
 
 #foot {
