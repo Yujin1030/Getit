@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+<link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+
+* {
+    
+}
+
+#menu {
+    width: 1900px;
+    height: 80px;
+}
+
+#nav_div {
+    width: 505px;
+    float: left;
+    margin-left: 140px;
+}
+
+#nav {
+    height: 50px;
+    padding: 5px 1px;
+    margin: 0;
+    background: white;
+    margin-top: 22px;
+}
+
+#nav li {
+    list-style: none;
+    float: left;
+    margin: 0px 22px; /* 글씨 간 간격*/
+    padding: 0;
+    position: relative;
+}
+
+#nav li a {
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    font-weight: bold;
+    color: black;
+}
+#nav li:hover > a {
+    color: gray;
+}
+
+#logo_div {
+    width: 500px;
+    float: left;
+    margin-top: 13px;
+    text-align: center;
+    margin-left: 55px;
+}
+
+#main_logo {
+    list-style: none;
+    display: block;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    font-weight: bold;
+}
+
+#main_logo a {
+    text-decoration: none;
+    color: black;
+    font-size: 35px;
+}
+
+#main_logo a:hover {
+    color: gray;
+}
+
+#sub_div {
+    float: right;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+#sub_div li {
+    list-style: none;
+    float: left;
+    margin-left: 40px;
+}
+
+#search_button {
+    margin-left: 50px;
+}
+
+#foot {
+    height: 100px;
+    text-align: center;
+}
