@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Assemble</title>
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<style>
-    body {
-        width: 1900px;
-        height: 2400px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <title>Assemble</title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
+
 <body>
     <header>
-        <div id="menu" style="border: 1px solid black;">
+        <div id="menu">
             <div id="nav_div">
                 <ul id="nav">
                     <li><a href="#">Recommend</a></li>
@@ -27,45 +22,90 @@
                 <li id="main_logo"><a href="#">Assemble</a></li>
             </div>
             <div id="sub_div">
-                <li id="search_button"><img src="img/search.png" width="20px;" height="20px;"></li>
-                <li id="login_button"><img src="img/login.png" width="20px;" height="20px;"></li>
+                <li id="search_button"><img src="img/login.png" width="20px;" height="20px;"></li>
+                <li id="login_button"><img src="img/search.png" width="20px;" height="20px;"></li>
             </div>
         </div>
     </header>
     <nav>
-        <div id="main_picture">
-            <img src="img/%EB%A9%94%EC%9D%B8.PNG" width="100%;">
+        <div>
+            <img src="img/%EB%A9%94%EC%9D%B8.PNG" style="width: 100%; height: 100%;">
         </div>
     </nav>
-    <br><br>
     <section id="sec">
-        <span id="head1">recommend</span><br><br>
-        <a href="#"><img src="img/%EB%B3%B8%EC%B2%B41.PNG"></a>
-        <a href="#"><img src="img/%EB%B3%B8%EC%B2%B41.PNG"></a>
-        <a href="#"><img src="img/%EB%B3%B8%EC%B2%B41.PNG"></a>
-        <a href="#"><img src="img/%EB%B3%B8%EC%B2%B41.PNG"></a>
-        <br><br>
-        <span id="head2">Self</span><br><br>
-        <a href="#"><img src="img/self.PNG"></a>
-        <a href="#"><img src="img/self.PNG"></a>
-        <a href="#"><img src="img/self.PNG"></a>
-        <a href="#"><img src="img/self.PNG"></a>
-        <br><br>
-        <span id="head3">Other</span><br><br>
-        <a href="#"><img src="img/other.PNG"></a>
-        <a href="#"><img src="img/other.PNG"></a>
-        <a href="#"><img src="img/other.PNG"></a>
-        <a href="#"><img src="img/other.PNG"></a>
-        <br><br>
-        <span id="head4">Used Deal</span><br><br>
-        <a href="#"><img src="img/%EC%A4%91%EA%B3%A0.PNG"></a>
-        <a href="#"><img src="img/%EC%A4%91%EA%B3%A0.PNG"></a>
-        <a href="#"><img src="img/%EC%A4%91%EA%B3%A0.PNG"></a>
-        <a href="#"><img src="img/%EC%A4%91%EA%B3%A0.PNG"></a>
-        <br><br>
+        <div id="sec_left"></div>
+        <div id="sec_middle">
+            <div id="title1">Recommend</div>
+            <div id="recommend">
+                <div id="recommend_layout1"></div>
+                <div id="recommend_layout2"></div>
+                <div id="recommend_layout3"></div>
+                <div id="recommend_layout4"></div>
+            </div>
+            <div id="title2">self</div>
+            <div id="self">
+                <div id="self_layout1">
+                </div>
+                <div id="self_layout2">
+
+                </div>
+                <div id="self_layout3">
+
+                </div>
+                <div id="self_layout4">
+
+                </div>
+            </div>
+            <div id="title3">other</div>
+            <div id="other">
+                <div id="other_layout1"></div>
+                <div id="other_layout2"></div>
+                <div id="other_layout3"></div>
+                <div id="other_layout4"></div>
+            </div>
+            <div id="title4">usedDeal</div>
+            <div id="usedDeal">
+                <div id="usedDeal_layout1"></div>
+                <div id="usedDeal_layout2"></div>
+                <div id="usedDeal_layout3"></div>
+                <div id="usedDeal_layout4"></div>
+            </div>
+        </div>
+        <div id="sec_right">
+            <div id="sec_right_button">
+                <a href="#menu" class="top">top</a>
+                <a href="#foot" class="bottom">bottom</a>
+            </div>
+        </div>
     </section>
     <footer id="foot">
-        Assemble
+        <div id="foot_left">
+            <div id="foot_left_layout1">Assemble</div>
+            <div id="foot_left_layout2">
+                <ul>
+                    <li>(주)어셈블</li>
+                    <li>대표이사: 노유진</li>
+                    <li>서울특별시 중구 남대문로 120 대일빌딩 2F,3F</li>
+                    <li>사업자등록번호: XXX-XX-XXXXXX</li>
+                    <li>COPYRIGHT © TENBYTEN ALL RIGHTS RESERVED.</li>
+                </ul>
+            </div>
+        </div>
+        <div id="foot_right">
+            <div id="customerCenter"></div>
+            <div id="customerCenter_text">
+                <ul>
+                    <li class="phone">02-1234-5678</li>
+                    <li class="time">평일 09:00~18:00 / 점심시간 12:00~13:00</li>
+                    <li class="notice">주말 및 공휴일은 휴무입니다.</li>
+                </ul>
+            </div>
+            <div id="depositAccount"></div>
+            <div id="depositAccount_text">
+            <ul>
+                <li class="account">국민은행 01234567-00-1234567</li>
+                <li class="account_holder">예금주: 노유진</li>
+            </ul></div>
+        </div>
     </footer>
-</body>
-</html>
+</body></html>
