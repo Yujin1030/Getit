@@ -8,6 +8,7 @@ body {
     height: 2400px;
 }
 
+/*
 div {
     border: 1px solid black;
     box-sizing: border-box;
@@ -17,6 +18,8 @@ section {
     border: 1px solid black;
     box-sizing: border-box;
 }
+*/
+/* */
 
 header {
     width: 100%;
@@ -25,13 +28,14 @@ header {
 
 #menu {
     width: 100%;
-    height: 100%;
+    height: 5%;
+    position: fixed;
 }
 
 #menu ul li {
     list-style: none;
     float: left;
-    margin: 0px 22px;
+    margin: 0px 10px;
     /* 글씨 간 간격*/
     line-height: 40px;
     padding-left: 10px;
@@ -41,11 +45,15 @@ header {
 #menu ul li a {
     text-decoration: none;
     display: block;
-    font-size: 14px;
+    font-size: 15px;
     font-family: 'Sawarabi Gothic', sans-serif;
     font-weight: bold;
     line-height: 10px;
     color: black;
+}
+
+#first_nav {
+    margin-left:140px;
 }
 
 #nav_div {
@@ -57,6 +65,7 @@ header {
 #nav_div a:hover {
     color: gray;
 }
+
 
 #logo_div {
     width: 30%;
@@ -73,10 +82,6 @@ header {
     text-decoration: none;
     color: black;
     font-size: 35px;
-}
-
-#main_logo a:hover {
-    color: gray;
 }
 
 #sub_div {
@@ -102,6 +107,76 @@ nav div {
     width: 100%;
     height: 100%;
 }
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+
+#wrap {
+  margin-left: 370px;
+  display: inline-block;
+  height: 40px;
+  padding: 0;
+  position: relative;
+}
+
+input[type="text"] {
+  height: 30px;
+  font-size: 16px;
+  display: inline-block;
+  font-family: 'Sawarabi Gothic', sans-serif;
+  font-weight: 20;
+  border: none;
+  outline: none;
+  color: black;
+  padding: 3px;
+  padding-right: 30px;
+  width: 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  z-index: 3;
+  transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+  cursor: pointer;
+}
+
+input[type="text"]:focus:hover {
+  border-bottom: 1px solid black;
+}
+
+input[type="text"]:focus {
+  width: 200px;
+  z-index: 1;
+  border-bottom: 1px solid black;
+  cursor: text;
+}
+input[type="submit"] {
+  margin-top: 3px;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  float: right;
+  background: url(https://ifh.cc/g/YsbNTw.png);
+  text-indent: -10000px;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  cursor: pointer;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
 
 /*section*/
 #sec {
