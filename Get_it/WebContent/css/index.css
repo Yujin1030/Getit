@@ -1,63 +1,72 @@
 @charset "UTF-8";
-
+/* 10/13 11:13*/
+/*<link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">*/
 @import url('https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap');
 
-* {
+body {
+    width: 1890px;
+    height: 2400px;
+}
+
+div {
     border: 1px solid black;
+    box-sizing: border-box;
+}
+
+section {
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    height: 2%;
 }
 
 #menu {
-    width: 1900px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
 }
 
-#nav_div {
-    width: 505px;
-    float: left;
-    margin-left: 140px;
-}
-
-#nav {
-    height: 50px;
-    padding: 5px 1px;
-    margin: 0;
-    background: white;
-    margin-top: 22px;
-}
-
-#nav li {
+#menu ul li {
     list-style: none;
     float: left;
-    margin: 0px 22px; /* 글씨 간 간격*/
-    padding: 0;
+    margin: 0px 22px;
+    /* 글씨 간 간격*/
+    line-height: 40px;
+    padding-left: 10px;
     position: relative;
 }
 
-#nav li a {
+#menu ul li a {
     text-decoration: none;
     display: block;
     font-size: 14px;
     font-family: 'Sawarabi Gothic', sans-serif;
     font-weight: bold;
+    line-height: 10px;
     color: black;
 }
-#nav li:hover > a {
+
+#nav_div {
+    width: 35%;
+    height: 100%;
+    float: left;
+}
+
+#nav_div a:hover {
     color: gray;
 }
 
 #logo_div {
-    width: 500px;
+    width: 30%;
+    height: 100%;
     float: left;
-    margin-top: 13px;
-    text-align: center;
-    margin-left: 55px;
-}
-
-#main_logo {
-    list-style: none;
-    display: block;
     font-family: 'Sawarabi Gothic', sans-serif;
     font-weight: bold;
+    list-style: none;
+    line-height: 40px;
+    text-align: center;
 }
 
 #main_logo a {
@@ -71,25 +80,318 @@
 }
 
 #sub_div {
-    float: right;
-    margin-right: 30px;
-    margin-top: 20px;
+    width: 35%;
+    height: 100%;
+    float: left;
+    line-height: 70px;
 }
+
 #sub_div li {
     list-style: none;
-    float: left;
-    margin-left: 40px;
+    float: right;
+    padding-right: 30px;
 }
 
-#search_button {
-    margin-left: 50px;
+/*navigator*/
+nav {
+    width: 100%;
+    height: 38%;
 }
 
+nav div {
+    width: 100%;
+    height: 100%;
+}
+
+/*section*/
 #sec {
-    text-align: center;
+    width: 100%;
+    height: 55%;
 }
 
-#foot {
-    height: 100px;
+#sec_left {
+    width: 10%;
+    height: 100%;
+    float: left;
+
+}
+
+#sec_middle {
+    width: 80%;
+    height: 100%;
+    float: left;
+}
+
+#title1 {
+    width: 100%;
+    height: 2%;
+    line-height: 30px;
     text-align: center;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    font-weight: bold;
+}
+
+#title2 {
+    width: 100%;
+    height: 2%;
+    line-height: 30px;
+    text-align: center;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    font-weight: bold;
+}
+
+#title3 {
+    width: 100%;
+    height: 2%;
+    line-height: 30px;
+    text-align: center;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    font-weight: bold;
+}
+
+#title4 {
+    width: 100%;
+    height: 2%;
+    line-height: 30px;
+    text-align: center;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    font-weight: bold;
+}
+
+/*추천견적*/
+#recommend {
+    width: 100%;
+    height: 23%;
+}
+
+#recommend_layout1 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#recommend_layout2 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#recommend_layout3 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#recommend_layout4 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#self {
+    width: 100%;
+    height: 23%;
+}
+
+#self_layout1 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#self_layout2 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#self_layout3 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#self_layout4 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#other {
+    width: 100%;
+    height: 23%;
+}
+
+#other_layout1 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#other_layout2 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#other_layout3 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#other_layout4 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#usedDeal {
+    width: 100%;
+    height: 23%;
+}
+
+#usedDeal_layout1 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#usedDeal_layout2 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#usedDeal_layout3 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#usedDeal_layout4 {
+    width: 25%;
+    height: 100%;
+    float: left;
+}
+
+#sec_right {
+    width: 10%;
+    height: 100%;
+    float: left;
+    bottom: 0;
+    right: 0;
+}
+
+#sec_right div {
+    margin-left: 125px;
+    position: fixed;
+}
+
+/*상단버튼*/
+#sec_right .top {
+    text-decoration: none;
+    font-size: 0;
+    display: block;
+    width: 60px;
+    height: 60px;
+    background-image: url(../img/icon.png);
+    background-position: 0px -660px;
+}
+
+/*하단버튼*/
+#sec_right .bottom {
+    text-decoration: none;
+    font-size: 0;
+    display: block;
+    width: 60px;
+    height: 60px;
+    background-image: url(../img/icon.png);
+    background-position: 0px -600px;
+}
+
+/*foot*/
+#foot {
+    width: 100%;
+    height: 10%;
+}
+
+#foot_left {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#foot_left_layout1 {
+    width: 50%;
+    height: 100%;
+    float: left;
+    text-decoration: none;
+    color: black;
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 80px;
+    text-align: right;
+    
+}
+
+#foot_left_layout2 {
+    width: 50%;
+    height: 100%;
+    float: left;
+
+}
+#foot_left_layout2 li{
+    list-style: none;
+    line-height: 30px;
+    padding-top: 10px;
+}
+#foot_right {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#foot_right #customerCenter{
+    width: 20%;
+    height: 50%;
+    float: left;
+    background-image: url(../img/login.png);
+}
+#foot_right #customerCenter_text{
+    width: 80%;
+    height: 50%;
+    float: left;
+    
+}
+#customerCenter_text ul{
+    margin-top: 15px;
+    list-style: none;
+}
+#customerCenter_text ul li{
+    padding-top: 5px;
+}
+#customerCenter_text .phone{
+    font-size: 25px;
+}
+#customerCenter_text .notice{
+    font-size: 15px;
+}
+#foot_right #depositAccount{
+    width: 20%;
+    height: 50%;
+    float: left;
+    background-image: url(../img/login.png);
+}
+#foot_right #depositAccount_text{
+    width: 80%;
+    height: 50%;
+    float: left;
+}
+#depositAccount_text ul{
+     margin-top: 15px;
+    list-style: none;
+}
+#depositAccount_text ul li{
+        padding-top: 5px;
 }
