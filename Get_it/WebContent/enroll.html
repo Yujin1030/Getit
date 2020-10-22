@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<title>회원가입</title>
+</head>
+<body>
+	<script>
+        $(document).ready(function(){
+			$(function() {
+				$('#userId').blur(function() {
+					var id = $('#userId').val()
+					if (id == "") {
+						alert("아이디를 입력하세요");
+						$('#userId').val('');
+						return false;
+					}
+					
+				});
+				$('#email').blur(function() {
+					var email = $('#email').val()
+					if (email == "") {
+						alert("이메일을 입력하세요.");
+						$('#email').val('');
+						return false;
+					}
+	
+				});
+	
+				$('#userPwd').blur(function() {
+					var pw = $('#userPwd').val()
+					if (pw == "") {
+						alert("비밀번호를 입력하세요");
+						$('#userPwd').val('');
+						return false;
+					}
+	
+				});
+	
+				$('#userPwdRe').keyup(function() {
+					var userPw = $("#userPwd").val();
+					if (userPw == "") {
+						alert("패스워드를 입력하세요");
+						$('#userPwdRe').val('');
+						$('#userPwd').focus();
+					}
+					var userPwr = $("userPwdRe").val();
+					if (userPw.legnth != 0 && userPwr.lengt != 0) {
+						if (userPw == userPwr) {
+							$("#out").html("패스워드가 일치합니다.");
+							$("#out").css({
+								'color' : 'green',
+								'font-weight' : 'bolder'
+							});
+	
+						} else {
+							$("#out").html("패스워드가 일치하지 않습니다.")
+							$("#out").css({
+	
+								'color' : 'red',
+								'font-weight' : 'bolder'
+							})
+						}
+					}
+				});
+			/* 	$("form").submit(function() {
+					var gender = $(".gedner:checked").length;
+					if (gender == 0) {
+						alert("성별을 선택하세요");
+						return false;
+					}
+	
+				}); */
+				});
+		
+			/* 	$("#allcheck").change(function() {
+					if(this.checked) {
+						$("#check_item").children().attr("checked", true);
+					} else {
+						$("#check_item").children().attr("checked", false);
+					}
+		
+				}); */
+				
+		    var $All = $('#allcheck');
+            $All.change(function () {
+                var $this = $(this);
+                var checked = $this.prop('checked'); // checked 문자열 참조(true, false)
+                // console.log(checked);
+                $('input[name="check"]').prop('checked', checked);
+
+            });
+
+
+            var boxes = $('input[name="check"]');
+            boxes.change(function () {
+         
+                var boxLength = boxes.length;
+                // 체크된 체크박스 갯수를 확인하기 위해 :checked 필터를 사용하여 체크박스만 선택한 후 length 프로퍼티를 확인
+                var checkedLength = $('input[name="check"]:checked').length;
+                var selectAll = (boxLength == checkedLength);
+
+                $All.prop('checked', selectAll);
+
+            });
+            
+          });
+	</script>
+	<h1>회원가입</h1>
+
+	<form action="/member/enroll" method="post">
+		<ul>
+			<li>아이디 *</li>
+			<li><input type="text" placeholder="아이디를 입력하세요" name="userId"
+				id="userId" required></li>
+			<br>
+			<li>이메일 *</li>
+			<li><input type="email" placeholder="이메일을 입력하세요" name="email"
+				id="email" required></li>
+			<br>
+			<li>이름 *</li>
+			<li><input type="text" placeholder="이름을 입력하세요" name="userName"
+				id="userName" required></li>
+			<br>
+			<li>비밀번호*</li>
+			<li><input type="password" placeholder="비밀번호를 입력하세요"
+				name="userPwd" id="userPwd" required></li><span id="out"></span>
+			<br>
+			<li>비밀번호 확인*</li>
+			<li><input type="password" placeholder="비밀번호를 다시 입력하세요"
+				name="userPwdRe" required></li>
+			<br>
+			<li>휴대폰 번호*</li>
+			<li><input type="phone" placeholder="폰번호를 입력하세요" name="phone"
+				required></li>
+			<br>
+			<li>우편주소*</li>
+
+			<li>주소 *</li>
+			<li><input type="text" placeholder="주소를 입력하세요" name="address"
+				required></li>
+			<br>
+			<li>생년월일*</li>
+			<li><input type="text" placeholder="나이를 입력하세요" name="dob"
+				required></li>
+			<br>
+			<li>성별 *</li>
+
+			<li><input type="radio" name="gender" class="gender" value="M">Male
+				<input type="radio" name="gender" class="gender" value="F">Female<br></li>
+
+			<li><input type="checkbox" name="all" value="all" id="allcheck">
+				<label for="allcheck">모두 동의 합니다.</label></li>
+			<br>
+
+			<div id="check_item">
+				
+				<input type="checkbox" name="check" value="eccential_1" id="check_1"><label for="check_1">
+						(필수) <a href="/terms.jsp">이용약관</a>과 <a href="/privacyPolicy.jsp">개인정보수집 및 이용</a>에 동의합니다.	</label><br> 
+						
+				<input type="checkbox" name="check" value="eccential_2" id="check_2"><label for="check_2"> (필수) 만 14세 이상입니다. <br>
+				<h6>만 19세 미만의 미성년자가 결제 시 법정 대리인이 거래를 취소할 수 있습니다.</h6> </label>
+				
+				<input type="checkbox" name="check" value="select_1" id="check_3"><label for="check_3"> (선택) 이메일 및 SMS 마케팅 정보 수신에 동의 합니다.	<br>
+				<h6>회원은 언제든지 회원 정보에서 수신 거부로 변경할 수 있습니다.</h6>	</label>
+				
+			</div>
+				<br>
+				
+							
+
+			<li><input type="submit" value="가입하기"></li>
+
+		</ul>
+	
+	</form>
+
+</body>
+</html>
