@@ -5,6 +5,7 @@
 body {
     width:1890px;
     height:2400px;
+    font-family: 'Sawarabi Gothic', sans-serif;
 }
 
 div {
@@ -17,8 +18,10 @@ header {
 }
 
 #nav_bar {
-    width:100%;
-    height:100%;
+    width:99.6%;
+    height:5.1%;
+    position: fixed;
+    z-index: 100;
 }
 
 #nav_bar>div {
@@ -32,8 +35,19 @@ header {
     float: left;
     /* 글씨간 간격 */
     margin: 14px;
+    margin-top: 10px;
+}
+
+#nav_bar_menu ul li a {
     font-size: 15px;
     font-family: 'Sawarabi Gothic', sans-serif;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+#nav_bar_menu ul li a:hover {
+    color: dimgray;
 }
 
 #nav_bar_menu ul li:first-child {
@@ -152,27 +166,60 @@ section {
     width:100%;
     height:3%;
     float:left;
-    font-size: 20px;
+    font-size: 17px;
     font-family: 'Sawarabi Gothic', sans-serif;
     text-align: center;
+    font-weight: bold;
+}
+
+#section_title p {
+    margin-top: 9px;
 }
 
 #empty_space {
     width:10%;
-    height : 25%;
+    height : 30%;
     float:left
 }
 
 #section_contents {
     width:80%;
-    height:25%;
+    height:30%;
     float:left;
 }
+
+#section_contents_inner{
+    width:25%;
+    height: 100%;
+    float:left;
+}
+
+#section_contents_inner a {
+    color:black;
+    text-decoration: none;
+    font-family: 'Sawarabi Gothic', sans-serif;
+}
+
+#card {
+    padding-left: 7%;
+}
+
+#section_contents_inner img {
+    width:325px;
+    height:260px;
+}
+
 
 #empty_space1{
     width:100%;
     height:3%;
     float: left;
+}
+
+#empty_space2 {
+    width:10%;
+    height : 25%;
+    float:left
 }
 
 
@@ -196,13 +243,14 @@ section {
 
 footer {
     width:100%;
-    height:38%;
+    height:28%;
 }
 
 #footer_icon {
     width:10%;
     height:25%;
     float: left;
+    text-align: right;
 }
 
 #footer_contents {
@@ -217,14 +265,20 @@ footer {
     font-family: 'Sawarabi Gothic', sans-serif;
 }
 
+#footer_empty {
+    width:100%;
+    height:20%;
+    float: left;
+}
+
 #footer_icon_split {
     width:100%;
-    height:50%;
+    height:40%;
     float: left;
 }
 
 #footer_contents1 {
     width:100%;
-    height:50%;
+    height:40%;
     float: left;
 }
