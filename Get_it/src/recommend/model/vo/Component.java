@@ -1,14 +1,14 @@
 package recommend.model.vo;
 
-import component.model.vo.COOLER;
-import component.model.vo.CPU;
-import component.model.vo.GCARD;
-import component.model.vo.HDD;
-import component.model.vo.MainBoard;
-import component.model.vo.POWER;
-import component.model.vo.RAM;
-import component.model.vo.SKIN;
-import component.model.vo.SSD;
+import component.vo.COOLER;
+import component.vo.CPU;
+import component.vo.GCARD;
+import component.vo.HDD;
+import component.vo.MainBoard;
+import component.vo.POWER;
+import component.vo.RAM;
+import component.vo.SKIN;
+import component.vo.SSD;
 
 public class Component {
 	
