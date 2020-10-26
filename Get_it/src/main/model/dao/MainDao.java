@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import recommend.Recommend;
+import recommend.model.vo.Recommend;
 
 public class MainDao {
 	
@@ -17,7 +17,7 @@ public class MainDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<Recommend> recommendList = null;
-		String query = "select * from end_product";
+		String query = "select * from (select * from end_product order by a_no desc) where rownum<=4";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(query);
@@ -31,8 +31,9 @@ public class MainDao {
 					recom.setaAccount(rset.getInt("a_account"));
 					recom.setaDetail(rset.getString("a_Detail"));
 					recom.setaCategory(rset.getString("a_category"));
-					recom.setFileName(rset.getString("filename"));
-					recom.setFilePath(rset.getString("filepath"));
+					recom.setFileName(rset.getString("a_filename"));
+					recom.setFilePath(rset.getString("a_filepath"));
+					recommendList.add(recom);
 				}
 			}
 		} catch (SQLException e) {

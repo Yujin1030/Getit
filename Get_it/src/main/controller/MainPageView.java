@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import main.model.service.MainService;
 import main.model.vo.MainList;
-import recommend.vo.Recommend;
+import recommend.model.vo.Recommend;
 
 /**
  * Servlet implementation class MainPageView
@@ -38,7 +38,9 @@ public class MainPageView extends HttpServlet {
 		// 화면에 넘겨줄 완제품, 조립부품, 기타부품, 중고거래 데이터 불러오기
 		// MainList에는 위에 해당되는 데이터리스트를 멤버변수로 가지고 있음
 		MainList mainList = new MainService().selectMain();
+		int recomSize = mainList.getRecommendList().size();
 //		if(mainList!=null) {
+			request.setAttribute("recomSize", recomSize);
 			request.setAttribute("recommendList", mainList.getRecommendList());
 //			request.setAttribute("dealList", mainList.getDealList());
 //			request.setAttribute("otherList", mainList.getOtherList());

@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="component.service.ComponentService" project="Get_it" 
-    file="/Get_it/src/component/service/ComponentService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="692" y="372"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="component.controller.ComponentServlet" project="Get_it" 
-    file="/Get_it/src/component/controller/ComponentServlet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="694" y="120"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="component.vo.CPU" project="Get_it" file="/Get_it/src/component/vo/CPU.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="component.model.vo.CPU" project="Get_it" 
+    file="/Get_it/src/component/model/vo/CPU.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="423" width="159" x="-211" y="866"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="component.vo.HDD" project="Get_it" file="/Get_it/src/component/vo/HDD.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="component.model.vo.HDD" project="Get_it" 
+    file="/Get_it/src/component/model/vo/HDD.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="423" width="156" x="-12" y="866"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="component.vo.SKIN" project="Get_it" file="/Get_it/src/component/vo/SKIN.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="component.model.vo.SKIN" project="Get_it" 
+    file="/Get_it/src/component/model/vo/SKIN.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="423" width="157" x="184" y="866"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="component.vo.MainBoard" project="Get_it" 
-    file="/Get_it/src/component/vo/MainBoard.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="component.model.vo.MainBoard" project="Get_it" 
+    file="/Get_it/src/component/model/vo/MainBoard.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="189" width="147" x="381" y="866"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,17 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="component.dao.ComponentDAO" project="Get_it" 
-    file="/Get_it/src/component/dao/ComponentDAO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="692" y="672"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="component.vo.POWER" project="Get_it" file="/Get_it/src/component/vo/POWER.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="component.model.vo.POWER" project="Get_it" 
+    file="/Get_it/src/component/model/vo/POWER.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="423" width="169" x="568" y="866"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="component.vo.COOLER" project="Get_it" file="/Get_it/src/component/vo/COOLER.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="component.model.vo.COOLER" project="Get_it" 
+    file="/Get_it/src/component/model/vo/COOLER.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="423" width="168" x="777" y="866"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -82,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="component.vo.RAM" project="Get_it" file="/Get_it/src/component/vo/RAM.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="component.model.vo.RAM" project="Get_it" 
+    file="/Get_it/src/component/model/vo/RAM.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="423" width="158" x="985" y="866"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -91,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="component.vo.GCARD" project="Get_it" file="/Get_it/src/component/vo/GCARD.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="component.model.vo.GCARD" project="Get_it" 
+    file="/Get_it/src/component/model/vo/GCARD.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="423" width="167" x="1183" y="866"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -100,7 +73,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="common.JDBCTemplate" project="Get_it" file="/Get_it/src/common/JDBCTemplate.java" 
+  <class id="9" language="java" name="common.JDBCTemplate" project="Get_it" file="/Get_it/src/common/JDBCTemplate.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1028" y="403"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -109,8 +82,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="component.vo.SSD" project="Get_it" file="/Get_it/src/component/vo/SSD.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="component.model.vo.SSD" project="Get_it" 
+    file="/Get_it/src/component/model/vo/SSD.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="423" width="156" x="1390" y="866"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -118,157 +91,16 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="14">    
-    <bendpoint x="71" y="776"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="15" name="HDD"/>      
-      <multiplicity id="16" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="17">    
-    <bendpoint x="267" y="804"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="18" name="SKIN"/>      
-      <multiplicity id="19" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="20">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="21" name="ComponentDAO">        
-        <position height="18" width="85" x="609" y="506"/>      
+  <association id="11">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="12" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="22" minimum="0" maximum="1">        
-        <position height="16" width="23" x="648" y="522"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="23">    
-    <bendpoint x="1467" y="710"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="24" name="SSD"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="26">    
-    <bendpoint x="846" y="822"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="27" name="COOLER"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="29">    
-    <bendpoint x="1034" y="677"/>    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="30" name="ComponentDAO">        
-        <position height="18" width="85" x="899" y="622"/>      
-      </attribute>      
-      <multiplicity id="31" minimum="0" maximum="1">        
-        <position height="16" width="23" x="868" y="563"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="32">    
-    <bendpoint x="1065" y="788"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="33" name="RAM"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="35">    
-    <bendpoint x="1267" y="747"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="36" name="GCARD"/>      
-      <multiplicity id="37" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="38">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="39" name="ComponentService">        
-        <position height="18" width="99" x="596" y="198"/>      
-      </attribute>      
-      <multiplicity id="40" minimum="0" maximum="1">        
-        <position height="16" width="23" x="641" y="212"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="41">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="42" name="POWER"/>      
-      <multiplicity id="43" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="44">    
-    <bendpoint x="869" y="378"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="45" name="factory">        
-        <position height="18" width="43" x="847" y="351"/>      
-      </attribute>      
-      <multiplicity id="46" minimum="0" maximum="1">        
-        <position height="16" width="23" x="859" y="364"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="47">    
-    <bendpoint x="875" y="439"/>    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="48" name="ComponentService">        
-        <position height="18" width="99" x="823" y="400"/>      
-      </attribute>      
-      <multiplicity id="49" minimum="0" maximum="1">        
-        <position height="16" width="23" x="862" y="416"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="50">    
-    <bendpoint x="-130" y="714"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="51" name="CPU"/>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="53">    
-    <bendpoint x="452" y="815"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="54" name="MainBoard"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="56">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="57" name="instance"/>      
-      <multiplicity id="58" minimum="0" maximum="1">        
+      <multiplicity id="13" minimum="0" maximum="1">        
         <position height="16" width="23" x="1137" y="492"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

@@ -1,11 +1,11 @@
 package main.model.vo;
 
-import java.awt.Component;
 import java.util.ArrayList;
 
-import deal.model.vo.Deal;
-import other.Other;
-import recommend.Recommend;
+import deal.vo.Deal;
+import other.vo.Other;
+import recommend.model.vo.Component;
+import recommend.model.vo.Recommend;
 
 public class MainList {
 	
