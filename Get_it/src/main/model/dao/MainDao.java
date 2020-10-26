@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import recommend.vo.Recommend;
+import recommend.Recommend;
 
 public class MainDao {
 	
