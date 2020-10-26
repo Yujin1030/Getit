@@ -8,9 +8,11 @@ body {
     font-family: 'Sawarabi Gothic', sans-serif;
 }
 
+/*
 div {
     border : 1px solid black;
 }
+*/
 
 header {
     width:100%;
@@ -189,7 +191,7 @@ section {
 }
 
 #section_contents_inner{
-    width:25%;
+    width:22%;
     height: 100%;
     float:left;
 }
@@ -200,13 +202,15 @@ section {
     font-family: 'Sawarabi Gothic', sans-serif;
 }
 
-#card {
-    padding-left: 7%;
+#section_contents_inner img {
+    width:328px;
+    height:260px;
 }
 
-#section_contents_inner img {
-    width:325px;
-    height:260px;
+#section_contents_inner_empty {
+    width:4%;
+    height: 100%;
+    float:left;
 }
 
 

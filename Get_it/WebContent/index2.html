@@ -10,17 +10,35 @@
 	<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
 	<link rel="stylesheet" type="text/css" href="css/index2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    
+    <script>
+        $(document).ready(function(){
+          $(window).scroll(function(){
+            var scroll = $(window).scrollTop();
+            if (scroll > 1) {
+              $("#nav_bar").css("background" , "white");
+              $("#nav_bar").css("opacity" , "0.5");
+              $("#nav_bar").css("color" , "black");
+            }
+            else{
+              $("#nav_bar").css("background" , "white");
+              $("#nav_bar").css("opacity" , "1");  
+            }
+          })
+        })
+    </script>
+    
 </head>
 <body>
     <header>
         <div id="nav_bar">
             <div id="nav_bar_menu">
                 <ul>
-                    <li><a hef="#">Recommend</a></li>
-                    <li><a hef="#">Self</a></li>
-                    <li><a hef="#">Other</a></li>
-                    <li><a hef="#">Used Deal</a></li>
-                    <li><a hef="#">Community</a></li>
+                    <li><a href="#">Recommend</a></li>
+                    <li><a href="#">Self</a></li>
+                    <li><a href="#">Other</a></li>
+                    <li><a href="#">Used Deal</a></li>
+                    <li><a href="#">Community</a></li>
                 </ul>
             </div>
             <div id="nav_bar_logo">
@@ -33,10 +51,10 @@
                   </form>
                 </div>
                 <div id="cart">
-                    <a href="#" class="fas fa-shopping-cart fa-lg"></a>
+                    <a href="#" class="fas fa-shopping-cart fa-lg" style="color: black;"></a>
                 </div>
                 <div id="login">
-                    <a href="#" class="fas fa-user fa-lg"></a>
+                    <a href="#" class="fas fa-user fa-lg" style="color: black;"></a>
                 </div>
             </div>
         </div>
@@ -46,41 +64,225 @@
         <img src="img/%EB%A9%94%EC%9D%B8.PNG" style="height: 100%;width:100%;">
         </div>
         <div id="section_title">
-            Recommend
+            <p>Recommend</p>
         </div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            내용 들어감
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
         </div>
         <div id="empty_space"></div>
         <div id="section_title">
-            Self
+            <p>Self</p>
         </div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            내용 들어감
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
         </div>
         <div id="empty_space"></div>
         <div id="section_title">
-            Other
+            <p>Other</p>
         </div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            내용 들어감
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
         </div>
         <div id="empty_space"></div>
         <div id="section_title">
-            Used Deal
+            <p>Used Deal</p>
         </div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            내용 들어감
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
+            <div id="section_contents_inner_empty"></div>
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card" style="width: 20.6rem;">
+                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">조립컴퓨터</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      </div>
+                    </div>
+                </a>
+            </div>
         </div>
         <div id="empty_space"></div>
         <div id="empty_space1"></div>
     </section>
     <footer>
-        <div id="empty_space"></div>
+        <div id="empty_space2"></div>
         <div id="footer_icon">
             <h3>Assemble</h3>
         </div>
@@ -94,8 +296,13 @@
             </ul>
         </div>
         <div id="footer_icon">
-            <div id="footer_icon_split"></div>
-            <div id="footer_icon_split"></div>
+            <div id="footer_icon_split">
+                <i class="fas fa-headset fa-5x"></i>
+            </div>
+            <div id="footer_empty"></div>
+            <div id="footer_icon_split">
+                <i class="fas fa-money-check-alt fa-4x"></i>
+            </div>
         </div>
         <div id="footer_contents">
             <div id="footer_contents1">
@@ -105,6 +312,7 @@
                     <li class="notice">주말 및 공휴일은 휴무입니다.</li>
                 </ul>
             </div>
+            <div id="footer_empty"></div>
             <div id="footer_contents1">
                 <ul>
                     <li class="account">국민은행 01234567-00-1234567</li>
@@ -112,7 +320,7 @@
                 </ul>
             </div>
         </div>
-        <div id="empty_space"></div>
+        <div id="empty_space2"></div>
     </footer>
 </body>
 </html>
