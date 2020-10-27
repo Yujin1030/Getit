@@ -1,36 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>메인페이지</title>
+    <meta charset="UTF-8">
+    <title>메인페이지</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/css/recommend/recommendMain.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/Recommend.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
     <script>
-        $(document).ready(function(){
-          $(window).scroll(function(){
-            var scroll = $(window).scrollTop();
-            if (scroll > 1) {
-              $("#nav_bar").css("background" , "white");
-              $("#nav_bar").css("opacity" , "0.5");
-              $("#nav_bar").css("color" , "black");
-            }
-            else{
-              $("#nav_bar").css("background" , "white");
-              $("#nav_bar").css("opacity" , "1");  
-            }
-          })
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                var scroll = $(window).scrollTop();
+                if (scroll > 1) {
+                    $("#nav_bar").css("background", "white");
+                    $("#nav_bar").css("opacity", "0.5");
+                    $("#nav_bar").css("color", "black");
+                } else {
+                    $("#nav_bar").css("background", "white");
+                    $("#nav_bar").css("opacity", "1");
+                }
+            })
         })
     </script>
-    
+
 </head>
+
 <body>
     <header>
         <div id="nav_bar">
@@ -48,12 +49,14 @@
             </div>
             <div id="nav_bar_other">
                 <div id="wrap">
-                  <form action="" autocomplete="on">
-                  <input id="search" name="search" type="text" placeholder="검색어를 입력하세요."><input id="search_submit" value="Rechercher" type="submit"> 
-                  </form>
+                    <form action="" autocomplete="on">
+                        <input id="search" name="search" type="text" placeholder="검색어를 입력하세요.">
+                        <input id="search_submit" value="Rechercher" type="submit">
+                    </form>
                 </div>
                 <div id="cart">
                     <a href="#" class="fas fa-shopping-cart fa-lg" style="color: black;"></a>
+
                 </div>
                 <div id="login">
                     <a href="#" class="fas fa-user fa-lg" style="color: black;"></a>
@@ -61,231 +64,161 @@
             </div>
         </div>
     </header>
-    
-    <section>
+
+    <section id="section">
         <div id="main_image">
-        <img src="img/%EB%A9%94%EC%9D%B8.PNG" style="height: 100%;width:100%;">
+            <img src="img/%EB%A9%94%EC%9D%B8.PNG" style="height: 100%;width:100%;">
         </div>
-      
+
+        <!--Recommend-->
+
         <div id="section_title">
-            <p>Recommend</p>
-        </div>
-        <div id="empty_space"></div>
-        <div id="section_contents">
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
+
+            <div class="section_title_top">
+                <div class="section_title_top_left"></div>
+                <div class="section_title_top_middle">
+                    <div class="recommend_title">Recommend</div>
+                    <div class="recommend_search">
+                        <form class="navbar-form navbar-right" role="search">
+                            <button type="submit" class="btn btn-default">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            <input type="text" class="form-control" placeholder="Search this site">
+                        </form>
                     </div>
-                </a>
+                </div>
+                <div class="section_title_top_right"></div>
             </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
+
+            <div class="section_title_bottom">
+                <div class="section_title_bottom_left"></div>
+                <div class="section_title_bottom_middle">
+                    <div>
+                        <ul class="category_navi">
+                            <li><a href="#">전체</a></li>
+                            <li>
+                                <a href="#">게임용PC</a>
+                                <ul class="category_navi_sub">
+                                    <li><a href="#">A</a></li>
+                                    <li><a href="#">B</a></li>
+                                    <li><a href="#">C</a></li>
+                                    <li><a href="#">D</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">사무용PC</a></li>
+                            <li><a href="#">그래픽용PC</a></li>
+                            <li><a href="#">방송용PC</a></li>
+                        </ul>
                     </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
+
+                </div>
+                <div class="section_title_bottom_right"></div>
             </div>
         </div>
-        <div id="empty_space"></div>
-    
-        <div id="empty_space"></div>
-        <div id="section_contents">
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div id="empty_space"></div>
- 
-        <div id="empty_space"></div>
-        <div id="section_contents">
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+
+
         <div id="empty_space"></div>
         
+        <div id="section_contents">
+        <c:forEach var="recomList" items="${recomList }" varStatus="status" begin="0" end="3">
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card">
+                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${recomList.aName }</h5>
+                            <p class="card-text">${recomList.aPrice }</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <c:if test="${status.index ne '3'}">
+            <div id="section_contents_inner_empty"></div>
+            </c:if>
+            </c:forEach>
+        </div>
+        
+        <div id="empty_space"></div>
+        <div id="empty_space"></div>
         
       
-        
-        <!--4번째 칸 영역-->
-        <div id="empty_space"></div>
         <div id="section_contents">
+        <c:forEach var="recomList" items="${recomList }" varStatus="index" begin="4" end="7">
             <div id="section_contents_inner">
                 <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
+                    <div class="card">
+                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${recomList.aName }</h5>
+                            <p class="card-text">${recomList.aPrice }</p>
+                        </div>
                     </div>
                 </a>
             </div>
+            <c:if test="${index.current ne '7'}">
             <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">조립컴퓨터</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
+            </c:if>
+            </c:forEach>
         </div>
+        
+        
+        <div id="empty_space"></div>
+        <div id="empty_space"></div>
+        
+         
+        <div id="section_contents">
+        <c:forEach var="recomList" items="${recomList }" varStatus="index" begin="8" end="11">
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card">
+                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${recomList.aName }</h5>
+                            <p class="card-text">${recomList.aPrice }</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <c:if test="${index.current ne '11'}">
+            <div id="section_contents_inner_empty"></div>
+             </c:if>
+              </c:forEach>
+        </div>
+       
+        
+        <div id="empty_space"></div>
         <div id="empty_space"></div>
         
         
-        <div id="empty_space1">
-        <!--여기에 페이징번호-->
+        <div id="section_contents">
+        <c:forEach var="recomList" items="${recomList }" varStatus="index" begin="12" end="15">
+            <div id="section_contents_inner">
+                <a href="#" style="color:black;">
+                    <div class="card">
+                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${recomList.aName }</h5>
+                            <p class="card-text">${recomList.aPrice }</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <c:if test="${status.current ne '15'}">
+            <div id="section_contents_inner_empty"></div>
+             </c:if>
+              </c:forEach>
+        </div>   
+       
+        
+        <div id="empty_space"></div>
+        
+        <div id="section_contents_bottom_empty"></div>
+        <div id="section_contents_bottom">
+                 ${pageNavi }
         </div>
+        <div id="section_contents_bottom_empty"></div>
+
+        <div id="empty_space1"></div>
     </section>
     <footer>
         <div id="empty_space2"></div>
@@ -328,5 +261,4 @@
         </div>
         <div id="empty_space2"></div>
     </footer>
-</body>
-</html>
+</body></html>

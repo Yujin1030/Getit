@@ -5,35 +5,39 @@
 /* 검색창 css 부분 */
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+
 
 body {
-    width:1890px;
-    height:2400px;
+    width: 1890px;
+    height: 2400px;
     font-family: 'Sawarabi Gothic', sans-serif;
     box-sizing: border-box;
 }
 
+/*
 
-div {
-    border : 1px solid black;
+ div {
+    border: 1px solid black;
 } 
-
+*/
+ 
 
 header {
-    width:100%;
-    height:2%;
+    width: 100%;
+    height: 2%;
 }
 
 #nav_bar {
-    width:99.6%;
-    height:5.1%;
+    width: 99.6%;
+    height: 5.1%;
     position: fixed;
     z-index: 100;
 }
 
-#nav_bar>div {
-    width:33.33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333%;
-    height:100%;
+#nav_bar > div {
+    width: 33.33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333%;
+    height: 100%;
     float: left;
 }
 
@@ -70,27 +74,27 @@ header {
     color: black;
     font-size: 30px;
     font-family: 'Sawarabi Gothic', sans-serif;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 #cart {
-    height:100%;
-    width:6%;
-    float:left;
+    height: 100%;
+    width: 6%;
+    float: left;
 }
 
-#cart>a {
+#cart > a {
     text-decoration: none;
     margin-top: 13px;
 }
 
 #login {
-    height:100%;
-    width:37%;
-    float:left;
+    height: 100%;
+    width: 37%;
+    float: left;
 }
 
-#login>a {
+#login > a {
     text-decoration: none;
     margin-top: 13px;
 }
@@ -98,172 +102,307 @@ header {
 
 
 #wrap {
-  display: inline-block;
-  height: 40px;
-  padding: 0;
-  position: relative;
-  float: left;
-  height:100%;
-  width:57%;
+    display: inline-block;
+    height: 40px;
+    padding: 0;
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 57%;
 }
 
-input[type="text"] {
-  height: 40px;
-  font-size: 16px;
-  display: inline-block;
-  font-family: 'Sawarabi Gothic', sans-serif;
-  font-weight: 20;
-  border: none;
-  outline: none;
-  color: black;
-  padding: 3px;
-  padding-right: 30px;
-  width: 0px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: none;
-  z-index: 3;
-  transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
-  cursor: pointer;
+
+#wrap input[type="text"] {
+    height: 40px;
+    font-size: 16px;
+    display: inline-block;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    font-weight: 20;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 3px;
+    padding-right: 30px;
+    width: 0px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    z-index: 3;
+    transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+    cursor: pointer;
 }
 
-input[type="text"]:focus:hover {
-  border-bottom: 1px solid black;
+#wrap input[type="text"]:focus:hover {
+    border-bottom: 1px solid black;
 }
 
-input[type="text"]:focus {
-  width: 200px;
-  z-index: 1;
-  border-bottom: 1px solid black;
-  cursor: text;
+#wrap input[type="text"]:focus {
+    width: 200px;
+    z-index: 1;
+    border-bottom: 1px solid black;
+    cursor: text;
 }
-input[type="submit"] {
-  margin-top: 3px;
-  height: 40px;
-  width: 40px;
-  display: inline-block;
-  float: right;
-  background: url(https://ifh.cc/g/YsbNTw.png);
-  text-indent: -10000px;
-  border: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-  cursor: pointer;
-  cursor: pointer;
+
+#wrap input[type="submit"] {
+    margin-top: 3px;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    float: right;
+    background: url(https://ifh.cc/g/YsbNTw.png);
+    text-indent: -10000px;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    cursor: pointer;
+    cursor: pointer;
 }
+
 
 
 section {
-    width:100%;
-    height:60%;
+    width: 100%;
+    height: 60%;
 }
 
 #main_image {
-    width:100%;
-    height:57%;
-    float:left;
+    width: 100%;
+    height: 57%;
+    float: left;
 }
 
 #section_title {
-    width:100%;
-    height:10%;
-    float:left;
+    width: 100%;
+    height: 20%;
+    float: left;
     font-size: 17px;
     font-family: 'Sawarabi Gothic', sans-serif;
+    line-height: 100px;
     text-align: center;
     font-weight: bold;
 }
+
+
+/*Recommend*/
+.section_title_top {
+    width: 100%;
+    height: 40%;
+}
+
+.section_title_top_left {
+    width: 10%;
+    height: 100%;
+    float: left;
+
+}
+
+.section_title_top_middle {
+    width: 80%;
+    height: 100%;
+    float: left;
+    line-height: 200px;
+    
+}
+
+.recommend_title{
+    width: 53.5%;
+    height: 100%;
+    float: left;
+    text-align: right;
+}
+
+.recommend_search{
+    width: 46.5%;
+    height: 100%;
+    float: left;
+    line-height: 185px;
+}
+
+.section_title_top_right {
+    width: 10%;
+    height: 100%;
+    float: left;
+}
+
+.section_title_bottom {
+    width: 100%;
+    height: 60%;
+}
+
+
+.section_title_bottom_left {
+    width: 10%;
+    height: 100%;
+    float: left;
+
+}
+
+.section_title_bottom_middle {
+    width: 80%;
+    height: 100%;
+    float: left;
+}
+.section_title_bottom_middle div{
+    width: 100%;
+    height: 100%;
+}
+
+.section_title_bottom_middle div>ul{
+    margin-left: 520px;
+}
+.section_title_bottom_middle div .category_navi>li{
+    float: left;
+    position: relative;
+    display: inline;
+    padding-left: 20px;
+    
+}
+.section_title_bottom_middle div .category_navi_sub>li{
+    position: absolute;
+    top:30px;
+}
+.section_title_bottom_middle div li ul{
+    display: none;
+}
+
+
+.section_title_bottom_middle div li a{
+    color: black;
+    text-decoration: none;
+}
+.section_title_bottom_middle div li:hover ul{
+    display: inline-block;
+}
+.section_title_bottom_middle div li a:hover{
+    color: red;
+}
+.section_title_bottom_middle span{
+    line-height: 10px;
+}
+
+.section_title_bottom_right {
+    width: 10%;
+    height: 100%;
+    float: left;
+}
+
+
+
+
+
+.section_title_top #empty_space {
+    width: 100%;
+    height: 100%;
+}
+
 
 #section_title p {
     margin-top: 9px;
 }
 
 #empty_space {
-    width:10%;
-    height : 30%;
-    float:left
+    width: 10%;
+    height: 30%;
+/*    20% */
+    float: left
 }
 
 #section_contents {
-    width:80%;
-    height:30%;
-    float:left;
+    width: 80%;
+    height: 30%;
+/*   20% */
+    float: left;
 }
 
-#section_contents_inner{
-    width:22%;
+#section_contents_inner {
+    width: 22%;
     height: 100%;
-    float:left;
+    float: left;
+}
+
+#section_contents_inner div{
+    width: 100%;
+   
 }
 
 #section_contents_inner a {
-    color:black;
+    color: black;
     text-decoration: none;
     font-family: 'Sawarabi Gothic', sans-serif;
 }
 
 #section_contents_inner img {
-    width:328px;
-    height:260px;
+    width: 328px;
+    height: 260px;
 }
 
 #section_contents_inner_empty {
-    width:4%;
+    width: 4%;
     height: 100%;
-    float:left;
+    float: left;
+}
+
+#section_contents_bottom_empty {
+    width:10%;
+    height : 5%;
+    float:left
+}
+
+#section_contents_bottom {
+    width:80%;
+    height:5%;
+/*   15% */
+    float: left;
+}
+
+.pagination {
+    position: relative;
+    left:40%;
+}
+
+#section_contents_bottom a {
+    color: black;
+    background-color: lightgray;
+    margin: 5px;
+}
+
+#section_contents_bottom a:hover {
+    color: white;
+    background-color: dimgray;
 }
 
 
-#empty_space1{
-    width:100%;
-    height:3%;
+#empty_space1 {
+    width: 100%;
+    height: 3%;
     float: left;
 }
 
 #empty_space2 {
-    width:10%;
-    height : 25%;
-    float:left
+    width: 10%;
+    height: 25%;
+    float: left
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 footer {
-    width:100%;
-    height:28%;
+    width: 100%;
+    height: 28%;
 }
 
 #footer_icon {
-    width:10%;
-    height:25%;
+    width: 10%;
+    height: 25%;
     float: left;
     text-align: right;
 }
 
 #footer_contents {
-    width:30%;
-    height:25%;
+    width: 30%;
+    height: 25%;
     float: left;
 }
 
@@ -274,19 +413,19 @@ footer {
 }
 
 #footer_empty {
-    width:100%;
-    height:20%;
+    width: 100%;
+    height: 20%;
     float: left;
 }
 
 #footer_icon_split {
-    width:100%;
-    height:40%;
+    width: 100%;
+    height: 40%;
     float: left;
 }
 
 #footer_contents1 {
-    width:100%;
-    height:40%;
+    width: 100%;
+    height: 40%;
     float: left;
 }
