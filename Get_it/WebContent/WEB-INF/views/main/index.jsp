@@ -10,7 +10,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/css/recommend/recommendMain.css">
+	<link rel="stylesheet" type="text/css" href="/css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     
     <script>
@@ -61,13 +61,13 @@
             </div>
         </div>
     </header>
-    
     <section>
         <div id="main_image">
         <img src="img/%EB%A9%94%EC%9D%B8.PNG" style="height: 100%;width:100%;">
         </div>
-      
         <div id="section_title">
+        
+        <!--  ----------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <p>Recommend</p>
         </div>
         <div id="empty_space"></div>
@@ -121,7 +121,10 @@
             </div>
         </div>
         <div id="empty_space"></div>
-    
+        <div id="section_title">
+       <!--  ----------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <p>Self</p>
+        </div>
         <div id="empty_space"></div>
         <div id="section_contents">
             <div id="section_contents_inner">
@@ -173,7 +176,9 @@
             </div>
         </div>
         <div id="empty_space"></div>
- 
+        <div id="section_title">
+            <p>Other</p>
+        </div>
         <div id="empty_space"></div>
         <div id="section_contents">
             <div id="section_contents_inner">
@@ -225,11 +230,9 @@
             </div>
         </div>
         <div id="empty_space"></div>
-        
-        
-      
-        
-        <!--4번째 칸 영역-->
+        <div id="section_title">
+            <p>Used Deal</p>
+        </div>
         <div id="empty_space"></div>
         <div id="section_contents">
             <div id="section_contents_inner">
@@ -281,11 +284,7 @@
             </div>
         </div>
         <div id="empty_space"></div>
-        
-        
-        <div id="empty_space1">
-        <!--여기에 페이징번호-->
-        </div>
+        <div id="empty_space1"></div>
     </section>
     <footer>
         <div id="empty_space2"></div>
