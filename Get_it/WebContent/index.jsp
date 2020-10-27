@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+  
+  <!-- 10/27 -->  
 <!DOCTYPE html>
 <html>
 <head>
