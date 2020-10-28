@@ -46,8 +46,10 @@ public class enrollServlet extends HttpServlet {
 		member.setMemberPwd(request.getParameter("userPwd"));
 		member.setPhone(request.getParameter("phone"));
 		member.setAddress(request.getParameter("address"));
+		member.setDetailAddress(request.getParameter("detailAddress"));
 		member.setDob(request.getParameter("dob"));
 		member.setGender(request.getParameter("gender"));
+		member.setZipcode(request.getParameter("zipcode"));
 		
 		
 		// 3. 비지니스 로직 처리 (DB에서 회원정보 저장)
@@ -56,9 +58,12 @@ public class enrollServlet extends HttpServlet {
 		int result = new MemberService().insertMember(member);
 		
 		if(result>0) { //성공
-			response.sendRedirect("/indexLogin.html");
+			response.sendRedirect("/index.jsp");
 		}else {//실패
 			response.sendRedirect("/views/member/memberError.html");
+			
+			
+			
 		}
 		
 	}

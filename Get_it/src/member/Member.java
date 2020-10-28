@@ -10,11 +10,13 @@ public class Member {
 	private String memberPwd;
 	private String phone;
 	private String address;
+	private String detailAddress;
 	private String dob;
 	private String gender;
 	private Date enrollDate;
 	private Date outDate;
 	private String outYN;
+	private String zipcode;
 	
 	
 	
@@ -96,6 +98,18 @@ public class Member {
 
 
 
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+
+
+
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
+	}
+
+
+
 	public String getDob() {
 		return dob;
 	}
@@ -156,9 +170,14 @@ public class Member {
 
 
 
+	public String getZipcode() {
+		return zipcode;
+	}
 
-	
 
-	
-	
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
 }
