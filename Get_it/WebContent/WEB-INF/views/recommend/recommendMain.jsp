@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>메인페이지</title>
@@ -67,7 +68,7 @@
 
     <section id="section">
         <div id="main_image">
-            <img src="img/%EB%A9%94%EC%9D%B8.PNG" style="height: 100%;width:100%;">
+            <img src="/img/%EA%B2%B0%EC%A0%9C%EB%B2%84%ED%8A%BC.PNG" style="height: 50%;width:50%;">
         </div>
 
         <!--Recommend-->
@@ -116,105 +117,101 @@
             </div>
         </div>
 
+		<!-- 첫번째 라인 -->
+        <div id="empty_space"></div>
+        <div id="section_contents">
+        	<c:forEach var="recomList" items="${recomList }" varStatus="status" begin="0" end="3">
+           <div id="section_contents_inner">
+                <a href
+ ="/recommend/detail?aNo=${recomList.aNo }&powerCode=${recomList.powerCode}&ssdCode=${recomList.ssdCode}&skinCode=${recomList.skinCode}&gcardCode=${recomList.gcardCode}&hddCode=${recomList.hddCode}&coolerCode=${recomList.coolerCode}&ramCode=${recomList.ramCode}&cpuCode=${recomList.cpuCode}&mainboardCode=${recomList.mainboardCode}" style="color:black;">
+                    <div class="card">
+                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${recomList.aName }</h5>
+                            <p class="card-text">${recomList.aDetail }</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <c:if test="${status.index ne '3' }">
+            <div id="section_contents_inner_empty"></div> 
+            </c:if>
+            </c:forEach>
+        </div>
+        <div id="empty_space"></div>
+        
+		<!-- 두번째 라인 -->
+        <div id="empty_space"></div>
+        <div id="section_contents">
+        	<c:forEach var="recomList" items="${recomList }" varStatus="status" begin="4" end="7">
+            <div id="section_contents_inner">
+                <a href
+ ="/recommend/detail?aNo=${recomList.aNo }&powerCode=${recomList.powerCode}&ssdCode=${recomList.ssdCode}&skinCode=${recomList.skinCode}&gcardCode=${recomList.gcardCode}&hddCode=${recomList.hddCode}&coolerCode=${recomList.coolerCode}&ramCode=${recomList.ramCode}&cpuCode=${recomList.cpuCode}&mainboardCode=${recomList.mainboardCode}" style="color:black;">
+                    <div class="card">
+                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${recomList.aName }</h5>
+                            <p class="card-text">${recomList.aDetail }</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <c:if test="${status.index ne '7' }">
+            <div id="section_contents_inner_empty"></div>
+            </c:if>
+            </c:forEach>
+        </div>
+        <div id="empty_space"></div>
+		
+		<!-- 세번째 라인 -->
+        <div id="empty_space"></div>
+        <div id="section_contents">
+        	<c:forEach var="recomList" items="${recomList }" varStatus="status" begin="8" end="11">
+            <div id="section_contents_inner">
+                <a href
+="/recommend/detail?aNo=${recomList.aNo }&powerCode=${recomList.powerCode}&ssdCode=${recomList.ssdCode}&skinCode=${recomList.skinCode}&gcardCode=${recomList.gcardCode}&hddCode=${recomList.hddCode}&coolerCode=${recomList.coolerCode}&ramCode=${recomList.ramCode}&cpuCode=${recomList.cpuCode}&mainboardCode=${recomList.mainboardCode}" style="color:black;">
+                    <div class="card">
+                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${recomList.aName }</h5>
+                            <p class="card-text">${recomList.aDetail }</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <c:if test="${status.index ne '11' }">
+            <div id="section_contents_inner_empty"></div>
+            </c:if>
+            </c:forEach>
+           </div>
+        <div id="empty_space"></div>
 
+        <!--4번째 칸 영역-->
         <div id="empty_space"></div>
-        
         <div id="section_contents">
-        <c:forEach var="recomList" items="${recomList }" varStatus="status" begin="0" end="3">
+        	<c:forEach var="recomList" items="${recomList }" varStatus="status" begin="12" end="15">
             <div id="section_contents_inner">
-                <a href="#" style="color:black;">
+                <a href
+="/recommend/detail?aNo=${recomList.aNo }&powerCode=${recomList.powerCode}&ssdCode=${recomList.ssdCode}&skinCode=${recomList.skinCode}&gcardCode=${recomList.gcardCode}&hddCode=${recomList.hddCode}&coolerCode=${recomList.coolerCode}&ramCode=${recomList.ramCode}&cpuCode=${recomList.cpuCode}&mainboardCode=${recomList.mainboardCode}" style="color:black;">
                     <div class="card">
                         <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">${recomList.aName }</h5>
-                            <p class="card-text">${recomList.aPrice }</p>
+                            <p class="card-text">${recomList.aDetail }</p>
                         </div>
                     </div>
                 </a>
             </div>
-            <c:if test="${status.index ne '3'}">
+            <c:if test="${status.index ne '15' }">
             <div id="section_contents_inner_empty"></div>
             </c:if>
             </c:forEach>
         </div>
-        
-        <div id="empty_space"></div>
-        <div id="empty_space"></div>
-        
-      
-        <div id="section_contents">
-        <c:forEach var="recomList" items="${recomList }" varStatus="index" begin="4" end="7">
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card">
-                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">${recomList.aName }</h5>
-                            <p class="card-text">${recomList.aPrice }</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <c:if test="${index.current ne '7'}">
-            <div id="section_contents_inner_empty"></div>
-            </c:if>
-            </c:forEach>
-        </div>
-        
-        
-        <div id="empty_space"></div>
-        <div id="empty_space"></div>
-        
-         
-        <div id="section_contents">
-        <c:forEach var="recomList" items="${recomList }" varStatus="index" begin="8" end="11">
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card">
-                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">${recomList.aName }</h5>
-                            <p class="card-text">${recomList.aPrice }</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <c:if test="${index.current ne '11'}">
-            <div id="section_contents_inner_empty"></div>
-             </c:if>
-              </c:forEach>
-        </div>
-       
-        
-        <div id="empty_space"></div>
-        <div id="empty_space"></div>
-        
-        
-        <div id="section_contents">
-        <c:forEach var="recomList" items="${recomList }" varStatus="index" begin="12" end="15">
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card">
-                        <img src="/upload/${recomList.fileName }" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">${recomList.aName }</h5>
-                            <p class="card-text">${recomList.aPrice }</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <c:if test="${status.current ne '15'}">
-            <div id="section_contents_inner_empty"></div>
-             </c:if>
-              </c:forEach>
-        </div>   
-       
-        
         <div id="empty_space"></div>
         
         <div id="section_contents_bottom_empty"></div>
         <div id="section_contents_bottom">
-                 ${pageNavi }
+				${pageNavi }
         </div>
         <div id="section_contents_bottom_empty"></div>
 

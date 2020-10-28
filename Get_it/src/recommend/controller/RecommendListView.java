@@ -45,7 +45,7 @@ public class RecommendListView extends HttpServlet {
 		if(!recomList.isEmpty()) {
 			request.setAttribute("recomList", recomList);
 			request.setAttribute("pageNavi", pageData.getPageNavi());
-			request.getRequestDispatcher("/WEB-INF/views/recommend/recommendList").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/recommend/recommendMain.jsp").forward(request, response);
 		}else {
 			response.sendRedirect("오류페이지입니다.");
 		}

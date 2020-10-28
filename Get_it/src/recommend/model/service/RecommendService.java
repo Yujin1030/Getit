@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import common.JDBCTemplate;
 import recommend.model.dao.RecommendDao;
+import recommend.model.vo.Component;
 import recommend.model.vo.ComponentList;
 import recommend.model.vo.PageData;
 import recommend.model.vo.Recommend;
@@ -19,8 +20,8 @@ public class RecommendService {
    // 완제품 전체 목록 출력
 	public PageData recommendAll(int currentPage){
 		Connection conn = null;
-		int recordCountPerPage = 12;
-		int naviCountPerPage = 4;
+		int recordCountPerPage = 16;
+		int naviCountPerPage = 5;
 		PageData pageData = new PageData();
 		try {
 			conn = factory.createConnection();
@@ -79,6 +80,32 @@ public class RecommendService {
 		return componentList;
 	}
 	
+	// 선택한 완제품과 부속부품 가져오기 
+	public Component recommendOne(Recommend recommend) {
+		Connection conn = null;
+		Component component = null;
+		try {
+			conn = factory.createConnection();
+			component = new Component();
+			component.setPower(new RecommendDao().selectPowerOne(conn,recommend));
+			component.setCooler(new RecommendDao().selectCoolerOne(conn,recommend));
+			component.setSsd(new RecommendDao().selectSsdOne(conn,recommend));
+			component.setHdd(new RecommendDao().selectHddOne(conn,recommend));
+			component.setRam(new RecommendDao().selectRamOne(conn,recommend));
+			component.setMainboard(new RecommendDao().selectMainboardOne(conn,recommend));
+			component.setGcard(new RecommendDao().selectGcardOne(conn,recommend));
+			component.setSkin(new RecommendDao().selectSkinOne(conn,recommend));
+			component.setCpu(new RecommendDao().selectCpuOne(conn,recommend));
+			component.setRecommend(new RecommendDao().selectRecommendOne(conn, recommend));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return component; 
+	}
+	
 	public int recommendDelete(String[] aName) {
 		Connection conn = null;
 		int result = 0;
@@ -98,6 +125,7 @@ public class RecommendService {
 		}
 		return result;
 	}
+	
 	
 	
 }

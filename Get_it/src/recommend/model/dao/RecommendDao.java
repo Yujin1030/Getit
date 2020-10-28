@@ -163,20 +163,22 @@ public class RecommendDao {
 		// String을 연결해주는 클래스
 		StringBuilder sb = new StringBuilder();
 		// 이전페이지를 누르면 해당 페이지의 게시물을 가져옴
+		sb.append("<ul class='pagination'>");
 		if(needPrev) {
-			sb.append("<a href='/recommend/view?currentPage=" + (startNavi-1) + "'> < </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='/recommend/listview?currentPage=" + (startNavi-1) + "' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
 		}
 		for(int i=startNavi; i<=endNavi; i++) {
 			if(i==currentPage) {
-				sb.append("<a href='/recommend/view?currentPage=" + i + "'>" + " " +   i + " "    + "</a>" );
+				sb.append("<li class='page-item'><a class='page-link' href='/recommend/listview?currentPage=" + i + "'>" +"<b>" + i + "</b></a></li>" );
 			}else {
-				sb.append("<a href='/recommend/view?currentPage=" + i + "'>" + " " +    i  + " "   + "</a>");
+				sb.append("<li class='page-item'><a class='page-link' href='/recommend/listview?currentPage=" + i + "'>" +  i   + "</a></li>");
 			}
 		}
-
+		
 		if(needNext) {
-			sb.append("<a href='/recommend/view?currentPage=" +(endNavi+1) + "'> > </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='/recommend/listview?currentPage=" +(endNavi+1) + "' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
 		}
+		sb.append("</ul>");
 		return sb.toString();
 	}
 
@@ -541,4 +543,290 @@ public class RecommendDao {
 		}
 		return result;
 	}
+	
+	public Recommend selectRecommendOne(Connection conn,Recommend recommend) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Recommend recom = null;
+		String query 
+		= "select * from end_product where a_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, recommend.getaNo());
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				recom = new Recommend();
+					// 완제품
+				recom.setFileName(rset.getString("a_filename"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return recom;
+	}
+	
+	// selectPower 테이블
+		public POWER selectPowerOne(Connection conn,Recommend recommend){
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			POWER power = null;
+			String query ="select * from power_tbl where power_code= ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, recommend.getPowerCode());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+						power = new POWER();
+						power.setPowerCode(rset.getString("power_code"));
+						power.setPowerNum(rset.getInt("power_no"));
+						power.setPowerName(rset.getString("power_name"));
+						power.setPowerPrice(rset.getInt("power_price"));
+						power.setPowerContent(rset.getString("power_content"));			
+						power.setPowerCount(rset.getInt("power_account"));
+					}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return power;
+		}
+		// selectSSD 테이블
+		public SSD selectSsdOne(Connection conn,Recommend recommend){
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			SSD ssd = null;
+			String query ="select * from ssd where ssd_code=?";
+			try {
+				pstmt =conn.prepareStatement(query);
+				pstmt.setString(1, recommend.getSsdCode());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+					ssd = new SSD();
+						ssd.setSsdCode(rset.getString("ssd_code"));
+						ssd.setSsdNum(rset.getInt("ssd_no"));
+						ssd.setSsdName(rset.getString("ssd_name"));
+						ssd.setSsdPrice(rset.getInt("ssd_price"));
+						ssd.setSsdContent(rset.getString("ssd_content"));			
+						ssd.setSsdCount(rset.getInt("ssd_account"));
+					}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return ssd;
+		}
+
+		// select SKIN 테이블
+		public SKIN selectSkinOne(Connection conn, Recommend recommend){
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			SKIN skin = null;
+			String query ="select * from skin where skin_code=?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, recommend.getSkinCode());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+						skin = new SKIN();
+						skin.setSkinCode(rset.getString("skin_code"));
+						skin.setSkinNum(rset.getInt("skin_no"));
+						skin.setSkinName(rset.getString("skin_name"));
+						skin.setSkinPrice(rset.getInt("skin_price"));
+						skin.setSkinContent(rset.getString("skin_content"));			
+						skin.setSkinCount(rset.getInt("skin_account"));
+					}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return skin;
+		}
+
+		// select GPU 테이블
+		public GCARD selectGcardOne(Connection conn,Recommend recommend){
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			GCARD gpu = null;
+			String query ="select * from gpu where gpu_code=?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, recommend.getGcardCode());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+						gpu = new GCARD();
+						gpu.setGcardCode(rset.getString("gpu_code"));
+						gpu.setGcardNum(rset.getInt("gpu_no"));
+						gpu.setGcardName(rset.getString("gpu_name"));
+						gpu.setGcardPrice(rset.getInt("gpu_price"));
+						gpu.setGcardContent(rset.getString("gpu_content"));			
+						gpu.setGcardCount(rset.getInt("gpu_account"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return gpu;
+		}
+
+		// Hdd 테이블
+		public HDD selectHddOne(Connection conn,Recommend recommend){
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			HDD hdd = null;
+			String query ="select * from hdd where hdd_code=?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, recommend.getHddCode());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+						hdd = new HDD();
+						hdd.setHddCode(rset.getString("hdd_code"));
+						hdd.setHddNum(rset.getInt("hdd_no"));
+						hdd.setHddName(rset.getString("hdd_name"));
+						hdd.setHddPrice(rset.getInt("hdd_price"));
+						hdd.setHddContent(rset.getString("hdd_content"));			
+						hdd.setHddCount(rset.getInt("hdd_account"));
+					}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return hdd;
+		}
+		
+		// select Ram 테이블
+		public RAM selectRamOne(Connection conn,Recommend recommend){
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			RAM ram = null;
+			String query ="select * from ram where ram_code=?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, recommend.getRamCode());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+						ram = new RAM();
+						ram.setRamCode(rset.getString("ram_code"));
+						ram.setRamNum(rset.getInt("ram_no"));
+						ram.setRamName(rset.getString("ram_name"));
+						ram.setRamPrice(rset.getInt("ram_price"));
+						ram.setRamContent(rset.getString("ram_content"));			
+						ram.setRamCount(rset.getInt("ram_account"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return ram;
+		}
+
+		// CpuCooler 테이블
+		public COOLER selectCoolerOne(Connection conn,Recommend recommend){
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			COOLER cooler = null;
+			String query ="select * from cpucooler where ccl_code=?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, recommend.getCoolerCode());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+					cooler = new COOLER();
+					cooler.setCoolerCode(rset.getString("ccl_code"));
+					cooler.setCoolerNum(rset.getInt("ccl_no"));
+					cooler.setCoolerName(rset.getString("ccl_name"));
+					cooler.setCoolerPrice(rset.getInt("ccl_price"));
+					cooler.setCoolerContent(rset.getString("ccl_content"));			
+					cooler.setCoolerCount(rset.getInt("ccl_account"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return cooler;
+		}
+
+		// MainBoard 테이블
+		public MainBoard selectMainboardOne(Connection conn,Recommend recommend){
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			MainBoard mainboard = null;
+			String query ="select * from mainboard where mainboard_code=?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, recommend.getMainboardCode());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+						mainboard = new MainBoard();
+						mainboard.setMainboardCode(rset.getString("mainboard_code"));
+						mainboard.setMainboardNum(rset.getInt("mainboard_no"));
+						mainboard.setMainboardName(rset.getString("mainboard_name"));
+						mainboard.setMainboardPrice(rset.getInt("mainboard_price"));
+						mainboard.setMainboardContent(rset.getString("mainboard_content"));			
+						mainboard.setMainboardCount(rset.getInt("mainboard_account"));
+						mainboard.setComCode(rset.getString("com_code"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return mainboard;
+		}
+
+		// Cpu 테이블
+		public CPU selectCpuOne(Connection conn,Recommend recommend){
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			CPU cpu= null;
+			String query ="select * from cpu where cpu_code=?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, recommend.getCpuCode());
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+						cpu = new CPU();
+						cpu.setCpuCode(rset.getString("cpu_code"));
+						cpu.setCpuNum(rset.getInt("cpu_no"));
+						cpu.setCpuName(rset.getString("cpu_name"));
+						cpu.setCpuPrice(rset.getInt("cpu_price"));
+						cpu.setCpuContent(rset.getString("cpu_content"));			
+						cpu.setCpuCount(rset.getInt("cpu_account"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return cpu;
+		}
 }
