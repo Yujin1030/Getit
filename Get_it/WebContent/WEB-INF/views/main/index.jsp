@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +15,7 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-    
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <script>
         $(document).ready(function(){
           $(window).scroll(function(){
@@ -55,9 +58,52 @@
                 <div id="cart">
                     <a href="#" class="fas fa-shopping-cart fa-lg" style="color: black;"></a>
                 </div>
-                <div id="login">
-                    <a href="#" class="fas fa-user fa-lg" style="color: black;"></a>
-                </div>
+                
+                <c:if test="${ sessionScope.member eq null }">
+					<!-- 로그인x -->
+					<div id="login">
+						<div class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <i
+								class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="/login.html">Log In</a> <a
+									class="dropdown-item" href="#"></a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/enroll.html">회원가입</a>
+							</div>
+						</div>
+					</div>
+				</c:if>
+
+				<c:if test="${ sessionScope.member ne null }">
+					<!-- 로그인o -->
+					<div id="login">
+						<div class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <i
+								class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a> 
+								<a class="dropdown-item" href="/member/orderInfo?userId=${sessionScope.member.memberId }">Order Info</a>
+								
+								<c:if test="${ sessionScope.member.memberId eq 'admin'}">
+								<a class="dropdown-item" href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
+								</c:if>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">LogOut</a>
+							</div>
+						</div>
+					</div>
+				</c:if>
+                
+                
+                
+                
             </div>
         </div>
     </header>
