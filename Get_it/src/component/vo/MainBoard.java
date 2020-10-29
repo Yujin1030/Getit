@@ -8,7 +8,8 @@ public class MainBoard {
 	private int mainboardPrice;
 	private String mainboardContent;
 	private int mainboardCount;
-	
+//	private String mbfileName;
+//	private String mbfilePath;
 	public MainBoard() {}
 
 	

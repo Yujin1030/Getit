@@ -12,21 +12,22 @@ import component.vo.CPU;
 import component.vo.GCARD;
 import component.vo.HDD;
 import component.vo.MainBoard;
+import component.vo.Other;
 import component.vo.POWER;
 import component.vo.RAM;
 import component.vo.SKIN;
 import component.vo.SSD;
 
 public class ComponentDAO {
-	private COOLER COOLER;
-	private CPU CPU;
-	private GCARD GCARD;
-	private HDD HDD;
-	private MainBoard MainBoard;
-	private POWER POWER;
-	private RAM RAM;
-	private SKIN SKIN;
-	private SSD SSD;
+//	private COOLER COOLER;
+//	private CPU CPU;
+//	private GCARD GCARD;
+//	private HDD HDD;
+//	private MainBoard MainBoard;
+//	private POWER POWER;
+//	private RAM RAM;
+//	private SKIN SKIN;
+//	private SSD SSD;
 	
 	
 	
@@ -48,9 +49,12 @@ public class ComponentDAO {
 				cpu.setCpuCode(rset.getString("CPU_CODE"));
 				cpu.setProductNum(rset.getInt("CPU_NO"));
 				cpu.setCpuName(rset.getString("CPU_NAME"));
-				cpu.setCputPrice(rset.getInt("CPU_PRICE"));
-				cpu.setCputContent(rset.getString("CPU_CONTENT"));
-				cpu.setCputCount(rset.getInt("CPU_ACCOUNT"));
+				cpu.setCpuPrice(rset.getInt("CPU_PRICE"));
+				cpu.setCpuContent(rset.getString("CPU_CONTENT"));
+				cpu.setCpuCount(rset.getInt("CPU_ACCOUNT"));
+				// File LINE
+				cpu.setCpufileName(rset.getString("CPU_FILENAME"));
+				cpu.setCpufilePath(rset.getString("CPU_FILEPATH"));
 				cpuList.add(cpu);
 			}
 		} catch (SQLException e) {
@@ -84,6 +88,9 @@ public class ComponentDAO {
 				cooler.setCoolerPrice(rset.getInt("CCL_PRICE"));
 				cooler.setCoolerContent(rset.getString("CCL_CONTENT"));
 				cooler.setCoolerCount(rset.getInt("CCL_ACCOUNT"));
+				//
+				cooler.setCoolerfileName(rset.getString("CCL_FILENAME"));
+				cooler.setCoolerfilePath(rset.getString("CCL_FILEPATH"));
 				coolerList.add(cooler);
 			}
 		} catch (SQLException e) {
@@ -116,6 +123,9 @@ public class ComponentDAO {
 				gcard.setGcardPrice(rset.getInt("GPU_PRICE"));
 				gcard.setGcardContent(rset.getString("GPU_CONTENT"));
 				gcard.setGcardCount(rset.getInt("GPU_ACCOUNT"));
+				//
+				gcard.setGcardfileName(rset.getString("GPU_FILENAME"));
+				gcard.setGcardfilePath(rset.getString("GPU_FILEPATH"));
 				gcardList.add(gcard);
 			}
 		} catch (SQLException e) {
@@ -148,6 +158,9 @@ public class ComponentDAO {
 				hdd.setHddPrice(rset.getInt("HDD_PRICE"));
 				hdd.setHddContent(rset.getString("HDD_CONTENT"));
 				hdd.setHddCount(rset.getInt("HDD_ACCOUNT"));
+				//
+				hdd.setHddfileName(rset.getString("HDD_FILENAME"));
+				hdd.setHddfilePath(rset.getString("HDD_FILEPATH"));
 				hddList.add(hdd);
 			}
 		} catch (SQLException e) {
@@ -182,6 +195,9 @@ public class ComponentDAO {
 				ram.setRamPrice(rset.getInt("RAM_PRICE"));
 				ram.setRamContent(rset.getString("RAM_CONTENT"));
 				ram.setRamCount(rset.getInt("RAM_ACCOUNT"));
+				//
+				ram.setRamfileName(rset.getString("RAM_FILENAME"));
+				ram.setRamfilePath(rset.getString("RAM_FILEPATH"));
 				ramList.add(ram);
 			}
 		} catch (SQLException e) {
@@ -207,6 +223,7 @@ public class ComponentDAO {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(skinQuery);
 			skinList = new ArrayList<SKIN>();
+			
 			while(rset.next()) {
 				SKIN skin = new SKIN();
 				skin.setSkinCode(rset.getString("SKIN_CODE"));
@@ -215,6 +232,9 @@ public class ComponentDAO {
 				skin.setSkinPrice(rset.getInt("SKIN_PRICE"));
 				skin.setSkinContent(rset.getString("SKIN_CONTENT"));
 				skin.setSkinCount(rset.getInt("SKIN_ACCOUNT"));
+				// DB 컬럼 순서 다른테이블이랑 좀 다름
+				skin.setSkinfileName(rset.getString("SKIN_FILENAME"));
+				skin.setSkinfilePath(rset.getString("SKIN_FILEPATH"));
 				skinList.add(skin);
 			}
 		} catch (SQLException e) {
@@ -247,6 +267,9 @@ public class ComponentDAO {
 				power.setPowerPrice(rset.getInt("POWER_PRICE"));
 				power.setPowerContent(rset.getString("POWER_CONTENT"));
 				power.setPowerCount(rset.getInt("POWER_ACCOUNT"));
+				//
+				power.setPowerfileName(rset.getString("POWER_FILENAME"));
+				power.setPowerfilePath(rset.getString("POWER_FILEPATH"));
 				powerList.add(power);
 			}
 		} catch (SQLException e) {
@@ -259,34 +282,37 @@ public class ComponentDAO {
 		
 		// SSD All LIST
 	public ArrayList<SSD> ssdAllList(Connection conn) {
-	ArrayList<SSD> ssdList = null;
-	Statement stmt = null;
-	ResultSet rset = null;
-	String ssdQuery = "SELECT * FROM SSD";
-	
-	try {
-		stmt = conn.createStatement();
-		rset = stmt.executeQuery(ssdQuery);
-		ssdList = new ArrayList<SSD>();
-		while(rset.next()) {
-			SSD ssd = new SSD();
-			ssd.setSsdCode(rset.getString("SSD_CODE"));
-			ssd.setSsdNum(rset.getInt("SSD_NO"));
-			ssd.setSsdName(rset.getString("SSD_NAME"));
-			ssd.setSsdPrice(rset.getInt("SSD_PRICE"));
-			ssd.setSsdContent(rset.getString("SSD_CONTENT"));
-			ssd.setSsdCount(rset.getInt("SSD_ACCOUNT"));
-			ssdList.add(ssd);
+		ArrayList<SSD> ssdList = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String ssdQuery = "SELECT * FROM SSD";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(ssdQuery);
+			ssdList = new ArrayList<SSD>();
+			while(rset.next()) {
+				SSD ssd = new SSD();
+				ssd.setSsdCode(rset.getString("SSD_CODE"));
+				ssd.setSsdNum(rset.getInt("SSD_NO"));
+				ssd.setSsdName(rset.getString("SSD_NAME"));
+				ssd.setSsdPrice(rset.getInt("SSD_PRICE"));
+				ssd.setSsdContent(rset.getString("SSD_CONTENT"));
+				ssd.setSsdCount(rset.getInt("SSD_ACCOUNT"));
+				//
+				ssd.setSsdfileName(rset.getString("SSD_FILENAME"));
+				ssd.setSsdfilePath(rset.getString("SSD_FILEPATH"));
+				ssdList.add(ssd);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
 		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		JDBCTemplate.close(rset);
-		JDBCTemplate.close(stmt);
-	}
 		return ssdList;
 	}
-		
+			
 	
 	
 			// MAIN BOARD All LIST
@@ -314,6 +340,38 @@ public class ComponentDAO {
 	*/
 	
 	
+	
+			// Other All List
+	public ArrayList<Other> otherAllList(Connection conn) {
+		ArrayList<Other> otherList = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String otherQuery = "SELECT * FROM OTHER_PRODUCT";
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(otherQuery);
+			otherList = new ArrayList<Other>();
+			while(rset.next()) {
+				Other other = new Other();
+				other.setoProductNo(rset.getInt("O_PRODUCT_NO"));
+				other.setoProductCode(rset.getString("O_PRODUCT_CODE"));
+				other.setoProductName(rset.getString("O_PRODUCT_NAME"));
+				other.setoProductAcount(rset.getInt("O_PRODUCT_ACOUNT"));
+				other.setoProductPrice(rset.getInt("O_PRODUCT_PRICE"));
+				other.setoProductContents(rset.getString("O_PRODUCT_CONTENTS"));
+				other.setFileName(rset.getString("PICTURE_NAME"));
+				other.setFilePath(rset.getString("PICTURE_PATH"));
+				otherList.add(other);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(stmt);
+		}
+		return otherList;
+	}
 	
 	
 	

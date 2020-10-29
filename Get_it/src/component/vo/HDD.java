@@ -9,8 +9,25 @@ public class HDD {
 	private int hddPrice;
 	private String hddContent;
 	private int hddCount;
-	
+	private String hddfileName;   
+	private String hddfilePath;
 	public HDD() {}
+
+	public String getHddfileName() {
+		return hddfileName;
+	}
+
+	public void setHddfileName(String hddfileName) {
+		this.hddfileName = hddfileName;
+	}
+
+	public String getHddfilePath() {
+		return hddfilePath;
+	}
+
+	public void setHddfilePath(String hddfilePath) {
+		this.hddfilePath = hddfilePath;
+	}
 
 	public String getHddCode() {
 		return hddCode;

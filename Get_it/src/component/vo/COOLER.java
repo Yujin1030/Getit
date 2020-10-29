@@ -3,15 +3,32 @@ package component.vo;
 public class COOLER {
 
 
-	
+	// 10월 30일 업데이트  -현모 
 	private String coolerCode;
 	private int coolerNum;
 	private String coolerName;
 	private int coolerPrice;
 	private String coolerContent;
 	private int coolerCount;
-	
+	private String coolerfileName;      
+	private String coolerfilePath;
 	public COOLER() {}
+
+	public String getCoolerfileName() {
+		return coolerfileName;
+	}
+
+	public void setCoolerfileName(String coolerfileName) {
+		this.coolerfileName = coolerfileName;
+	}
+
+	public String getCoolerfilePath() {
+		return coolerfilePath;
+	}
+
+	public void setCoolerfilePath(String coolerfilePath) {
+		this.coolerfilePath = coolerfilePath;
+	}
 
 	public String getCoolerCode() {
 		return coolerCode;

@@ -8,8 +8,25 @@ public class SSD {
 	private int ssdPrice;
 	private String ssdContent;
 	private int ssdCount;
-	
+	private String ssdfileName;     
+	private String ssdfilePath;
 	public SSD() {}
+
+	public String getSsdfileName() {
+		return ssdfileName;
+	}
+
+	public void setSsdfileName(String ssdfileName) {
+		this.ssdfileName = ssdfileName;
+	}
+
+	public String getSsdfilePath() {
+		return ssdfilePath;
+	}
+
+	public void setSsdfilePath(String ssdfilePath) {
+		this.ssdfilePath = ssdfilePath;
+	}
 
 	public String getSsdCode() {
 		return ssdCode;

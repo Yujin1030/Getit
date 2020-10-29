@@ -9,8 +9,25 @@ public class RAM {
 	private int ramPrice;
 	private String ramContent;
 	private int ramCount;
-	
+	private String ramfileName;  
+	private String ramfilePath;
 	public RAM() {}
+
+	public String getRamfileName() {
+		return ramfileName;
+	}
+
+	public void setRamfileName(String ramfileName) {
+		this.ramfileName = ramfileName;
+	}
+
+	public String getRamfilePath() {
+		return ramfilePath;
+	}
+
+	public void setRamfilePath(String ramfilePath) {
+		this.ramfilePath = ramfilePath;
+	}
 
 	public String getRamCode() {
 		return ramCode;

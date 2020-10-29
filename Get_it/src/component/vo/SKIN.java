@@ -8,11 +8,27 @@ public class SKIN {
 	private int skinPrice;
 	private String skinContent;
 	private int skinCount;
-	
 	public SKIN() {}
-
+	private String skinfileName; 
+	private String skinfilePath;
 	public String getSkinCode() {
 		return skinCode;
+	}
+
+	public String getSkinfileName() {
+		return skinfileName;
+	}
+
+	public void setSkinfileName(String skinfileName) {
+		this.skinfileName = skinfileName;
+	}
+
+	public String getSkinfilePath() {
+		return skinfilePath;
+	}
+
+	public void setSkinfilePath(String skinfilePath) {
+		this.skinfilePath = skinfilePath;
 	}
 
 	public void setSkinCode(String skinCode) {

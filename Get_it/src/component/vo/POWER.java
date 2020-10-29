@@ -8,8 +8,25 @@ public class POWER {
 	private int powerPrice;
 	private String powerContent;
 	private int powerCount;
-	
+	private String powerfileName; 
+	private String powerfilePath;
 	public POWER() {}
+
+	public String getPowerfileName() {
+		return powerfileName;
+	}
+
+	public void setPowerfileName(String powerfileName) {
+		this.powerfileName = powerfileName;
+	}
+
+	public String getPowerfilePath() {
+		return powerfilePath;
+	}
+
+	public void setPowerfilePath(String powerfilePath) {
+		this.powerfilePath = powerfilePath;
+	}
 
 	public String getPowerCode() {
 		return powerCode;

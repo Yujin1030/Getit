@@ -8,8 +8,25 @@ public class GCARD {
 	private int gcardPrice;
 	private String gcardContent;
 	private int gcardCount;
-	
+	private String gcardfileName;      
+	private String gcardfilePath;	
 	public GCARD() {}
+
+	public String getGcardfileName() {
+		return gcardfileName;
+	}
+
+	public void setGcardfileName(String gcardfileName) {
+		this.gcardfileName = gcardfileName;
+	}
+
+	public String getGcardfilePath() {
+		return gcardfilePath;
+	}
+
+	public void setGcardfilePath(String gcardfilePath) {
+		this.gcardfilePath = gcardfilePath;
+	}
 
 	public String getGcardCode() {
 		return gcardCode;

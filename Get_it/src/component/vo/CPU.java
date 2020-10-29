@@ -6,11 +6,28 @@ public class CPU {
 	private String cpuCode;
 	private int productNum;
 	private String cpuName;
-	private int cputPrice;
-	private String cputContent;
-	private int cputCount;
-	
+	private int cpuPrice;
+	private String cpuContent;
+	private int cpuCount;
+	private String cpufileName;  
+	private String cpufilePath;
 	public CPU() {}
+
+	public String getCpufileName() {
+		return cpufileName;
+	}
+
+	public void setCpufileName(String cpufileName) {
+		this.cpufileName = cpufileName;
+	}
+
+	public String getCpufilePath() {
+		return cpufilePath;
+	}
+
+	public void setCpufilePath(String cpufilePath) {
+		this.cpufilePath = cpufilePath;
+	}
 
 	public String getCpuCode() {
 		return cpuCode;
@@ -36,35 +53,36 @@ public class CPU {
 		this.cpuName = cpuName;
 	}
 
-	public int getCputPrice() {
-		return cputPrice;
+	public int getCpuPrice() {
+		return cpuPrice;
 	}
 
-	public void setCputPrice(int cputPrice) {
-		this.cputPrice = cputPrice;
+	public void setCpuPrice(int cpuPrice) {
+		this.cpuPrice = cpuPrice;
 	}
 
-	public String getCputContent() {
-		return cputContent;
+	public String getCpuContent() {
+		return cpuContent;
 	}
 
-	public void setCputContent(String cputContent) {
-		this.cputContent = cputContent;
+	public void setCpuContent(String cpuContent) {
+		this.cpuContent = cpuContent;
 	}
 
-	public int getCputCount() {
-		return cputCount;
+	public int getCpuCount() {
+		return cpuCount;
 	}
 
-	public void setCputCount(int cputCount) {
-		this.cputCount = cputCount;
+	public void setCpuCount(int cpuCount) {
+		this.cpuCount = cpuCount;
 	}
 
 	@Override
 	public String toString() {
-		return "CPU [cpuCode=" + cpuCode + ", productNum=" + productNum + ", cpuName=" + cpuName + ", cputPrice="
-				+ cputPrice + ", cputContent=" + cputContent + ", cputCount=" + cputCount + "]";
+		return "CPU [cpuCode=" + cpuCode + ", productNum=" + productNum + ", cpuName=" + cpuName + ", cpuPrice="
+				+ cpuPrice + ", cpuContent=" + cpuContent + ", cpuCount=" + cpuCount + "]";
 	}
 
-		
+	
+	
 }

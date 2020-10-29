@@ -10,6 +10,7 @@ import component.vo.COOLER;
 import component.vo.CPU;
 import component.vo.GCARD;
 import component.vo.HDD;
+import component.vo.Other;
 import component.vo.POWER;
 import component.vo.RAM;
 import component.vo.SKIN;
@@ -23,7 +24,7 @@ public class ComponentService {
 		factory = JDBCTemplate.getConnection();
 	}
 	
-	private ComponentDAO ComponentDAO;
+//	private ComponentDAO ComponentDAO;
 	
 	
 	
@@ -39,7 +40,7 @@ public class ComponentService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return cpuList;
+		return cpuList ;
 	}
 	
 	
@@ -144,6 +145,7 @@ public class ComponentService {
 	public ArrayList<SSD> ssdAllList() {
 		ArrayList<SSD> ssdList = null;
 		Connection conn = null;
+		
 		try {
 			conn = factory.createConnection();
 			ssdList = new ComponentDAO().ssdAllList(conn);
@@ -170,7 +172,20 @@ public class ComponentService {
 	} */
 
 
-
+			// Other All List 
+	public ArrayList<Other> otherAllList(){
+		ArrayList<Other> otherList = null;
+		Connection conn = null;
+		
+		try {
+			conn = factory.createConnection();
+			otherList = new ComponentDAO().otherAllList(conn);
+			JDBCTemplate.close(conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return otherList;
+	}
 
 
 
