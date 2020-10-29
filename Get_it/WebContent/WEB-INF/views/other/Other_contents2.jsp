@@ -1,0 +1,290 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>메인페이지</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/other/other_content.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+    <script>
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                var scroll = $(window).scrollTop();
+                if (scroll > 1) {
+                    $("#nav_bar").css("background", "white");
+                    $("#nav_bar").css("opacity", "0.5");
+                    $("#nav_bar").css("color", "black");
+                } else {
+                    $("#nav_bar").css("background", "white");
+                    $("#nav_bar").css("opacity", "1");
+                }
+            })
+        })
+    </script>
+    
+    <script>
+    	$("btn1").click(function() {
+    		var position = $(".component").offset();
+    		$("body").stop().animate
+    	})
+    </script>
+
+</head>
+
+<body>
+    <header>
+        <div id="nav_bar">
+            <div id="nav_bar_menu">
+                <ul>
+                    <li><a href="#">Recommend</a></li>
+                    <li><a href="#">Self</a></li>
+                    <li><a href="#">Other</a></li>
+                    <li><a href="#">Used Deal</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+            <div id="nav_bar_logo">
+                <a href="#">Assemble</a>
+            </div>
+            <div id="nav_bar_other">
+                <div id="wrap">
+                    <form action="" autocomplete="on">
+                        <input id="search" name="search" type="text" placeholder="검색어를 입력하세요."><input id="search_submit" value="Rechercher" type="submit">
+                    </form>
+                </div>
+                <div id="cart">
+                    <a href="#" class="fas fa-shopping-cart fa-lg" style="color: black;"></a>
+                </div>
+                <div id="login">
+                    <a href="#" class="fas fa-user fa-lg" style="color: black;"></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="header_space"></div>
+
+
+    <section>
+        <div class="aside"></div>
+        <div class="section_main">
+            <div id="detail_main">
+                <table class="tg">
+			        <tr>
+			          <th rowspan="5" style="width:100%;height:100%"><img src="/oupload/${content.fileName }" width= 150% height= 90%;></th>
+			          <td colspan="2" style="font-weight: bold;">${content.oProductName }</td>
+			        </tr>
+			        <tr>
+			          <td>가격 &nbsp;<fmt:formatNumber value="${content.oProductPrice }" pattern="###,###,###원"/></td>
+			          <%-- ${content.oProductPrice }원 --%>
+			          <td>
+			          	<select style="float: left;">
+			                <option value="">수량선택</option>
+			                <option>1</option>
+			                <option>2</option>
+			                <option>3</option>
+			                <option>4</option>
+			                <option>5</option>
+			            </select>
+			          </td>
+			        </tr>
+			        <tr>
+			          <td colspan="2">배송비 3,000원</td>
+			        </tr>
+			        <tr>
+			          <td colspan="2">${content.oProductContents }</td>
+			        </tr>
+			        <tr>
+			          <td colspan="2">본 상품은 해외배송이 불가한 상품입니다.</td>
+			        </tr>
+			    </table>
+            </div>
+            <hr style="width: 45%;height: 2px; background-color:gray; border-top: 1px;opacity: 0.4; margin-left: 750px;">
+            <div id="account">
+                <div class="detail_main_top_left"><b>총 합계 금액</b></div>
+                <div class="detail_main_top_right"><fmt:formatNumber value="${content.oProductPrice }" pattern="###,###,###원"/></div>
+            </div>
+            <div id="basket">
+                <img src="/img/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88.PNG" style="width: 80px; padding-bottom: 30px;">
+                &nbsp;&nbsp;
+                <a href="#"><b style="font-size: 50px;">장바구니</b></a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="/img/%EA%B2%B0%EC%A0%9C%EB%B2%84%ED%8A%BC.PNG" style="width: 80px; padding-bottom: 37px;">
+                &nbsp;&nbsp;
+                <a href="#"><b style="font-size: 50px; color: red;">결제하기</b></a>
+            </div>
+            <div id="info">
+                <a href="#" id="btn1">상품정보</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" id="btn2">구매후기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" id="btn3">취소/반품/교환 정보</a>
+            </div>
+            <hr style="width: 87.5%;height: 2px; background-color:gray; border-top: 1px;opacity: 0.4;">
+            <div id="content">
+                <div class="component">
+                    <!-- <div class="component_left"> -->
+                        <%-- ${cpu.cpuName} <br>
+                        ${cpu.cpuCode} <br>
+                        ${cpu.cpuContent} --%>
+                    <%-- ${content.oProductContents } --%>
+                    <img src="/img/test.PNG">
+                    <!-- </div> -->
+                    <!-- <div class="component_right"><img src="#"> </div> -->
+                </div>
+                <!-- <div class="component">
+                    <div class="component_left"></div>
+                    <div class="component_right"></div>
+                </div>
+                <div class="component">
+                    <div class="component_left"></div>
+                    <div class="component_right"></div>
+                </div>
+                <div class="component">
+                    <div class="component_left"></div>
+                    <div class="component_right"></div>
+                </div>
+                <div class="component">
+                    <div class="component_left"></div>
+                    <div class="component_right"></div>
+                </div>
+                <div class="component">
+                    <div class="component_left"></div>
+                    <div class="component_right"></div>
+                </div>
+                <div class="component">
+                    <div class="component_left"></div>
+                    <div class="component_right"></div>
+                </div>
+                <div class="component">
+                    <div class="component_left"></div>
+                    <div class="component_right"></div>
+                </div>
+                <div class="component">
+                    <div class="component_left"></div>
+                    <div class="component_right"></div>
+                </div>
+                <div class="component">
+                    <div class="component_left"></div>
+                    <div class="component_right"></div>
+                </div> -->
+            </div>
+            <br><br><br>
+            <hr style="width: 87.5%;height: 2px; background-color:gray; border-top: 1px;opacity: 0.4;">
+            <div class="section_space" style="text-align: center;">구매후기</div>
+            <div class="review">
+                <table border="1">
+                    <tr>
+                        <td class="review_title_top">제목</td>
+                        <td class="review_memeber">작성자</td>
+                        <td class="review_enrolldate">등록일자</td>
+                    </tr>
+                    <tr>
+                        <td class="review_title">1</td>
+                        <td class="review_memeber">후보1</td>
+                        <td class="review_enrolldate">sysdate</td>
+                    </tr>
+                    <tr>
+                        <td class="review_title">2</td>
+                        <td class="review_memeber">후보2</td>
+                        <td class="review_enrolldate">sysdate</td>
+                    </tr>
+                    <tr>
+                        <td class="review_title">3</td>
+                        <td class="review_memeber">후보3</td>
+                        <td class="review_enrolldate">sysdate</td>
+                    </tr>
+                    <tr>
+                        <td class="review_title">4</td>
+                        <td class="review_memeber">후보4</td>
+                        <td class="review_enrolldate">sysdate</td>
+                    </tr>
+                    <tr>
+                        <td class="review_title">5</td>
+                        <td class="review_memeber">후보5</td>
+                        <td class="review_enrolldate">sysdate</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">여기는 페이징</td>
+                    </tr>
+                </table>
+                <div style="text-align: right; padding-right: 95px;"><a href="#">구매후기 작성</a></div>
+            </div>
+            
+            <hr style="width: 87.5%;height: 2px; background-color:gray; border-top: 1px;opacity: 0.4;">
+            <div class="notice">
+              <br><br>
+                <div class="notice_change">
+                    <!-- <div class="notice_change_left"></div>
+                    <div class="notice_change_right"></div> -->
+		                    단품 : 교환 및 반품이 가능한 경우<br>
+				상품등을 실제 받으신 날로부터 7일 이내<br>
+				(※ 포장을 개봉하여 사용하거나 또는 설치완료가 되어 상품의 가치가 훼손된 경우에는 반품 및 교환이 불가하오니 이점 양해하여 주시기 바랍니다.)<br>
+				받으신 상품의 내용이 표시·광고 사항과 다른 경우에는 상품등을 받으신 날로부터 3개월 이내.<br>
+				전자상거래등에서의소비자보호에관한법률에 규정되어 있는 소비자 청약철회 가능범위에 해당되는 경우.<br>
+				기타, 고객님의 단순한 변심에 의해 상품의 교환 및 반품을 요청하시는 경우에는 고객님께서 상품 반송에 소요되는 비용을 실비로 부담하셔야 하오니 이점 양해하여 주시기 바랍니다.
+                </div>
+                <div class="notice_warning">
+                    <!-- <div class="notice_warning_left"></div>
+                    <div class="notice_warning_right"></div> -->
+			                    교환 및 반품이 불가능한 경우<br>
+					고객님의 책임있는 사유로 상품등이 멸실 또는 훼손된 경우.<br>
+					고객님의 사용 또는 일부 소비에 의하여 상품등의 가치가 현저히 감소한 경우.<br>
+					시간이 경과되어 재판매가 곤란할 정도로 상품등의 가치가 상실된 경우.<br>
+					복제가 가능한 상품등의 포장을 훼손한 경우.<br>
+					기타, 전자상거래등에서의소비자보호에관한법률이 정하는 소비자 청약철회 제한에 해당되는 경우.(고객변심에 의한 교환, 반품인 경우 상품 반송에 드는 비용은 고객님께서 부담하셔야 합니다.)
+                </div>
+            </div>
+        </div>
+        <div class="aside"></div>
+    </section>
+
+    <footer>
+        <div class="aside"></div>
+        <div id="footer_icon">
+            <h3>Assemble</h3>
+        </div>
+        <div id="footer_contents">
+            <ul>
+                <li>(주)어셈블</li>
+                <li>대표이사: 노유진</li>
+                <li>서울특별시 중구 남대문로 120 대일빌딩 2F,3F</li>
+                <li>사업자등록번호: XXX-XX-XXXXXX</li>
+                <li>COPYRIGHT © TENBYTEN ALL RIGHTS RESERVED.</li>
+            </ul>
+        </div>
+        <div id="footer_icon">
+            <div id="footer_icon_split">
+                <i class="fas fa-headset fa-5x"></i>
+            </div>
+            <div id="footer_empty"></div>
+            <div id="footer_icon_split">
+                <i class="fas fa-money-check-alt fa-4x"></i>
+            </div>
+        </div>
+        <div id="footer_contents">
+            <div id="footer_contents1">
+                <ul>
+                    <li class="phone">02-1234-5678</li>
+                    <li class="time">평일 09:00~18:00 / 점심시간 12:00~13:00</li>
+                    <li class="notice">주말 및 공휴일은 휴무입니다.</li>
+                </ul>
+            </div>
+            <div id="footer_empty"></div>
+            <div id="footer_contents1">
+                <ul>
+                    <li class="account">국민은행 01234567-00-1234567</li>
+                    <li class="account_holder">예금주: 노유진</li>
+                </ul>
+            </div>
+        </div>
+        <div class="aside"></div>
+    </footer>
+
+</body></html>
