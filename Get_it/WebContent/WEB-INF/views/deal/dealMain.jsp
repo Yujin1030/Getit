@@ -81,53 +81,22 @@
         </div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
+            <c:forEach var="dList" items="${dList }" varStatus="status" begin="0" end="3">
+				<div id="section_contents_inner">
+	                <a href="/deal/select?dealNo=${deal.dealNo }" style="color:black;">
+	                    <div class="card" style="width:20.6rem;">
+	                      	<img src="img/${deal.dealFileName }" class="card-img-top" alt="...">
+	                      <div class="card-body">
+	                        <h5 class="card-title">${deal.dealTitle }</h5>
+	                        <p class="card-text">${deal.dealPrice }</p>
+	                      </div>
+	                    </div>
+	                </a>
+	            </div>
+				<c:if test="${status.index ne '3' }">
+            		<div id="section_contents_inner_empty"></div> 
+            	</c:if>
+            </c:forEach>
         </div>
         <div id="empty_space"></div>
         <div id="empty_space"></div>
@@ -252,7 +221,7 @@
                       </a>
                     </li>
                         <form action="/deal/writeform" method="post" style="margin-left: 34.5%;">
-                            <button type="subnit" class="btn btn-secondary" style="margin-top: 7%;">글쓰기</button>
+                            <button type="submit" class="btn btn-secondary" style="margin-top: 7%;">글쓰기</button>
                         </form>
                   </ul>
                 </nav>
