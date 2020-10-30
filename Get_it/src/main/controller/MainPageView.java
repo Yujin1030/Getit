@@ -8,11 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import main.model.service.MainService;
-import main.model.vo.MainList;
-import recommend.model.vo.Recommend;
+import product.model.vo.Product;
 
 /**
  * Servlet implementation class MainPageView
@@ -36,19 +34,15 @@ public class MainPageView extends HttpServlet {
 		// 넘겨받은 파라미터 값 인코딩 처리
 		request.setCharacterEncoding("utf-8");
 		// 화면에 넘겨줄 완제품, 조립부품, 기타부품, 중고거래 데이터 불러오기
-		// MainList에는 위에 해당되는 데이터리스트를 멤버변수로 가지고 있음
-		MainList mainList = new MainService().selectMain();
-		int recomSize = mainList.getRecommendList().size();
-//		if(mainList!=null) {
-			request.setAttribute("recomSize", recomSize);
-			request.setAttribute("recommendList", mainList.getRecommendList());
-//			request.setAttribute("dealList", mainList.getDealList());
-//			request.setAttribute("otherList", mainList.getOtherList());
-//			request.setAttribute("componentList", mainList.getComponentList());
+		// Product클래스를 리스트로 만들어서 전체 데이터를 가져옴
+		ArrayList<Product> productList = new MainService().selectAllProduct();
+		System.out.println(productList.size());
+		if(!productList.isEmpty()) {
+		request.setAttribute("productList", productList);
 		request.getRequestDispatcher("/WEB-INF/views/main/index.jsp").forward(request, response);
-//		}else {
-//			response.sendRedirect("페이지 요청 실패");
-//		}
+		}else {
+		response.sendRedirect("페이지 요청 실패");
+		}
 		
 	}
 
