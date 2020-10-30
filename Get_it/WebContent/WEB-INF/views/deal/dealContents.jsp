@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	<%@ page import="java.util.*" %>
 
     
 <!DOCTYPE html>
@@ -35,11 +37,8 @@
     </script>
     
     <script>
-		function question1() {
-			return confirm ("정말로 수정하시겠습니까?");
-		}
 	
-   		function question2() {
+   		function question() {
    			return confirm ("정말로 삭제하시겠습니까?");
    		}
    		
@@ -79,20 +78,31 @@
     <section>
         <div id="section_empty"></div>
         <div id="main_image">
-            <img src=img src="${pageContext.request.contextPath}//WEB-INF/image/${contents.dealFileName }" alt="..." style="height: 100%;width:50%;" class="rounded mx-auto d-block">
+            <img src="/img/${contents.dealFileName }" alt="..." style="height: 100%;width:50%;" class="rounded mx-auto d-block">
         </div>
         <div id="section_title_empty"></div>
         <div id="section_title">
             <div id="section_title_icon">
-                <i class="fas fa-user-circle fa-3x" style="color: dimgray"></i>
+                <i class="fas fa-user-circle fa-3x" style="color: dimgray;margin-top:6%;"></i>
             </div>
             <div id="section_title_p">
                 <p id="section_title_pTag" style="margin-top:3.5%;">${contents.memberId }</p>
             </div>
         </div>
+
         <div id="section_title">
-                <button type="submit" class="btn btn-secondary" onclick="window.open('/deal/chatToWriter', '판매자와 채팅중', 'width=400px, height=600px')">채팅하기</button>
-                <button type="submit" class="btn btn-secondary" onclick="window.open('/deal/chatToBuyer', '구매자와 채팅중', 'width=400px, height=600px')">채팅하기</button>
+        		<!-- 게시물 아이디와 로그인 중인 아이디가 같을때 구매자와의 채팅이 열림 -->
+        		<c:if test="${contents.memberId eq sessionScope.member.memberId }">
+                	<input type="image" src="/img/ezgif.com-gif-maker.gif" style="width:10%;height:100%;margin-top:1%;margin-left:90%;" onclick="window.open('/deal/chatToBuyer', '구매자와 채팅중', 'width=400px, height=600px')">
+                </c:if>
+                
+                <!-- 게시물 아이디와 로그인 중인 아이디가 다를때 판매자와의 채팅이 열림 -->
+                <c:if test="${contents.memberId ne sessionScope.member.memberId }">
+                	<input type="image" src="/img/ezgif.com-gif-maker.gif" style="width:10%;height:100%;margin-top:1%;margin-left:90%;" onclick="window.open('/deal/chatToWriter', '판매자와 채팅중', 'width=400px, height=600px')">
+                </c:if>
+
+                <!-- <button type="submit" class="btn btn-secondary" onclick="window.open('/deal/chatToBuyer', '구매자와 채팅중', 'width=400px, height=600px')">채팅하기</button> -->
+                <!-- <button type="submit" class="btn btn-secondary" onclick="window.open('/deal/chatToWriter', '판매자와 채팅중', 'width=400px, height=600px')">채팅하기</button> -->
         </div>
         <div id="section_title_empty"></div>
         <div id="section_title_empty_hr"></div>
@@ -106,7 +116,7 @@
                 <p style="font-weight: bold;font-size: 20px;">${contents.dealTitle }</p>
             </div>
             <div id="section_contents_price">
-                <p style="font-weight: bold;font-size: 17px;color: dimgray">${contents.dealPrice }</p>
+                <p style="font-weight: bold;font-size: 17px;color: dimgray"><fmt:formatNumber value="${contents.dealPrice }" pattern="###,###,###원"/></p>
             </div>
             <div id="section_contents_contents">
                 <pre>${contents.dealContents }
@@ -114,9 +124,6 @@
             </div>
             <div id="section_contents_date">
                 <p style="color:dimgray;">${contents.dealDate }</p>
-            </div>
-            <div id="section_contents_veiwnum">
-                <p style="color:dimgray;">조회수 : ${contents.dealView }</p>
             </div>
         </div>
         <div id="contents_empty"></div>
@@ -126,21 +133,38 @@
         </div>
         <div id="section_title_empty_hr"></div>
         <div id="section_footer_empty"></div>
-        <div id="section_footer_modify">
-            <form action="" method="post">
-                <button type="submit" class="btn btn-secondary" onclick="return question1();">수정</button>
-            </form>
-        </div>
-        <div id="section_footer_delete">
-            <form action="/deal/delete" method="post">
-                <button type="submit" class="btn btn-secondary" onclick="return question2();">삭제</button>
-            </form>
-        </div>
-        <div id="section_footer_list">
-            <form action="/deal/chatToWriter" method="post">
-                <button type="submit" class="btn btn-secondary">목록</button>
-            </form>
-        </div>
+        
+
+        <!-- 게시물을 작성한 작성자와 현재 로그인 중인 작성자가 같을때 뜨는 화면 -->
+        <c:if test="${contents.memberId eq sessionScope.member.memberId }">
+	        <div id="section_footer_modify" style="text-align:right;width:42%;height:8%;float:left;">
+	            <form action="/deal/modifyform" method="post">
+	                <button type="submit" class="btn btn-secondary">수정</button>
+	                <input type="hidden" name="dealNo" value="${contents.dealNo }">
+	            </form>
+	        </div>
+	        <div id="section_footer_delete" style="text-align: right;width:4%;height:8%;float:left;">
+	            <form action="/deal/delete" method="post">
+	                <button type="submit" class="btn btn-secondary" onclick="return question();">삭제</button>
+	                <input type="hidden" name="dealNo" value="${contents.dealNo }">
+	            </form>
+	        </div>
+	        <div id="section_footer_list" style="text-align: right;width:4%;height:8%;float:left;">
+	            <form action="/deal/main" method="post">
+	                <button type="submit" class="btn btn-secondary">목록</button>
+	            </form>
+	        </div>
+        </c:if>
+        
+        
+        <!-- 게시물을 작성한 작성자와 현재 로그인 중인 작성자가 같지 않을때 뜨는 화면 -->
+        <c:if test="${contents.memberId ne sessionScope.member.memberId }">
+	        <div id="section_footer_list" style="text-align:right;width:50%;height:8%;float:left;">
+	            <form action="/deal/main" method="post">
+	                <button type="submit" class="btn btn-secondary">목록</button>
+	            </form>
+	        </div>
+        </c:if>
         <div id="section_footer_empty"></div>
     </section>
     <footer>

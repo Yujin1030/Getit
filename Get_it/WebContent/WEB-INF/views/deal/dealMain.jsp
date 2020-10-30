@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	<%@ page import="java.util.*" %>
     
 <!DOCTYPE html>
 <html>
@@ -31,6 +33,12 @@
             }
           })
         })
+        
+        function numbeComma(number) {
+    		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+		
+		
     </script>
     
 </head>
@@ -65,15 +73,15 @@
         </div>
     </header>
     <section>
-        <div id="main_image">
-        <img src="img/%EB%A9%94%EC%9D%B8.PNG" style="height: 100%;width:100%;">
+        <div id="main_image" style="text-align:center;background-color:#FDFDFD;">
+        <img src="/img/LiveChat.gif" style="height: 100%;width:80%;">
         </div>
         <div id="section_title">
             <div id="section_title_main">
                 <p>Used Deal</p>
             </div>
             <div id="wrap1">
-                  <form action="" autocomplete="on">
+                  <form action="/deal/search" autocomplete="on">
                   <input id="search" name="search" type="text" placeholder="검색어를 입력하세요."><input id="search_submit" value="Rechercher" type="submit"> 
                   </form>
             </div>
@@ -81,14 +89,14 @@
         </div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            <c:forEach var="dList" items="${dList }" varStatus="status" begin="0" end="3">
+            <c:forEach var="deal" items="${dList }" varStatus="status" begin="0" end="3">
 				<div id="section_contents_inner">
 	                <a href="/deal/select?dealNo=${deal.dealNo }" style="color:black;">
 	                    <div class="card" style="width:20.6rem;">
-	                      	<img src="img/${deal.dealFileName }" class="card-img-top" alt="...">
+	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
 	                        <h5 class="card-title">${deal.dealTitle }</h5>
-	                        <p class="card-text">${deal.dealPrice }</p>
+	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
 	                </a>
@@ -101,130 +109,47 @@
         <div id="empty_space"></div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
+            <c:forEach var="deal" items="${dList }" varStatus="status" begin="4" end="7">
+				<div id="section_contents_inner">
+	                <a href="/deal/select?dealNo=${deal.dealNo }" style="color:black;">
+	                    <div class="card" style="width:20.6rem;">
+	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
+	                      <div class="card-body">
+	                        <h5 class="card-title">${deal.dealTitle }</h5>
+	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
+	                      </div>
+	                    </div>
+	                </a>
+	            </div>
+				<c:if test="${status.index ne '7' }">
+            		<div id="section_contents_inner_empty"></div> 
+            	</c:if>
+            </c:forEach>
         </div>
         <div id="empty_space"></div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
-            <div id="section_contents_inner_empty"></div>
-            <div id="section_contents_inner">
-                <a href="#" style="color:black;">
-                    <div class="card" style="width: 20.6rem;">
-                      <img src="img/ec3dafa6594854b21308197ad902fcb55cc0d48e949cc0c64bd9600b57200c58.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">램 4G 팝니다.</h5>
-                        <p class="card-text">45,000원</p>
-                      </div>
-                    </div>
-                </a>
-            </div>
+            <c:forEach var="deal" items="${dList }" varStatus="status" begin="8" end="11">
+				<div id="section_contents_inner">
+	                <a href="/deal/select?dealNo=${deal.dealNo }" style="color:black;">
+	                    <div class="card" style="width:20.6rem;">
+	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
+	                      <div class="card-body">
+	                        <h5 class="card-title">${deal.dealTitle }</h5>
+	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
+	                      </div>
+	                    </div>
+	                </a>
+	            </div>
+				<c:if test="${status.index ne '11' }">
+            		<div id="section_contents_inner_empty"></div> 
+            	</c:if>
+            </c:forEach>
         </div>
         <div id="empty_space"></div>
         <div id="section_contents_bottom_empty"></div>
         <div id="section_contents_bottom">
-                <nav aria-label="Page navigation example" id="section_contents_bottom_nav">
-                  <ul class="pagination">
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                        <form action="/deal/writeform" method="post" style="margin-left: 34.5%;">
-                            <button type="submit" class="btn btn-secondary" style="margin-top: 7%;">글쓰기</button>
-                        </form>
-                  </ul>
-                </nav>
+				${dealPageNavi }
         </div>
         <div id="section_contents_bottom_empty"></div>
         <div id="empty_space1"></div>

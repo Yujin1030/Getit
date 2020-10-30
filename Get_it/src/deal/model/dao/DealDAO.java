@@ -17,7 +17,7 @@ public class DealDAO {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO DEAL VALUES(DEAL_SEQ.NEXTVAL,?,?,?,SYSDATE,0,?,?,?)";
+		String query = "INSERT INTO DEAL VALUES(DEAL_SEQ.NEXTVAL,?,?,?,SYSDATE,?,?,?)";
 		// 0은 조회수이고 기본값 0으로 넣음
 		
 		try {
@@ -54,6 +54,7 @@ public class DealDAO {
 			pstmt.setString(2, deal.getDealContents());
 			pstmt.setInt(3, deal.getDealPrice());
 			pstmt.setString(4, deal.getDealFileName());
+			pstmt.setString(5, deal.getDealFilePath());
 			pstmt.setInt(6, deal.getDealNo());
 			
 			result = pstmt.executeUpdate();
@@ -92,7 +93,6 @@ public class DealDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "SELECT * FROM DEAL WHERE DEAL_NO =?";
-		// 사진도 불러와야해서 사진 테이블과 조인되는 쿼리문으로 수정해야함!
 		// DEAL_NO와 일치하는 사진들 불러올것!
 		Deal deal = null;
 		
@@ -108,7 +108,7 @@ public class DealDAO {
 				deal.setDealContents(rset.getString("DEAL_CONTENTS"));
 				deal.setDealPrice(rset.getInt("DEAL_PRICE"));
 				deal.setDealDate(rset.getDate("DEAL_DATE"));
-				deal.setDealView(rset.getInt("DEAL_LOOK"));
+				deal.setDealFileName(rset.getString("DEAL_FILENAME"));
 				deal.setDealFilePath(rset.getString("DEAL_FILEPATH"));
 				deal.setMemberId(rset.getString("MEMBER_ID"));
 				
@@ -152,7 +152,8 @@ public class DealDAO {
 				dealOne.setDealContents(rset.getString("DEAL_CONTENTS"));
 				dealOne.setDealPrice(rset.getInt("DEAL_PRICE"));
 				dealOne.setDealDate(rset.getDate("DEAL_DATE"));
-				dealOne.setDealView(rset.getInt("DEAL_LOOK"));
+				dealOne.setDealFileName(rset.getString("DEAL_FILENAME"));
+				dealOne.setDealFilePath(rset.getString("DEAL_FILEPATH"));
 				dealOne.setMemberId(rset.getString("MEMBER_ID"));
 				dList.add(dealOne);
 			}
@@ -174,7 +175,7 @@ public class DealDAO {
 		// 전체 페이지의 개수
 		int pageTotalCount = 0;
 		
-		if (recordTotalCount % pageTotalCount >0) {
+		if (recordTotalCount % recordCountDealPage > 0) {
 			pageTotalCount = recordTotalCount/recordCountDealPage+1;
 		} else {
 			pageTotalCount = recordTotalCount/recordCountDealPage;
@@ -209,25 +210,25 @@ public class DealDAO {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		// 이전버튼 샌성
-		if (needPrev) {
-			sb.append("<a href='/deal/main?dealPageNo="+(startNavi-1)+"'> < </a>");
+		sb.append("<ul class='pagination'>");
+		if(needPrev) {
+			sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" + (startNavi-1) + "' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
 		}
-		
-		// 1~10까지의 숫자를 생성하고 만들어줌
-		for (int i=startNavi; i<=endNavi; i++) {
-			if (i==dealPageNo) {
-				sb.append("<a href='/deal/main?dealPageNo="+i+"'><b>"+i+"</b></a>");
-			} else {
-				sb.append("<a href='/deal/main?dealPageNo="+i+"'>"+i+"</a>");
+		for(int i=startNavi; i<=endNavi; i++) {
+			if(i==dealPageNo) {
+				sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" + i + "'>" +"<b>" + i + "</b></a></li>" );
+			}else {
+				sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" + i + "'>" +  i   + "</a></li>");
 			}
 		}
 		
-		// 다음버튼 생성
-		if (needNext) {
-			sb.append("<a href='/deal/main?dealPageNo="+(endNavi+1)+"'> > </a>");
+		if(needNext) {
+			sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" +(endNavi+1) + "' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
 		}
 		
+		sb.append("<form action=\"/deal/writeform\" method=\"post\" id=\"writeForm\">\r\n" + 
+				"<button type=\"submit\" class=\"btn btn-secondary\">글쓰기</button>\r\n" + 
+				"</form></ul>");
 		return sb.toString();
 	}
 	
@@ -264,7 +265,7 @@ public class DealDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Deal> dList =  null;
-		String query = "SELECT * FROM(SELECT DEAL.*,ROW_NUMBER() OVER (ORDER BY DEAL_DATE DESC) AS NUM FROM DEAL WHERE TITLE LIKE ?) WHERE NUM BETWEEN ? AND ?";
+		String query = "SELECT * FROM(SELECT DEAL.*,ROW_NUMBER() OVER (ORDER BY DEAL_DATE DESC) AS NUM FROM DEAL WHERE DEAL_TITLE LIKE ?) WHERE NUM BETWEEN ? AND ?";
 		
 		int start = dealPageNo*recordCountDealPage - (recordCountDealPage-1);
 		int end = dealPageNo*recordCountDealPage;
@@ -287,7 +288,6 @@ public class DealDAO {
 					deal.setDealContents(rset.getString("DEAL_CONTENTS"));
 					deal.setDealPrice(rset.getInt("DEAL_PRICE"));
 					deal.setDealDate(rset.getDate("DEAL_DATE"));
-					deal.setDealView(rset.getInt("DEAL_LOOK"));
 					deal.setMemberId(rset.getString("MEMBER_ID"));
 					dList.add(deal);
 				}
@@ -370,7 +370,7 @@ public class DealDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "SELECT COUNT(*) AS TOTALCOUNT FROM DEAL WHERE TITLE LIKE ?";
+		String query = "SELECT COUNT(*) AS TOTALCOUNT FROM DEAL WHERE DEAL_TITLE LIKE ?";
 		int recordTotalCount = 0;
 		
 		try {

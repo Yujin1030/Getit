@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import deal.model.service.DealService;
 import deal.model.vo.Deal;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class DealSelectServlet
@@ -33,12 +36,16 @@ public class DealSelectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		String memberId = ((Member)session.getAttribute("member")).getMemberId();
 		
 		int dealNo = Integer.parseInt(request.getParameter("dealNo"));
 		Deal deal = new DealService().selectDeal(dealNo);
+		Member member = new MemberService().selectMember(memberId);
 		
 		if (deal != null) {
 			request.setAttribute("contents", deal);
+			session.setAttribute("member", member);
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/deal/dealContents.jsp");
 			view.forward(request, response);
 		} else {

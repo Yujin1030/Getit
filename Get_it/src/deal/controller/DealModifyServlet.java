@@ -50,10 +50,9 @@ public class DealModifyServlet extends HttpServlet {
 		File multiFile = multi.getFile("image");
 	    String systemImageName = multi.getFilesystemName("image");
 	    String filePath = multiFile.getPath();
-	    int dealNo = Integer.parseInt(multi.getParameter("dealNo"));
 		
 	    Deal deal = new Deal();
-	    deal.setDealNo(dealNo);
+	    deal.setDealNo(Integer.parseInt(multi.getParameter("dealNo")));
 	    deal.setDealTitle(multi.getParameter("title"));
 	    deal.setDealContents(multi.getParameter("contents"));
 	    deal.setDealPrice(Integer.parseInt(multi.getParameter("price")));
@@ -63,7 +62,7 @@ public class DealModifyServlet extends HttpServlet {
 	    int result = new DealService().modifyDeal(deal);
 		
 		if (result > 0) {
-			response.sendRedirect("/deal/select?dealNo="+dealNo);
+			response.sendRedirect("/deal/main");
 		} else {
 			// 오류 페이지
 		}

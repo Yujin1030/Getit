@@ -51,7 +51,7 @@ public class DealSearchServlet extends HttpServlet {
 		
 		if (!dList.isEmpty()) {
 			request.setAttribute("dList", dList);
-			request.setAttribute("pageNavi", dealPageData.getDealPageNavi());
+			request.setAttribute("dealPageNavi", dealPageData.getDealPageNavi());
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/deal/dealMain.jsp");
 			view.forward(request, response);
 		} else {

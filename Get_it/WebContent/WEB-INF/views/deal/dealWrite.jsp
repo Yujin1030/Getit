@@ -75,7 +75,7 @@
                     <h2>중고거래 게시물 작성</h2>
                     <br>
                     <form action="/deal/write" method="post" enctype="multipart/form-data">
-                    <input type="hidden" value="${member.memberId }">
+                    <input type="hidden" value="${member.memberId }" name="memberId">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Title</label>
                         <textarea class="form-control" rows="1" id="comment" placeholder="제목을 입력해주세요." name="title"></textarea>

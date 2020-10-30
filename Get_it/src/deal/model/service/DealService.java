@@ -93,13 +93,13 @@ public class DealService {
 	public DealPageData dealList (int dealPageNo) {
 		Connection conn = null;
 		DealPageData dpd = new DealPageData();
-		int recordCountDealPage = 10;
+		int recordCountDealPage = 12;
 		int naviCountDealPage = 5;
 		
 		try {
 			conn = factory.createConnection();
 			dpd.setDealPageList(new DealDAO().dealList(conn,dealPageNo,recordCountDealPage));
-//			dpd.setDealPageNavi(new DealDAO().dealPageNavi(conn,dealPageNo,recordCountDealPage,naviCountDealPage));
+			dpd.setDealPageNavi(new DealDAO().dealPageNavi(conn,dealPageNo,recordCountDealPage,naviCountDealPage));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

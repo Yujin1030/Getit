@@ -1,19 +1,21 @@
 package deal.controller;
 
 import java.io.File;
-import java.io.IOException;
 
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import deal.model.service.DealService;
 import deal.model.vo.Deal;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class DealWriteServlet
@@ -36,7 +38,7 @@ public class DealWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		// HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		// 여기부터는 사진 파일에 대한 내용
 		// MultipartRequest 밑으로는 request를 쓰면 안됨
@@ -46,9 +48,8 @@ public class DealWriteServlet extends HttpServlet {
 		String encType = "utf-8";
 		
 		// 웹서버내의 파일 절대경로
-		String uploadImagePath = request.getServletContext().getRealPath("\\WEB-INF\\image");
+		String uploadImagePath = request.getServletContext().getRealPath("\\img");
 		MultipartRequest multi = new MultipartRequest(request, uploadImagePath, uploadImageSize, encType, new DefaultFileRenamePolicy());
-		String memberId = "김승태바보";
 		File multiFile = multi.getFile("image");
 	    String systemImageName = multi.getFilesystemName("image");
 	    String filePath = multiFile.getPath();
@@ -59,27 +60,20 @@ public class DealWriteServlet extends HttpServlet {
 	    deal.setDealPrice(Integer.parseInt(multi.getParameter("price")));
 	    deal.setDealFileName(systemImageName);
 	    deal.setDealFilePath(filePath);
-	    deal.setMemberId(memberId);
+	    deal.setMemberId(multi.getParameter("memberId"));
 
 	    int result = new DealService().insertDeal(deal);
-	  
 	    
-		if (result > 0) {
-			request.getRequestDispatcher("/WEB-INF/views/deal/dealMain.jsp");
-		} else {
-			// insert가 실패했을때 넣을 메시지!
-		}
-	    
+//	    String memberId = deal.getMemberId();
+//	    String memberId = ((Member)session.getAttribute("member")).getMemberId();
 //		if (session != null && (session.getAttribute("deal")!=null)) {
-//			memberId = ((Deal)session.getAttribute("deal")).getMemberId();
-//			int result = new DealService().insertDeal(dealTitle,dealContents,dealPrice,memberId, dealImageName,multiFile,systemImageName);
-//			
-//			if (result > 0) {
-//				response.sendRedirect("/deal/main");
-//			} else {
-//				// insert가 실패했을때 넣을 메시지!
-//			}
-//			
+//			memberId = ((Member)session.getAttribute("member")).getMemberId();
+			if (result > 0) {
+				response.sendRedirect("/deal/main");
+			} else {
+				// insert가 실패했을때 넣을 메시지!
+			}
+			
 //		} else {
 //			// 로그인을 하지 않았을때 넣을 메시지!
 //		}

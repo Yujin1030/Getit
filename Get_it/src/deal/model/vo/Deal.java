@@ -9,7 +9,6 @@ public class Deal {
 	private String dealContents;
 	private int dealPrice;
 	private Date dealDate;
-	private int dealView;
 	private String dealFileName;
 	private String dealFilePath;
 	private String memberId;
@@ -54,14 +53,6 @@ public class Deal {
 	public void setDealDate(Date dealDate) {
 		this.dealDate = dealDate;
 	}
-
-	public int getDealView() {
-		return dealView;
-	}
-	public void setDealView(int dealView) {
-		this.dealView = dealView;
-	}
-	
 	
 	
 	public String getDealFileName() {
@@ -88,7 +79,7 @@ public class Deal {
 	@Override
 	public String toString() {
 		return "Deal [dealNo=" + dealNo + ", dealTitle=" + dealTitle + ", dealContents=" + dealContents + ", dealPrice="
-				+ dealPrice + ", dealDate=" + dealDate + ", dealView=" + dealView + ", dealFileName=" + dealFileName
+				+ dealPrice + ", dealDate=" + dealDate + ", dealFileName=" + dealFileName
 				+ ", dealFilePath=" + dealFilePath + ", memberId=" + memberId + "]";
 	}
 
