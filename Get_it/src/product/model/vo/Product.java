@@ -13,8 +13,20 @@ public class Product {
 	private String pComcode;
 	private String pFilename;
 	private String pFilepath;
+	private String relatedProduct;
 	
 	public Product() {}
+
+	
+	public String getRelatedProduct() {
+		return relatedProduct;
+	}
+
+
+	public void setRelatedProduct(String relatedProduct) {
+		this.relatedProduct = relatedProduct;
+	}
+
 
 	public String getpCode() {
 		return pCode;
