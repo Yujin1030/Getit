@@ -7,26 +7,26 @@
 
 body {
     width: 1890px;
-    height: 4000px;
+    height: 4500px;
     font-family: 'Sawarabi Gothic', sans-serif;
 }
 
-/*
-div {
+
+/* div {
     border: 1px solid black;
     box-sizing: border-box;
-}
-*/
+} */
 
 
+/*수정*/
 header {
     width: 100%;
-    height: 1.2%;
+    height: 0.8%;
 }
 
 .header_space {
     width: 100%;
-    height: 0.8%;
+    height: 0.7%;
 }
 
 #nav_bar {
@@ -173,6 +173,20 @@ section {
     font-size: 20px;
 }
 
+.section_space div:first-child {
+    width: 53%;
+    height: 100%;
+    float: left;
+    text-align: right;
+}
+
+.buy_review {
+    width: 47%;
+    height: 100%;
+    /*    line-height: 50px;*/
+    float: left;
+}
+
 .aside {
     width: 10%;
     height: 100%;
@@ -189,7 +203,19 @@ section {
 
 #detail_main {
     width: 100%;
-    height: 21%;
+    height: 18.7%;
+}
+
+.detail_main_left {
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+
+.detail_main_right {
+    width: 60%;
+    height: 100%;
+    float: left;
 }
 
 #account {
@@ -199,7 +225,7 @@ section {
 
 #basket {
     width: 100%;
-    height: 6%;
+    height: 5%;
     text-align: right;
     line-height: 165px;
     padding-right: 100px;
@@ -211,7 +237,7 @@ section {
 
 #info {
     width: 100%;
-    height: 4%;
+    height: 3%;
 }
 
 #info a {
@@ -227,9 +253,10 @@ section {
     color: darkred;
 }
 
+/*수정*/
 #content {
     width: 100%;
-    height: 40%;
+    height: 38%;
 }
 
 .component {
@@ -267,12 +294,12 @@ section {
 }
 
 #detail_main table th {
-    text-align: center;
+    /*    text-align: center;*/
 }
 
 .detail_img {
     width: 40%;
-    text-align: center;
+    /*    text-align: center;*/
 }
 
 .detail_component {
@@ -316,42 +343,79 @@ section {
     font-size: 50px;
 }
 
+/* 수정 11.01 */
 .review {
     width: 100%;
-    height: 6%;
+    height: 8%;
 }
 
-.review table {
+.accordion_sub {
+    display: none;
+}
+
+.accordion_title {
     width: 100%;
-    height: 50%;
+    height: 12%;
 }
 
-
-.review_title_top {
-    text-align: center;
+.accordion_sub {
+    width: 100%;
+    height: 20%;
 }
 
 .review_title {
+    width: 100%;
+    height: 15%;
+    text-align: center;
+}
+
+.accordion_title_left {
     width: 60%;
     height: 100%;
-    text-align: left;
+    float: left;
 }
 
-.review_memeber {
-    width: 30%;
+.accordion_title_middle {
+    width: 20%;
     height: 100%;
+    float: left;
     text-align: center;
 }
 
-.review_enrolldate {
-    width: 10%;
+.accordion_title_right {
+    width: 20%;
     height: 100%;
+    float: left;
     text-align: center;
 }
+
+.review_title_left {
+    width: 60%;
+    height: 100%;
+    float: left;
+}
+
+.review_title_middle {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+.review_title_right {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+.review_contents {
+    width: 100%;
+    height: 90%;
+}
+
 
 .notice {
     width: 100%;
-    height: 17.2%;
+    height: 19.7%;
 }
 
 .notice_change {
@@ -390,7 +454,7 @@ section {
 
 footer {
     width: 100%;
-    height: 6%;
+    height: 5.5%;
 }
 
 #footer_icon {
