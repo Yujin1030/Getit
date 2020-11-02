@@ -1,4 +1,4 @@
-package recommend.controller;
+package product.controller.recommend;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import recommend.model.service.RecommendService;
-import recommend.model.vo.Recommend;
+import product.model.service.recommend.RecommendService;
+import product.model.vo.Product;
 
 /**
  * Servlet implementation class RecommendInsert
@@ -57,38 +57,22 @@ public class RecommendInsert extends HttpServlet {
 		String systemFileName = multi.getFilesystemName("upFile");
 		String filePath = multiFile.getPath();
 		// input태그의 값을 DB로 넘겨줌
-		Recommend recommend = new Recommend();
-		recommend.setaName(multi.getParameter("aName"));
-		recommend.setaPrice(Integer.parseInt(multi.getParameter("aPrice")));
-		recommend.setaAccount(Integer.parseInt(multi.getParameter("aAccount")));
-		recommend.setaDetail(multi.getParameter("aDetail"));
-		recommend.setaCategory(multi.getParameter("category"));
-		
-		recommend.setPowerCode(multi.getParameter("powerCode"));
-		
-		recommend.setSsdCode(multi.getParameter("ssdCode"));
-		
-		recommend.setSkinCode(multi.getParameter("skinCode"));
-		
-		recommend.setGcardCode(multi.getParameter("gcardCode"));
-		
-		recommend.setHddCode(multi.getParameter("hddCode"));
-		
-		recommend.setCoolerCode(multi.getParameter("coolerCode"));
-		
-		recommend.setRamCode(multi.getParameter("ramCode"));
-		
-		recommend.setCpuCode(multi.getParameter("cpuCode"));
-		
-		recommend.setMainboardCode(multi.getParameter("mainboardCode"));
-
-		recommend.setFilePath(filePath);
-		System.out.println(recommend.toString());
-		System.out.println(systemFileName);
+		Product product = new Product();
+		product.setpCode(multi.getParameter("pCode"));
+		product.setSepCode(multi.getParameter("sepCode"));
+		product.setpName(multi.getParameter("pName"));
+		product.setpPrice(Integer.parseInt(multi.getParameter("pPrice")));
+		product.setpContents(multi.getParameter("pContents"));
+		product.setpCategory(multi.getParameter("category"));
+		product.setpComcode(multi.getParameter("pComcode"));
+		product.setRelatedProduct(multi.getParameter("relatedProduct"));
+		product.setpFilepath(filePath);
+//		System.out.println(recommend.toString());
+//		System.out.println(systemFileName);
 		// 매개변수 (완제품 입력값, 업로드파일이름,파일절대경로), 관리자 계정만 사용가능한 서블릿
-		int result = new RecommendService().recommendInsert(recommend,systemFileName);
+		int result = new RecommendService().recommendInsert(product,systemFileName);
 		if(result>0) {
-			response.sendRedirect("/mainpage/view");
+			request.getRequestDispatcher("/recommendenroll/view").forward(request, response);
 		}else {
 			response.sendRedirect("/WEB-INF/views/service/ServiceError.html");
 		}

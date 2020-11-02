@@ -1,4 +1,4 @@
-package recommend.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
 
@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import recommend.model.service.RecommendService;
-import recommend.model.vo.ComponentList;
 
 
 /**
@@ -32,22 +30,8 @@ public class RecommendEnrollView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		ComponentList componentList = new RecommendService().recommendselectAll();
-		
-		if(componentList!=null) {
-			request.setAttribute("powerList", componentList.getPowerList());
-			request.setAttribute("ssdList", componentList.getSsdList());
-			request.setAttribute("skinList", componentList.getSkinList());
-			request.setAttribute("cpuList", componentList.getCpuList());
-			request.setAttribute("hddList", componentList.getHddList());
-			request.setAttribute("ramList", componentList.getRamList());
-			request.setAttribute("coolerList", componentList.getCoolerList());
-			request.setAttribute("mainboardList", componentList.getMainboardList());
-			request.setAttribute("gcardList", componentList.getGcardList());
-			request.getRequestDispatcher("/WEB-INF/views/recommend/recommendEnroll.jsp").forward(request, response);
-		}else {
+		request.getRequestDispatcher("/WEB-INF/views/recommend/recommendEnroll.jsp").forward(request, response);
 			// 오류 화면
-		}
 	}
 
 	/**

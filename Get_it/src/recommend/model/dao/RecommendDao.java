@@ -17,6 +17,7 @@ import component.model.vo.POWER;
 import component.model.vo.RAM;
 import component.model.vo.SKIN;
 import component.model.vo.SSD;
+import product.model.vo.Product;
 import recommend.model.vo.Recommend;
 
 public class RecommendDao {
@@ -828,5 +829,33 @@ public class RecommendDao {
 				JDBCTemplate.close(pstmt);
 			}
 			return cpu;
+		}
+		
+		// 상품 등록
+		public int recommendInsert(Connection conn,Product product,String systemFileName) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query 
+			="insert into product values(?,SERIAL_NO_SEQ.nextval,?,?,?,1,?,?,?,?,?,?)";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, product.getpCode());
+				pstmt.setString(2, product.getSepCode());
+				pstmt.setString(3, product.getpName());
+				pstmt.setInt(4, product.getpPrice());
+				pstmt.setString(5, product.getpContents());
+				pstmt.setString(6, product.getpCategory());
+				pstmt.setString(7, product.getpComcode());
+				pstmt.setString(8, systemFileName);
+				pstmt.setString(9, product.getpFilepath());
+				pstmt.setString(10, product.getRelatedProduct());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(pstmt);
+			}
+			return result;
 		}
 }

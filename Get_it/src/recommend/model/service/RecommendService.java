@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import common.JDBCTemplate;
+import product.model.vo.Product;
 import recommend.model.dao.RecommendDao;
 import recommend.model.vo.Component;
 import recommend.model.vo.ComponentList;
@@ -126,6 +127,21 @@ public class RecommendService {
 		return result;
 	}
 	
+	// 상품등록
+		public int recommendInsert(Product product, String systemFileName){
+			Connection conn = null;
+			int result =0;
+			try {
+				conn = factory.createConnection();
+				result = new RecommendDao().recommendInsert(conn, product, systemFileName);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally{
+				JDBCTemplate.close(conn);
+			}
+			return result;
+		}
 	
 	
 }
