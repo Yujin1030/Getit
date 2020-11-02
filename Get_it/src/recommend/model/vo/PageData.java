@@ -1,19 +1,30 @@
-package recommend.model.vo;
+package product.model.vo;
 
 import java.util.ArrayList;
 
 public class PageData {
 	
-	private ArrayList<Recommend> pageList;
+	private ArrayList<Product> pageList;
 	private String pageNavi;
+	private ArrayList<ProductReview> reviewList;
 
 	public PageData() {}
+	
+	
 
-	public ArrayList<Recommend> getPageList() {
+	public ArrayList<ProductReview> getReviewList() {
+		return reviewList;
+	}
+
+	public void setReviewList(ArrayList<ProductReview> reviewList) {
+		this.reviewList = reviewList;
+	}
+
+	public ArrayList<Product> getPageList() {
 		return pageList;
 	}
 
-	public void setPageList(ArrayList<Recommend> pageList) {
+	public void setPageList(ArrayList<Product> pageList) {
 		this.pageList = pageList;
 	}
 
@@ -24,8 +35,5 @@ public class PageData {
 	public void setPageNavi(String pageNavi) {
 		this.pageNavi = pageNavi;
 	}
-	
-	
-	
 	
 }

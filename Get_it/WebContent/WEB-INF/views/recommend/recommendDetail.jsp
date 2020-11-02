@@ -64,7 +64,10 @@
             }
         });
     });
-
+	
+    function reviewdelete() {
+    	return confirm("삭제하시겠습니까?");	
+    };
 </script>
 
 </head>
@@ -119,7 +122,7 @@
 							<th
 								style="font-size: 22px; font-weight: bolder; text-align: center">부품</th>
 							<th
-								style="font-size: 22px; font-weight: bolder; padding-left: 100px;">수량</th>
+								style="font-size: 22px; font-weight: bolder; padding-left: 100px; text-align: right;">수량</th>
 							<th
 								style="font-size: 22px; font-weight: bolder; text-align: center;">가격</th>
 						</tr>
@@ -356,8 +359,8 @@
 				</div>
 			</div>
 			<div class="review">
-			<!-- 수정 시작점 -->
-				<div class="review_title">
+				<!-- 수정 시작점 -->
+				<div class="review_title" border="1">
 					<div class="review_title_left">제목</div>
 					<div class="review_title_middle">작성자</div>
 					<div class="review_title_right">날짜</div>
@@ -369,13 +372,22 @@
 							<div class="accordion_title_middle">${reviewList.memberId }</div>
 							<div class="accordion_title_right">${reviewList.enrollDate }</div>
 						</div>
-						<div class="accordion_sub">${reviewList.reviewContents }</div>
+						<div class="accordion_sub">
+							<div style="width: 80%; height: 100%; float: left;"></div>
+							<div
+								style="width: 20%; height: 100%; float: left; line-height: 50px; padding-left: 75px;">
+								<c:if test="${sessionScope.member.memberId eq reviewList.memberId }">
+								<a class="btn btn-primary" href="/review/update">수정</a> 
+								<a	class="btn btn-primary" href="/review/delete?pCode=${reviewList.pCode }&reviewNo=${reviewList.reviewNo}" onclick="return reviewdelete()">삭제</a>
+								</c:if>
+							</div>
+						</div>
 					</c:forEach>
 					<div id="section_contents_bottom"
 						style="margin-left: 633px; margin-top: 14px;">
 						${reviewpageNavi }</div>
 				</div>
-			<!-- 수정 끝나는곳 -->
+				<!-- 수정 끝나는곳 -->
 			</div>
 			<div class="notice">
 				<div class="notice_change">

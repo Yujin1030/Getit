@@ -1,30 +1,27 @@
-package community.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import community.model.service.CommunityService;
-import community.model.vo.QnA;
-import community.model.vo.QnaPageData;
-import product.model.vo.PageData;
+import member.model.vo.Member;
+import product.model.service.recommend.RecommendService;
 
 /**
- * Servlet implementation class ReviewMainServlet
+ * Servlet implementation class reviewdelete
  */
-@WebServlet("/review/main")
-public class ReviewMainServlet extends HttpServlet {
+@WebServlet("/review/delete")
+public class reviewdelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewMainServlet() {
+    public reviewdelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +31,22 @@ public class ReviewMainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int currentPage =0;
-		if(request.getParameter("currnetPage")==null) {
-			currentPage =1;
-		}else {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		// id 랑 상품코드 가져오기
+		String pCode = request.getParameter("pCode");
+		HttpSession session = request.getSession();
+		String memberId = ((Member)session.getAttribute("member")).getMemberId();
+		// 삭제하러 가즈아~
+		int result =0;
+		if(request.getParameter("reviewNo")!=null) {
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		result = new RecommendService().reviewDelete(pCode,memberId,reviewNo);
 		}
-		QnaPageData pagedata = new CommunityService().selectQnaAll(currentPage);
-		ArrayList<QnA> qnaList = pagedata.getQnaList();
-		if(!qnaList.isEmpty()&&qnaList!=null) {
-			request.setAttribute("qnaList", qnaList);
-			request.setAttribute("pageNavi", pagedata.getPageNavi());
-			request.getRequestDispatcher("/WEB-INF/views/community/review.jsp").forward(request, response);
+		if(result>0) {
+			request.setAttribute("pCode", pCode);
+			request.getRequestDispatcher("/recommend/detail").forward(request, response);
 		}else {
-			System.out.println("오류");
+			response.sendRedirect("실패");
 		}
-		
 	}
 
 	/**

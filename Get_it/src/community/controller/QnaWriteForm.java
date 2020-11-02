@@ -1,30 +1,28 @@
 package community.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import community.model.service.CommunityService;
-import community.model.vo.QnA;
-import community.model.vo.QnaPageData;
-import product.model.vo.PageData;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class ReviewMainServlet
+ * Servlet implementation class QnaWriteForm
  */
-@WebServlet("/review/main")
-public class ReviewMainServlet extends HttpServlet {
+@WebServlet("/qna/writeform")
+public class QnaWriteForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewMainServlet() {
+    public QnaWriteForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +32,17 @@ public class ReviewMainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int currentPage =0;
-		if(request.getParameter("currnetPage")==null) {
-			currentPage =1;
+		HttpSession session = request.getSession();
+		if((Member)session.getAttribute("member")!=null) {
+			String memberId = ((Member)session.getAttribute("member")).getMemberId();
+			request.setAttribute("memberId", memberId);
+			request.getRequestDispatcher("/WEB-INF/views/community/qnaWrite.jsp").forward(request, response);
 		}else {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('로그인 후 이용 가능합니다.'); location.href='/review/main';</script>");
+			writer.close();
 		}
-		QnaPageData pagedata = new CommunityService().selectQnaAll(currentPage);
-		ArrayList<QnA> qnaList = pagedata.getQnaList();
-		if(!qnaList.isEmpty()&&qnaList!=null) {
-			request.setAttribute("qnaList", qnaList);
-			request.setAttribute("pageNavi", pagedata.getPageNavi());
-			request.getRequestDispatcher("/WEB-INF/views/community/review.jsp").forward(request, response);
-		}else {
-			System.out.println("오류");
-		}
-		
 	}
 
 	/**
