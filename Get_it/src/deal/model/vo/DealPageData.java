@@ -6,6 +6,7 @@ public class DealPageData {
 	
 	private ArrayList<Deal> dealPageList;
 	private String dealPageNavi;
+	private String dealPageNaviNonlogin;
 	
 	public DealPageData() {}
 
@@ -24,6 +25,16 @@ public class DealPageData {
 	public void setDealPageNavi(String dealPageNavi) {
 		this.dealPageNavi = dealPageNavi;
 	}
+
+	public String getDealPageNaviNonlogin() {
+		return dealPageNaviNonlogin;
+	}
+
+	public void setDealPageNaviNonlogin(String dealPageNaviNonlogin) {
+		this.dealPageNaviNonlogin = dealPageNaviNonlogin;
+	}
+	
+	
 	
 	
 	

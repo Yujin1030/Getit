@@ -34,10 +34,14 @@
           })
         })
         
-        function numbeComma(number) {
-    		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
-		
+        function loginError() {
+        	alert("로그인 후 게시글 확인 가능합니다.");
+        }
+        
+        function loginError2() {
+        	alert("로그인 후 이용 가능합니다.");
+        }
+        
 		
     </script>
     
@@ -74,7 +78,7 @@
     </header>
     <section>
         <div id="main_image" style="text-align:center;background-color:#FDFDFD;">
-        <img src="/img/LiveChat.gif" style="height: 100%;width:80%;">
+        <img src="/img/LiveChat.gif" style="height:100%;width:60%;">
         </div>
         <div id="section_title">
             <div id="section_title_main">
@@ -91,15 +95,27 @@
         <div id="section_contents">
             <c:forEach var="deal" items="${dList }" varStatus="status" begin="0" end="3">
 				<div id="section_contents_inner">
+					<% if(request.getAttribute("member") != null) {%>
 	                <a href="/deal/select?dealNo=${deal.dealNo }" style="color:black;">
 	                    <div class="card" style="width:20.6rem;">
 	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
-	                        <h5 class="card-title">${deal.dealTitle }</h5>
+	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
 	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
 	                </a>
+	                <% } else { %>
+	                <a href="/login.html" style="color:black;" onclick="loginError()">
+	                    <div class="card" style="width:20.6rem;">
+	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
+	                      <div class="card-body">
+	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
+	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
+	                      </div>
+	                    </div>
+	                </a>
+	                <% } %>
 	            </div>
 				<c:if test="${status.index ne '3' }">
             		<div id="section_contents_inner_empty"></div> 
@@ -109,19 +125,31 @@
         <div id="empty_space"></div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            <c:forEach var="deal" items="${dList }" varStatus="status" begin="4" end="7">
+            <c:forEach var="deal" items="${dList }" varStatus="status" begin="0" end="3">
 				<div id="section_contents_inner">
+					<% if(request.getAttribute("member") != null) {%>
 	                <a href="/deal/select?dealNo=${deal.dealNo }" style="color:black;">
 	                    <div class="card" style="width:20.6rem;">
 	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
-	                        <h5 class="card-title">${deal.dealTitle }</h5>
+	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
 	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
 	                </a>
+	                <% } else { %>
+	                <a href="/login.html" style="color:black;" onclick="loginError()">
+	                    <div class="card" style="width:20.6rem;">
+	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
+	                      <div class="card-body">
+	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
+	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
+	                      </div>
+	                    </div>
+	                </a>
+	                <% } %>
 	            </div>
-				<c:if test="${status.index ne '7' }">
+				<c:if test="${status.index ne '3' }">
             		<div id="section_contents_inner_empty"></div> 
             	</c:if>
             </c:forEach>
@@ -129,19 +157,31 @@
         <div id="empty_space"></div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            <c:forEach var="deal" items="${dList }" varStatus="status" begin="8" end="11">
+            <c:forEach var="deal" items="${dList }" varStatus="status" begin="0" end="3">
 				<div id="section_contents_inner">
+					<% if(request.getAttribute("member") != null) {%>
 	                <a href="/deal/select?dealNo=${deal.dealNo }" style="color:black;">
 	                    <div class="card" style="width:20.6rem;">
 	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
-	                        <h5 class="card-title">${deal.dealTitle }</h5>
+	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
 	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
 	                </a>
+	                <% } else { %>
+	                <a href="/login.html" style="color:black;" onclick="loginError()">
+	                    <div class="card" style="width:20.6rem;">
+	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
+	                      <div class="card-body">
+	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
+	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
+	                      </div>
+	                    </div>
+	                </a>
+	                <% } %>
 	            </div>
-				<c:if test="${status.index ne '11' }">
+				<c:if test="${status.index ne '3' }">
             		<div id="section_contents_inner_empty"></div> 
             	</c:if>
             </c:forEach>
@@ -149,7 +189,11 @@
         <div id="empty_space"></div>
         <div id="section_contents_bottom_empty"></div>
         <div id="section_contents_bottom">
-				${dealPageNavi }
+				<% if(session.getAttribute("member") != null) { %>
+					${dealPageNavi }
+				<% } else { %>
+					${dealPageNaviNonlogin }
+				<% } %>
         </div>
         <div id="section_contents_bottom_empty"></div>
         <div id="empty_space1"></div>

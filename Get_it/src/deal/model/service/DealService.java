@@ -100,6 +100,7 @@ public class DealService {
 			conn = factory.createConnection();
 			dpd.setDealPageList(new DealDAO().dealList(conn,dealPageNo,recordCountDealPage));
 			dpd.setDealPageNavi(new DealDAO().dealPageNavi(conn,dealPageNo,recordCountDealPage,naviCountDealPage));
+			dpd.setDealPageNaviNonlogin(new DealDAO().dealPageNaviNonlogin(conn,dealPageNo,recordCountDealPage,naviCountDealPage));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

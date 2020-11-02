@@ -225,8 +225,72 @@ public class DealDAO {
 		if(needNext) {
 			sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" +(endNavi+1) + "' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
 		}
-		
+
 		sb.append("<form action=\"/deal/writeform\" method=\"post\" id=\"writeForm\">\r\n" + 
+				"<button type=\"submit\" class=\"btn btn-secondary\">글쓰기</button>\r\n" + 
+				"</form></ul>");
+		return sb.toString();
+	}
+	
+	
+	public String dealPageNaviNonlogin (Connection conn, int dealPageNo, int recordCountDealPage, int naviCountDealPage) {
+		// 전체 게시물의 개수
+		int recordTotalCount = totalCount(conn);
+		// 전체 페이지의 개수
+		int pageTotalCount = 0;
+		
+		if (recordTotalCount % recordCountDealPage > 0) {
+			pageTotalCount = recordTotalCount/recordCountDealPage+1;
+		} else {
+			pageTotalCount = recordTotalCount/recordCountDealPage;
+		}
+		
+		// 오류방지코드
+		if (dealPageNo<1) {
+			dealPageNo = 1;
+		} else if (dealPageNo > pageTotalCount) {
+			dealPageNo = pageTotalCount;
+		}
+		
+		
+		int startNavi = ((dealPageNo-1)/naviCountDealPage)*naviCountDealPage+1;
+		int endNavi = startNavi+naviCountDealPage-1;
+		
+		// 오류방지코드
+		if (endNavi>pageTotalCount) {
+			endNavi=pageTotalCount;
+		}
+		
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("<ul class='pagination'>");
+		if(needPrev) {
+			sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" + (startNavi-1) + "' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
+		}
+		for(int i=startNavi; i<=endNavi; i++) {
+			if(i==dealPageNo) {
+				sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" + i + "'>" +"<b>" + i + "</b></a></li>" );
+			}else {
+				sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" + i + "'>" +  i   + "</a></li>");
+			}
+		}
+		
+		if(needNext) {
+			sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" +(endNavi+1) + "' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
+		}
+
+		sb.append("<form action=\"/login.html\" method=\"post\" id=\"writeForm\" onclick=\"loginError2()\">\r\n" + 
 				"<button type=\"submit\" class=\"btn btn-secondary\">글쓰기</button>\r\n" + 
 				"</form></ul>");
 		return sb.toString();
@@ -344,23 +408,26 @@ public class DealDAO {
 		// a 태그를 만드는 코드
 		
 		StringBuilder sb = new StringBuilder();
-		if(needPrev) {
-			sb.append("<a href='/notice/search?search="+search+"&currentPage="+(startNavi-1)+"'> < </a>");
-		}
 		
-		for (int i=startNavi; i<=endNavi; i++) {
-			if (i==dealPageNo) {
-				// 현재 몇번째 페이지의 값을 보고 있는지 강조하기 위해서 if문 사용
-				sb.append("<a href='/notice/search?search="+search+"&currentPage="+i+"'><b>"+i+"</b></a>");
-			} else {
-				sb.append("<a href='/notice/search?search="+search+"&currentPage="+i+"'>"+i+"</a>");
+		sb.append("<ul class='pagination'>");
+		if(needPrev) {
+			sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" + (startNavi-1) + "' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>");
+		}
+		for(int i=startNavi; i<=endNavi; i++) {
+			if(i==dealPageNo) {
+				sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" + i + "'>" +"<b>" + i + "</b></a></li>" );
+			}else {
+				sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" + i + "'>" +  i   + "</a></li>");
 			}
 		}
 		
-		if (needNext) {
-			sb.append("<a href='/notice/search?search="+search+"&currentPage="+(startNavi+1)+"'> > </a>");
+		if(needNext) {
+			sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" +(endNavi+1) + "' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
 		}
-		
+
+		sb.append("<form action=\"/login.html\" method=\"post\" id=\"writeForm\" onclick=\"loginError2()\">\r\n" + 
+				"<button type=\"submit\" class=\"btn btn-secondary\">글쓰기</button>\r\n" + 
+				"</form></ul>");
 		return sb.toString();
 	}
 	
