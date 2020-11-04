@@ -171,7 +171,7 @@ section {
 
 #main_image {
     width:100%;
-    height:57%;
+    height:60%;
     float:left;
 }
 
@@ -259,6 +259,11 @@ section {
 #writeForm {
 	margin-top:0.5%;
 	margin-left:60%;
+}
+
+#writeForm2 {
+	margin-top:0.5%;
+	margin:100%;
 }
 
 #section_contents_bottom a {

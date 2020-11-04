@@ -1,26 +1,25 @@
-package product.controller.recommend;
+package community.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import community.model.service.CommunityService;
 
 /**
- * Servlet implementation class RecommendEnrollView
+ * Servlet implementation class QnaDelete
  */
-@WebServlet("/recommendenroll/view")
-public class RecommendEnrollView extends HttpServlet {
+@WebServlet("/qna/delete")
+public class QnaDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendEnrollView() {
+    public QnaDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +29,13 @@ public class RecommendEnrollView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		request.getRequestDispatcher("/WEB-INF/views/recommend/recommendEnroll.jsp").forward(request, response);
-			// 오류 화면
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		int result = new CommunityService().qnaDelete(qnaNo);
+		if(result>0) {
+			request.getRequestDispatcher("/review/main").forward(request, response);
+		}else {
+			
+		}
 	}
 
 	/**

@@ -15,6 +15,8 @@ import javax.servlet.jsp.tagext.PageData;
 import deal.model.service.DealService;
 import deal.model.vo.Deal;
 import deal.model.vo.DealPageData;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class DealMain
@@ -39,18 +41,25 @@ public class DealMain extends HttpServlet {
 		HttpSession session = request.getSession();
 		int dealPageNo = 0;
 		
+		
 		if (request.getParameter("dealPageNo")==null) {
 			dealPageNo = 1;
 		} else {
 			dealPageNo = Integer.parseInt(request.getParameter("dealPageNo"));
 		}
 		
+		
 		DealPageData dealPageData = new DealService().dealList(dealPageNo);
 		ArrayList<Deal> dList = dealPageData.getDealPageList();
 		
 		if (!dList.isEmpty()) {
+			if(((Member)session.getAttribute("member")!=null)){
+			Member member = (Member)session.getAttribute("member");
+			request.setAttribute("member", member);
+			}
 			request.setAttribute("dList", dList);
 			request.setAttribute("dealPageNavi", dealPageData.getDealPageNavi());
+			request.setAttribute("dealPageNaviNonlogin", dealPageData.getDealPageNaviNonlogin());
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/deal/dealMain.jsp");
 			view.forward(request, response);
 			

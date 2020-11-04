@@ -1,9 +1,6 @@
-package deal.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,23 +8,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import deal.model.service.DealService;
-import deal.model.vo.Deal;
-import member.model.service.MemberService;
 import member.model.vo.Member;
+import product.model.service.recommend.RecommendService;
+
 
 /**
- * Servlet implementation class DealSelectServlet
+ * Servlet implementation class RecommendWrite
  */
-@WebServlet("/deal/select")
-public class DealSelectServlet extends HttpServlet {
+@WebServlet("/recommend/writeinsert")
+public class RecommendWriteInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private DealService DealService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DealSelectServlet() {
+    public RecommendWriteInsert() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,22 +32,24 @@ public class DealSelectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		// 회원아이디받아야함
 		HttpSession session = request.getSession();
 		String memberId = ((Member)session.getAttribute("member")).getMemberId();
-		
-		int dealNo = Integer.parseInt(request.getParameter("dealNo"));
-		Deal deal = new DealService().selectDeal(dealNo);
-		Member member = new MemberService().selectMember(memberId);
-		
-		if (deal != null) {
-			request.setAttribute("contents", deal);
-			session.setAttribute("member", member);
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/deal/dealContents.jsp");
-			view.forward(request, response);
-		} else {
-			// 게시물 내용 불러오지못할때 오류코드!
+		// 완제품 코드 
+		String pCode = request.getParameter("pCode");
+		// 완제품 사진 다시 뿌려줘야 함 ㅁㅊ
+		String pFilename = request.getParameter("pFilename");
+		// 제목,내용
+		String title = request.getParameter("title");
+		String contents = request.getParameter("contents");
+		int result  = new RecommendService().insertReview(pCode,memberId,title,contents);
+		if(result>0) {
+			request.setAttribute("pCode", pCode);
+			request.setAttribute("pFilename", pFilename);
+			request.getRequestDispatcher("/recommend/detail").forward(request, response);
+		}else {
+			response.sendRedirect("서비스 요청 실패");
 		}
-		
 	}
 
 	/**

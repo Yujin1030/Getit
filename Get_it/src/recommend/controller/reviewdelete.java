@@ -1,26 +1,27 @@
 package product.controller.recommend;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
+import member.model.vo.Member;
+import product.model.service.recommend.RecommendService;
 
 /**
- * Servlet implementation class RecommendEnrollView
+ * Servlet implementation class reviewdelete
  */
-@WebServlet("/recommendenroll/view")
-public class RecommendEnrollView extends HttpServlet {
+@WebServlet("/review/delete")
+public class reviewdelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendEnrollView() {
+    public reviewdelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +31,22 @@ public class RecommendEnrollView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		request.getRequestDispatcher("/WEB-INF/views/recommend/recommendEnroll.jsp").forward(request, response);
-			// 오류 화면
+		// id 랑 상품코드 가져오기
+		String pCode = request.getParameter("pCode");
+		HttpSession session = request.getSession();
+		String memberId = ((Member)session.getAttribute("member")).getMemberId();
+		// 삭제하러 가즈아~
+		int result =0;
+		if(request.getParameter("reviewNo")!=null) {
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		result = new RecommendService().reviewDelete(pCode,memberId,reviewNo);
+		}
+		if(result>0) {
+			request.setAttribute("pCode", pCode);
+			request.getRequestDispatcher("/recommend/detail").forward(request, response);
+		}else {
+			response.sendRedirect("실패");
+		}
 	}
 
 	/**

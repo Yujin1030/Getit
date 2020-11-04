@@ -1,26 +1,23 @@
-package product.controller.recommend;
+package community.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 /**
- * Servlet implementation class RecommendEnrollView
+ * Servlet implementation class QnaUpdateView
  */
-@WebServlet("/recommendenroll/view")
-public class RecommendEnrollView extends HttpServlet {
+@WebServlet("/qna/updateview")
+public class QnaUpdateView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendEnrollView() {
+    public QnaUpdateView() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +27,9 @@ public class RecommendEnrollView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		request.getRequestDispatcher("/WEB-INF/views/recommend/recommendEnroll.jsp").forward(request, response);
-			// 오류 화면
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		request.setAttribute("qnaNo", qnaNo);
+		request.getRequestDispatcher("/WEB-INF/views/community/qnaUpdate.jsp").forward(request, response);
 	}
 
 	/**

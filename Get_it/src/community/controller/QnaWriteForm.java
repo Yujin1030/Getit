@@ -1,26 +1,28 @@
-package product.controller.recommend;
+package community.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class RecommendEnrollView
+ * Servlet implementation class QnaWriteForm
  */
-@WebServlet("/recommendenroll/view")
-public class RecommendEnrollView extends HttpServlet {
+@WebServlet("/qna/writeform")
+public class QnaWriteForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendEnrollView() {
+    public QnaWriteForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +32,17 @@ public class RecommendEnrollView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		request.getRequestDispatcher("/WEB-INF/views/recommend/recommendEnroll.jsp").forward(request, response);
-			// 오류 화면
+		HttpSession session = request.getSession();
+		if((Member)session.getAttribute("member")!=null) {
+			String memberId = ((Member)session.getAttribute("member")).getMemberId();
+			request.setAttribute("memberId", memberId);
+			request.getRequestDispatcher("/WEB-INF/views/community/qnaWrite.jsp").forward(request, response);
+		}else {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('로그인 후 이용 가능합니다.'); location.href='/review/main';</script>");
+			writer.close();
+		}
 	}
 
 	/**

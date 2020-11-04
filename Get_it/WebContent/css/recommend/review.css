@@ -186,7 +186,7 @@ section {
 }
 
 #section_title2 {
-    margin-top: 15%;
+    margin-top: 13%;
     width:100%;
     height:10%;
     float:left;
@@ -276,7 +276,6 @@ section {
 #paging {
 	display: inline-block;
 	margin: 0px auto;
-	margin-left: 17%;
 }
 
 .pagination li {
@@ -293,14 +292,9 @@ section {
 	color: white;
 }
 
-#input_btn {
-	margin-right: 10%;
-	float: right;
-}
-
 footer {
     width:100%;
-    height:28%;
+    height:24%;
 }
 
 #footer_icon {

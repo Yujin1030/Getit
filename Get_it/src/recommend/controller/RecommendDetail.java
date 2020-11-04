@@ -1,15 +1,20 @@
-package recommend.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import recommend.model.service.RecommendService;
-import recommend.model.vo.Component;
-import recommend.model.vo.Recommend;
+import member.model.vo.Member;
+import product.model.service.recommend.RecommendService;
+import product.model.vo.PageData;
+import product.model.vo.Product;
+import product.model.vo.ProductReview;
 
 /**
  * Servlet implementation class RecommendDetail
@@ -31,30 +36,29 @@ public class RecommendDetail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		Recommend recommend = new Recommend();
-		recommend.setaNo(Integer.parseInt(request.getParameter("aNo")));
-		recommend.setPowerCode(request.getParameter("powerCode"));
-		recommend.setSsdCode(request.getParameter("ssdCode"));
-		recommend.setSkinCode(request.getParameter("skinCode"));
-		recommend.setGcardCode(request.getParameter("gcardCode"));
-		recommend.setHddCode(request.getParameter("hddCode"));
-		recommend.setCoolerCode(request.getParameter("coolerCode"));
-		recommend.setRamCode(request.getParameter("ramCode"));
-		recommend.setCpuCode(request.getParameter("cpuCode"));
-		recommend.setMainboardCode(request.getParameter("mainboardCode"));
-		Component component = new RecommendService().recommendOne(recommend);
-
-		if(component!=null) {
-			request.setAttribute("recommend", component.getRecommend());
-			request.setAttribute("hdd", component.getHdd());
-			request.setAttribute("cooler", component.getCooler());
-			request.setAttribute("cpu", component.getCpu());
-			request.setAttribute("gcard", component.getGcard());
-			request.setAttribute("mainboard", component.getMainboard());
-			request.setAttribute("power", component.getPower());
-			request.setAttribute("ram", component.getRam());
-			request.setAttribute("skin", component.getSkin());
-			request.setAttribute("ssd", component.getSsd());
+		// 후기 글 페이징 처리
+		int currentPage =0;
+		
+		if(request.getParameter("currentPage")==null) {
+			currentPage =1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		// 전체 리스트에서 선택한 완제품 상품코드 가져오기
+		String pCode = request.getParameter("pCode");
+		// 해당 완제품 사진이름 저장
+		String pFilename = request.getParameter("pFilename");
+		// 선택한 완제품에 대한 데이터 불러오기 (매개변수 pCode)
+		ArrayList<Product> productList = new RecommendService().recommendDetail(pCode);
+		// 후기게시글에 대한 페이징처리 및 데이터 불러오기 (매개변수 currentPage,pCode)
+		PageData pagedata = new RecommendService().recommendReview(currentPage,pCode);
+		ArrayList<ProductReview> reviewList = pagedata.getReviewList();
+		if(reviewList!=null) {
+			request.setAttribute("pCode", pCode);
+			request.setAttribute("pFilename", pFilename);
+			request.setAttribute("reviewpageNavi", pagedata.getPageNavi());
+			request.setAttribute("reviewList", reviewList);
+			request.setAttribute("productList", productList);
 			request.getRequestDispatcher("/WEB-INF/views/recommend/recommendDetail.jsp").forward(request, response);
 		}else {
 			response.sendRedirect("오류페이지~");

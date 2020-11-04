@@ -1,47 +1,138 @@
-package recommend.model.service;
+package product.model.service.recommend;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import recommend.model.dao.RecommendDao;
-import recommend.model.vo.Component;
-import recommend.model.vo.ComponentList;
-import recommend.model.vo.PageData;
-import recommend.model.vo.Recommend;
+import product.model.dao.recommend.RecommendDao;
+import product.model.vo.PageData;
+import product.model.vo.Product;
 
 public class RecommendService {
 	
-	private JDBCTemplate  factory;
+	public JDBCTemplate factory;
 	
 	public RecommendService() {
 		factory = JDBCTemplate.getConnection();
 	}
-   // 완제품 전체 목록 출력
+
 	public PageData recommendAll(int currentPage){
 		Connection conn = null;
 		int recordCountPerPage = 16;
 		int naviCountPerPage = 5;
-		PageData pageData = new PageData();
+		PageData pagedata = new PageData();
 		try {
 			conn = factory.createConnection();
-			pageData.setPageList(new RecommendDao().recommendAll(conn,currentPage,recordCountPerPage));
-			pageData.setPageNavi(new RecommendDao().getPageNavi(conn,currentPage,recordCountPerPage,naviCountPerPage));
+			pagedata.setPageList(new RecommendDao().recommendAll(conn,currentPage,recordCountPerPage));
+			pagedata.setPageNavi(new RecommendDao().getPageNavi(conn,currentPage,recordCountPerPage,naviCountPerPage));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(conn);
 		}
-		return pageData;
+		return pagedata;
 	}
-	// 완제품 등록 
-	public int recommendInsert(Recommend recommend,String systemFileName) {
+	
+	public PageData recommendReview(int currentPage, String pCode) {
 		Connection conn = null;
-		int result = 0;
+		int recordCountPerPage = 5;
+		int naviCountPerPage=5;
+		PageData pagedata = new PageData();
 		try {
 			conn = factory.createConnection();
-			result = new RecommendDao().recommendInsert(conn,recommend,systemFileName);
+//			pagedata.setPageList(new RecommendDao().recommendDetail(conn,pCode));
+			pagedata.setReviewList(new RecommendDao().recommendReview(conn,currentPage,recordCountPerPage,pCode));
+			pagedata.setPageNavi(new RecommendDao().reviewPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage,pCode));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pagedata;
+	}
+	// 완제품 상세내용 가져오는 메소드
+	public ArrayList<Product> recommendDetail(String pCode) {
+		Connection conn = null;
+		ArrayList<Product> productList = null;
+		try {
+			conn = factory.createConnection();
+			productList = new RecommendDao().recommendDetail(conn,pCode);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return productList;
+	}
+	// 사무용,게임용,그래픽용,방송용 별로 가져오는 메소드
+	public PageData recommendFilter(int currentPage, String category){
+		Connection conn = null;
+		PageData pagedata = new PageData();
+		int recordCountPerPage = 16;
+		int naviCountPerPage = 5;
+		try {
+			conn = factory.createConnection();
+			pagedata.setPageList(new RecommendDao().recommendFilter(conn,currentPage,recordCountPerPage,category));
+			pagedata.setPageNavi(new RecommendDao().getFilterNavi(conn,currentPage,recordCountPerPage,naviCountPerPage,category));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pagedata;
+	}
+	
+	// 검색 기능 메소드
+	public PageData recommendSearch(int currentPage,String search) {
+		Connection conn = null;
+		PageData pagedata = new PageData();
+		int recordCountPerPage = 16;
+		int naviCountPerPage = 5;
+		try {
+			conn = factory.createConnection();
+			pagedata.setPageList(new RecommendDao().recommendSearch(conn,currentPage,recordCountPerPage,search));
+			pagedata.setPageNavi(new RecommendDao().getSearchNavi(conn,currentPage,recordCountPerPage,naviCountPerPage,search));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pagedata;
+	}
+	
+	// 가격대 별로 가져오는 메소드
+	public PageData recommendPrice(int currentPage, String category, String pricegrade) {
+		Connection conn = null;
+		PageData pagedata = new PageData();
+		int recordCountPerPage = 16;
+		int naviCountPerPage = 5;
+		try {
+			conn = factory.createConnection();
+			pagedata.setPageList(new RecommendDao().recommendPrice(conn,currentPage,recordCountPerPage,category,pricegrade));
+			pagedata.setPageNavi(new RecommendDao().getPriceNavi(conn,currentPage,recordCountPerPage,naviCountPerPage,category,pricegrade));
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pagedata;
+	}
+	
+	// 후기 등록
+	public int insertReview(String pCode, String memberId,String title,String contents) {
+		int result =0;
+		Connection conn = null;
+		try {
+			conn = factory.createConnection();
+			result = new RecommendDao().insertReview(conn,pCode,memberId,title,contents);
 			if(result>0) {
 				JDBCTemplate.commit(conn);
 			}else {
@@ -56,76 +147,60 @@ public class RecommendService {
 		return result;
 	}
 	
-	// 완제품 관련 데이터 전체 출력 
-	public ComponentList recommendselectAll(){
+	// 후기 삭제
+	public int reviewDelete(String pCode,String memberId, int reviewNo) {
 		Connection conn = null;
-		ComponentList componentList =new ComponentList();
+		int result = 0;
 		try {
 			conn = factory.createConnection();
-			componentList.setPowerList(new RecommendDao().selectPowerAll(conn)); 
-			componentList.setCoolerList(new RecommendDao().selectCoolerAll(conn));
-			componentList.setSsdList(new RecommendDao().selectSsdAll(conn));
-			componentList.setHddList(new RecommendDao().selectHddAll(conn));
-			componentList.setRamList(new RecommendDao().selectRamAll(conn));
-			componentList.setMainboardList(new RecommendDao().selectMainboardAll(conn));
-			componentList.setGcardList(new RecommendDao().selectGcardAll(conn));
-			componentList.setSkinList(new RecommendDao().selectSkinAll(conn));
-			componentList.setCpuList(new RecommendDao().selectCpuAll(conn));
+			result = new RecommendDao().reviewDelete(conn,pCode,memberId,reviewNo);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	public int reviewUpdate(String memberId, String pCode, String title, String contents,int reviewNo) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = factory.createConnection();
+			result = new RecommendDao().reviewUpdate(conn,memberId,pCode,title,contents,reviewNo);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	// 상품등록
+	public int recommendInsert(Product product, String systemFileName){
+		Connection conn = null;
+		int result =0;
+		try {
+			conn = factory.createConnection();
+			result = new RecommendDao().recommendInsert(conn, product, systemFileName);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			JDBCTemplate.close(conn);
 		}
-		return componentList;
-	}
-	
-	// 선택한 완제품과 부속부품 가져오기 
-	public Component recommendOne(Recommend recommend) {
-		Connection conn = null;
-		Component component = null;
-		try {
-			conn = factory.createConnection();
-			component = new Component();
-			component.setPower(new RecommendDao().selectPowerOne(conn,recommend));
-			component.setCooler(new RecommendDao().selectCoolerOne(conn,recommend));
-			component.setSsd(new RecommendDao().selectSsdOne(conn,recommend));
-			component.setHdd(new RecommendDao().selectHddOne(conn,recommend));
-			component.setRam(new RecommendDao().selectRamOne(conn,recommend));
-			component.setMainboard(new RecommendDao().selectMainboardOne(conn,recommend));
-			component.setGcard(new RecommendDao().selectGcardOne(conn,recommend));
-			component.setSkin(new RecommendDao().selectSkinOne(conn,recommend));
-			component.setCpu(new RecommendDao().selectCpuOne(conn,recommend));
-			component.setRecommend(new RecommendDao().selectRecommendOne(conn, recommend));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(conn);
-		}
-		return component; 
-	}
-	
-	public int recommendDelete(String[] aName) {
-		Connection conn = null;
-		int result = 0;
-		try {
-			conn = factory.createConnection();
-			result = new RecommendDao().recommendDelete(conn,aName);
-			if(result>0) {
-				JDBCTemplate.commit(conn);
-			}else {
-				JDBCTemplate.rollback(conn);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(conn);
-		}
 		return result;
 	}
-	
-	
-	
 }

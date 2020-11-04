@@ -1,26 +1,26 @@
-package product.controller.recommend;
+package community.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import community.model.service.CommunityService;
+import community.model.vo.QnA;
 
 /**
- * Servlet implementation class RecommendEnrollView
+ * Servlet implementation class QnaDetail
  */
-@WebServlet("/recommendenroll/view")
-public class RecommendEnrollView extends HttpServlet {
+@WebServlet("/qna/detail")
+public class QnaDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendEnrollView() {
+    public QnaDetail() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +30,14 @@ public class RecommendEnrollView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		request.getRequestDispatcher("/WEB-INF/views/recommend/recommendEnroll.jsp").forward(request, response);
-			// 오류 화면
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		QnA qna = new CommunityService().qnaDetail(qnaNo);
+		if(qna!=null) {
+			request.setAttribute("qna", qna);
+			request.getRequestDispatcher("/WEB-INF/views/community/qnaDetail.jsp").forward(request, response);
+		}else {
+			System.out.println("서비스요청 실패");
+		}
 	}
 
 	/**

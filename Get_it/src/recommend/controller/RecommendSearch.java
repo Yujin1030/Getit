@@ -15,16 +15,16 @@ import product.model.vo.PageData;
 import product.model.vo.Product;
 
 /**
- * Servlet implementation class RecommendListView
+ * Servlet implementation class RecommendSearch
  */
-@WebServlet("/recommend/listview")
-public class RecommendListView extends HttpServlet {
+@WebServlet("/recommend/search")
+public class RecommendSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendListView() {
+    public RecommendSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,37 +34,16 @@ public class RecommendListView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int currentPage =0;
+		String search = request.getParameter("search");
+		int currentPage = 0;
 		if(request.getParameter("currentPage")==null) {
-			currentPage =1;
+			currentPage = 1;
 		}else {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		PageData pagedata = new PageData();
-		ArrayList<Product> recomList = new ArrayList<Product>();
-		// 카테고리 분류
-		String category = request.getParameter("category");
-		// 가격등급이 null인 경우
-		if(request.getParameter("pricegrade")==null) {
-		 // 첫화면 or 전체를 눌렀을 때
-		if(category==null || category.equals("전체")) {
-			pagedata = new RecommendService().recommendAll(currentPage); 
-			recomList = pagedata.getPageList();
-		}
-		//  첫화면 and 전체화면이 아닐 때
-		else{  
-			/* if(!(category==null && category.equals("전체"))) */
-			pagedata = new RecommendService().recommendFilter(currentPage,category);
-			recomList = pagedata.getPageList();
-		}
-		}
-		else {
-		//	첫화면 and 전체화면 아니면서 가격으로 분류 했을 때
-			String pricegrade = request.getParameter("pricegrade");
-			pagedata = new RecommendService().recommendPrice(currentPage,category,pricegrade);
-			recomList = pagedata.getPageList();
-		}
 		
+		PageData pagedata = new RecommendService().recommendSearch(currentPage,search);
+		ArrayList<Product> recomList = pagedata.getPageList();
 		if(!recomList.isEmpty()&&recomList!=null) {
 			request.setAttribute("recomList", recomList);
 			request.setAttribute("pageNavi", pagedata.getPageNavi());
@@ -72,11 +51,9 @@ public class RecommendListView extends HttpServlet {
 		}else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('해당 상품이 없습니다.'); location.href='/recommend/listview'; </script>");
+			writer.println("<script>alert('검색한 상품이 없습니다.'); location.href='/recommend/listview';</script>");
 			writer.close();
 		}
-		
-		
 	}
 
 	/**

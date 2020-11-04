@@ -1,9 +1,8 @@
-package deal.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,23 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import deal.model.service.DealService;
-import deal.model.vo.Deal;
-import member.model.service.MemberService;
 import member.model.vo.Member;
+import product.model.service.recommend.RecommendService;
 
 /**
- * Servlet implementation class DealSelectServlet
+ * Servlet implementation class RecommendWriteForm
  */
-@WebServlet("/deal/select")
-public class DealSelectServlet extends HttpServlet {
+@WebServlet("/recommend/writeform")
+public class RecommendWriteForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private DealService DealService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DealSelectServlet() {
+    public RecommendWriteForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,22 +33,22 @@ public class DealSelectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		// 로그인 유무
 		HttpSession session = request.getSession();
-		String memberId = ((Member)session.getAttribute("member")).getMemberId();
-		
-		int dealNo = Integer.parseInt(request.getParameter("dealNo"));
-		Deal deal = new DealService().selectDeal(dealNo);
-		Member member = new MemberService().selectMember(memberId);
-		
-		if (deal != null) {
-			request.setAttribute("contents", deal);
-			session.setAttribute("member", member);
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/deal/dealContents.jsp");
-			view.forward(request, response);
-		} else {
-			// 게시물 내용 불러오지못할때 오류코드!
-		}
-		
+		// 완제품 코드 넘기기
+		String pCode = request.getParameter("pCode");
+	    if(session.getAttribute("member")!=null) {
+	    	String memberId = ((Member)session.getAttribute("member")).getMemberId();
+	    	request.setAttribute("memberId", memberId);
+	    	request.setAttribute("pCode", pCode);
+	    	request.getRequestDispatcher("/WEB-INF/views/recommend/recommendReview.jsp").forward(request, response);
+	    }else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('로그인 후 이용가능합니다.'); location.href='/login.html';</script>"); 
+			writer.close();
+	    }
+			
 	}
 
 	/**
