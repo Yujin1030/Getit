@@ -1,4 +1,4 @@
-package component.controller;
+package product.controller.component;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,60 +9,74 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import component.service.ComponentService;
-import component.vo.COOLER;
-import component.vo.CPU;
-import component.vo.GCARD;
-import component.vo.HDD;
-import component.vo.Other;
-import component.vo.POWER;
-import component.vo.RAM;
-import component.vo.SKIN;
-import component.vo.SSD;
+import product.model.service.ComponentService;
+import product.model.vo.Product;
 
-@WebServlet("/getit/self")
+
+
+@WebServlet("/getit/Component")
 public class ComponentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-//	private ComponentService ComponentService;
     public ComponentServlet() {
         super();
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		ArrayList<CPU> cpuList = new ComponentService().cpuAllList();
-		ArrayList<COOLER> coolerList = new ComponentService().coolerAllList();
-		ArrayList<GCARD> gcardList = new ComponentService().gcardAllList();
-		ArrayList<HDD> hddList = new ComponentService().hddAllList();
-//		ArrayList<MainBoard> mainboardList = new ComponentService().mainboardAllList(); 메인보드 대기
-		ArrayList<POWER> powerList = new ComponentService().powerAllList();
-		ArrayList<RAM> ramList = new ComponentService().ramAllList();
-		ArrayList<SKIN> skinList = new ComponentService().skinAllList();
-		ArrayList<SSD> ssdList = new ComponentService().ssdAllList();
-//		기타부품 Array
-		ArrayList<Other> otherList = new ComponentService().otherAllList();
-		if( !( cpuList.isEmpty() && ssdList.isEmpty() 
-				&& coolerList.isEmpty() && gcardList.isEmpty() 
-				&& hddList.isEmpty() && powerList.isEmpty() 
-				&& ramList.isEmpty() && skinList.isEmpty() 
-				&& otherList.isEmpty() ) ) { // other List 수정 2020.10.30 am1214, 부품별 테이블 추가함 
-			request.setAttribute("cpuList", cpuList);
-			request.setAttribute("coolerList", coolerList); 
-			request.setAttribute("gcardList", gcardList); 
-			request.setAttribute("hddList", hddList); 
-//			request.setAttribute("ssdList", mainboardList); 메인보드 대기
-			request.setAttribute("powerList", powerList); 
-			request.setAttribute("ramList", ramList); 
-			request.setAttribute("skinList", skinList); 
-			request.setAttribute("ssdList", ssdList);
-//			기타부품 request 추가 2020.10.30 am1214 
-			request.setAttribute("otherList", otherList);
+//		ArrayList<Product> componentList = new ComponentService().productList();
+		// 메인부품 List
+		ArrayList<Product> cpuList = new ComponentService().cpuList();
+		ArrayList<Product> mboardList = new ComponentService().mboardbList();
+		ArrayList<Product> coolerList = new ComponentService().coolerList();
+		ArrayList<Product> gcardList = new ComponentService().gcardList();
+		ArrayList<Product> hddList = new ComponentService().hddList();
+		ArrayList<Product> powerList = new ComponentService().powerList();
+		ArrayList<Product> ramList = new ComponentService().ramList();
+		ArrayList<Product> skinList = new ComponentService().skinList();
+		ArrayList<Product> ssdList = new ComponentService().ssdList();
+		//기타부품 List
+		ArrayList<Product> deskTopList = new ComponentService().deskList();
+		ArrayList<Product> keyBoardList = new ComponentService().keyList();
+		ArrayList<Product> mouseList = new ComponentService().mouseList();
+		ArrayList<Product> headSetList = new ComponentService().headSetList();
+		ArrayList<Product> speakerList = new ComponentService().speakerList();
+		
+		if( !( cpuList.isEmpty() && mboardList.isEmpty() && coolerList.isEmpty() && 
+				gcardList.isEmpty() && hddList.isEmpty() && powerList.isEmpty() &&
+				ramList.isEmpty() && skinList.isEmpty() && ssdList.isEmpty() &&
+				deskTopList.isEmpty() && keyBoardList.isEmpty() && mouseList.isEmpty() && 
+				headSetList.isEmpty() && speakerList.isEmpty() )) {
+		
+//		if( !( cpuList.isEmpty() || mboardList.isEmpty() || coolerList.isEmpty() || 
+//				gcardList.isEmpty() || hddList.isEmpty() || powerList.isEmpty() ||
+//				ramList.isEmpty() && skinList.isEmpty() && ssdList.isEmpty() &&
+//				deskTopList.isEmpty() || keyBoardList.isEmpty() || mouseList.isEmpty() || 
+//				headSetList.isEmpty() || speakerList.isEmpty() )) {
+//			request.setAttribute("comList", componentList);
+			// 메인부품 속성
+			request.setAttribute("cpuL", cpuList);
+			request.setAttribute("mboardL", mboardList);
+			request.setAttribute("coolL", coolerList);
+			request.setAttribute("gcardL", gcardList);
+			request.setAttribute("hddL", hddList);
+			request.setAttribute("powerL", powerList);
+			request.setAttribute("ramL", ramList);
+			request.setAttribute("skinL", skinList);
+			request.setAttribute("ssdL", ssdList);
+			// 기타부품 속성
+			request.setAttribute("deskTopL", deskTopList);
+			request.setAttribute("keyBoardL", keyBoardList);
+			request.setAttribute("mouseL", mouseList);
+			request.setAttribute("headSetL", headSetList);
+			request.setAttribute("speakerL", speakerList );
+
 			request.getRequestDispatcher("/WEB-INF/Component/ComponentSelfPage.jsp").forward(request, response);
 		}else {
 			System.out.println("3번이상 안되면 존나 자바삭제");
-			// 가격누적 , 호환성 대기
+			System.out.println(cpuList);
 		}
-	}
+}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

@@ -1,24 +1,14 @@
-package component.service;
+package product.model.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import component.dao.ComponentDAO;
-import component.vo.COOLER;
-import component.vo.CPU;
-import component.vo.GCARD;
-import component.vo.HDD;
-import component.vo.Other;
-import component.vo.POWER;
-import component.vo.RAM;
-import component.vo.SKIN;
-import component.vo.SSD;
-
+import product.model.dao.ComponentDAO;
+import product.model.vo.Product;
 public class ComponentService {
 	
-	// 커넥션
 	private JDBCTemplate factory;
 	public ComponentService() {
 		factory = JDBCTemplate.getConnection();
@@ -29,30 +19,63 @@ public class ComponentService {
 	
 	
 	
-			// CPU All LIST
-	public ArrayList<CPU> cpuAllList() {
-		ArrayList<CPU> cpuList = null;
-		Connection conn = null;
-		try {
-			conn = factory.createConnection();
-			cpuList = new ComponentDAO().cpuAllList(conn);
-			JDBCTemplate.close(conn);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return cpuList ;
-	}
+	// COMPONENT LIST
+//	public ArrayList<Product> productList() {
+//		ArrayList<Product> productList = null;
+//		Connection conn = null;
+//		try {
+//			conn = factory.createConnection();
+//			productList = new ComponentDAO().productList(conn);
+//			JDBCTemplate.close(conn);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return productList ;
+//	}
+
 	
-	
-	
-			// COOLER All LIST
-	public ArrayList<COOLER> coolerAllList() {
-		ArrayList<COOLER> coolerList = null;
+//	CPU
+	public ArrayList<Product> cpuList() {
+		ArrayList<Product> cpuList = null;
 		Connection conn = null;
 		
 		try {
 			conn = factory.createConnection();
-			coolerList = new ComponentDAO().coolerAllList(conn);
+			cpuList = new ComponentDAO().cpuList(conn);
+			JDBCTemplate.close(conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cpuList;
+	}
+	
+	
+	
+//	MainBoard
+	public ArrayList<Product> mboardbList() {
+		ArrayList<Product> mboardList = null;
+		Connection conn = null;
+		
+		try {
+			conn = factory.createConnection();
+			mboardList = new ComponentDAO().mboardList(conn);
+			JDBCTemplate.close(conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return mboardList;
+	}
+	
+	
+	
+//	Cooler
+	public ArrayList<Product> coolerList() {
+		ArrayList<Product> coolerList = null;
+		Connection conn = null;
+		
+		try {
+			conn = factory.createConnection();
+			coolerList = new ComponentDAO().coolerList(conn);
 			JDBCTemplate.close(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,14 +84,15 @@ public class ComponentService {
 	}
 	
 	
-			// GCARD All LIST
-	public ArrayList<GCARD> gcardAllList(){
-		ArrayList<GCARD> gcardList = null;
+	
+//	GPU(GCARD)
+	public ArrayList<Product> gcardList() {
+		ArrayList<Product> gcardList = null;
 		Connection conn = null;
 		
 		try {
 			conn = factory.createConnection();
-			gcardList = new ComponentDAO().gcardAllList(conn);
+			gcardList = new ComponentDAO().gcardList(conn);
 			JDBCTemplate.close(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,29 +100,34 @@ public class ComponentService {
 		return gcardList;
 	}
 	
-			// HDD All LIST
-	public ArrayList<HDD> hddAllList() {
-		ArrayList<HDD> hddList = null;
+	
+	
+//	HDD
+	public ArrayList<Product> hddList() {
+		ArrayList<Product> hddList = null;
 		Connection conn = null;
 		
 		try {
 			conn = factory.createConnection();
-			hddList = new ComponentDAO().hddAllList(conn);
+			hddList = new ComponentDAO().hddList(conn);
+			JDBCTemplate.close(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return hddList;
 	}
-		
 	
-		// POWER All LIST
-	public ArrayList<POWER> powerAllList() {
-		ArrayList<POWER> powerList = null;
+	
+	
+//	POWER
+	public ArrayList<Product> powerList() {
+		ArrayList<Product> powerList = null;
 		Connection conn = null;
 		
 		try {
 			conn = factory.createConnection();
-		powerList = new ComponentDAO().powerAllList(conn);
+			powerList = new ComponentDAO().powerList(conn);
+			JDBCTemplate.close(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -107,14 +136,15 @@ public class ComponentService {
 	
 	
 	
-		// RAM All LIST
-	public ArrayList<RAM> ramAllList() {
-		ArrayList<RAM> ramList = null;
+//	RAM
+	public ArrayList<Product> ramList() {
+		ArrayList<Product> ramList = null;
 		Connection conn = null;
 		
 		try {
 			conn = factory.createConnection();
-		ramList = new ComponentDAO().ramAllList(conn);
+			ramList = new ComponentDAO().ramList(conn);
+			JDBCTemplate.close(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -123,15 +153,15 @@ public class ComponentService {
 	
 	
 	
-	
-		// SKIN All LIST
-	public ArrayList<SKIN> skinAllList() {
-		ArrayList<SKIN> skinList = null;
+//	SKIN
+	public ArrayList<Product> skinList() {
+		ArrayList<Product> skinList = null;
 		Connection conn = null;
 		
 		try {
 			conn = factory.createConnection();
-		skinList = new ComponentDAO().skinAllList(conn);
+			skinList = new ComponentDAO().skinList(conn);
+			JDBCTemplate.close(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -140,68 +170,105 @@ public class ComponentService {
 	
 	
 	
-	
-			// SSD All LIST
-	public ArrayList<SSD> ssdAllList() {
-		ArrayList<SSD> ssdList = null;
+//	SSD
+	public ArrayList<Product> ssdList() {
+		ArrayList<Product> ssdList = null;
 		Connection conn = null;
 		
 		try {
 			conn = factory.createConnection();
-			ssdList = new ComponentDAO().ssdAllList(conn);
+			ssdList = new ComponentDAO().ssdList(conn);
 			JDBCTemplate.close(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return ssdList;
 	}
-
-			// MAINBOARD All LIST
-/*	public ArrayList<MainBoard> mainboardAllList() {
-		ArrayList<MainBoard> boardList = null;
+	
+	
+	//	DESKTOP
+	public ArrayList<Product> deskList() {
+		ArrayList<Product> deskList = null;
 		Connection conn = null;
 		
 		try {
 			conn = factory.createConnection();
-			boardList = new ComponentDAO().mainboardAllList();
+			deskList = new ComponentDAO().deskList(conn);
 			JDBCTemplate.close(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return boardList;
-	} */
-
-
-			// Other All List 
-	public ArrayList<Other> otherAllList(){
-		ArrayList<Other> otherList = null;
+		return deskList;
+	}
+	
+	
+	//	KEY BOARD
+	public ArrayList<Product> keyList() {
+		ArrayList<Product> keyList = null;
 		Connection conn = null;
 		
 		try {
 			conn = factory.createConnection();
-			otherList = new ComponentDAO().otherAllList(conn);
+			keyList = new ComponentDAO().keyList(conn);
 			JDBCTemplate.close(conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return otherList;
+		return keyList;
+	}
+	
+	
+	
+//	MOUSE
+	public ArrayList<Product> mouseList() {
+		ArrayList<Product> mouseList = null;
+		Connection conn = null;
+		
+		try {
+			conn = factory.createConnection();
+			mouseList = new ComponentDAO().mouseList(conn);
+			JDBCTemplate.close(conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return mouseList;
+	}
+	
+	
+	
+//	HEAD SET
+	public ArrayList<Product> headSetList() {
+		ArrayList<Product> headSetList = null;
+		Connection conn = null;
+		
+		try {
+			conn = factory.createConnection();
+			headSetList = new ComponentDAO().headSetList(conn);
+			JDBCTemplate.close(conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return headSetList;
+	}
+	
+	
+	
+//	SPEAKER
+	public ArrayList<Product> speakerList() {
+		ArrayList<Product> speakerList = null;
+		Connection conn = null;
+		
+		try {
+			conn = factory.createConnection();
+			speakerList = new ComponentDAO().speakerList(conn);
+			JDBCTemplate.close(conn);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return speakerList;
 	}
 
 
-
-
-
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
