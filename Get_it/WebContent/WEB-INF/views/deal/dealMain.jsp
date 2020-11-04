@@ -100,7 +100,7 @@
 	                    <div class="card" style="width:20.6rem;">
 	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
-	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
+	                        <h5 class="card-title" style="font-weight:bold;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${deal.dealTitle }</h5>
 	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
@@ -110,7 +110,7 @@
 	                    <div class="card" style="width:20.6rem;">
 	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
-	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
+	                        <h5 class="card-title" style="font-weight:bold;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${deal.dealTitle }</h5>
 	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
@@ -125,14 +125,14 @@
         <div id="empty_space"></div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            <c:forEach var="deal" items="${dList }" varStatus="status" begin="0" end="3">
+            <c:forEach var="deal" items="${dList }" varStatus="status" begin="4" end="7">
 				<div id="section_contents_inner">
 					<% if(request.getAttribute("member") != null) {%>
 	                <a href="/deal/select?dealNo=${deal.dealNo }" style="color:black;">
 	                    <div class="card" style="width:20.6rem;">
 	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
-	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
+	                        <h5 class="card-title" style="font-weight:bold;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${deal.dealTitle }</h5>
 	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
@@ -142,14 +142,14 @@
 	                    <div class="card" style="width:20.6rem;">
 	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
-	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
+	                        <h5 class="card-title" style="font-weight:bold;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${deal.dealTitle }</h5>
 	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
 	                </a>
 	                <% } %>
 	            </div>
-				<c:if test="${status.index ne '3' }">
+				<c:if test="${status.index ne '7' }">
             		<div id="section_contents_inner_empty"></div> 
             	</c:if>
             </c:forEach>
@@ -157,14 +157,14 @@
         <div id="empty_space"></div>
         <div id="empty_space"></div>
         <div id="section_contents">
-            <c:forEach var="deal" items="${dList }" varStatus="status" begin="0" end="3">
+            <c:forEach var="deal" items="${dList }" varStatus="status" begin="8" end="11">
 				<div id="section_contents_inner">
 					<% if(request.getAttribute("member") != null) {%>
 	                <a href="/deal/select?dealNo=${deal.dealNo }" style="color:black;">
 	                    <div class="card" style="width:20.6rem;">
 	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
-	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
+	                        <h5 class="card-title" style="font-weight:bold;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${deal.dealTitle }</h5>
 	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
@@ -174,14 +174,14 @@
 	                    <div class="card" style="width:20.6rem;">
 	                      	<img src="/img/${deal.dealFileName }" class="card-img-top" alt="...">
 	                      <div class="card-body">
-	                        <h5 class="card-title" style="font-weight: bold;">${deal.dealTitle }</h5>
+	                        <h5 class="card-title" style="font-weight:bold;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${deal.dealTitle }</h5>
 	                        <p class="card-text"><fmt:formatNumber value="${deal.dealPrice }" pattern="###,###,###원"/></p>
 	                      </div>
 	                    </div>
 	                </a>
 	                <% } %>
 	            </div>
-				<c:if test="${status.index ne '3' }">
+				<c:if test="${status.index ne '11' }">
             		<div id="section_contents_inner_empty"></div> 
             	</c:if>
             </c:forEach>

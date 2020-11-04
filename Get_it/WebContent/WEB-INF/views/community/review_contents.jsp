@@ -158,10 +158,17 @@
 			      <td class="com-line">${com.memberId }</td>
 			      <td class="com-line">${com.cContents }</td>
 			      <td class="com-line" style="text-align: center;">${com.cDate }</td>
+			      <td class="com-line" style="width: 100px;">
+			      	<form action="/review/comdelete" method="post">
+			      		<button type="submit" class="btn btn-outline-dark" onclick="return question()">삭제</button>
+			      		<input type="hidden" name="commentNo" value="${com.commentNo }">
+			      		<input type="hidden" name="reviewNo" value="${contents.reviewNo }">
+			      	</form>
+			      </td>
 			    </tr>
 			  </c:forEach>
 			  	<tr>
-					<td colspan="4" align="center">${ pageComNavi }</td>
+					<td colspan="5" align="center">${ pageComNavi }</td>
 				</tr>
 			  </tbody>
 			</table>
