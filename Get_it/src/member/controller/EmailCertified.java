@@ -77,7 +77,7 @@ public class EmailCertified extends HttpServlet {
 		String host = "smtp.gmail.com";
 		String subject = "Assemble 회원가입 인증번호";
 		String fromName = "Assemble 관리자";
-		String from = "m0silver91@gmail.com";
+		String from = "KHassemble@gmail.com";
 		String to1 = email;
 		
 		String content = "Assemble 회원가입 인증번호 ["+authNum+"]";
@@ -94,7 +94,7 @@ public class EmailCertified extends HttpServlet {
 			
 			Session mailSession = Session.getInstance(p, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("m0silver91", "!y13y46y79"); // 관리자의 gmail 아이디, 비밀번호
+					return new PasswordAuthentication("KHassemble", "getit1234"); // 관리자의 gmail 아이디, 비밀번호
 				}
 			});
 			
