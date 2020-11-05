@@ -8,10 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import member.model.vo.Member;
-import product.model.service.recommend.RecommendService;
+import product.model.service.RecommendService;
 import product.model.vo.PageData;
 import product.model.vo.Product;
 import product.model.vo.ProductReview;
