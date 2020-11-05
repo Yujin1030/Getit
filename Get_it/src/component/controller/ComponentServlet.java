@@ -23,7 +23,6 @@ public class ComponentServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-//		ArrayList<Product> componentList = new ComponentService().productList();
 		// 메인부품 List
 		ArrayList<Product> cpuList = new ComponentService().cpuList();
 		ArrayList<Product> mboardList = new ComponentService().mboardbList();

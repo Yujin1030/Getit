@@ -30,7 +30,6 @@ public class ComponentDAO {
 		ResultSet rset = null;
 		String cpuQuery
 		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='COMPONENT') WHERE P_CODE LIKE '%CPU%'";
-//		= "SELECT * FROM PRODUCT";
 		
 		try {
 			stmt = conn.createStatement();
@@ -74,7 +73,6 @@ public class ComponentDAO {
 		ResultSet rset = null;
 		String mboardQuery 
 		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='COMPONENT') WHERE P_CODE LIKE '%MAINBOARD%'";
-//		= "SELECT * FROM PRODUCT";
 
 		
 		try {
@@ -119,7 +117,6 @@ public class ComponentDAO {
 		ResultSet rset = null;
 		String coolerQuery 
 		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='COMPONENT') WHERE P_CODE LIKE '%COOLER%'";
-//		= "SELECT * FROM PRODUCT";
 		
 		try {
 			stmt = conn.createStatement();
@@ -163,7 +160,6 @@ public class ComponentDAO {
 		ResultSet rset = null;
 		String gcardQuery 
 		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='COMPONENT') WHERE P_CODE LIKE '%GPU%'";
-//		= "SELECT * FROM PRODUCT";
 		
 		try {
 			stmt = conn.createStatement();
@@ -207,7 +203,6 @@ public class ComponentDAO {
 		ResultSet rset = null;
 		String hddQuery 
 		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='COMPONENT') WHERE P_CODE LIKE '%HDD%'";
-//		= "SELECT * FROM PRODUCT";
 		
 		try {
 			stmt = conn.createStatement();
@@ -251,7 +246,6 @@ public class ComponentDAO {
 		ResultSet rset = null;
 		String powerQuery 
 		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='COMPONENT') WHERE P_CODE LIKE '%POWER%'";
-//		= "SELECT * FROM PRODUCT";
 		
 		try {
 			stmt = conn.createStatement();
@@ -295,7 +289,6 @@ public class ComponentDAO {
 		ResultSet rset = null;
 		String ramQuery 
 		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='COMPONENT') WHERE P_CODE LIKE '%RAM%'";
-//		= "SELECT * FROM PRODUCT";
 		
 		try {
 			stmt = conn.createStatement();
@@ -339,7 +332,6 @@ public class ComponentDAO {
 		ResultSet rset = null;
 		String caseQuery 
 		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='COMPONENT') WHERE P_CODE LIKE '%CASE%'";
-//		= "SELECT * FROM PRODUCT";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(caseQuery);
@@ -382,7 +374,6 @@ public class ComponentDAO {
 		ResultSet rset = null;
 		String ssdQuery 
 		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='COMPONENT') WHERE P_CODE LIKE '%SSD%'";
-//		= "SELECT * FROM PRODUCT";
 		
 		try {
 			stmt = conn.createStatement();
@@ -425,8 +416,8 @@ public class ComponentDAO {
 		Statement stmt = null;
 		ResultSet rset = null;
 		String deskQuery 
-//		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='other') WHERE P_CODE LIKE '%MT%'";
-		= "SELECT * FROM PRODUCT";
+		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='OTHER') WHERE P_CODE LIKE '%MT%'";
+
 		
 		try {
 			stmt = conn.createStatement();
@@ -469,8 +460,7 @@ public class ComponentDAO {
 		Statement stmt = null;
 		ResultSet rset = null;
 		String keyQuery 
-//		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='other') WHERE P_CODE LIKE '%K%'";
-		= "SELECT * FROM PRODUCT";
+		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='OTHER') WHERE P_CODE LIKE '%K%'";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(keyQuery);
@@ -512,8 +502,7 @@ public class ComponentDAO {
 		Statement stmt = null;
 		ResultSet rset = null;
 		String mouseQuery 
-//		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='other') WHERE P_CODE LIKE '%MS%'";
-		= "SELECT * FROM PRODUCT";
+		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='OTHER') WHERE P_CODE LIKE '%MS%'";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(mouseQuery);
@@ -555,8 +544,7 @@ public class ComponentDAO {
 		Statement stmt = null;
 		ResultSet rset = null;
 		String headQuery 
-//		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='other') WHERE P_CODE LIKE '%HEAD%'";
-		= "SELECT * FROM PRODUCT";
+		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='OTHER') WHERE P_CODE LIKE '%HEAD%'";
 		try {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(headQuery);
@@ -598,8 +586,7 @@ public class ComponentDAO {
 		Statement stmt = null;
 		ResultSet rset = null;
 		String speakQuery 
-//		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='other') WHERE P_CODE LIKE '%SP%'";
-		= "SELECT * FROM PRODUCT";
+		= "SELECT * FROM (SELECT * FROM PRODUCT WHERE SEP_CODE='OTHER') WHERE P_CODE LIKE '%SP%'";
 		
 		try {
 			stmt = conn.createStatement();
