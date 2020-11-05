@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class PageData {
 	private ArrayList<Review> pageList;
 	private ArrayList<ReviewCom> pageComList;
-	private String pageNavi;
+	private String pageReNavi;
 	private String pageComNavi;
 	
 	public PageData() {}
@@ -18,12 +18,12 @@ public class PageData {
 		this.pageList = pageList;
 	}
 
-	public String getPageNavi() {
-		return pageNavi;
+	public String getPageReNavi() {
+		return pageReNavi;
 	}
 
-	public void setPageNavi(String pageNavi) {
-		this.pageNavi = pageNavi;
+	public void setPageReNavi(String pageNavi) {
+		this.pageReNavi = pageNavi;
 	}
 
 	public ArrayList<ReviewCom> getPageComList() {

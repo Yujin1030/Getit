@@ -640,7 +640,7 @@ public class CommunityDao {
 		return result;
 	}
 	
-	public String getPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage) {
+	public String getPageReNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage) {
 		int recordTotalCount = totalCount(conn);
 		int pageTotalCount = 0;
 		if(recordTotalCount % recordCountPerPage > 0) {
@@ -690,7 +690,7 @@ public class CommunityDao {
 	}
 	
 	public String getSearchPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage, String search) {
-		int recordTotalCount = searchTotalCount(conn, search);
+		int recordTotalCount = searchReTotalCount(conn, search);
 		int pageTotalCount = 0;
 		if(recordTotalCount % recordCountPerPage > 0) {
 			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
@@ -807,7 +807,7 @@ public class CommunityDao {
 		return recordTotalCount;
 	}
 	
-	public int searchTotalCount(Connection conn, String search) {
+	public int searchReTotalCount(Connection conn, String search) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "SELECT COUNT(*) AS TOTALCOUNT FROM REVIEW WHERE R_TITLE LIKE ?";

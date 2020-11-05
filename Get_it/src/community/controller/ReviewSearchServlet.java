@@ -45,7 +45,7 @@ public class ReviewSearchServlet extends HttpServlet {
 		ArrayList<Review> nList = pageData.getPageList();
 		if(!nList.isEmpty()) {
 			request.setAttribute("list", nList);
-			request.setAttribute("pageNavi", pageData.getPageNavi());
+			request.setAttribute("pageNavi", pageData.getPageReNavi());
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/community/reviewSearch.jsp");
 			view.forward(request, response);
 		} else {

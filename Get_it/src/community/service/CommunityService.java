@@ -204,7 +204,7 @@ public class CommunityService {
 		try {
 			conn = factory.createConnection();
 			pd.setPageList(new CommunityDao().selectReviewList(conn, currentPage, recordCountPerPage));
-			pd.setPageNavi(new CommunityDao().getPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage));
+			pd.setPageReNavi(new CommunityDao().getPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -317,7 +317,7 @@ public class CommunityService {
 		try {
 			conn = factory.createConnection();
 			pd.setPageList(new CommunityDao().reviewSearch(conn, search, currentPage, recordCountPerPage));
-			pd.setPageNavi(new CommunityDao().getSearchPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage, search));
+			pd.setPageReNavi(new CommunityDao().getSearchPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage, search));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
