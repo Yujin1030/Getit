@@ -1,4 +1,4 @@
-package component.dao;
+package product.model.dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -42,8 +42,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -86,8 +86,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -129,8 +129,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -172,8 +172,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -215,8 +215,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -258,8 +258,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -301,8 +301,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -343,8 +343,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -386,8 +386,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -430,8 +430,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -472,8 +472,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -514,8 +514,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -556,8 +556,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
@@ -599,8 +599,8 @@ public class ComponentDAO {
 					pro.setSerialNo(rset.getInt("SERIAL_NO"));
 					pro.setSepCode(rset.getString("SEP_CODE"));
 					pro.setpName(rset.getString("P_NAME"));
-					pro.setpPrice(rset.getString("P_PRICE"));
-					pro.setpAccount(rset.getString("P_ACCOUNT"));
+					pro.setpPrice(rset.getInt("P_PRICE"));
+					pro.setpAccount(rset.getInt("P_ACCOUNT"));
 					pro.setpContents(rset.getString("P_CONTENTS"));
 					pro.setpCategory(rset.getString("P_CATEGORY"));
 					pro.setpComcode(rset.getString("P_COMCODE"));
