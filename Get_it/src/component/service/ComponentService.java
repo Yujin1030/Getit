@@ -1,11 +1,11 @@
-package product.model.service;
+package component.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import product.model.dao.ComponentDAO;
+import component.dao.ComponentDAO;
 import product.model.vo.Product;
 public class ComponentService {
 	

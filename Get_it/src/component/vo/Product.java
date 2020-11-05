@@ -1,4 +1,4 @@
-package product.model.vo;
+package component.vo;
 
 public class Product {
 

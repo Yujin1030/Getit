@@ -1,4 +1,4 @@
-package product.controller.component;
+package component.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import product.model.service.ComponentService;
+import component.service.ComponentService;
 import product.model.vo.Product;
 
 
