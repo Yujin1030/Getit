@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +73,8 @@
                     <br>
                     <br>
                     <br>
-                    <h2>Basket(3)</h2>
+                     <form action="/memeber/shoppingPay" method="post">
+                    <h2>PAY</h2>
                     <br>
                     <div style="width:100%">
                         <table class="table" id="basket_1">
@@ -81,7 +87,18 @@
                             </tr>
                           </thead>
                           <tbody style="border-bottom: 1px solid black;">
-                            <tr>
+                          	<!--결제 리스트  -->
+                          	 <tr>
+                              <th scope="row"><input type="checkbox"></th>
+                                <td>	
+                                	${shopping.pName }
+                                </td>
+                                <td>${shopping.pAccount }</td>
+                                <td id="price${status.index}">${shopping.pPrice }</td>
+                            </tr>
+                          
+                   
+                           <!--  <tr>
                               <th scope="row"><input type="checkbox"></th>
                                 <td>	
                                 이엠텍 지포스 GTX 1660 SUPER STORM X Dual OC D6 6GB
@@ -104,7 +121,7 @@
                                 </td>
                                 <td>1</td>
                                 <td>278,000원</td>
-                            </tr>
+                            </tr> -->
                           </tbody>
                         </table>
                     </div>
@@ -124,53 +141,95 @@
                             </tr>
                           </thead>
                           <tbody>
+                         
                             <tr>
-                              <th scope="row">판매가(카드)</th>
+                              <th scope="row">판매 최적가</th>
                               <td>0원</td>
                               <td>0원</td>
-                              <td>0원</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">최적가</th>
-                              <td>0원</td>
-                              <td>0원</td>
-                              <td>0원</td>
+                              <td name="allPrice">10000원</td>
                             </tr>
                           </tbody>
                         </table>
                     </div>
                     <br>
                     <br>
-                    <h6 style="font-weight: bold;">구매자 정보</h6>
+                    <h6 style="font-weight: bold;">구매자 정보</h6><input type="checkBox" id="memberAddr" name="memberInfo"><label>주문자 정보와 동일</label>
                     <div style="width:100%;">
                         <table class="table" id="basket_3">
                           <tbody>
+                          <c:if test="${ member ne null }">
+                          <!--만약 체크 되어진다면 회원 정보에 저장된 이름, 메일 , 연락처 , 주소지 를 가져오고
+                          	체크가 안될경우 따로 input 에 입력해서 그 값을 결제정보에 넘기기  -->
                             <tr>
                               <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">이름</th>
-                              <td>KH정보교육원</td>
+                              <td> ${ member.userName}</td>
                             </tr>
                             <tr>
                               <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">이메일</th>
-                              <td>khacademy.iei.or.kr</td>
+                              <td> ${ member.email} }</td>
                             </tr>
                             <tr>
                               <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">연락처</th>
-                              <td>010-1234-1234</td>
+                              <td> ${ member.phone }</td>
                             </tr>
                             <tr>
                               <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">배송주소</th>
-                              <td>(00000)서울 시 중구 남대문로 120 대일빌딩 3층</td>
+                              <td> ${ member.address } ${member.detailAddress}</td>
                             </tr>
                             <tr>
                               <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">배송요청사항</th>
                               <td>
-                                <select>
+                                <select name="dMessage" >
                                     <option>부재 시 문앞에 놔주세요.</option>
                                     <option>배송 전 연락부탁드립니다.</option>
                                     <option>문앞에 사나운 강아지가 있습니다.주의하세요.</option>
                                 </select>
                               </td>
                             </tr>
+                            </c:if>
+                            
+                            
+                            <c:if test="${ member eq null}">
+                          <!--만약 체크 되어진다면 회원 정보에 저장된 이름, 메일 , 연락처 , 주소지 를 가져오고
+                          	체크가 안될경우 따로 input 에 입력해서 그 값을 결제정보에 넘기기  -->
+                            <tr>
+                              <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">이름</th>
+                              <td><input type="text" name="userName" placeholder="이름을 입력하세요"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">이메일</th>
+                              <td><input type="email" name="email" placeholder="이메일을 입력하세요"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">연락처</th>
+                              <td><input type="phone" name="phone" placeholder="폰 번호를 입력하세요"></td>
+                            </tr>
+                            <tr>
+                              <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">배송주소</th>
+                              <td>
+                             	<input type="text" id="postcode" placeholder="우편번호" name="zipcode">
+                              </td>
+                              <td>
+								<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                              </td>
+                              <td>
+								<input type="text" id="address" name="address"placeholder="주소"><br>
+                              </td>
+                              <td>
+								<input type="text" id="detailAddress"name ="detailAddress" placeholder="상세주소" required>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row" style="color:white;background-color:#343A40;width:15%;text-align:right;">배송요청사항</th>
+                              <td>
+                                <select name="dMessage">
+                                    <option>부재 시 문앞에 놔주세요.</option>
+                                    <option>배송 전 연락부탁드립니다.</option>
+                                    <option>문앞에 사나운 강아지가 있습니다.주의하세요.</option>
+                                </select>
+                              </td>
+                            </tr>
+                            </c:if>
                           </tbody>
                         </table>
                     </div>
@@ -222,11 +281,11 @@
                     </div>
                     <br>
                     <div style="width:100%;text-align:center;font-size:14px;">
-                        <input type="checkbox">위 주문 내용을 확인하였으며, 회원 본인은 결제에 동의합니다.
+                        <input type="checkbox" required>위 주문 내용을 확인하였으며, 회원 본인은 결제에 동의합니다.
                     </div>
                     <br>
                     <div style="width:100%;font-size:14px;text-align:center;">
-                        <form action="" method="post">
+                       
                             <button type="submit" class="btn btn-secondary" style="background-color:#343A40; color: white;" id="orderButton">결제하기</button>
                         </form>
                     </div>

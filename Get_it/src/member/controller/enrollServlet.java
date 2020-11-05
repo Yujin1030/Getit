@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.Member;
 import member.service.MemberService;
+import member.vo.Member;
 
 /**
  * Servlet implementation class enrollServlet
@@ -58,7 +58,8 @@ public class enrollServlet extends HttpServlet {
 		int result = new MemberService().insertMember(member);
 		
 		if(result>0) { //성공
-			response.sendRedirect("/index.jsp");
+			request.getRequestDispatcher("/WEB-INF/views/main/index.jsp").forward(request, response);
+			//response.sendRedirect("/index.jsp");
 		}else {//실패
 			response.sendRedirect("/views/member/memberError.html");
 			

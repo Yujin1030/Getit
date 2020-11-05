@@ -1,29 +1,26 @@
 package member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import member.service.MemberService;
-import member.vo.Member;
+import member.vo.OrderList;
 
 /**
- * Servlet implementation class LoginServelt
+ * Servlet implementation class returnSendServelt
  */
-@WebServlet("/member/login")
-public class LoginServelt extends HttpServlet {
+@WebServlet("/member/returnSend")
+public class returnSendServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServelt() {
+    public returnSendServelt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,25 +31,29 @@ public class LoginServelt extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String userId=request.getParameter("id");
-		String userPwd=request.getParameter("pw");
+		OrderList orderList = new OrderList();
+		orderList.setOrderNo(Integer.parseInt(request.getParameter("orderNo")));
+		orderList.setReturnA(Integer.parseInt(request.getParameter("pAccount")));
+		String returnRE = request.getParameter("returnRE");
 		
-		Member member = new MemberService().selectMember(userId, userPwd);
-		
-		if(member != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("member", member);
-			
-			request.getRequestDispatcher("/WEB-INF/views/main/index.jsp").forward(request, response);
-			
-		}else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('가입정보가 없거나, 비밀번호가 일치하지 않습니다.'); location.href='/login.html';</script>"); 
-			writer.close();
+		if(returnRE.equals("dsbs")) {
+			orderList.setReturnRE("단순변심 상품이 맘에들지 않음.");
+		}else if(returnRE.equals("diff")) {
+			orderList.setReturnRE("상품이 설명과 다름");
+		}else if(returnRE.equals("faulty")) {
+			orderList.setReturnRE("상품 파손 및 불량품 배송");
 		}
 		
-	
+		int result = new MemberService().updateReturn(orderList);
+		
+		if(result>0) {
+			request.getRequestDispatcher("/WEB-INF/views/main/index.jsp").forward(request, response);
+			
+		}
+		else {
+			request.getRequestDispatcher("/WEB-INF/views/member/memberError.html").forward(request, response);
+		}
+		
 	}
 
 	/**

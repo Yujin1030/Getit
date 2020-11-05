@@ -6,9 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import member.Member;
 import member.service.MemberService;
+import member.vo.Member;
 
 /**
  * Servlet implementation class MyPageServlet
@@ -30,9 +31,10 @@ public class MyPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String userId=request.getParameter("userId");
+		String userId = request.getParameter("userId");
+		
 		Member member = new MemberService().selectMember(userId);
-		System.out.println(userId);
+		
 		if(member !=null) {
 			request.setAttribute("member", member);
 			request.getRequestDispatcher("/WEB-INF/views/member/myPage.jsp").forward(request, response);

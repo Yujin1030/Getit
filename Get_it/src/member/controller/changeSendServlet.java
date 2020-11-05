@@ -1,8 +1,6 @@
 package member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,18 +10,19 @@ import javax.servlet.http.HttpSession;
 
 import member.service.MemberService;
 import member.vo.Member;
+import member.vo.OrderList;
 
 /**
- * Servlet implementation class LoginServelt
+ * Servlet implementation class changeSendServlet
  */
-@WebServlet("/member/login")
-public class LoginServelt extends HttpServlet {
+@WebServlet("/member/changeSend")
+public class changeSendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServelt() {
+    public changeSendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +33,33 @@ public class LoginServelt extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String userId=request.getParameter("id");
-		String userPwd=request.getParameter("pw");
+		OrderList orderList = new OrderList();
+		orderList.setOrderNo(Integer.parseInt(request.getParameter("orderNo")));
+		orderList.setChangeA(Integer.parseInt(request.getParameter("pAccount")));
+		String changeRE = request.getParameter("changeRE");
 		
-		Member member = new MemberService().selectMember(userId, userPwd);
-		
-		if(member != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("member", member);
+		if(changeRE.equals("mdelivery")) {
+			orderList.setChangeRE("판매자의 오배송으로 인한 교환신청");
 			
-			request.getRequestDispatcher("/WEB-INF/views/main/index.jsp").forward(request, response);
+		}else if(changeRE.equals("diff")) {
+			orderList.setChangeRE("상품이 설명과 다름");
 			
-		}else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('가입정보가 없거나, 비밀번호가 일치하지 않습니다.'); location.href='/login.html';</script>"); 
-			writer.close();
+		}else if(changeRE.equals("faulty")) {
+			orderList.setChangeRE("상품 파손 및 불량품 배송");
+			
 		}
 		
+		
+		
+		int result = new MemberService().updateChange(orderList);
+		
+		if(result>0) {
+			request.getRequestDispatcher("/WEB-INF/views/member/index.jsp").forward(request, response);
+			
+		}
+		else {
+			request.getRequestDispatcher("/WEB-INF/views/member/memberError.html").forward(request, response);
+		}
 	
 	}
 

@@ -2,6 +2,7 @@ package member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +15,16 @@ import member.service.MemberService;
 import member.vo.Member;
 
 /**
- * Servlet implementation class LoginServelt
+ * Servlet implementation class shoppingBagListDeleteServelt
  */
-@WebServlet("/member/login")
-public class LoginServelt extends HttpServlet {
+@WebServlet("/member/shoppingBagListDelete")
+public class shoppingBagListDeleteServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServelt() {
+    public shoppingBagListDeleteServelt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +34,32 @@ public class LoginServelt extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		String userId = ((Member)session.getAttribute("member")).getMemberId();
 		
-		String userId=request.getParameter("id");
-		String userPwd=request.getParameter("pw");
 		
-		Member member = new MemberService().selectMember(userId, userPwd);
+		//int basketNo = Integer.parseInt(request.getParameter("basketNo"));
+		String params = request.getParameter("basketNo");
+		// 12, 14
+		int result = 0;
+		String [] basketArr = params.split(",");
 		
-		if(member != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("member", member);
-			
-			request.getRequestDispatcher("/WEB-INF/views/main/index.jsp").forward(request, response);
+		for(int i = 0; i<basketArr.length;i++) {
+			int basketNo = Integer.parseInt(basketArr[i]);
+			result = new MemberService().shoppingListDelete(basketNo);
+		}
+		
+		if(result>0) {
+			//request.getRequestDispatcher("/WEB-INF/views/member/basket.jsp").forward(request, response);
+			response.sendRedirect("/member/shoppingbag?userId="+userId);
 			
 		}else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('가입정보가 없거나, 비밀번호가 일치하지 않습니다.'); location.href='/login.html';</script>"); 
+			writer.println("<script>alert('삭제할 항목이 없습니다.'); location.href='/basket.jsp';</script>"); 
 			writer.close();
+			
 		}
-		
-	
 	}
 
 	/**
