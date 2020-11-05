@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import common.JDBCTemplate;
 import other.model.dao.FileDAO;
-import other.model.vo.Other;
+import product.model.vo.Product;
 
 public class FileService {
 	private JDBCTemplate factory;
@@ -14,12 +14,12 @@ public class FileService {
 		factory = JDBCTemplate.getConnection();
 	}
 	
-	public int uploadFile(Other other, String systemFileName) {
+	public int uploadFile(Product product, String systemFileName) {
 		Connection conn = null;
 		int result = 0;
 		try {
 			conn = factory.createConnection();
-			result = new FileDAO().uploadFile(conn, other, systemFileName);
+			result = new FileDAO().uploadFile(conn, product, systemFileName);
 			if(result > 0) {
 				JDBCTemplate.commit(conn);
 			} else {

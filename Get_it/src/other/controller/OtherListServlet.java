@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import other.model.service.OtherService;
-import other.model.vo.Other;
 import other.model.vo.PageData;
+import product.model.vo.Product;
 
 /**
  * Servlet implementation class OtherListServlet
@@ -42,7 +42,7 @@ public class OtherListServlet extends HttpServlet {
 		}
 		
 		PageData pageData = new OtherService().selectProductList(currentPage);
-		ArrayList<Other> list = pageData.getPageList();
+		ArrayList<Product> list = pageData.getPageList();
 		if(!list.isEmpty()) {
 			request.setAttribute("list", list);
 			request.setAttribute("pageNavi", pageData.getPageNavi());

@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import community.model.service.CommunityService;
 
 /**
- * Servlet implementation class QnaUpdate
+ * Servlet implementation class QnaComdelete
  */
-@WebServlet("/qna/update")
-public class QnaUpdate extends HttpServlet {
+@WebServlet("/qna/comdelete")
+public class QnaComdelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaUpdate() {
+    public QnaComdelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +29,14 @@ public class QnaUpdate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
-		
-		int result = new CommunityService().qnaUpdate(qnaNo,title,contents);
+		int result = new CommunityService().qnaComDelete(commentNo,qnaNo);
 		if(result>0) {
 			request.setAttribute("qnaNo", qnaNo);
 			request.getRequestDispatcher("/qna/detail").forward(request, response);
+		}else {
+			System.out.println("실패");
 		}
 	}
 

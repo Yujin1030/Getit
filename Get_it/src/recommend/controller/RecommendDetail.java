@@ -53,7 +53,17 @@ public class RecommendDetail extends HttpServlet {
 		// 후기게시글에 대한 페이징처리 및 데이터 불러오기 (매개변수 currentPage,pCode)
 		PageData pagedata = new RecommendService().recommendReview(currentPage,pCode);
 		ArrayList<ProductReview> reviewList = pagedata.getReviewList();
+		// 전체 합계
+		int totalPrice = 0;
+		
+		for(int i=0; i<productList.size(); i++) {
+			if(!productList.get(i).getpCode().equals(pCode)) {
+				totalPrice += productList.get(i).getpPrice();
+			}
+		}
+		
 		if(reviewList!=null) {
+			request.setAttribute("totalPrice", totalPrice);
 			request.setAttribute("pCode", pCode);
 			request.setAttribute("pFilename", pFilename);
 			request.setAttribute("reviewpageNavi", pagedata.getPageNavi());

@@ -6,6 +6,7 @@ public class QnaPageData {
 	
 	private ArrayList<QnA> qnaList;
 	private String pageNavi;
+	private ArrayList<Comments> comList;
 	
 	public QnaPageData() {}
 
@@ -24,6 +25,15 @@ public class QnaPageData {
 	public void setPageNavi(String pageNavi) {
 		this.pageNavi = pageNavi;
 	}
+
+	public ArrayList<Comments> getComList() {
+		return comList;
+	}
+
+	public void setComList(ArrayList<Comments> comList) {
+		this.comList = comList;
+	}
+	
 	
 	
 

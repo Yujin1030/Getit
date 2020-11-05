@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,7 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <!-- scirpt추가 -->
-<link rel="stylesheet" type="text/css" href="/css/recommendDetail.css">
+<link rel="stylesheet" type="text/css" href="/css/recomDetail.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
@@ -77,7 +77,7 @@
 		<div id="nav_bar">
 			<div id="nav_bar_menu">
 				<ul>
-					<li><a href="#">Recommend</a></li>
+					<li><a href="/recommend/listview">Recommend</a></li>
 					<li><a href="#">Self</a></li>
 					<li><a href="#">Other</a></li>
 					<li><a href="#">Used Deal</a></li>
@@ -114,7 +114,7 @@
 			<div id="detail_main">
 				<div class="detail_main_left">
 					<img src="/upload/${pFilename }"
-						style="width: 90%; height: 90%; padding-top: 120px; padding-left: 100px;">
+						style="width: 80%; height: 80%; padding-top: 120px; padding-left: 100px;">
 				</div>
 				<div class="detail_main_right">
 					<table>
@@ -132,7 +132,7 @@
 									<!-- CPU  -->
 									<td class="detail_component">${productList.pName}</td>
 									<td class="detail_count">${productList.pAccount }</td>
-									<td class="detail_price">${productList.pPrice }</td>
+									<td class="detail_price"><fmt:formatNumber value="${productList.pPrice }" pattern="###,###,###"/></td>
 
 								</tr>
 							</c:if>
@@ -142,7 +142,7 @@
 									<!-- 메인보드 -->
 									<td class="detail_component">${productList.pName}</td>
 									<td class="detail_count">${productList.pAccount }</td>
-									<td class="detail_price">${productList.pPrice }</td>
+									<td class="detail_price"><fmt:formatNumber value="${productList.pPrice }" pattern="###,###,###"/></td>
 								</tr>
 							</c:if>
 
@@ -151,7 +151,7 @@
 									<!-- 그래픽카드 -->
 									<td class="detail_component">${productList.pName}</td>
 									<td class="detail_count">${productList.pAccount }</td>
-									<td class="detail_price">${productList.pPrice }</td>
+									<td class="detail_price"><fmt:formatNumber value="${productList.pPrice }" pattern="###,###,###"/></td>
 								</tr>
 							</c:if>
 
@@ -160,7 +160,7 @@
 									<!-- HDD -->
 									<td class="detail_component">${productList.pName}</td>
 									<td class="detail_count">${productList.pAccount }</td>
-									<td class="detail_price">${productList.pPrice }</td>
+									<td class="detail_price"><fmt:formatNumber value="${productList.pPrice }" pattern="###,###,###"/></td>
 								</tr>
 							</c:if>
 
@@ -169,7 +169,7 @@
 									<!-- SSD -->
 									<td class="detail_component">${productList.pName}</td>
 									<td class="detail_count">${productList.pAccount }</td>
-									<td class="detail_price">${productList.pPrice }</td>
+									<td class="detail_price"><fmt:formatNumber value="${productList.pPrice }" pattern="###,###,###"/></td>
 								</tr>
 							</c:if>
 							<c:if test="${fn:contains(productList.pCode,'RAM') }">
@@ -177,7 +177,7 @@
 									<!-- RAM -->
 									<td class="detail_component">${productList.pName}</td>
 									<td class="detail_count">${productList.pAccount }</td>
-									<td class="detail_price">${productList.pPrice }</td>
+									<td class="detail_price"><fmt:formatNumber value="${productList.pPrice }" pattern="###,###,###"/></td>
 								</tr>
 							</c:if>
 							<c:if test="${fn:contains(productList.pCode,'POWER') }">
@@ -185,7 +185,7 @@
 									<!-- POWER -->
 									<td class="detail_component">${productList.pName}</td>
 									<td class="detail_count">${productList.pAccount }</td>
-									<td class="detail_price">${productList.pPrice }</td>
+									<td class="detail_price"><fmt:formatNumber value="${productList.pPrice }" pattern="###,###,###"/></td>
 								</tr>
 							</c:if>
 							<c:if test="${fn:contains(productList.pCode,'COOLER') }">
@@ -193,7 +193,7 @@
 									<!-- COOLER -->
 									<td class="detail_component">${productList.pName}</td>
 									<td class="detail_count">${productList.pAccount }</td>
-									<td class="detail_price">${productList.pPrice }</td>
+									<td class="detail_price"><fmt:formatNumber value="${productList.pPrice }" pattern="###,###,###"/></td>
 								</tr>
 							</c:if>
 							<c:if test="${fn:contains(productList.pCode,'CASE') }">
@@ -201,7 +201,7 @@
 									<!-- SKIN -->
 									<td class="detail_component">${productList.pName}</td>
 									<td class="detail_count">${productList.pAccount }</td>
-									<td class="detail_price">${productList.pPrice }</td>
+									<td class="detail_price"><fmt:formatNumber value="${productList.pPrice }" pattern="###,###,###"/></td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -214,12 +214,14 @@
 				<div class="detail_main_top_left">
 					<b>총 합계 금액</b>
 				</div>
-				<div class="detail_main_top_right">999999</div>
+				<div class="detail_main_top_right">
+				<fmt:formatNumber value="${totalPrice }" pattern="###,###,###"/>
+				</div>
 			</div>
 			<div id="basket">
 				<img src="/img/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88.PNG" alt="장바구니"
 					style="width: 80px; padding-bottom: 30px;"> &nbsp;&nbsp; <a
-					href="/basket/insert?aNo=${recommend.aNo }"><b
+					href="#"><b
 					style="font-size: 50px;">장바구니</b></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img src="/img/%EA%B2%B0%EC%A0%9C%EB%B2%84%ED%8A%BC.PNG" alt="결제하기"
@@ -227,9 +229,9 @@
 					href="#"><b style="font-size: 50px; color: red;">결제하기</b></a>
 			</div>
 			<div id="info">
-				<a href="#">상품정보</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#">구매후기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#">취소/반품/교환 정보</a>
+				<a href="#info">상품정보</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#order_review">구매후기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#notice">취소/반품/교환 정보</a>
 			</div>
 			<hr
 				style="width: 87.5%; height: 2px; background-color: gray; border-top: 1px; opacity: 0.4;">
@@ -239,11 +241,11 @@
 					<c:if test="${fn:contains(productList.pCode,'CPU') }">
 						<div class="component">
 							<div class="component_left">
-								${productList.pName} <br> ${productList.pCode} <br>
+								${productList.pName} <br><br>
 								${productList.pContents}
 							</div>
 							<div class="component_right">
-								<img src="#">
+								<img src="/upload/${productList.pFilename }">
 							</div>
 						</div>
 					</c:if>
@@ -251,11 +253,11 @@
 					<c:if test="${fn:contains(productList.pCode,'HDD') }">
 						<div class="component">
 							<div class="component_left">
-								${productList.pName} <br> ${productList.pCode} <br>
+								${productList.pName} <br> <br><br>
 								${productList.pContents}
 							</div>
 							<div class="component_right">
-								<img src="#">
+								<img src="/upload/${productList.pFilename }">
 							</div>
 						</div>
 					</c:if>
@@ -263,11 +265,11 @@
 					<c:if test="${fn:contains(productList.pCode,'COOLER') }">
 						<div class="component">
 							<div class="component_left">
-								${productList.pName} <br> ${productList.pCode} <br>
+								${productList.pName} <br><br><br>
 								${productList.pContents}
 							</div>
 							<div class="component_right">
-								<img src="#">
+								<img src="/upload/${productList.pFilename }">
 							</div>
 						</div>
 					</c:if>
@@ -275,11 +277,11 @@
 					<c:if test="${fn:contains(productList.pCode,'GPU') }">
 						<div class="component">
 							<div class="component_left">
-								${productList.pName} <br> ${productList.pCode} <br>
+								${productList.pName} <br><br><br>
 								${productList.pContents}
 							</div>
 							<div class="component_right">
-								<img src="#">
+								<img src="/upload/${productList.pFilename }">
 							</div>
 						</div>
 					</c:if>
@@ -287,11 +289,11 @@
 					<c:if test="${fn:contains(productList.pCode,'MAINBOARD') }">
 						<div class="component">
 							<div class="component_left">
-								${productList.pName} <br> ${productList.pCode} <br>
+								${productList.pName} <br><br><br>
 								${productList.pContents}
 							</div>
 							<div class="component_right">
-								<img src="#">
+								<img src="/upload/${productList.pFilename }">
 							</div>
 						</div>
 					</c:if>
@@ -299,11 +301,11 @@
 					<c:if test="${fn:contains(productList.pCode,'POWER') }">
 						<div class="component">
 							<div class="component_left">
-								${productList.pName} <br> ${productList.pCode} <br>
+								${productList.pName} <br><br><br>
 								${productList.pContents}
 							</div>
 							<div class="component_right">
-								<img src="#">
+								<img src="/upload/${productList.pFilename }">
 							</div>
 						</div>
 					</c:if>
@@ -311,11 +313,11 @@
 					<c:if test="${fn:contains(productList.pCode,'RAM') }">
 						<div class="component">
 							<div class="component_left">
-								${productList.pName} <br> ${productList.pCode} <br>
+								${productList.pName} <br><br><br>
 								${productList.pContents}
 							</div>
 							<div class="component_right">
-								<img src="#">
+								<img src="/upload/${productList.pFilename }">
 							</div>
 						</div>
 					</c:if>
@@ -323,11 +325,11 @@
 					<c:if test="${fn:contains(productList.pCode,'CASE') }">
 						<div class="component">
 							<div class="component_left">
-								${productList.pName} <br> ${productList.pCode} <br>
+								${productList.pName} <br><br><br> 
 								${productList.pContents}
 							</div>
 							<div class="component_right">
-								<img src="#">
+								<img src="/upload/${productList.pFilename }">
 							</div>
 						</div>
 					</c:if>
@@ -335,11 +337,11 @@
 					<c:if test="${fn:contains(productList.pCode,'SSD') }">
 						<div class="component">
 							<div class="component_left">
-								${productList.pName} <br> ${productList.pCode} <br>
+								${productList.pName} <br><br><br>
 								${productList.pContents}
 							</div>
 							<div class="component_right">
-								<img src="#">
+								<img src="/upload/${productList.pFilename }">
 							</div>
 						</div>
 					</c:if>
@@ -350,7 +352,7 @@
 				</div>
 			</div>
 			<div class="section_space" style="text-align: center;">
-				<div>구매 후기</div>
+				<div id="order_review">구매 후기</div>
 				<div class="buy_review"
 					style="text-align: right; padding-right: 30px;">
 					<a
@@ -360,7 +362,7 @@
 			</div>
 			<div class="review">
 				<!-- 수정 시작점 -->
-				<div class="review_title" border="1">
+				<div class="review_title">
 					<div class="review_title_left">제목</div>
 					<div class="review_title_middle">작성자</div>
 					<div class="review_title_right">날짜</div>
@@ -373,12 +375,12 @@
 							<div class="accordion_title_right">${reviewList.enrollDate }</div>
 						</div>
 						<div class="accordion_sub">
-							<div style="width: 80%; height: 100%; float: left;"></div>
+							<div style="width: 80%; height: 100%; float: left; line-height: 50px;">${reviewList.reviewContents }</div>
 							<div
 								style="width: 20%; height: 100%; float: left; line-height: 50px; padding-left: 75px;">
 								<c:if test="${sessionScope.member.memberId eq reviewList.memberId }">
-								<a class="btn btn-primary" href="/review/update">수정</a> 
-								<a	class="btn btn-primary" href="/review/delete?pCode=${reviewList.pCode }&reviewNo=${reviewList.reviewNo}" onclick="return reviewdelete()">삭제</a>
+								<a class="btn btn-primary" href="/recommend/review/update?pCode=${pCode }&reviewNo=${reviewList.reviewNo }&pFilename=${pFilename}">수정</a> 
+								<a	class="btn btn-primary" href="/review/delete?pCode=${reviewList.pCode }&reviewNo=${reviewList.reviewNo}&pFilename=${pFilename}" onclick="return reviewdelete()">삭제</a>
 								</c:if>
 							</div>
 						</div>

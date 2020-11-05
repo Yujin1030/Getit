@@ -116,7 +116,7 @@ public class DealService {
 		Connection conn = null;
 		DealPageData dpd = new DealPageData();
 		
-		int recordCountDealPage = 5;
+		int recordCountDealPage = 12;
 		int naviCountDealPage = 5;
 		
 		try {

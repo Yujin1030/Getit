@@ -96,10 +96,11 @@
         
         <!--  ----------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <p>Other</p>
-            <p><a href="/other/allList">전체</a> | <a href="/other/monitor">모니터</a> | <a href="/other/keyboard">키보드</a> | <a href="/other/mouse" style="font-weight: bold;">마우스</a> | <a href="/other/speaker">스피커</a> | <a href="/other/headset">헤드셋</a></p>
+            <p><a href="/other/allList" style="font-weight: bold;">전체</a> | <a href="/other/monitor">모니터</a> | <a href="/other/keyboard">키보드</a> | <a href="/other/mouse">마우스</a> | <a href="/other/speaker">스피커</a> | <a href="/other/headset">헤드셋</a></p>
             <div id="wrap2">
                <form action="/other/search" method="get" autocomplete="on">
-               <input id="search" name="search1" type="text" placeholder="검색어를 입력하세요."><input id="search_submit" value="Rechercher" type="submit"> 
+               <input id="search" name="search1" type="text" placeholder="검색어를 입력하세요.">
+               <input id="search_submit" value="Rechercher" type="submit"> 
                </form>
             </div>
             <hr style="width: 80%;">
@@ -108,14 +109,14 @@
 		 
 		 	<div id="empty_space"></div>
 	        <div id="section_contents">
-	        <c:forEach items="${list }" var="other" varStatus="index" begin="0" end="3">
+	        <c:forEach items="${nList }" var="other" varStatus="index" begin="0" end="3">
 	            <div id="section_contents_inner">
-	                <a href="/other/content?oProductNo=${other.serialNo }" style="color:black;">
+	                <a href="/other/content?oProductNo=${other.oProductNo }" style="color:black;">
 	                    <div class="card" style="width: 20.6rem;">
-	                      <img src="/oupload/${other.pFilename }" class="card-img-top" alt="...">
+	                      <img src="/oupload/${other.fileName }" class="card-img-top" alt="...">
 	                      <div class="card-body" id="card-body">
-	                        <h5 class="card-title" id="card-title">${other.pName }</h5>
-	                        <p class="card-text">${other.pPrice }원</p>
+	                        <h5 class="card-title" id="card-title">${other.oProductName }</h5>
+	                        <p class="card-text">${other.oProductPrice }원</p>
 	                      </div>
 	                    </div>
 	                </a>
@@ -131,14 +132,14 @@
 	        
 	        <div id="empty_space"></div>
 	        <div id="section_contents">
-	        <c:forEach items="${list }" var="other" varStatus="index" begin="4" end="7">
+	        <c:forEach items="${nList }" var="other" varStatus="index" begin="4" end="7">
 	            <div id="section_contents_inner">
-	                <a href="/other/content?oProductNo=${other.serialNo }" style="color:black;">
+	                <a href="/other/content?oProductNo=${other.oProductNo }" style="color:black;">
 	                    <div class="card" style="width: 20.6rem;">
-	                      <img src="/oupload/${other.pFilename }" class="card-img-top" alt="...">
+	                      <img src="/oupload/${other.fileName }" class="card-img-top" alt="...">
 	                      <div class="card-body" id="card-body">
-	                        <h5 class="card-title" id="card-title">${other.pName }</h5>
-	                        <p class="card-text">${other.pPrice }원</p>
+	                        <h5 class="card-title" id="card-title">${other.oProductName }</h5>
+	                        <p class="card-text">${other.oProductPrice }원</p>
 	                      </div>
 	                    </div>
 	                </a>
@@ -154,14 +155,14 @@
 	        
 	        <div id="empty_space"></div>
 	        <div id="section_contents">
-	        <c:forEach items="${list }" var="other" varStatus="index" begin="8" end="11">
+	        <c:forEach items="${nList }" var="other" varStatus="index" begin="8" end="11">
 	            <div id="section_contents_inner">
-	                <a href="/other/content?oProductNo=${other.serialNo }" style="color:black;">
+	                <a href="/other/content?oProductNo=${other.oProductNo }" style="color:black;">
 	                    <div class="card" style="width: 20.6rem;">
-	                      <img src="/oupload/${other.pFilename }" class="card-img-top" alt="...">
+	                      <img src="/oupload/${other.fileName }" class="card-img-top" alt="...">
 	                      <div class="card-body" id="card-body">
-	                        <h5 class="card-title" id="card-title">${other.pName }</h5>
-	                        <p class="card-text">${other.pPrice }원</p>
+	                        <h5 class="card-title" id="card-title">${other.oProductName }</h5>
+	                        <p class="card-text">${other.oProductPrice }원</p>
 	                      </div>
 	                    </div>
 	                </a>

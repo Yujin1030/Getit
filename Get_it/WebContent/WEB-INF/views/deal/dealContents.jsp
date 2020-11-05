@@ -93,12 +93,12 @@
         <div id="section_title">
         		<!-- 게시물 아이디와 로그인 중인 아이디가 같을때 구매자와의 채팅이 열림 -->
         		<c:if test="${contents.memberId eq sessionScope.member.memberId }">
-                	<input type="image" src="/img/ezgif.com-gif-maker.gif" style="width:10%;height:100%;margin-top:1%;margin-left:90%;" onclick="window.open('/deal/chatToBuyer', '구매자와 채팅중', 'width=400px, height=600px')">
+                	<input type="image" src="/img/ezgif.com-gif-maker.gif" style="width:10%;height:100%;margin-top:1%;margin-left:90%;" onclick="window.open('/deal/chatToBuyer', '구매자와 채팅중', 'width=400px, height=600px, location=no')">
                 </c:if>
                 
                 <!-- 게시물 아이디와 로그인 중인 아이디가 다를때 판매자와의 채팅이 열림 -->
                 <c:if test="${contents.memberId ne sessionScope.member.memberId }">
-                	<input type="image" src="/img/ezgif.com-gif-maker.gif" style="width:10%;height:100%;margin-top:1%;margin-left:90%;" onclick="window.open('/deal/chatToWriter', '판매자와 채팅중', 'width=400px, height=600px')">
+                	<input type="image" src="/img/ezgif.com-gif-maker.gif" style="width:10%;height:100%;margin-top:1%;margin-left:90%;" onclick="window.open('/deal/chatToWriter', '판매자와 채팅중', 'width=400px, height=600px, location=no')">
                 </c:if>
 
                 <!-- <button type="submit" class="btn btn-secondary" onclick="window.open('/deal/chatToBuyer', '구매자와 채팅중', 'width=400px, height=600px')">채팅하기</button> -->

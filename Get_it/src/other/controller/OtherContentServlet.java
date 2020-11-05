@@ -1,6 +1,7 @@
 package other.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import other.model.service.OtherService;
-import other.model.vo.Other;
+import other.model.vo.PageData;
+import product.model.vo.Product;
+import product.model.vo.ProductReview;
 
 /**
  * Servlet implementation class OtherContentServlet
@@ -31,11 +34,22 @@ public class OtherContentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int oProductNo = Integer.parseInt(request.getParameter("oProductNo"));
-		Other other = new OtherService().selectOther(oProductNo);
-		if(other != null) {
-			request.setAttribute("content", other);
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/other/Other_contents2.jsp");
+		String pCode = request.getParameter("pCode");
+		Product product = new OtherService().selectOther(pCode);
+		
+		int currentPage = 0;
+		if(request.getParameter("currentPage") == null) {
+			currentPage = 1;
+		} else { 
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		PageData pageData = new OtherService().selectOtherReview(currentPage, pCode);
+		ArrayList<ProductReview> list = pageData.getPageReList();
+		if(product != null) {
+			request.setAttribute("content", product);
+			request.setAttribute("list", list);
+			request.setAttribute("pageReNavi", pageData.getPageReNavi());
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/other/Other_contents.jsp");
 			view.forward(request, response);
 		} else {
 			request.getRequestDispatcher("/WEB-INF/views/Error.jsp").forward(request, response);

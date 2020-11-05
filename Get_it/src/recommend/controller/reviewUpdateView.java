@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import member.model.vo.Member;
-import product.model.service.recommend.RecommendService;
 
 /**
- * Servlet implementation class reviewupdate
+ * Servlet implementation class reviewUpdateView
  */
-@WebServlet("/review/update2")
-public class reviewupdate extends HttpServlet {
+@WebServlet("/recommend/review/update")
+public class reviewUpdateView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reviewupdate() {
+    public reviewUpdateView() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +30,16 @@ public class reviewupdate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+//		System.out.println(reviewNo);
 		String pCode = request.getParameter("pCode");
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
 		String pFilename = request.getParameter("pFilename");
-		int result =0;
-		int reviewNo =0;
-		String memberId ="";
-		//if(((Member)session.getAttribute("memeber")!=null)) {
-		reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		memberId = ((Member)session.getAttribute("member")).getMemberId(); 
-		result = new RecommendService().reviewUpdate(memberId,pCode,title,contents,reviewNo);
-		//}
-		
-		  if(result>0) { request.setAttribute("pFilename", pFilename);
-		  request.setAttribute("pCode", pCode);
-		  request.getRequestDispatcher("/recommend/detail").forward(request, response);
-		  }else { response.sendRedirect("서비스요청실패"); }
-		 
+//		System.out.println(pCode);
+		request.setAttribute("pFilename", pFilename);
+		request.setAttribute("reviewNo", reviewNo);
+		request.setAttribute("pCode", pCode);
+		request.getRequestDispatcher("/WEB-INF/views/recommend/recommendUpdate.jsp").forward(request,response);
+
 	}
 
 	/**

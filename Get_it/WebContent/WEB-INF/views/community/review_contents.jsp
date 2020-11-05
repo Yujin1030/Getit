@@ -80,7 +80,6 @@
         <div id="main_image">
             <img src="/rupload/${contents.rFilename }" alt="..." style="height: 100%;width:50%;" class="rounded mx-auto d-block">
         </div>
-        <!-- <div id="section_title_empty"></div> -->
         <div id="section_title">
             <div id="section_title_icon">
                 <i class="fas fa-user-circle fa-3x" style="color: dimgray;margin-top:6%;"></i>

@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import community.model.service.CommunityService;
-
 /**
- * Servlet implementation class QnaUpdate
+ * Servlet implementation class ReviewWriteFormServlet
  */
-@WebServlet("/qna/update")
-public class QnaUpdate extends HttpServlet {
+@WebServlet("/review/writeform")
+public class ReviewWriteFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaUpdate() {
+    public ReviewWriteFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,16 +26,7 @@ public class QnaUpdate extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
-		
-		int result = new CommunityService().qnaUpdate(qnaNo,title,contents);
-		if(result>0) {
-			request.setAttribute("qnaNo", qnaNo);
-			request.getRequestDispatcher("/qna/detail").forward(request, response);
-		}
+		request.getRequestDispatcher("/WEB-INF/views/community/reviewWrite.jsp").forward(request, response);
 	}
 
 	/**

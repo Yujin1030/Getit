@@ -171,9 +171,12 @@ section {
 #main_image {
     width: 100%;
     height: 57%;
-    float: left;
 }
 
+#slide{
+ 	width: 100%;
+    height: 100%;
+}
 #section_title {
     width: 100%;
     height: 20%;
@@ -299,6 +302,9 @@ section {
     color: red;
 }
 
+.topMenuLi a{
+	text-decoration:none;
+}
 
 .submenuLink {
     /* 하위 메뉴의 a 태그 스타일 설정 */
@@ -307,7 +313,7 @@ section {
 /*    border: solid 1px black;*/
     padding-top: 8px;
     margin-right: -1px;
-    font-size: 15px;
+    font-size: 13px;
     /* [변경] 위 칸의 하단 테두리와 아래칸의 상단 테두리가 겹쳐지도록 설덩 */
 }
 
@@ -398,6 +404,10 @@ section {
     color: black;
     text-decoration: none;
     font-family: 'Sawarabi Gothic', sans-serif;
+}
+
+.card img:hover{
+	transform: scale(1.1);
 }
 
 #section_contents_inner img {
@@ -495,3 +505,5 @@ footer {
     height: 40%;
     float: left;
 }
+
+/* 캐러셀 */

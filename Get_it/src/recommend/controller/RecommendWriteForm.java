@@ -37,9 +37,11 @@ public class RecommendWriteForm extends HttpServlet {
 		HttpSession session = request.getSession();
 		// 완제품 코드 넘기기
 		String pCode = request.getParameter("pCode");
+		String pFilename= request.getParameter("pFilename");
 	    if(session.getAttribute("member")!=null) {
 	    	String memberId = ((Member)session.getAttribute("member")).getMemberId();
 	    	request.setAttribute("memberId", memberId);
+	    	request.setAttribute("pFilename", pFilename);
 	    	request.setAttribute("pCode", pCode);
 	    	request.getRequestDispatcher("/WEB-INF/views/recommend/recommendReview.jsp").forward(request, response);
 	    }else {

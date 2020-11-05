@@ -346,14 +346,16 @@ public class DealDAO {
 				dList = new ArrayList<Deal>();
 				
 				while(rset.next()) {
-					Deal deal = new Deal();
-					deal.setDealNo(rset.getInt("DEAL_NO"));
-					deal.setDealTitle(rset.getString("DEAL_TITLE"));
-					deal.setDealContents(rset.getString("DEAL_CONTENTS"));
-					deal.setDealPrice(rset.getInt("DEAL_PRICE"));
-					deal.setDealDate(rset.getDate("DEAL_DATE"));
-					deal.setMemberId(rset.getString("MEMBER_ID"));
-					dList.add(deal);
+					Deal dealOne = new Deal();
+					dealOne.setDealNo(rset.getInt("DEAL_NO"));
+					dealOne.setDealTitle(rset.getString("DEAL_TITLE"));
+					dealOne.setDealContents(rset.getString("DEAL_CONTENTS"));
+					dealOne.setDealPrice(rset.getInt("DEAL_PRICE"));
+					dealOne.setDealDate(rset.getDate("DEAL_DATE"));
+					dealOne.setDealFileName(rset.getString("DEAL_FILENAME"));
+					dealOne.setDealFilePath(rset.getString("DEAL_FILEPATH"));
+					dealOne.setMemberId(rset.getString("MEMBER_ID"));
+					dList.add(dealOne);
 				}
 			}
 			
@@ -425,9 +427,7 @@ public class DealDAO {
 			sb.append("<li class='page-item'><a class='page-link' href='/deal/main?dealPageNo=" +(endNavi+1) + "' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>");
 		}
 
-		sb.append("<form action=\"/login.html\" method=\"post\" id=\"writeForm\" onclick=\"loginError2()\">\r\n" + 
-				"<button type=\"submit\" class=\"btn btn-secondary\">글쓰기</button>\r\n" + 
-				"</form></ul>");
+		sb.append("</ul>");
 		return sb.toString();
 	}
 	

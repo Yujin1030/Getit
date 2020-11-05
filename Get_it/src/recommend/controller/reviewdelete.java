@@ -35,6 +35,7 @@ public class reviewdelete extends HttpServlet {
 		String pCode = request.getParameter("pCode");
 		HttpSession session = request.getSession();
 		String memberId = ((Member)session.getAttribute("member")).getMemberId();
+		String pFilename = request.getParameter("pFilename");
 		// 삭제하러 가즈아~
 		int result =0;
 		if(request.getParameter("reviewNo")!=null) {
@@ -42,6 +43,7 @@ public class reviewdelete extends HttpServlet {
 		result = new RecommendService().reviewDelete(pCode,memberId,reviewNo);
 		}
 		if(result>0) {
+			request.setAttribute("pFilename", pFilename);
 			request.setAttribute("pCode", pCode);
 			request.getRequestDispatcher("/recommend/detail").forward(request, response);
 		}else {

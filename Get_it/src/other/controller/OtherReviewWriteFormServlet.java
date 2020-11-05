@@ -1,4 +1,4 @@
-package community.controller;
+package other.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import community.model.service.CommunityService;
-
 /**
- * Servlet implementation class QnaUpdate
+ * Servlet implementation class OtherReviewWriteFormServlet
  */
-@WebServlet("/qna/update")
-public class QnaUpdate extends HttpServlet {
+@WebServlet("/other/writeform")
+public class OtherReviewWriteFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaUpdate() {
+    public OtherReviewWriteFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,16 +26,10 @@ public class QnaUpdate extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
-		
-		int result = new CommunityService().qnaUpdate(qnaNo,title,contents);
-		if(result>0) {
-			request.setAttribute("qnaNo", qnaNo);
-			request.getRequestDispatcher("/qna/detail").forward(request, response);
-		}
+		String pCode = request.getParameter("pCode");
+		request.setAttribute("pCode", pCode);
+		System.out.println("pCode : " + pCode);
+		request.getRequestDispatcher("/WEB-INF/views/other/otherWrite.jsp").forward(request, response);
 	}
 
 	/**

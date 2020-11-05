@@ -23,9 +23,12 @@
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/Recommend.css">
+<link rel="stylesheet" type="text/css" href="/css/recomMain.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <script>
         $(document).ready(function() {
@@ -41,7 +44,8 @@
                 }
             })
         })
-    </script>
+        
+</script>
 
 </head>
 
@@ -58,7 +62,7 @@
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
-				<a href="#">Assemble</a>
+				<a href="/mainpage/view">Assemble</a>
 			</div>
 			<div id="nav_bar_other">
 				<div id="wrap">
@@ -82,8 +86,7 @@
 
 	<section id="section">
 		<div id="main_image">
-			<img src="/img/%EA%B2%B0%EC%A0%9C%EB%B2%84%ED%8A%BC.PNG"
-				style="height: 50%; width: 50%;">
+				<img src="/img/recommendMain.gif" alt="..." style="width: 90%; height: 90%; padding-left:200px; padding-top: 0px;">
 		</div>
 
 		<!--Recommend-->
@@ -116,30 +119,30 @@
 							<li class="topMenuLi"><a
 								href="/recommend/listview?category=사무용" class="menuLink">사무용PC</a>
 								<ul class="submenu">
-									<li><a href="/recommend/listview?category=사무용&pricegrade=C" class="submenuLink">~60만원</a></li>
-									<li><a href="/recommend/listview?category=사무용&pricegrade=B" class="submenuLink">60~120만원</a></li>
+									<li><a href="/recommend/listview?category=사무용&pricegrade=C" class="submenuLink">60만원</a></li>
+									<li><a href="/recommend/listview?category=사무용&pricegrade=B" class="submenuLink">60	-120만원</a></li>
 									<li><a href="/recommend/listview?category=사무용&pricegrade=A" class="submenuLink">120만원 이상</a></li>
 								</ul></li>
 							<li class="topMenuLi"><a
 								href="/recommend/listview?category=게임용" class="menuLink">게임용PC</a>
 								<ul class="submenu">
-									<li><a href="/recommend/listview?category=게임용&pricegrade=C" class="submenuLink">~60만원</a></li>
-									<li><a href="/recommend/listview?category=게임용&pricegrade=B" class="submenuLink">60~120만원</a></li>
+									<li><a href="/recommend/listview?category=게임용&pricegrade=C" class="submenuLink">60만원</a></li>
+									<li><a href="/recommend/listview?category=게임용&pricegrade=B" class="submenuLink">60	&#126;120만원</a></li>
 									<li><a href="/recommend/listview?category=게임용&pricegrade=A" class="submenuLink">120만원 이상</a></li>
 								</ul></li>
 							<li class="topMenuLi"><a
 								href="/recommend/listview?category=그래픽용" class="menuLink">그래픽용PC</a>
 								<ul class="submenu">
-									<li><a href="/recommend/listview?category=그래픽용&pricegrade=C" class="submenuLink">~60만원</a></li>
-									<li><a href="/recommend/listview?category=그래픽용&pricegrade=B" class="submenuLink">60~120만원</a></li>
+									<li><a href="/recommend/listview?category=그래픽용&pricegrade=C" class="submenuLink">60만원</a></li>
+									<li><a href="/recommend/listview?category=그래픽용&pricegrade=B" class="submenuLink">60	&#126;120만원</a></li>
 									<li><a href="/recommend/listview?category=그래픽용&pricegrade=A" class="submenuLink">120만원 이상</a></li>
 								</ul></li>
 							<li class="topMenuLi"><a
 								href="/recommend/listview?category=방송용" class="menuLink">방송용PC</a>
 								<ul class="submenu">
-									<li><a href="/recommend/listview?category=방송용&price=C" class="submenuLink">~60만원</a></li>
-									<li><a href="/recommend/listview?category=방송용&price=B" class="submenuLink">60~120만원</a></li>
-									<li><a href="/recommend/listview?category=방송용&price=A" class="submenuLink">120만원 이상</a></li>
+									<li><a href="/recommend/listview?category=방송용&pricegrade=C" class="submenuLink">~60만원</a></li>
+									<li><a href="/recommend/listview?category=방송용&pricegrade=B" class="submenuLink">60~120만원</a></li>
+									<li><a href="/recommend/listview?category=방송용&pricegrade=A" class="submenuLink">120만원 이상</a></li>
 								</ul></li>
 						</ul>
 					</div>
@@ -160,7 +163,7 @@
 						style="color: black;">
 						<div class="card">
 							<img src="/upload/${recomList.pFilename }" class="card-img-top"
-								alt="...">
+								alt="..." style="width:90%; padding-left:40px; padding-top:20px;">
 							<div class="card-body">
 								<h5 class="card-title">${recomList.pName }</h5>
 								<p class="card-text">${recomList.pContents }</p>
@@ -186,7 +189,7 @@
 						style="color: black;">
 						<div class="card">
 							<img src="/upload/${recomList.pFilename }" class="card-img-top"
-								alt="...">
+								alt="..." style="width:90%; padding-left:40px; padding-top:20px;">
 							<div class="card-body">
 								<h5 class="card-title">${recomList.pName }</h5>
 								<p class="card-text">${recomList.pContents }</p>
@@ -212,7 +215,7 @@
 						style="color: black;">
 						<div class="card">
 							<img src="/upload/${recomList.pFilename }" class="card-img-top"
-								alt="...">
+								alt="..." style="width:90%; padding-left:40px; padding-top:20px;">
 							<div class="card-body">
 								<h5 class="card-title">${recomList.pName }</h5>
 								<p class="card-text">${recomList.pContents }</p>
@@ -238,7 +241,7 @@
 						style="color: black;">
 						<div class="card">
 							<img src="/upload/${recomList.pFilename }" class="card-img-top"
-								alt="...">
+								alt="..." style="width:90%; padding-left:40px; padding-top:20px;">
 							<div class="card-body">
 								<h5 class="card-title">${recomList.pName }</h5>
 								<p class="card-text">${recomList.pContents }</p>

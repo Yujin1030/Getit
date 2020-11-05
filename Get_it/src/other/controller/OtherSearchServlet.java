@@ -15,16 +15,16 @@ import other.model.vo.PageData;
 import product.model.vo.Product;
 
 /**
- * Servlet implementation class OtherKeyboardServlet
+ * Servlet implementation class OtherSearchServlet
  */
-@WebServlet("/other/speaker")
-public class OtherSpeakerServlet extends HttpServlet {
+@WebServlet("/other/search")
+public class OtherSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OtherSpeakerServlet() {
+    public OtherSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,6 +33,8 @@ public class OtherSpeakerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		int currentPage = 0;
 		if(request.getParameter("currentPage") == null) {
 			currentPage = 1;
@@ -40,15 +42,16 @@ public class OtherSpeakerServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		PageData pageData = new OtherService().selectProductSpeaker(currentPage);
-		ArrayList<Product> list = pageData.getPageList();
-		if(!list.isEmpty()) {
-			request.setAttribute("list", list);
+		String search = request.getParameter("search1");
+		PageData pageData = new OtherService().otherSearchList(search, currentPage);
+		ArrayList<Product> nList = pageData.getPageList();
+		if(!nList.isEmpty()) {
+			request.setAttribute("nList", nList);
 			request.setAttribute("pageNavi", pageData.getPageNavi());
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/other/Other_speaker.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/other/Other_search.jsp");
 			view.forward(request, response);
 		} else {
-			response.sendRedirect("/views/other/Error.html");
+			request.getRequestDispatcher("/WEB-INF/views/other/otherError.html").forward(request, response);
 		}
 	}
 
