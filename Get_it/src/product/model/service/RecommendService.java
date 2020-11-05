@@ -43,7 +43,7 @@ public class RecommendService {
 		try {
 			conn = factory.createConnection();
 //			pagedata.setPageList(new RecommendDao().recommendDetail(conn,pCode));
-			pagedata.setReviewList(new RecommendDao().recommendReview(conn,currentPage,recordCountPerPage,pCode));
+			pagedata.setPageReList(new RecommendDao().recommendReview(conn,currentPage,recordCountPerPage,pCode));
 			pagedata.setPageNavi(new RecommendDao().reviewPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage,pCode));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
