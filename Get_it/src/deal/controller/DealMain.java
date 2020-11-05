@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.tagext.PageData;
 
 import deal.model.service.DealService;
 import deal.model.vo.Deal;
 import deal.model.vo.DealPageData;
-import member.model.service.MemberService;
-import member.model.vo.Member;
+import member.vo.Member;
 
 /**
  * Servlet implementation class DealMain

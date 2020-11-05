@@ -1,8 +1,8 @@
 package deal.controller;
 
 import java.io.File;
-
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import deal.model.service.DealService;
 import deal.model.vo.Deal;
-import member.model.vo.Member;
 
 /**
  * Servlet implementation class DealWriteServlet

@@ -1,6 +1,7 @@
-package deal.controller;
+package product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,25 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import deal.model.service.DealService;
-import deal.model.vo.Deal;
-import member.service.MemberService;
-import member.vo.Member;
+import product.model.service.OtherService;
+import product.model.vo.PageData;
+import product.model.vo.Product;
 
 /**
- * Servlet implementation class DealSelectServlet
+ * Servlet implementation class OtherSearchServlet
  */
-@WebServlet("/deal/select")
-public class DealSelectServlet extends HttpServlet {
+@WebServlet("/other/search")
+public class OtherSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private DealService DealService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DealSelectServlet() {
+    public OtherSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,22 +34,25 @@ public class DealSelectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
-		String memberId = ((Member)session.getAttribute("member")).getMemberId();
 		
-		int dealNo = Integer.parseInt(request.getParameter("dealNo"));
-		Deal deal = new DealService().selectDeal(dealNo);
-		Member member = new MemberService().selectMember(memberId);
-		
-		if (deal != null) {
-			request.setAttribute("contents", deal);
-			session.setAttribute("member", member);
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/deal/dealContents.jsp");
-			view.forward(request, response);
+		int currentPage = 0;
+		if(request.getParameter("currentPage") == null) {
+			currentPage = 1;
 		} else {
-			// 게시물 내용 불러오지못할때 오류코드!
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
+		String search = request.getParameter("search1");
+		PageData pageData = new OtherService().otherSearchList(search, currentPage);
+		ArrayList<Product> nList = pageData.getPageList();
+		if(!nList.isEmpty()) {
+			request.setAttribute("nList", nList);
+			request.setAttribute("pageNavi", pageData.getPageNavi());
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/other/Other_search.jsp");
+			view.forward(request, response);
+		} else {
+			request.getRequestDispatcher("/WEB-INF/views/other/otherError.html").forward(request, response);
+		}
 	}
 
 	/**

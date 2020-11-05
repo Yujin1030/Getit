@@ -1,8 +1,6 @@
-package deal.controller;
+package product.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,23 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import deal.model.service.DealService;
-import deal.model.vo.Deal;
-import member.service.MemberService;
-import member.vo.Member;
+import member.model.vo.Member;
+import product.model.service.recommend.RecommendService;
 
 /**
- * Servlet implementation class DealSelectServlet
+ * Servlet implementation class reviewupdate
  */
-@WebServlet("/deal/select")
-public class DealSelectServlet extends HttpServlet {
+@WebServlet("/review/update2")
+public class reviewupdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private DealService DealService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DealSelectServlet() {
+    public reviewupdate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,21 +32,24 @@ public class DealSelectServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		String memberId = ((Member)session.getAttribute("member")).getMemberId();
+		String pCode = request.getParameter("pCode");
+		String title = request.getParameter("title");
+		String contents = request.getParameter("contents");
+		String pFilename = request.getParameter("pFilename");
+		int result =0;
+		int reviewNo =0;
+		String memberId ="";
+		//if(((Member)session.getAttribute("memeber")!=null)) {
+		reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		memberId = ((Member)session.getAttribute("member")).getMemberId(); 
+		result = new RecommendService().reviewUpdate(memberId,pCode,title,contents,reviewNo);
+		//}
 		
-		int dealNo = Integer.parseInt(request.getParameter("dealNo"));
-		Deal deal = new DealService().selectDeal(dealNo);
-		Member member = new MemberService().selectMember(memberId);
-		
-		if (deal != null) {
-			request.setAttribute("contents", deal);
-			session.setAttribute("member", member);
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/deal/dealContents.jsp");
-			view.forward(request, response);
-		} else {
-			// 게시물 내용 불러오지못할때 오류코드!
-		}
-		
+		  if(result>0) { request.setAttribute("pFilename", pFilename);
+		  request.setAttribute("pCode", pCode);
+		  request.getRequestDispatcher("/recommend/detail").forward(request, response);
+		  }else { response.sendRedirect("서비스요청실패"); }
+		 
 	}
 
 	/**

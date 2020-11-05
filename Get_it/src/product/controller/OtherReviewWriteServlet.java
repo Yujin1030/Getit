@@ -1,4 +1,4 @@
-package deal.controller;
+package product.controller;
 
 import java.io.IOException;
 
@@ -10,23 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import deal.model.service.DealService;
-import deal.model.vo.Deal;
-import member.service.MemberService;
 import member.vo.Member;
+import product.model.service.OtherService;
 
 /**
- * Servlet implementation class DealSelectServlet
+ * Servlet implementation class OtherReviewWriteServlet
  */
-@WebServlet("/deal/select")
-public class DealSelectServlet extends HttpServlet {
+@WebServlet("/other/write")
+public class OtherReviewWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private DealService DealService;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DealSelectServlet() {
+    public OtherReviewWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,21 +34,24 @@ public class DealSelectServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		String memberId = ((Member)session.getAttribute("member")).getMemberId();
-		
-		int dealNo = Integer.parseInt(request.getParameter("dealNo"));
-		Deal deal = new DealService().selectDeal(dealNo);
-		Member member = new MemberService().selectMember(memberId);
-		
-		if (deal != null) {
-			request.setAttribute("contents", deal);
-			session.setAttribute("member", member);
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/deal/dealContents.jsp");
-			view.forward(request, response);
+		String title = request.getParameter("title");
+		String contents = request.getParameter("contents");
+		String pCode = request.getParameter("pCode");
+		System.out.println("contents: " + contents );
+		System.out.println("pCode : " + pCode);
+		if(session != null && (session.getAttribute("member") != null)) {
+			String userId = ((Member)session.getAttribute("member")).getMemberId();
+			int result = new OtherService().insertReview(title, contents, pCode, userId);
+			if(result > 0) {
+				response.sendRedirect("/other/content?pCode=" + pCode);
+			} else {
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/other/otherError.html");
+				view.forward(request, response);
+			}
 		} else {
-			// 게시물 내용 불러오지못할때 오류코드!
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/other/serviceFailed.html");
+			view.forward(request, response);
 		}
-		
 	}
 
 	/**

@@ -14,6 +14,8 @@ public class Product {
 	private String pFilename;
 	private String pFilepath;
 	private String relatedProduct;
+	private String pcFilename;
+	private String pcFilepath;
 	
 	public Product() {}
 
@@ -117,7 +119,24 @@ public class Product {
 	public void setpFilepath(String pFilepath) {
 		this.pFilepath = pFilepath;
 	}
-	
-	
 
+
+	public String getPcFilename() {
+		return pcFilename;
+	}
+
+
+	public void setPcFilename(String pcFilename) {
+		this.pcFilename = pcFilename;
+	}
+
+
+	public String getPcFilepath() {
+		return pcFilepath;
+	}
+
+
+	public void setPcFilepath(String pcFilepath) {
+		this.pcFilepath = pcFilepath;
+	}
 }

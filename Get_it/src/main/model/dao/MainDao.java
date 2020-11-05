@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import product.model.vo.Product;
-import recommend.model.vo.Recommend;
 
 public class MainDao {
 	
