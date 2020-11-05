@@ -78,7 +78,7 @@
     </header>
     <section>
         <div id="main_image" style="text-align:center;background-color:#FDFDFD;">
-        <img src="/img/LiveChat.gif" style="height:100%;width:60%;">
+        <img src="/img/livechat-animation.gif" style="height:100%;width:60%;">
         </div>
         <div id="section_title">
             <div id="section_title_main">
