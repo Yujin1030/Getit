@@ -11,7 +11,11 @@ body {
     font-family: 'Sawarabi Gothic', sans-serif;
 }
 
-
+.component_right img{
+	width:80%;
+	height:80%;
+	padding-left: 100px;
+}
 /* div {
     border: 1px solid black;
     box-sizing: border-box;
@@ -270,6 +274,7 @@ padding-right: 60px;
     height: 100%;
     float: left;
     padding-left: 95px;
+    font-size: 13px;
 }
 
 .component_right {
@@ -332,6 +337,7 @@ padding-right: 60px;
     text-align: right;
     font-size: 25px;
     line-height: 95px;
+    padding-right: 25px;
 }
 
 .detail_main_top_right {
@@ -339,7 +345,7 @@ padding-right: 60px;
     height: 100%;
     float: left;
     line-height: 80px;
-    padding-left: 60px;
+    padding-left: 20px;
     font-size: 50px;
 }
 

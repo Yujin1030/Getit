@@ -69,35 +69,47 @@
                     <br>
                     <br>
                     <i class="fas fa-user-circle fa-3x" style="color: dimgray;float: left;"></i>
-                    <h5 style="float:left; margin-top: 1.3%;margin-left: 1%;">id</h5>
+                    <h5 style="float:left; margin-top: 1.3%;margin-left: 1%;">${qna.memberId }</h5>
                     <br>
                     <br>
                     <hr>
-                    <h6 style="font-weight: bold;">힘들어뒤지겠다.</h6>
-                    <pre style="font-size: 17px;">ddddddddddddddddddddddddddddddddddddddddddddddddd</pre>
+                    <h6 style="font-weight: bold;">${qna.qnaTitle }</h6>
+                    <pre style="font-size: 17px;">${qna.qnaContents }</pre>
                     <br>
                     <br>
                     <br>
                     <br>
-                    <p>2020-11-02</p>
+                    <p>${qna.qnaDate }</p>
                     <hr>
+                    
+                    <!-- 게시물을 작성한 작성자와 현재 로그인 중인 작성자가 같을때 뜨는 화면 -->
+        <c:if test="${qna.memberId eq sessionScope.member.memberId || sessionScope.member.memberId eq 'admin' } ">
                         <div id="section_footer_modify" style="text-align:right;width:86%;height:8%;float:left;">
-                            <form action="/deal/modifyform" method="post">
+                            <form action="/qna/updateview" method="post">
                                 <button type="submit" class="btn btn-secondary">수정</button>
-                                <input type="hidden" name="dealNo" value="${contents.dealNo }">
+                                <input type="hidden" name="qnaNo" value="${qna.qnaNo }">
                             </form>
                         </div>
                         <div id="section_footer_delete" style="text-align: right;width:7%;height:1%;float:left;">
-                            <form action="/deal/delete" method="post">
+                            <form action="/qna/delete" method="post">
                                 <button type="submit" class="btn btn-secondary" onclick="return question();">삭제</button>
-                                <input type="hidden" name="dealNo" value="${contents.dealNo }">
+                                <input type="hidden" name="qnaNo" value="${contents.dealNo }">
                             </form>
                         </div>
                         <div id="section_footer_list" style="text-align: right;width:7%;height:8%;float:left;">
-                            <form action="/deal/main" method="post">
+                            <form action="/review/main" method="post">
                                 <button type="submit" class="btn btn-secondary">목록</button>
                             </form>
                         </div>
+                        </c:if>
+                                <!-- 게시물을 작성한 작성자와 현재 로그인 중인 작성자가 같지 않을때 뜨는 화면 -->
+        <c:if test="${qna.memberId ne sessionScope.member.memberId || sessionScope.member.memberId eq 'admin' }">
+	        <div id="section_footer_list" style="text-align:right;width:50%;height:8%;float:left;">
+	            <form action="/review/main" method="post">
+	                <button type="submit" class="btn btn-secondary">목록</button>
+	            </form>
+	        </div>
+        </c:if>
                     <br>
                     <br>
                     <br>
@@ -105,35 +117,36 @@
                     <div class="review">
                        <table class="table table-sm" id="table">
                           <tbody>
-                          <c:forEach items="${list }" var="com" varStatus="index">
+                          <c:forEach items="${qnaComList }" var="qnaComList" varStatus="index">
                             <tr>
                               <td scope="row" style="width: 100px;"><i class="fas fa-user-circle fa-3x" id="tb-icon" style="color: dimgray;"></i></td>
-                              <td class="com-line" style="line-height:50px;">${com.memberId }</td>
-                              <td class="com-line" style="line-height:50px;">${com.cContents }</td>
-                              <td class="com-line" style="text-align: center;line-height:50px;">${com.cDate }</td>
+                              <td class="com-line" style="line-height:50px;">${qnaComList.memberId }</td>
+                              <td class="com-line" style="line-height:50px;">${qnaComList.cContents }</td>
+                              <td class="com-line" style="text-align: center;line-height:50px;">${qnaComList.cDate }</td>
                               <td class="com-line" style="width: 100px;line-height:50px;">
-                                <form action="/review/comdelete" method="post">
+                                <form action="/qna/comdelete" method="post">
                                     <button type="submit" class="btn btn-outline-dark" onclick="return question()">삭제</button>
-                                    <input type="hidden" name="commentNo" value="${com.commentNo }">
-                                    <input type="hidden" name="reviewNo" value="${contents.reviewNo }">
+                                    <input type="hidden" name="commentNo" value="${qnaComList.cNo }">
+                                    <input type="hidden" name="qnaNo" value="${qnaComList.qnaNo }">
                                 </form>
                               </td>
                             </tr>
                           </c:forEach>
-                            <tr>
+                  <!--           <tr>
                                 <td colspan="5" align="center">${ pageComNavi }</td>
-                            </tr>
+                            </tr> -->
                           </tbody>
                      </table>
                     </div>
                     <br>
-                        <form action="/review/comwrite" method="get">
+                    <c:if test="${qna.memberId eq sessionScope.member.memberId || sessionScope.member.memberId eq 'admin' }">
+                        <form action="/qna/cominsert" method="get">
                             <div class="input-group" style="width:100%;">
                                <label for="content" id="label" style="width:100%;font-weight: bold;">댓글</label>
                                 <input class="form-control form-control-sm" type="text" placeholder="내용을 입력하세요(최대 70글자)" name="contents" style="width:100%;float:left;">
                                <span class="input-group-btn">
                                     <button class="btn btn-default" id="btn-push" type="submit" style="font-weight: bold;">등록</button>
-                                    <input type="hidden" value="${contents.reviewNo }" name="reviewNo">
+                                    <input type="hidden" value="${qna.qnaNo }" name="qnaNo">
                                </span>
                               </div>
                         </form>

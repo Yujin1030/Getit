@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 import common.JDBCTemplate;
 import other.model.dao.OtherDAO;
-import other.model.vo.Other;
 import other.model.vo.PageData;
+import product.model.vo.Product;
 
 public class OtherService {
 	private JDBCTemplate factory;
@@ -118,17 +118,70 @@ public class OtherService {
 		return pd;
 	}
 	
-	public Other selectOther(int oProductNo) {
-		Other other = null;
+	public Product selectOther(String pCode) {
+		Product product = null;
 		Connection conn = null;
 		try {
 			conn = factory.createConnection();
-			other = new OtherDAO().selectOther(conn, oProductNo);
+			product = new OtherDAO().selectOther(conn, pCode);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(conn);
 		}
-		return other;
+		return product;
+	}
+	
+	public PageData otherSearchList(String search, int currentPage) {
+		Connection conn = null;
+		PageData pd = new PageData();
+		int recordCountPerPage = 12;
+		int naviCountPerPage = 5;
+		try {
+			conn = factory.createConnection();
+			pd.setPageList(new OtherDAO().otherSearchList(conn, search, currentPage, recordCountPerPage));
+			pd.setPageNavi(new OtherDAO().getSearchPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage, search));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
+	}
+	
+	public PageData selectOtherReview(int currentPage, String pCode) {
+		Connection conn = null;
+		int recordCountPerPage = 5;
+		int naviCountPerPage = 5;
+		PageData pd = new PageData();
+		try {
+			conn = factory.createConnection();
+			// setPageList() 메소드는 10개의 게시물을 저장
+			pd.setPageReList(new OtherDAO().selectOtherReview(conn, currentPage, recordCountPerPage, pCode));
+			// setPageNavi() 메소드는 a링크 10개를 저장
+			pd.setPageReNavi(new OtherDAO().getOtherReviewPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage, pCode));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);			
+		}
+		return pd;
+	}
+	
+	public int insertReview(String title, String contents, String pCode, String userId) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = factory.createConnection();
+			result = new OtherDAO().insertReview(conn, title, contents, pCode, userId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
 	}
 }

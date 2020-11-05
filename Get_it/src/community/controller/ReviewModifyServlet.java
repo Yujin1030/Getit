@@ -1,4 +1,4 @@
-package other.controller;
+package community.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import other.model.service.FileService;
-import product.model.vo.Product;
+import community.service.CommunityService;
+import community.vo.Review;
 
 /**
- * Servlet implementation class FileUploadServlet
+ * Servlet implementation class ReviewModifyServlet
  */
-@WebServlet("/file/upload")
-public class FileUploadServlet extends HttpServlet {
+@WebServlet("/review/modify")
+public class ReviewModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FileUploadServlet() {
+    public ReviewModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,25 +34,33 @@ public class FileUploadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		int uploadFileSizeLimit = 5*1024*1024;
 		String encType = "UTF-8";
-		String uploadFilePath = request.getServletContext().getRealPath("/oupload");
-		
+		String uploadFilePath = request.getServletContext().getRealPath("/rupload");
 		MultipartRequest multi = new MultipartRequest(request, uploadFilePath, uploadFileSizeLimit, encType, new DefaultFileRenamePolicy());
+		File multiFile = multi.getFile("image");
+		String systemFileName = multi.getFilesystemName("image");
+		String filePath = multiFile.getPath();
 		
-		File multiFile = multi.getFile("upFile");
-		String systemFileName = multi.getFilesystemName("upFile");
-		String contFilePath = multiFile.getPath();
+		Review review = new Review();
+		review.setReviewNo(Integer.parseInt(multi.getParameter("reviewNo")));
+		review.setrTitle(multi.getParameter("title"));
+		review.setrContents(multi.getParameter("contents"));
+		review.setrFilename(systemFileName);
+		review.setrFilepath(filePath);
 		
-		Product product = new Product();
-		product.setpFilepath(contFilePath);
-		product.setSerialNo(Integer.parseInt(multi.getParameter("serial_no")));
+		System.out.println("title : " + multi.getParameter("title"));
+		System.out.println("contents : " + multi.getParameter("contents"));
 		
-		int result = new FileService().uploadFile(product, systemFileName);
+		System.out.println("reviewNo : " + Integer.parseInt(multi.getParameter("reviewNo")));
+//		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		int result = new CommunityService().modifyReview(review);
 		if(result > 0) {
-			response.sendRedirect("/WEB-INF/views/other/Success.html");
+			response.sendRedirect("/review/main");
 		} else {
-			response.sendRedirect("/WEB-INF/views/other/Fail.html");
+			request.getRequestDispatcher("/WEB-INF/views/community/error.html").forward(request, response);
 		}
 	}
 

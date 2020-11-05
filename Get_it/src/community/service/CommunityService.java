@@ -7,6 +7,8 @@ import common.JDBCTemplate;
 import community.model.dao.CommunityDao;
 import community.model.vo.QnA;
 import community.model.vo.QnaPageData;
+import community.vo.PageData;
+import community.vo.Review;
 
 public class CommunityService {
 	
@@ -124,6 +126,175 @@ public class CommunityService {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+//================================================================================================================================
+	
+	public PageData selectReviewList(int currentPage) {
+		Connection conn = null;
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		
+		PageData pd = new PageData();
+		try {
+			conn = factory.createConnection();
+			pd.setPageList(new CommunityDao().selectReviewList(conn, currentPage, recordCountPerPage));
+			pd.setPageNavi(new CommunityDao().getPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
+	}
+	
+	public int insertReview(Review review, String userId) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = factory.createConnection();
+			result = new CommunityDao().insertReview(conn, review, userId);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	public Review selectReview(int reviewNo) {
+		Review review = null;
+		Connection conn = null;
+		try {
+			conn = factory.createConnection();
+			
+			// 조회수 증가
+			new CommunityDao().updateViewCnt(conn, reviewNo);
+			
+			// 상세 정보 조회
+			review = new CommunityDao().selectReview(conn, reviewNo);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return review;
+	}
+	
+	public PageData selectReviewCom(int currentPage, int reviewNo) {
+		Connection conn = null;
+		int recordCountPerPage = 5;
+		int naviCountPerPage = 5;
+		PageData pd = new PageData();
+//		ArrayList<ReviewCom> reviewCom = null;
+		try {
+			conn = factory.createConnection();
+			pd.setPageComList(new CommunityDao().selectReviewCom(conn, currentPage, recordCountPerPage, reviewNo));
+			pd.setPageComNavi(new CommunityDao().getComPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage, reviewNo));
+//			reviewCom = new CommunityDao().selectReviewCom(conn, reviewNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
+	}
+	
+	public int modifyReview(Review review) {
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = factory.createConnection();
+			result = new CommunityDao().modifyReview(conn, review);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	public int deleteReview(int reviewNo) {
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = factory.createConnection();
+			result = new CommunityDao().deleteReview(conn, reviewNo);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	public PageData reviewSearch(String search, int currentPage) {
+		Connection conn = null;
+		PageData pd = new PageData();
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		try {
+			conn = factory.createConnection();
+			pd.setPageList(new CommunityDao().reviewSearch(conn, search, currentPage, recordCountPerPage));
+			pd.setPageNavi(new CommunityDao().getSearchPageNavi(conn, currentPage, recordCountPerPage, naviCountPerPage, search));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return pd;
+	}
+	
+	public int insertComment(String contents, String userId, int reviewNo) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = factory.createConnection();
+			result = new CommunityDao().insertComment(conn, contents, userId, reviewNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+	
+	public int deleteComReview(int reviewNo, int commentNo) {
+		int result = 0;
+		Connection conn = null;
+		try {
+			conn = factory.createConnection();
+			result = new CommunityDao().deleteComReview(conn, reviewNo, commentNo);
+			if(result > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(conn);
