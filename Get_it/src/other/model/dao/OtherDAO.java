@@ -15,7 +15,7 @@ public class OtherDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Product> list = null;
-		String query = "SELECT * FROM (SELECT PRODUCT.*, ROW_NUMBER() OVER(ORDER BY SERIAL_NO) AS NUM FROM PRODUCT) WHERE SEP_CODE = 'OTHER' AND NUM BETWEEN ? AND ?";
+		String query = "SELECT * FROM (SELECT PRODUCT.*, ROW_NUMBER() OVER(ORDER BY SERIAL_NO) AS NUM FROM PRODUCT WHERE SEP_CODE = 'OTHER') WHERE NUM BETWEEN ? AND ?";
 		int start = currentPage * recordCountPerPage - (recordCountPerPage - 1);
 		int end = currentPage * recordCountPerPage;
 		try {
@@ -255,6 +255,8 @@ public class OtherDAO {
 				product.setpComcode(rset.getString("P_COMCODE"));
 				product.setpFilename(rset.getString("P_FILENAME"));
 				product.setpFilepath(rset.getString("P_FILEPATH"));
+				product.setPcFilename(rset.getString("P_CONT_FILENAME"));
+				product.setPcFilepath(rset.getString("P_CONT_FILEPATH"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -268,7 +270,7 @@ public class OtherDAO {
 	public ArrayList<Product> otherSearchList(Connection conn, String search, int currentPage, int recordCountPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "SELECT * FROM (SELECT OTHER_PRODUCT.*, ROW_NUMBER() OVER(ORDER BY O_PRODUCT_NO DESC) AS NUM FROM OTHER_PRODUCT WHERE O_PRODUCT_NAME LIKE ?) WHERE NUM BETWEEN ? AND ?";
+		String query = "SELECT * FROM (SELECT PRODUCT.*, ROW_NUMBER() OVER(ORDER BY SERIAL_NO DESC) AS NUM FROM PRODUCT WHERE P_NAME LIKE ? AND SEP_CODE = 'OTHER') WHERE NUM BETWEEN ? AND ?";
 		
 		int start = currentPage*recordCountPerPage - (recordCountPerPage - 1);
 		int end = currentPage*recordCountPerPage;
@@ -678,17 +680,17 @@ public class OtherDAO {
 		
 		StringBuilder sb = new StringBuilder();
 		if(needPrev) {
-			sb.append("<a href='/notice/other?search1=" + search + "&currentPage=" + (startNavi - 1) + "'> < </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='/other/search?search1=" + search + "&currentPage=" + (startNavi - 1) + "'> < </a></li>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
 			if(i == currentPage) {
-				sb.append("<a href='/notice/other?search1=" + search + "&currentPage=" + i + "'><b>" + i + "</b></a>");
+				sb.append("<li class='page-item'><a class='page-link' href='/other/search?search1=" + search + "&currentPage=" + i + "'>" + i + "</a></li>");
 			} else {
-				sb.append("<a href='/notice/other?search1=" + search + "&currentPage=" + i + "'>" + i + "</a>");
+				sb.append("<li class='page-item'><a class='page-link' href='/other/search?search1=" + search + "&currentPage=" + i + "'>" + i + "</a></li>");
 			}
 		}
 		if(needNext) {
-			sb.append("<a href='/notice/other?search1=" + search + "&currentPage=" + (endNavi + 1) + "'> > </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='/other/search?search1=" + search + "&currentPage=" + (endNavi + 1) + "'> > </a></li>");
 		}
 		return sb.toString();
 	}
@@ -721,17 +723,17 @@ public class OtherDAO {
 		}
 		StringBuilder sb = new StringBuilder();
 		if(needPrev) {
-			sb.append("<a href='/other/content?pCode=" + pCode + "&&currentPage=" + (startNavi-1) + "'> < </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='/other/content?pCode=" + pCode + "&&currentPage=" + (startNavi-1) + "'> < </a></li>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
 			if(i == currentPage) {
-				sb.append("<a href='/other/content?pCode=" + pCode + "&&currentPage=" + i + "'><b>" + i + " </b></a>");
+				sb.append("<li class='page-item'><a class='page-link' href='/other/content?pCode=" + pCode + "&&currentPage=" + i + "'>" + i + " </a></li>");
 			} else {
-				sb.append("<a href='/other/content?pCode=" + pCode + "&&currentPage=" + i + "'>" + i + " </a>");
+				sb.append("<li class='page-item'><a class='page-link' href='/other/content?pCode=" + pCode + "&&currentPage=" + i + "'>" + i + " </a></li>");
 			}
 		}
 		if(needNext) {
-			sb.append("<a href='/other/content?pCode=" + pCode + "&&currentPage=" + (endNavi+1) + "'> > </a>");
+			sb.append("<li class='page-item'><a class='page-link' href='/other/content?pCode=" + pCode + "&&currentPage=" + (endNavi+1) + "'> > </a></li>");
 		}
 		
 		return sb.toString();
@@ -861,7 +863,7 @@ public class OtherDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		// 게시글의 총 갯수를 알아오는 쿼리
-		String query = "SELECT COUNT(*) AS TOTALCOUNT FROM OTHER_PRODUCT WHERE O_PRODUCT_NAME LIKE ?";
+		String query = "SELECT COUNT(*) AS TOTALCOUNT FROM PRODUCT WHERE P_NAME LIKE ?";
 		int recordTotalCount = 0;
 		try {
 			pstmt = conn.prepareStatement(query);

@@ -39,6 +39,19 @@
     		$("body").stop().animate
     	})
     </script>
+    
+    <script>
+	    $(document).ready(function() {  /* script 추가 */
+	        $(".review .accordion_title").click(function() {
+	            if ($(this).next("div").is(":visible")) {
+	                $(this).next("div").slideUp("fast");
+	            } else {
+	                $(".review .accordion_sub").slideUp("fast");
+	                $(this).next("div").slideToggle("fast");
+	            }
+	        });
+	    });
+    </script>
 
 </head>
 
@@ -131,7 +144,7 @@
             <hr style="width: 87.5%;height: 2px; background-color:gray; border-top: 1px;opacity: 0.4;">
             <div id="content">
                 <div class="component">
-                    <img src="/oupload/${content.pFilename }">
+                    <img src="/oupload/${content.pcFilename }">
                     <input type="hidden" name="pCode" value="${content.pCode }">
                 </div>
             </div>
@@ -146,22 +159,27 @@
 			</form>
             </div>
             <div class="accordion" id="accordionExample">
-            	<c:forEach items="${list }" var="rv" varStatus="index">
 			      <div class="card">
+			      <c:forEach items="${list }" var="rv" varStatus="index">
 			        <div class="card-header" id="headingTwo">
-			            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			            <span><button id="btn_review" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse${index.index }" aria-expanded="false" aria-controls="collapseTwo">
 			              ${rv.reviewTitle }
-			            </button>
-			            ${rv.memberId }
-			            ${rv.enrollDate }
+			            </button></span>
+			             <div style="text-align: right;">${rv.memberId } ${rv.enrollDate }</div>
 			        </div>
-			        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+			        <div id="collapse${index.index }" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
 			          <div class="card-body">
 			            	${rv.reviewContents }
 			          </div>
 			        </div>
+			        </c:forEach>
 			      </div>
-		      </c:forEach>
+			      <div id="empty_space"></div>
+		        <div id="section_title2">
+		        	<nav aria-label="Page navigation example" id="paging">
+		        		<ul class="pagination">${pageReNavi }</ul>
+		        	</nav>
+		        </div>
 		    </div>
             <div class="section_space"></div>
             <hr style="width: 90%;height: 2px; background-color:gray; border-top: 1px;opacity: 0.4;">
