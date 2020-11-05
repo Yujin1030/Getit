@@ -111,12 +111,12 @@
 	        <div id="section_contents">
 	        <c:forEach items="${nList }" var="other" varStatus="index" begin="0" end="3">
 	            <div id="section_contents_inner">
-	                <a href="/other/content?oProductNo=${other.oProductNo }" style="color:black;">
+	                <a href="/other/content?pCode=${other.pCode }" style="color:black;">
 	                    <div class="card" style="width: 20.6rem;">
-	                      <img src="/oupload/${other.fileName }" class="card-img-top" alt="...">
+	                      <img src="/oupload/${other.pFilename }" class="card-img-top" alt="...">
 	                      <div class="card-body" id="card-body">
-	                        <h5 class="card-title" id="card-title">${other.oProductName }</h5>
-	                        <p class="card-text">${other.oProductPrice }원</p>
+	                        <h5 class="card-title" id="card-title">${other.pName }</h5>
+	                        <p class="card-text">${other.pPrice }원</p>
 	                      </div>
 	                    </div>
 	                </a>
@@ -134,12 +134,12 @@
 	        <div id="section_contents">
 	        <c:forEach items="${nList }" var="other" varStatus="index" begin="4" end="7">
 	            <div id="section_contents_inner">
-	                <a href="/other/content?oProductNo=${other.oProductNo }" style="color:black;">
+	                <a href="/other/content?pCode=${other.pCode }" style="color:black;">
 	                    <div class="card" style="width: 20.6rem;">
-	                      <img src="/oupload/${other.fileName }" class="card-img-top" alt="...">
+	                      <img src="/oupload/${other.pFilename }" class="card-img-top" alt="...">
 	                      <div class="card-body" id="card-body">
-	                        <h5 class="card-title" id="card-title">${other.oProductName }</h5>
-	                        <p class="card-text">${other.oProductPrice }원</p>
+	                        <h5 class="card-title" id="card-title">${other.pName }</h5>
+	                        <p class="card-text">${other.pPrice }원</p>
 	                      </div>
 	                    </div>
 	                </a>
@@ -157,12 +157,12 @@
 	        <div id="section_contents">
 	        <c:forEach items="${nList }" var="other" varStatus="index" begin="8" end="11">
 	            <div id="section_contents_inner">
-	                <a href="/other/content?oProductNo=${other.oProductNo }" style="color:black;">
+	                <a href="/other/content?pCode=${other.pCode }" style="color:black;">
 	                    <div class="card" style="width: 20.6rem;">
-	                      <img src="/oupload/${other.fileName }" class="card-img-top" alt="...">
+	                      <img src="/oupload/${other.pFilename }" class="card-img-top" alt="...">
 	                      <div class="card-body" id="card-body">
-	                        <h5 class="card-title" id="card-title">${other.oProductName }</h5>
-	                        <p class="card-text">${other.oProductPrice }원</p>
+	                        <h5 class="card-title" id="card-title">${other.pName }</h5>
+	                        <p class="card-text">${other.pPrice }원</p>
 	                      </div>
 	                    </div>
 	                </a>

@@ -175,9 +175,7 @@
 	        <div id="empty_space"></div>
 	        <div id="section_title2">
 	        	<nav aria-label="Page navigation example" id="paging">
-	        		<ul class="pagination">
-	        			${ pageNavi }
-	        		</ul>
+	        		<ul class="pagination">${pageNavi }</ul>
 	        	</nav>
 	        </div>
     </section>
