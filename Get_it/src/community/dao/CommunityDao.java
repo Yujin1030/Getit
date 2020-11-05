@@ -1,4 +1,4 @@
-package community.model.dao;
+package community.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import community.model.vo.Comments;
-import community.model.vo.QnA;
+import community.vo.Comments;
+import community.vo.QnA;
 import community.vo.Review;
 import community.vo.ReviewCom;
 

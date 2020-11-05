@@ -1,15 +1,15 @@
-package community.model.service;
+package community.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import community.model.dao.CommunityDao;
-import community.model.vo.Comments;
-import community.model.vo.QnA;
-import community.model.vo.QnaPageData;
+import community.dao.CommunityDao;
+import community.vo.Comments;
 import community.vo.PageData;
+import community.vo.QnA;
+import community.vo.QnaPageData;
 import community.vo.Review;
 
 public class CommunityService {

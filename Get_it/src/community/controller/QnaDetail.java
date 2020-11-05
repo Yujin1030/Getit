@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import community.model.service.CommunityService;
-import community.model.vo.Comments;
-import community.model.vo.QnA;
+import community.service.CommunityService;
+import community.vo.Comments;
+import community.vo.QnA;
 
 /**
  * Servlet implementation class QnaDetail

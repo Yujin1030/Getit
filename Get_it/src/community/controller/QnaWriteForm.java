@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import member.model.vo.Member;
+import member.vo.Member;
 
 /**
  * Servlet implementation class QnaWriteForm

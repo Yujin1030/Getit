@@ -1,4 +1,4 @@
-package community.model.vo;
+package community.vo;
 
 import java.sql.Date;
 
