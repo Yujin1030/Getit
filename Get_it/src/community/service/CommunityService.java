@@ -2,9 +2,11 @@ package community.model.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import community.model.dao.CommunityDao;
+import community.model.vo.Comments;
 import community.model.vo.QnA;
 import community.model.vo.QnaPageData;
 import community.vo.PageData;
@@ -21,7 +23,7 @@ public class CommunityService {
 	public QnaPageData selectQnaAll(int currentPage) {
 		Connection conn = null;
 		QnaPageData pagedata = new QnaPageData();
-		int recordCountPerPage= 10;
+		int recordCountPerPage= 5;
 		int naviCountPerPage =5;
 		try {
 			conn = factory.createConnection();
@@ -128,6 +130,64 @@ public class CommunityService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	// QnA 댓글 등록
+	public int qnaComInsert(int qnaNo, String contents, String memberId) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = factory.createConnection();
+			result = new CommunityDao().qnaComInsert(conn, qnaNo,contents,memberId);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+	
+	// QnA 댓글내용 가져오기
+	public ArrayList<Comments> commentsList(int qnaNo) {
+		Connection conn = null;
+		ArrayList<Comments> qnaComList =null;
+		try {
+			conn = factory.createConnection();
+			qnaComList = new CommunityDao().commentsList(conn,qnaNo);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return qnaComList;
+	}
+	
+	// QnA 댓글 삭제
+	public int qnaComDelete(int commentNo,int qnaNo) {
+		Connection conn =null;
+		int result = 0;
+		try { 
+			conn = factory.createConnection();
+			result = new CommunityDao().qnaComDelete(conn,commentNo,qnaNo);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
 			JDBCTemplate.close(conn);
 		}
 		return result;

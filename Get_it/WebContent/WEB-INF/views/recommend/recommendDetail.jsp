@@ -26,7 +26,7 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <!-- scirpt추가 -->
-<link rel="stylesheet" type="text/css" href="/css/recommendDetail.css">
+<link rel="stylesheet" type="text/css" href="/css/recomDetail.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
@@ -114,7 +114,7 @@
 			<div id="detail_main">
 				<div class="detail_main_left">
 					<img src="/upload/${pFilename }"
-						style="width: 90%; height: 90%; padding-top: 120px; padding-left: 100px;">
+						style="width: 80%; height: 80%; padding-top: 120px; padding-left: 100px;">
 				</div>
 				<div class="detail_main_right">
 					<table>
@@ -221,7 +221,7 @@
 			<div id="basket">
 				<img src="/img/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88.PNG" alt="장바구니"
 					style="width: 80px; padding-bottom: 30px;"> &nbsp;&nbsp; <a
-					href="/basket/insert?aNo=${recommend.aNo }"><b
+					href="#"><b
 					style="font-size: 50px;">장바구니</b></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img src="/img/%EA%B2%B0%EC%A0%9C%EB%B2%84%ED%8A%BC.PNG" alt="결제하기"
@@ -362,7 +362,7 @@
 			</div>
 			<div class="review">
 				<!-- 수정 시작점 -->
-				<div class="review_title" border="1">
+				<div class="review_title">
 					<div class="review_title_left">제목</div>
 					<div class="review_title_middle">작성자</div>
 					<div class="review_title_right">날짜</div>

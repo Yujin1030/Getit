@@ -729,7 +729,7 @@ public class RecommendDao {
 	public int reviewUpdate(Connection conn, String memberId, String pCode, String title, String contents,int reviewNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update product_review set title=?, contents=? where p_code=? and member_id=? and pr_review_no=?";
+		String query = "update product_review set pr_title=?, pr_contents=? where p_code=? and member_id=? and pr_review_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, title);

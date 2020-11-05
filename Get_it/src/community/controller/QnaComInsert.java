@@ -1,6 +1,8 @@
-package product.controller.recommend;
+package community.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import community.model.service.CommunityService;
 import member.model.vo.Member;
-import product.model.service.recommend.RecommendService;
 
 /**
- * Servlet implementation class reviewupdate
+ * Servlet implementation class QnaComInsert
  */
-@WebServlet("/review/update2")
-public class reviewupdate extends HttpServlet {
+@WebServlet("/qna/cominsert")
+public class QnaComInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reviewupdate() {
+    public QnaComInsert() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +34,24 @@ public class reviewupdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		String pCode = request.getParameter("pCode");
-		String title = request.getParameter("title");
+		int qnaNo  = Integer.parseInt(request.getParameter("qnaNo"));
 		String contents = request.getParameter("contents");
-		String pFilename = request.getParameter("pFilename");
-		int result =0;
-		int reviewNo =0;
-		String memberId ="";
-		//if(((Member)session.getAttribute("memeber")!=null)) {
-		reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		memberId = ((Member)session.getAttribute("member")).getMemberId(); 
-		result = new RecommendService().reviewUpdate(memberId,pCode,title,contents,reviewNo);
-		//}
-		
-		  if(result>0) { request.setAttribute("pFilename", pFilename);
-		  request.setAttribute("pCode", pCode);
-		  request.getRequestDispatcher("/recommend/detail").forward(request, response);
-		  }else { response.sendRedirect("서비스요청실패"); }
-		 
+		if((Member)session.getAttribute("member")!=null) {
+		String memberId = ((Member)session.getAttribute("member")).getMemberId();
+		int result = new CommunityService().qnaComInsert(qnaNo,contents,memberId);
+		if(result>0) {
+		request.setAttribute("qnaNo", qnaNo);
+		request.getRequestDispatcher("/qna/detail").forward(request, response);
+		}else {
+			System.out.println("서비스 요청 실패");
+		}
+		}
+		else {
+			PrintWriter writer = response.getWriter();
+			response.setContentType("text/html; charset=utf-8");
+			writer.println("<script>alert('로그인 후 이용 가능합니다.'); location.href='/qna/detail?qna=" + qnaNo +"</script>");
+			writer.close();
+		}
 	}
 
 	/**

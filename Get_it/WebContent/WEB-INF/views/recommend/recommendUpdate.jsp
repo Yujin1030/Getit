@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>완제품 후기게시글 작성</title>
+<title>후기글 수정</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -39,11 +39,11 @@
         <div id="nav_bar">
             <div id="nav_bar_menu">
                 <ul>
-                    <li><a href="#">Recommend</a></li>
+                    <li><a href="/recommend/listview">Recommend</a></li>
                     <li><a href="#">Self</a></li>
                     <li><a href="#">Other</a></li>
                     <li><a href="#">Used Deal</a></li>
-                    <li><a href="#">Community</a></li>
+                    <li><a href="/review/main">Community</a></li>
                 </ul>
             </div>
             <div id="nav_bar_logo">
@@ -71,13 +71,14 @@
                 <div class="container" id="section_contents_write">
                     <br>
                     <br>
-                    <h2>완제품 후기게시글 작성</h2>
+                    <h2>후기 게시글 수정 화면</h2>
                     <br>
                     
-                    <form action="/recommend/writeinsert" method="post">
+                     <form action="/review/update2" method="post"> 
+                     	<input type="hidden" name="pCode" value="${pCode }">
+                     	<input type="hidden" name="pFilename" value="${pFilename }">
+                     	<input type="hidden" name="reviewNo" value="${reviewNo }">
                       <div class="form-group">
-                      	<input type="hidden" name="pCode" value="${pCode }">
-                      	<input type="hidden" name="pFilename" value="${pFilename }">
                         <label for="exampleInputEmail1">Title</label>
                         <textarea class="form-control" rows="1" id="comment" placeholder="제목을 입력해주세요." name="title"></textarea>
                       </div>
@@ -85,8 +86,8 @@
                         <label for="exampleInputPassword1">Contents</label>
                         <textarea class="form-control" rows="5" id="comment" placeholder="내용을 입력해주세요." name="contents"></textarea>
                       </div>
-                      <button type="submit" class="btn btn-default" style="margin-left: 83%;">Submit</button>
-                      <button type="reset" class="btn btn-default">Cancel</button>
+                      <button type="submit" class="btn btn-default" style="margin-left: 83%;">수정하기</button> <br>
+                      <a href="javascript:history.back()" style="text-align:right;">원래 페이지로 이동</a>
                     </form>
                 </div>
             <div id="section_contents_empty"></div>
