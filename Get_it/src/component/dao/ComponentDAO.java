@@ -1,4 +1,4 @@
-package product.model.dao;
+package component.dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
