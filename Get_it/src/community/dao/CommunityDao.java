@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import community.model.vo.QnA;
+import community.vo.Review;
+import community.vo.ReviewCom;
 
 public class CommunityDao {
 	
@@ -324,7 +326,453 @@ public class CommunityDao {
 		return result;
 	}
 	
+//================================================================================================================================
 	
+	public ArrayList<Review> selectReviewList(Connection conn, int currentPage, int recordCountPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Review> list = null;
+		String query = "SELECT T.* FROM (SELECT RV.*, CASE WHEN RV.MEMBER_ID = 'ADMIN' THEN '1' ELSE '0' END TEST_PR FROM REVIEW RV WHERE 1=1) T WHERE REVIEW_NO BETWEEN ? AND ? ORDER BY T.TEST_PR DESC, REVIEW_NO DESC";
+		int start = currentPage * recordCountPerPage - (recordCountPerPage - 1);
+		int end = currentPage * recordCountPerPage;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Review>();
+			while(rset.next()) {
+				Review review = new Review();
+				review.setReviewNo(rset.getInt("REVIEW_NO"));
+				review.setrTitle(rset.getString("R_TITLE"));
+				review.setrContents(rset.getString("R_CONTENTS"));
+				review.setrDate(rset.getDate("R_DATE"));
+				review.setMemberId(rset.getString("MEMBER_ID"));
+				review.setrFilename(rset.getString("R_FILENAME"));
+				review.setrFilepath(rset.getString("R_FILEPATH"));
+				review.setViewCnt(rset.getInt("VIEW_CNT"));
+				list.add(review);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	
+	public int insertReview(Connection conn, Review review, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO REVIEW VALUES(REVIEW_SEQ.NEXTVAL,?,?,SYSDATE,?,?,?,DEFAULT)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, review.getrTitle());
+			pstmt.setString(2, review.getrContents());
+			pstmt.setString(3, userId);
+			pstmt.setString(4, review.getrFilename());
+			pstmt.setString(5, review.getrFilepath());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public Review selectReview(Connection conn, int reviewNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Review review = null;
+		String query = "SELECT * FROM REVIEW WHERE REVIEW_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reviewNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				review = new Review();
+				review.setReviewNo(rset.getInt("REVIEW_NO"));
+				review.setrTitle(rset.getString("R_TITLE"));
+				review.setrContents(rset.getString("R_CONTENTS"));
+				review.setrDate(rset.getDate("R_DATE"));
+				review.setMemberId(rset.getString("MEMBER_ID"));
+				review.setrFilename(rset.getString("R_FILENAME"));
+				review.setrFilepath(rset.getString("R_FILEPATH"));
+				review.setViewCnt(rset.getInt("VIEW_CNT"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return review;
+	}
+	
+	public ArrayList<ReviewCom> selectReviewCom(Connection conn, int currentPage, int recordCountPerPage, int reviewNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ReviewCom> reviewCom = null;
+		String query = "SELECT * FROM (SELECT COMMENTS.*, ROW_NUMBER() OVER(ORDER BY COMMENT_NO DESC) AS NUM FROM COMMENTS WHERE REVIEW_NO = ?) WHERE NUM BETWEEN ? AND ?";
+		
+		int start = currentPage * recordCountPerPage - (recordCountPerPage - 1);
+		int end = currentPage * recordCountPerPage;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			reviewCom = new ArrayList<ReviewCom>();
+			while(rset.next()) {
+				ReviewCom rCom = new ReviewCom();
+				rCom.setCommentNo(rset.getInt("COMMENT_NO"));
+				rCom.setcContents(rset.getString("C_CONTENTS"));
+				rCom.setcDate(rset.getDate("C_DATE"));
+				rCom.setReviewNo(rset.getInt("REVIEW_NO"));
+				rCom.setMemberId(rset.getString("MEMBER_ID"));
+				reviewCom.add(rCom);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return reviewCom;
+	}
+	
+	public void updateViewCnt(Connection conn, int reviewNo) {
+		PreparedStatement pstmt = null;
+		String query = "UPDATE REVIEW SET VIEW_CNT = (VIEW_CNT+1) WHERE REVIEW_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reviewNo);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int modifyReview(Connection conn, Review review) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "UPDATE REVIEW SET R_TITLE = ?, R_CONTENTS = ?, R_DATE = SYSDATE, R_FILENAME = ?, R_FILEPATH = ? WHERE REVIEW_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, review.getrTitle());
+			pstmt.setString(2, review.getrContents());
+			pstmt.setString(3, review.getrFilename());
+			pstmt.setString(4, review.getrFilepath());
+			pstmt.setInt(5, review.getReviewNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteReview(Connection conn, int reviewNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM REVIEW WHERE REVIEW_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reviewNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Review> reviewSearch(Connection conn, String search, int currentPage, int recordCountPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT T.* FROM (SELECT RV.*, CASE WHEN RV.MEMBER_ID = 'ADMIN' THEN '1' ELSE '0' END TEST_PR FROM REVIEW RV WHERE 1=1) T WHERE R_TITLE LIKE ? AND REVIEW_NO BETWEEN ? AND ? ORDER BY T.TEST_PR DESC, REVIEW_NO DESC";
+		int start = currentPage*recordCountPerPage - (recordCountPerPage - 1);
+		int end = currentPage*recordCountPerPage;
+		ArrayList<Review> nList = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			nList = new ArrayList<Review>();
+			while(rset.next()) {
+				Review review = new Review();
+				review.setReviewNo(rset.getInt("REVIEW_NO"));
+				review.setrTitle(rset.getString("R_TITLE"));
+				review.setrContents(rset.getString("R_CONTENTS"));
+				review.setrDate(rset.getDate("R_DATE"));
+				review.setMemberId(rset.getString("MEMBER_ID"));
+				review.setrFilename(rset.getString("R_FILENAME"));
+				review.setrFilepath(rset.getString("R_FILEPATH"));
+				review.setViewCnt(rset.getInt("VIEW_CNT"));
+				nList.add(review);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return nList;
+	}
+	
+	public int insertComment(Connection conn, String contents, String userId, int reviewNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO COMMENTS VALUES (COMMENTS_SEQ.NEXTVAL,?,SYSDATE,NULL,?,?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, contents);
+			pstmt.setInt(2, reviewNo);
+			pstmt.setString(3, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteComReview(Connection conn, int reviewNo, int commentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "DELETE FROM COMMENTS WHERE COMMENT_NO = ? AND REVIEW_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, commentNo);
+			pstmt.setInt(2, reviewNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public String getPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage) {
+		int recordTotalCount = totalCount(conn);
+		int pageTotalCount = 0;
+		if(recordTotalCount % recordCountPerPage > 0) {
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		
+		if(currentPage < 1) {
+			currentPage = 1;
+		} else if(currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		if(needPrev) {
+			sb.append("<li class='page-item'><a class='page-link' href='/review/main?currentPage=" + (startNavi - 1) + "'> < </a></li>");
+		}
+		for(int i = startNavi; i <= endNavi; i++) {
+			if(i == currentPage) {
+				sb.append("<li class='page-item'><a class='page-link' href='/review/main?currentPage=" + i + "'>" + i + "</a></li>");
+			} else {
+				sb.append("<li class='page-item'><a class='page-link' href='/review/main?currentPage=" + i + "'>" + i + "</a></li>");
+			}
+		}
+		if(needNext) {
+			sb.append("<li class='page-item'><a class='page-link' href='/review/main?currentPage=" + (endNavi + 1) + "'> > </a></li>");
+		}
+		return sb.toString();
+	}
+	
+	public String getSearchPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage, String search) {
+		int recordTotalCount = searchTotalCount(conn, search);
+		int pageTotalCount = 0;
+		if(recordTotalCount % recordCountPerPage > 0) {
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		
+		if(currentPage < 1) {
+			currentPage = 1;
+		} else if(currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+		int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		
+		boolean needPrev = true;
+		boolean needNext = true;
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		if(needPrev) {
+			sb.append("<a href='/review/search?search1=" + search + "currentPage=" + (startNavi - 1) + "'> < </a>");
+		}
+		for(int i = startNavi; i <= endNavi; i++) {
+			if(i == currentPage) {
+				sb.append("<a href='/review/search?search1=" + search + "currentPage=" + i + "'><b>" + i + "</b></a>");
+			} else {
+				sb.append("<a href='/review/search?search1=" + search + "currentPage=" + i + "'>" + i + "</a>");
+			}
+		}
+		if(needNext) {
+			sb.append("<a href='/review/search?search1=" + search + "currentPage=" + (endNavi + 1) + "'> > </a>");
+		}
+		return sb.toString();
+	}
+	
+	public String getComPageNavi(Connection conn, int currentPage, int recordCountPerPage, int naviCountPerPage, int reviewNo) {
+		int recordTotalCount = totalComCount(conn, reviewNo);
+		int pageTotalCount = 0;
+		
+		if(recordTotalCount % recordCountPerPage > 0) {
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		
+		if(currentPage < 1) {
+			currentPage = 1;
+		} else if(currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		
+		if(endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		if(needPrev) {
+			sb.append("<a href='/review/select?reviewNo=" + reviewNo +"&&currentPage=" + (startNavi-1) + "'> < </a>");
+		}
+		for(int i = startNavi; i <= endNavi; i++) {
+			if(i == currentPage) {
+				sb.append("<a href='/review/select?reviewNo=" + reviewNo + "&&currentPage=" + i + "'><b>" + i + " </b></a>");
+			} else {
+				sb.append("<a href='/review/select?reviewNo=" + reviewNo + "&&currentPage=" + i + "'>" + i + " </a>");
+			}
+		}
+		if(needNext) {
+			sb.append("<a href='/review/select?reviewNo=" + reviewNo + "&&currentPage=" + (endNavi+1) + "'> > </a>");
+		}
+		return sb.toString();
+	}
+	
+	public int totalCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT COUNT(*) AS TOTALCOUNT FROM REVIEW";
+		int recordTotalCount = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				recordTotalCount = rset.getInt("TOTALCOUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return recordTotalCount;
+	}
+	
+	public int searchTotalCount(Connection conn, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT COUNT(*) AS TOTALCOUNT FROM REVIEW WHERE R_TITLE LIKE ?";
+		int recordTotalCount = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+search+"%");
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				recordTotalCount = rset.getInt("TOTALCOUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return recordTotalCount;
+	}
+	
+	public int totalComCount(Connection conn, int reviewNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT COUNT(*) AS TOTALCOUNT FROM COMMENTS WHERE REVIEW_NO = ?";
+		int recordTotalCount = 0;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reviewNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				recordTotalCount = rset.getInt("TOTALCOUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return recordTotalCount;
+	}
 	
 	
 }

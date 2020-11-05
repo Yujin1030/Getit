@@ -65,7 +65,33 @@
     </header>
     <section>
         <div id="main_image">
-        <img src="/img/main.PNG" style="height: 100%;width:100%;">
+        <!-- <img src="/img/main.PNG" style="height: 100%;width:100%;"> -->
+        	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			  <ol class="carousel-indicators">
+			    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+			    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			  </ol>
+			  <div class="carousel-inner">
+			    <div class="carousel-item active">
+			      <img src="/img/nakseo1.PNG" class="d-block w-100" alt="First" style="height: 800px;">
+			    </div>
+			    <div class="carousel-item">
+			      <img src="/img/nakseo2.PNG" class="d-block w-100" alt="Second" style="height: 800px;">
+			    </div>
+			    <div class="carousel-item">
+			      <img src="/img/nakseo3.PNG" class="d-block w-100" alt="Third" style="height: 800px;">
+			    </div>
+			  </div>
+			  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+			  </a>
+			  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			  </a>
+			</div>
         </div>
         <div id="section_title2">
         
@@ -73,8 +99,8 @@
             <p>Other</p>
             <p><a href="/other/allList">전체</a> | <a href="/other/monitor" style="font-weight: bold;">모니터</a> | <a href="/other/keyboard">키보드</a> | <a href="/other/mouse">마우스</a> | <a href="/other/speaker">스피커</a> | <a href="/other/headset">헤드셋</a></p>
             <div id="wrap2">
-               <form action="" autocomplete="on">
-               <input id="search" name="search" type="text" placeholder="검색어를 입력하세요."><input id="search_submit" value="Rechercher" type="submit"> 
+               <form action="/other/search" method="get" autocomplete="on">
+               <input id="search" name="search1" type="text" placeholder="검색어를 입력하세요."><input id="search_submit" value="Rechercher" type="submit"> 
                </form>
             </div>
             <hr style="width: 80%;">
@@ -85,12 +111,12 @@
 	        <div id="section_contents">
 	        <c:forEach items="${list }" var="other" varStatus="index" begin="0" end="3">
 	            <div id="section_contents_inner">
-	                <a href="#" style="color:black;">
+	                <a href="/other/content?oProductNo=${other.serialNo }" style="color:black;">
 	                    <div class="card" style="width: 20.6rem;">
-	                      <img src="/oupload/${other.fileName }" class="card-img-top" alt="...">
+	                      <img src="/oupload/${other.pFilename }" class="card-img-top" alt="...">
 	                      <div class="card-body" id="card-body">
-	                        <h5 class="card-title" id="card-title">${other.oProductName }</h5>
-	                        <p class="card-text">${other.oProductPrice }원</p>
+	                        <h5 class="card-title" id="card-title">${other.pName }</h5>
+	                        <p class="card-text">${other.pPrice }원</p>
 	                      </div>
 	                    </div>
 	                </a>
@@ -108,12 +134,12 @@
 	        <div id="section_contents">
 	        <c:forEach items="${list }" var="other" varStatus="index" begin="4" end="7">
 	            <div id="section_contents_inner">
-	                <a href="#" style="color:black;">
+	                <a href="/other/content?oProductNo=${other.serialNo }" style="color:black;">
 	                    <div class="card" style="width: 20.6rem;">
-	                      <img src="/oupload/${other.fileName }" class="card-img-top" alt="...">
+	                      <img src="/oupload/${other.pFilename }" class="card-img-top" alt="...">
 	                      <div class="card-body" id="card-body">
-	                        <h5 class="card-title" id="card-title">${other.oProductName }</h5>
-	                        <p class="card-text">${other.oProductPrice }원</p>
+	                        <h5 class="card-title" id="card-title">${other.pName }</h5>
+	                        <p class="card-text">${other.pPrice }원</p>
 	                      </div>
 	                    </div>
 	                </a>
@@ -131,12 +157,12 @@
 	        <div id="section_contents">
 	        <c:forEach items="${list }" var="other" varStatus="index" begin="8" end="11">
 	            <div id="section_contents_inner">
-	                <a href="#" style="color:black;">
+	                <a href="/other/content?oProductNo=${other.serialNo }" style="color:black;">
 	                    <div class="card" style="width: 20.6rem;">
-	                      <img src="/oupload/${other.fileName }" class="card-img-top" alt="...">
+	                      <img src="/oupload/${other.pFilename }" class="card-img-top" alt="...">
 	                      <div class="card-body" id="card-body">
-	                        <h5 class="card-title" id="card-title">${other.oProductName }</h5>
-	                        <p class="card-text">${other.oProductPrice }원</p>
+	                        <h5 class="card-title" id="card-title">${other.pName }</h5>
+	                        <p class="card-text">${other.pPrice }원</p>
 	                      </div>
 	                    </div>
 	                </a>
