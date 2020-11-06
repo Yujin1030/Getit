@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -611,7 +613,7 @@
 												${cpuL.pName}</a></b>
 									</div>
 									<div class="productP">
-										가격 : <b class="priceColor">${cpuL.pPrice}</b>
+										 가격 : <b class="priceColor">${cpuL.pPrice}won</b>
 									</div>
 								</div>
 							</div>
