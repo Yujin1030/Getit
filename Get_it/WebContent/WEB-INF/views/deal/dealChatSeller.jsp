@@ -56,7 +56,7 @@
 	
 	<script type="text/javascript">
 		// 서버의 admin의 서블릿으로 웹 소켓을 한다.
-		var webSocket = new WebSocket("ws://localhost:8990/deal/chatseller");
+		var webSocket = new WebSocket("ws://localhost:2330/deal/chatseller");
 		
 		
 		// 운영자에서의 open, close, error는 의미가 없어서 형태만 선언
