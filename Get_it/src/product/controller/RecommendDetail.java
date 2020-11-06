@@ -1,4 +1,4 @@
-package product.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import product.model.service.RecommendService;
+import product.model.service.recommend.RecommendService;
 import product.model.vo.PageData;
 import product.model.vo.Product;
 import product.model.vo.ProductReview;
@@ -49,8 +49,8 @@ public class RecommendDetail extends HttpServlet {
 		// 선택한 완제품에 대한 데이터 불러오기 (매개변수 pCode)
 		ArrayList<Product> productList = new RecommendService().recommendDetail(pCode);
 		// 후기게시글에 대한 페이징처리 및 데이터 불러오기 (매개변수 currentPage,pCode)
-		PageData pagedata = new RecommendService().recommendReview(currentPage,pCode);
-		ArrayList<ProductReview> reviewList = pagedata.getPageReList();
+		PageData pagedata = new RecommendService().recommendReview(currentPage,pCode,pFilename);
+		ArrayList<ProductReview> reviewList = pagedata.getReviewList();
 		// 전체 합계
 		int totalPrice = 0;
 		

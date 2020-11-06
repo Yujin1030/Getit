@@ -54,11 +54,11 @@
 		<div id="nav_bar">
 			<div id="nav_bar_menu">
 				<ul>
-					<li><a href="#">Recommend</a></li>
-					<li><a href="#">Self</a></li>
-					<li><a href="#">Other</a></li>
-					<li><a href="#">Used Deal</a></li>
-					<li><a href="#">Community</a></li>
+                    <li><a href="/recommend/listview">Recommend</a></li>
+                    <li><a href="/getit/Component">Self</a></li>
+                    <li><a href="/other/allList">Other</a></li>
+                    <li><a href="/deal/main">Used Deal</a></li>
+                    <li><a href="/review/main">Community</a></li>
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
@@ -72,14 +72,65 @@
 							value="Rechercher" type="submit">
 					</form>
 				</div>
-				<div id="cart">
-					<a href="#" class="fas fa-shopping-cart fa-lg"
-						style="color: black;"></a>
+			<c:if test="${ sessionScope.member eq null }">
+            <div id="cart">
+               
+               <a href="#"><i class="fas fa-shopping-cart fa-lg"
+                  style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
 
-				</div>
-				<div id="login">
-					<a href="#" class="fas fa-user fa-lg" style="color: black;"></a>
-				</div>
+            </div>
+            </c:if>
+            
+            <c:if test="${ sessionScope.member ne null }">
+            <div id="cart">
+               
+               <a href="/member/shoppingbag?userId=${sessionScope.member.memberId }"><i class="fas fa-shopping-cart fa-lg"
+                  style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
+            </div>
+            </c:if>
+
+            <c:if test="${ sessionScope.member eq null }">
+               <!-- 로그인x -->
+               <div id="login">
+                  <div class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> <i
+                        class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/login.html">Log In</a>
+                           <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/enroll.jsp">회원가입</a>
+                     </div>
+                  </div>
+               </div>
+            </c:if>
+
+            <c:if test="${ sessionScope.member ne null }">
+               <!-- 로그인o -->
+               <div id="login">
+                  <div class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> <i
+                        class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a> 
+                        <a class="dropdown-item" href="/order/info?userId=${sessionScope.member.memberId }">Order Info</a>
+                        
+                        <c:if test="${ sessionScope.member.memberId eq 'admin'}">
+                        <a class="dropdown-item" href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
+                        </c:if>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/member/logout">LogOut</a>
+                     </div>
+                  </div>
+               </div>
+            </c:if>
+            
 			</div>
 		</div>
 	</header>
@@ -119,29 +170,29 @@
 							<li class="topMenuLi"><a
 								href="/recommend/listview?category=사무용" class="menuLink">사무용PC</a>
 								<ul class="submenu">
-									<li><a href="/recommend/listview?category=사무용&pricegrade=C" class="submenuLink">60만원</a></li>
-									<li><a href="/recommend/listview?category=사무용&pricegrade=B" class="submenuLink">60	-120만원</a></li>
+									<li><a href="/recommend/listview?category=사무용&pricegrade=C" class="submenuLink">60만원 이하</a></li>
+									<li><a href="/recommend/listview?category=사무용&pricegrade=B" class="submenuLink">60	 -&nbsp;120만원</a></li>
 									<li><a href="/recommend/listview?category=사무용&pricegrade=A" class="submenuLink">120만원 이상</a></li>
 								</ul></li>
 							<li class="topMenuLi"><a
 								href="/recommend/listview?category=게임용" class="menuLink">게임용PC</a>
 								<ul class="submenu">
-									<li><a href="/recommend/listview?category=게임용&pricegrade=C" class="submenuLink">60만원</a></li>
-									<li><a href="/recommend/listview?category=게임용&pricegrade=B" class="submenuLink">60	&#126;120만원</a></li>
+									<li><a href="/recommend/listview?category=게임용&pricegrade=C" class="submenuLink">60만원 이하</a></li>
+									<li><a href="/recommend/listview?category=게임용&pricegrade=B" class="submenuLink">60	 -&nbsp;120만원</a></li>
 									<li><a href="/recommend/listview?category=게임용&pricegrade=A" class="submenuLink">120만원 이상</a></li>
 								</ul></li>
 							<li class="topMenuLi"><a
 								href="/recommend/listview?category=그래픽용" class="menuLink">그래픽용PC</a>
 								<ul class="submenu">
-									<li><a href="/recommend/listview?category=그래픽용&pricegrade=C" class="submenuLink">60만원</a></li>
-									<li><a href="/recommend/listview?category=그래픽용&pricegrade=B" class="submenuLink">60	&#126;120만원</a></li>
+									<li><a href="/recommend/listview?category=그래픽용&pricegrade=C" class="submenuLink">60만원 이하</a></li>
+									<li><a href="/recommend/listview?category=그래픽용&pricegrade=B" class="submenuLink">60	 -&nbsp;120만원</a></li>
 									<li><a href="/recommend/listview?category=그래픽용&pricegrade=A" class="submenuLink">120만원 이상</a></li>
 								</ul></li>
 							<li class="topMenuLi"><a
 								href="/recommend/listview?category=방송용" class="menuLink">방송용PC</a>
 								<ul class="submenu">
-									<li><a href="/recommend/listview?category=방송용&pricegrade=C" class="submenuLink">~60만원</a></li>
-									<li><a href="/recommend/listview?category=방송용&pricegrade=B" class="submenuLink">60~120만원</a></li>
+									<li><a href="/recommend/listview?category=방송용&pricegrade=C" class="submenuLink">60만원 이하</a></li>
+									<li><a href="/recommend/listview?category=방송용&pricegrade=B" class="submenuLink">60	 -&nbsp;120만원</a></li>
 									<li><a href="/recommend/listview?category=방송용&pricegrade=A" class="submenuLink">120만원 이상</a></li>
 								</ul></li>
 						</ul>

@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import community.service.CommunityService;
-import community.vo.Comments;
-import community.vo.QnA;
+import community.model.service.CommunityService;
+import community.model.vo.Comments;
+import community.model.vo.QnA;
 
 /**
  * Servlet implementation class QnaDetail
@@ -40,7 +40,7 @@ public class QnaDetail extends HttpServlet {
 		if(qna!=null) {
 			request.setAttribute("qnaComList", qnaComList);
 			request.setAttribute("qna", qna);
-			request.getRequestDispatcher("/WEB-INF/views/community/comment.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/community/qnacomment.jsp").forward(request, response);
 		}else {
 			System.out.println("서비스요청 실패");
 		}

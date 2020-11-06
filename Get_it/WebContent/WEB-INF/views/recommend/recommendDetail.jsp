@@ -77,11 +77,12 @@
 		<div id="nav_bar">
 			<div id="nav_bar_menu">
 				<ul>
-					<li><a href="/recommend/listview">Recommend</a></li>
-					<li><a href="#">Self</a></li>
-					<li><a href="#">Other</a></li>
-					<li><a href="#">Used Deal</a></li>
-					<li><a href="#">Community</a></li>
+                    <li><a href="/recommend/listview">Recommend</a></li>
+                    <li><a href="/getit/Component">Self</a></li>
+                    <li><a href="/other/allList">Other</a></li>
+                    <li><a href="/deal/main">Used Deal</a></li>
+                    <li><a href="/review/main">Community</a></li>
+
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
@@ -95,13 +96,64 @@
 							value="Rechercher" type="submit">
 					</form>
 				</div>
-				<div id="cart">
-					<a href="#" class="fas fa-shopping-cart fa-lg"
-						style="color: black;"></a>
-				</div>
-				<div id="login">
-					<a href="#" class="fas fa-user fa-lg" style="color: black;"></a>
-				</div>
+			<c:if test="${ sessionScope.member eq null }">
+            <div id="cart">
+               
+               <a href="#"><i class="fas fa-shopping-cart fa-lg"
+                  style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
+            </div>
+            </c:if>
+            
+            <c:if test="${ sessionScope.member ne null }">
+            <div id="cart">
+               
+               <a href="/member/shoppingbag?userId=${sessionScope.member.memberId }"><i class="fas fa-shopping-cart fa-lg"
+                  style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
+            </div>
+            </c:if>
+
+            <c:if test="${ sessionScope.member eq null }">
+               <!-- 로그인x -->
+               <div id="login">
+                  <div class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> <i
+                        class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/login.html">Log In</a>
+                           <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/enroll.jsp">회원가입</a>
+                     </div>
+                  </div>
+               </div>
+            </c:if>
+
+            <c:if test="${ sessionScope.member ne null }">
+               <!-- 로그인o -->
+               <div id="login">
+                  <div class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> <i
+                        class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a> 
+                        <a class="dropdown-item" href="/order/info?userId=${sessionScope.member.memberId }">Order Info</a>
+                        
+                        <c:if test="${ sessionScope.member.memberId eq 'admin'}">
+                        <a class="dropdown-item" href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
+                        </c:if>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/member/logout">LogOut</a>
+                     </div>
+                  </div>
+               </div>
+            </c:if>
 			</div>
 		</div>
 	</header>
@@ -221,17 +273,17 @@
 			<div id="basket">
 				<img src="/img/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88.PNG" alt="장바구니"
 					style="width: 80px; padding-bottom: 30px;"> &nbsp;&nbsp; <a
-					href="#"><b
+					href="/recommed/basket?pCode=${pCode }&pFilename=${pFilename}"><b
 					style="font-size: 50px;">장바구니</b></a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<img src="/img/%EA%B2%B0%EC%A0%9C%EB%B2%84%ED%8A%BC.PNG" alt="결제하기"
 					style="width: 80px; padding-bottom: 37px;"> &nbsp;&nbsp; <a
-					href="#"><b style="font-size: 50px; color: red;">결제하기</b></a>
+					href="/recommend/payment?pCode=${pCode }"><b style="font-size: 50px; color: red;">결제하기</b></a>
 			</div>
 			<div id="info">
 				<a href="#info">상품정보</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="#order_review">구매후기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#notice">취소/반품/교환 정보</a>
+				<a href="#section_space">취소/반품/교환 정보</a>
 			</div>
 			<hr
 				style="width: 87.5%; height: 2px; background-color: gray; border-top: 1px; opacity: 0.4;">
@@ -347,10 +399,11 @@
 					</c:if>
 				</c:forEach>
 				<div class="component">
-					<div class="component_left">공백</div>
+					<div class="component_left"></div>
 					<div class="component_right"></div>
 				</div>
 			</div>
+			<hr style="width: 87.5%;height: 2px; background-color:gray; border-top: 1px;opacity: 0.4;">
 			<div class="section_space" style="text-align: center;">
 				<div id="order_review">구매 후기</div>
 				<div class="buy_review"
@@ -362,44 +415,62 @@
 			</div>
 			<div class="review">
 				<!-- 수정 시작점 -->
-				<div class="review_title">
-					<div class="review_title_left">제목</div>
-					<div class="review_title_middle">작성자</div>
-					<div class="review_title_right">날짜</div>
-				</div>
-				<div class="review_contents">
-					<c:forEach var="reviewList" items="${reviewList }">
-						<div class="accordion_title">
-							<div class="accordion_title_left">${reviewList.reviewTitle }</div>
-							<div class="accordion_title_middle">${reviewList.memberId }</div>
-							<div class="accordion_title_right">${reviewList.enrollDate }</div>
-						</div>
-						<div class="accordion_sub">
-							<div style="width: 80%; height: 100%; float: left; line-height: 50px;">${reviewList.reviewContents }</div>
-							<div
-								style="width: 20%; height: 100%; float: left; line-height: 50px; padding-left: 75px;">
-								<c:if test="${sessionScope.member.memberId eq reviewList.memberId }">
-								<a class="btn btn-primary" href="/recommend/review/update?pCode=${pCode }&reviewNo=${reviewList.reviewNo }&pFilename=${pFilename}">수정</a> 
-								<a	class="btn btn-primary" href="/review/delete?pCode=${reviewList.pCode }&reviewNo=${reviewList.reviewNo}&pFilename=${pFilename}" onclick="return reviewdelete()">삭제</a>
+				<div class="accordion" id="accordionExample">
+					<div class="card">
+						<c:forEach var="reviewList" items="${reviewList }" varStatus="index">
+							<div class="card-header" id="headingTwo">
+			          	    <span><button id="btn_review" class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse${index.index }" aria-expanded="false" aria-controls="collapseTwo">
+			                ${reviewList.reviewTitle }
+			                </button></span>
+			                <div style="text-align: right;">${reviewList.memberId } ${reviewList.enrollDate }</div>
+			            	</div>
+						
+							<div id="collapse${index.index }" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+							<div class="card-body" >
+								<div class="card-body_left" style="width:50%; height:100%; float:left;">	
+			            		${reviewList.reviewContents }
+			            		</div>
+			            		<div class="card-body_right" style="width:50%; height:100%; float:left; text-align:right;">
+			            		<c:if test="${sessionScope.member.memberId eq reviewList.memberId }">
+								<a class="btn btn-primary" href="/recommend/updateview?pCode=${pCode }&reviewNo=${reviewList.reviewNo }&pFilename=${pFilename}">수정</a> 
+								<a	class="btn btn-primary" href="/recommend/delete?pCode=${reviewList.pCode }&reviewNo=${reviewList.reviewNo}&pFilename=${pFilename}" onclick="return reviewdelete()">삭제</a>
 								</c:if>
-							</div>
-						</div>
+			            		</div>
+			          		</div>
+			          		</div>
 					</c:forEach>
+						</div>
 					<div id="section_contents_bottom"
 						style="margin-left: 633px; margin-top: 14px;">
-						${reviewpageNavi }</div>
-				</div>
+						${reviewpageNavi }
+					</div>
+				</div> 
 				<!-- 수정 끝나는곳 -->
 			</div>
+			
+			<div class="section_space" style="text-align: center;">
+			<!-- <hr style="width: 87.5%;height: 2px; background-color:gray; border-top: 1px;opacity: 0.4;"> -->
+			교환 / 환불</div>
 			<div class="notice">
-				<div class="notice_change">
-					<div class="notice_change_left"></div>
-					<div class="notice_change_right"></div>
-				</div>
-				<div class="notice_warning">
-					<div class="notice_warning_left"></div>
-					<div class="notice_warning_right"></div>
-				</div>
+				<blockquote class="blockquote mb-0">
+			         <p><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				  <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+				</svg> 단품 : 교환 및 반품이 가능한 경우</p>
+				상품등을 실제 받으신 날로부터 7일 이내<br>
+				(※ 포장을 개봉하여 사용하거나 또는 설치완료가 되어 상품의 가치가 훼손된 경우에는 반품 및 교환이 불가하오니 이점 양해하여 주시기 바랍니다.)<br>
+				받으신 상품의 내용이 표시·광고 사항과 다른 경우에는 상품등을 받으신 날로부터 3개월 이내.<br>
+				전자상거래등에서의소비자보호에관한법률에 규정되어 있는 소비자 청약철회 가능범위에 해당되는 경우.<br>
+				기타, 고객님의 단순한 변심에 의해 상품의 교환 및 반품을 요청하시는 경우에는 고객님께서 상품 반송에 소요되는 비용을 실비로 부담하셔야 하오니 이점 양해하여 주시기 바랍니다.
+				<hr style="height: 2px; background-color:gray; border-top: 1px;opacity: 0.4;">
+				<p><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				  <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+				</svg> 교환 및 반품이 불가능한 경우</p>
+				고객님의 책임있는 사유로 상품등이 멸실 또는 훼손된 경우.<br>
+				고객님의 사용 또는 일부 소비에 의하여 상품등의 가치가 현저히 감소한 경우.<br>
+				시간이 경과되어 재판매가 곤란할 정도로 상품등의 가치가 상실된 경우.<br>
+				복제가 가능한 상품등의 포장을 훼손한 경우.<br>
+				기타, 전자상거래등에서의소비자보호에관한법률이 정하는 소비자 청약철회 제한에 해당되는 경우.(고객변심에 의한 교환, 반품인 경우 상품 반송에 드는 비용은 고객님께서 부담하셔야 합니다.)
+			    </blockquote>
 			</div>
 		</div>
 		<div class="aside"></div>
@@ -447,30 +518,5 @@
 		<div class="aside"></div>
 	</footer>
 
-	<!-- 후기 작성 글 보는 모달창 -->
-
-	<%-- <div class="modal fade" id="modaltitle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-				  <!-- modal창에 제목이 들어가는 부분 -->
-				  <c:forEach var="reviewList" items="${reviewList }">
-					<h5 class="modal-title" id="exampleModalLabel">
-					${reviewList.reviewTitle }
-					</h5>
-					</c:forEach>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">X</span>
-					</button>
-				</div>
-				<!-- modal창에 내용이 들어가는 부분 -->
-				<div class="modal-body">내용</div>
-				<div class="modal-footer">
-					<a class="btn" id="modalY" href="">수정</a>
-					<a class="btn" id="modalY" href="#">삭제</a>
-				</div>
-			</div>
-		</div>
-	</div> --%>
 </body>
 </html>

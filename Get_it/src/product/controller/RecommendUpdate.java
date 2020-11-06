@@ -1,24 +1,27 @@
-package product.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import member.model.vo.Member;
+import product.model.service.recommend.RecommendService;
 
 /**
- * Servlet implementation class reviewUpdateView
+ * Servlet implementation class reviewupdate
  */
-@WebServlet("/recommend/review/update")
-public class reviewUpdateView extends HttpServlet {
+@WebServlet("/recommend/update")
+public class RecommendUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reviewUpdateView() {
+    public RecommendUpdate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,16 +31,25 @@ public class reviewUpdateView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-//		System.out.println(reviewNo);
+		HttpSession session = request.getSession();
 		String pCode = request.getParameter("pCode");
+		String title = request.getParameter("title");
+		String contents = request.getParameter("contents");
 		String pFilename = request.getParameter("pFilename");
-//		System.out.println(pCode);
-		request.setAttribute("pFilename", pFilename);
-		request.setAttribute("reviewNo", reviewNo);
-		request.setAttribute("pCode", pCode);
-		request.getRequestDispatcher("/WEB-INF/views/recommend/recommendUpdate.jsp").forward(request,response);
-
+		int result =0;
+		int reviewNo =0;
+		String memberId ="";
+		//if(((Member)session.getAttribute("memeber")!=null)) {
+		reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		memberId = ((Member)session.getAttribute("member")).getMemberId(); 
+		result = new RecommendService().reviewUpdate(memberId,pCode,title,contents,reviewNo);
+		//}
+		
+		  if(result>0) { request.setAttribute("pFilename", pFilename);
+		  request.setAttribute("pCode", pCode);
+		  request.getRequestDispatcher("/recommend/detail").forward(request, response);
+		  }else { response.sendRedirect("서비스요청실패"); }
+		 
 	}
 
 	/**

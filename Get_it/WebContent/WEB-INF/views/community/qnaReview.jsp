@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>완제품 후기글 수정</title>
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -24,7 +26,7 @@
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/recomReviewWrite.css">
+<link rel="stylesheet" type="text/css" href="/css/review.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
@@ -44,7 +46,6 @@
           })
         })
     </script>
-
 </head>
 <body>
 	<header>
@@ -63,7 +64,7 @@
 			</div>
 			<div id="nav_bar_other">
 				<div id="wrap">
-					<form action="" autocomplete="on">
+					<form action="/qna/search" autocomplete="on">
 						<input id="search" name="search" type="text"
 							placeholder="검색어를 입력하세요."><input id="search_submit"
 							value="Rechercher" type="submit">
@@ -137,38 +138,60 @@
 		</div>
 	</header>
 	<section>
-		<div id="section_empty"></div>
-		<div id="section_contents">
-			<div id="section_contents_empty"></div>
-			<div class="container" id="section_contents_write">
-				<br> <br>
-				<h2>완제품 후기 게시글 수정</h2>
-				<br>
+		<div id="main_image"
+			style="text-align: center; margin-top: 1%; background-color: #6E65A6;">
+			<img src="/img/QnA.gif" alt="..." style="width: 70%; height: 100%;">
+		</div>
+		<div id="section_title2">
 
-				<form action="/recommend/update" method="post">
-					<input type="hidden" name="pCode" value="${pCode }"> <input
-						type="hidden" name="pFilename" value="${pFilename }"> <input
-						type="hidden" name="reviewNo" value="${reviewNo }">
-					<div class="form-group">
-						<label for="exampleInputEmail1">Title</label>
-						<textarea class="form-control" rows="1" id="comment"
-							placeholder="제목을 입력해주세요." name="title"></textarea>
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">Contents</label>
-						<textarea class="form-control" rows="5" id="comment"
-							placeholder="내용을 입력해주세요." name="contents"></textarea>
-					</div>
-					<button type="submit" class="btn btn-default"
-						style="margin-left: 83%;">수정하기</button>
-					<br> <a href="javascript:history.back()"
-						style="text-align: right;">원래 페이지로 이동</a>
+			<!--  ----------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+			<p>
+				<b>Community</b>
+			</p>
+			<p>
+				<a href="/review/main">QnA</a> | <a href="#"
+					style="font-weight: bold;">후기</a>
+			</p>
+			<div id="wrap2">
+				<form action="/qna/search" method="get" autocomplete="on">
+					<input id="search" name="search" type="text"
+						placeholder="검색어를 입력하세요."> <input id="search_submit"
+						value="Rechercher" type="submit">
 				</form>
 			</div>
-			<div id="section_contents_empty"></div>
+			<hr style="width: 80%;">
 		</div>
-
-
+		<div id="empty_space1"></div>
+		<table class="table table-hover" id="tb-list">
+			<thead>
+				<tr>
+					<th scope="col">No</th>
+					<th scope="col">제목</th>
+					<th scope="col">작성자</th>
+					<th scope="col">등록날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="qnaList" items="${qnaList }">
+					<tr>
+						<th scope="row">${qnaList.qnaNo }</th>
+						<td><a href="/qna/detail?qnaNo=${qnaList.qnaNo }">${qnaList.qnaTitle }</a></td>
+						<td>${qnaList.memberId }</td>
+						<td>${qnaList.qnaDate }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<div id="section_title3">
+			<div class="section_title3_left">
+				<nav aria-label="Page navigation example" id="paging">${ pageNavi }
+				</nav>
+			</div>
+			<div class="section_title3_right">
+				<a href="/qna/writeform">글 작성</a>
+			</div>
+		</div>
 	</section>
 	<footer>
 		<div id="empty_space2"></div>

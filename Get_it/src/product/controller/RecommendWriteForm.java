@@ -1,4 +1,4 @@
-package product.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import member.vo.Member;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class RecommendWriteForm

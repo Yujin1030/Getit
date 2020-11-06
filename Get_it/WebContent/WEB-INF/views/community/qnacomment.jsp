@@ -1,9 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	<%@ page import="java.util.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>댓글</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>QnA 게시글</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -28,21 +35,28 @@
         })
     </script>
     
+    <script>
+	
+   		function question() {
+   			return confirm ("정말로 삭제하시겠습니까?");
+   		}
+   		
+    </script>
 </head>
 <body>
     <header>
         <div id="nav_bar">
             <div id="nav_bar_menu">
                 <ul>
-                    <li><a href="#">Recommend</a></li>
-                    <li><a href="#">Self</a></li>
-                    <li><a href="#">Other</a></li>
-                    <li><a href="#">Used Deal</a></li>
-                    <li><a href="#">Community</a></li>
+                    <li><a href="/recommend/listview">Recommend</a></li>
+                    <li><a href="/getit/Component">Self</a></li>
+                    <li><a href="/other/allList">Other</a></li>
+                    <li><a href="/deal/main">Used Deal</a></li>
+                    <li><a href="/review/main">Community</a></li>
                 </ul>
             </div>
             <div id="nav_bar_logo">
-                <a href="#">Assemble</a>
+                <a href="/mainpage/view">Assemble</a>
             </div>
             <div id="nav_bar_other">
                 <div id="wrap">
@@ -50,12 +64,64 @@
                   <input id="search" name="search" type="text" placeholder="검색어를 입력하세요."><input id="search_submit" value="Rechercher" type="submit"> 
                   </form>
                 </div>
-                <div id="cart">
-                    <a href="#" class="fas fa-shopping-cart fa-lg" style="color: black;"></a>
-                </div>
-                <div id="login">
-                    <a href="#" class="fas fa-user fa-lg" style="color: black;"></a>
-                </div>
+                <c:if test="${ sessionScope.member eq null }">
+            <div id="cart">
+               
+               <a href="#"><i class="fas fa-shopping-cart fa-lg"
+                  style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
+            </div>
+            </c:if>
+            
+            <c:if test="${ sessionScope.member ne null }">
+            <div id="cart">
+               
+               <a href="/member/shoppingbag?userId=${sessionScope.member.memberId }"><i class="fas fa-shopping-cart fa-lg"
+                  style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
+            </div>
+            </c:if>
+
+            <c:if test="${ sessionScope.member eq null }">
+               <!-- 로그인x -->
+               <div id="login">
+                  <div class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> <i
+                        class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/login.html">Log In</a>
+                           <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/enroll.jsp">회원가입</a>
+                     </div>
+                  </div>
+               </div>
+            </c:if>
+
+            <c:if test="${ sessionScope.member ne null }">
+               <!-- 로그인o -->
+               <div id="login">
+                  <div class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> <i
+                        class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a> 
+                        <a class="dropdown-item" href="/order/info?userId=${sessionScope.member.memberId }">Order Info</a>
+                        
+                        <c:if test="${ sessionScope.member.memberId eq 'admin'}">
+                        <a class="dropdown-item" href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
+                        </c:if>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/member/logout">LogOut</a>
+                     </div>
+                  </div>
+               </div>
+            </c:if>
             </div>
         </div>
     </header>
@@ -83,7 +149,7 @@
                     <hr>
                     
                     <!-- 게시물을 작성한 작성자와 현재 로그인 중인 작성자가 같을때 뜨는 화면 -->
-        <c:if test="${qna.memberId eq sessionScope.member.memberId || sessionScope.member.memberId eq 'admin' } ">
+     			<c:if test="${qna.memberId eq sessionScope.member.memberId || sessionScope.member.memberId eq 'admin' }">
                         <div id="section_footer_modify" style="text-align:right;width:86%;height:8%;float:left;">
                             <form action="/qna/updateview" method="post">
                                 <button type="submit" class="btn btn-secondary">수정</button>
@@ -101,15 +167,15 @@
                                 <button type="submit" class="btn btn-secondary">목록</button>
                             </form>
                         </div>
-                        </c:if>
+                        </c:if> 
                                 <!-- 게시물을 작성한 작성자와 현재 로그인 중인 작성자가 같지 않을때 뜨는 화면 -->
-        <c:if test="${qna.memberId ne sessionScope.member.memberId || sessionScope.member.memberId eq 'admin' }">
+             <c:if test="${qna.memberId ne sessionScope.member.memberId}">
 	        <div id="section_footer_list" style="text-align:right;width:50%;height:8%;float:left;">
 	            <form action="/review/main" method="post">
 	                <button type="submit" class="btn btn-secondary">목록</button>
 	            </form>
 	        </div>
-        </c:if>
+	        </c:if> 
                     <br>
                     <br>
                     <br>
@@ -124,11 +190,11 @@
                               <td class="com-line" style="line-height:50px;">${qnaComList.cContents }</td>
                               <td class="com-line" style="text-align: center;line-height:50px;">${qnaComList.cDate }</td>
                               <td class="com-line" style="width: 100px;line-height:50px;">
-                                <form action="/qna/comdelete" method="post">
+                   <%--              <form action="/qna/comdelete" method="post">
                                     <button type="submit" class="btn btn-outline-dark" onclick="return question()">삭제</button>
                                     <input type="hidden" name="commentNo" value="${qnaComList.cNo }">
                                     <input type="hidden" name="qnaNo" value="${qnaComList.qnaNo }">
-                                </form>
+                                </form> --%>
                               </td>
                             </tr>
                           </c:forEach>
@@ -150,6 +216,7 @@
                                </span>
                               </div>
                         </form>
+                     </c:if>
                     <br>
                     <br>
                     <br>

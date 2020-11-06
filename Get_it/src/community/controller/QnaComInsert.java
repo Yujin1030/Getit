@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import community.service.CommunityService;
-import member.vo.Member;
+import community.model.service.CommunityService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class QnaComInsert
