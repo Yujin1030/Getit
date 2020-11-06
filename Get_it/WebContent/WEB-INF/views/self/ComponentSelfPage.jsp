@@ -43,15 +43,15 @@
 		<div id="nav_bar">
 			<div id="nav_bar_menu">
 				<ul>
-					<li><a href="#">Recommend</a></li>
-					<li><a href="#">Self</a></li>
-					<li><a href="#">Other</a></li>
-					<li><a href="#">Used Deal</a></li>
-					<li><a href="#">Community</a></li>
+                    <li><a href="/recommend/listview">Recommend</a></li>
+                    <li><a href="/getit/Component">Self</a></li>
+                    <li><a href="/other/allList">Other</a></li>
+                    <li><a href="/deal/main">Used Deal</a></li>
+                    <li><a href="/review/main">Community</a></li>
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
-				<a href="#">Assemble</a>
+				<a href="/mainpage/view">Assemble</a>
 			</div>
 			<div id="nav_bar_other">
 				<div id="wrap">
