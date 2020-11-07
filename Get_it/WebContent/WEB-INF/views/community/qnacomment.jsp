@@ -190,6 +190,13 @@
                               <td class="com-line" style="line-height:50px;">${qnaComList.cContents }</td>
                               <td class="com-line" style="text-align: center;line-height:50px;">${qnaComList.cDate }</td>
                               <td class="com-line" style="width: 100px;line-height:50px;">
+                              <c:if test="${qna.memberId eq sessionScope.member.memberId || sessionScope.member.memberId eq 'admin' }">
+                             <form action="/qna/comdelete" method="post">
+			      				<button type="submit" class="btn btn-outline-dark" onclick="return question()">삭제</button>
+			      				<input type="hidden" name="commentNo" value="${qnaComList.qnaNo }">
+			      				<input type="hidden" name="reviewNo" value="${qnaComList.cNo }">
+			      			 </form>
+			      			 </c:if>
                               </td>
                             </tr>
                           </c:forEach>
