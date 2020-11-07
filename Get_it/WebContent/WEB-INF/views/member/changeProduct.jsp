@@ -51,15 +51,15 @@
 		<div id="nav_bar">
 			<div id="nav_bar_menu">
 				<ul>
-					<li><a href="#">Recommend</a></li>
-					<li><a href="#">Self</a></li>
-					<li><a href="#">Other</a></li>
-					<li><a href="#">Used Deal</a></li>
-					<li><a href="#">Community</a></li>
+					<li><a href="/recommend/listview">Recommend</a></li>
+                    <li><a href="/getit/Component">Self</a></li>
+                    <li><a href="/other/allList">Other</a></li>
+                    <li><a href="/deal/main">Used Deal</a></li>
+                    <li><a href="/review/main">Community</a></li>
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
-				<a href="#">Assemble</a>
+				<a href="/mainpage/view">Assemble</a>
 			</div>
 			<div id="nav_bar_other">
 				<div id="wrap">
@@ -69,13 +69,64 @@
 							value="Rechercher" type="submit">
 					</form>
 				</div>
+				<c:if test="${ sessionScope.member eq null }">
 				<div id="cart">
-					<a href="#" class="fas fa-shopping-cart fa-lg"
-						style="color: black;"></a>
+					
+					<a href="#"><i class="fas fa-shopping-cart fa-lg"
+						style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
 				</div>
-				<div id="login">
-					<a href="#" class="fas fa-user fa-lg" style="color: black;"></a>
+				</c:if>
+				
+				<c:if test="${ sessionScope.member ne null }">
+				<div id="cart">
+					
+					<a href="/member/shoppingbag?userId=${sessionScope.member.memberId }"><i class="fas fa-shopping-cart fa-lg"
+						style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
 				</div>
+				</c:if>
+
+				<c:if test="${ sessionScope.member eq null }">
+					<!-- 로그인x -->
+					<div id="login">
+						<div class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <i
+								class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="/login.html">Log In</a>
+									<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/enroll.jsp">회원가입</a>
+							</div>
+						</div>
+					</div>
+				</c:if>
+
+				<c:if test="${ sessionScope.member ne null }">
+					<!-- 로그인o -->
+					<div id="login">
+						<div class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <i
+								class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a> 
+								<a class="dropdown-item" href="/order/info?userId=${sessionScope.member.memberId }">Order Info</a>
+								
+								<c:if test="${ sessionScope.member.memberId eq 'admin'}">
+								<a class="dropdown-item" href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
+								</c:if>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/member/logout">LogOut</a>
+							</div>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</header>
@@ -139,8 +190,8 @@
                                 
                                 <h6 style="text-align: left; font-size:18px; font-weight: bolder;">상품 배송, 회수지</h6>
 								<h6 class="card-title" style="font-weight: bold; text-align: left;">${member.memberName}</h6>
-								<p class="card-text" style="text-align: left; margin-bottom: -5px; font-size:15px;">${cOrder.detailAddress}</p>
-								<p class="card-text"  style="text-align: left;font-size:13px; color: dimgray;">${cOrder.phone}</p>
+								<p class="card-text" style="text-align: left; margin-bottom: -5px; font-size:15px;">${cOrder.deliveryAddress}</p>
+								<p class="card-text"  style="text-align: left;font-size:13px; color: dimgray;">${member.phone}</p>
                                 
 							</div>
 						</div>

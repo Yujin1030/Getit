@@ -27,79 +27,86 @@
 <link rel="stylesheet" type="text/css" href="/css/member/basket.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 <script>
-        $(document).ready(function(){
-          $(window).scroll(function(){
-            var scroll = $(window).scrollTop();
-            if (scroll > 1) {
-              $("#nav_bar").css("background" , "white");
-              $("#nav_bar").css("opacity" , "0.5");
-              $("#nav_bar").css("color" , "black");
-            }
-            else{
-              $("#nav_bar").css("background" , "white");
-              $("#nav_bar").css("opacity" , "1");  
-            }
-          })
-          
-          var $All = $('#allCheck');
-          $All.change(function () {
-              var $this = $(this);
-              var checked = $this.prop('checked'); // checked 문자열 참조(true, false)
-              // console.log(checked);
-              $('input[name="checkRow"]').prop('checked', checked);
+	$(document)
+			.ready(
+					function() {
+						$(window).scroll(function() {
+							var scroll = $(window).scrollTop();
+							if (scroll > 1) {
+								$("#nav_bar").css("background", "white");
+								$("#nav_bar").css("opacity", "0.5");
+								$("#nav_bar").css("color", "black");
+							} else {
+								$("#nav_bar").css("background", "white");
+								$("#nav_bar").css("opacity", "1");
+							}
+						})
 
-          });
+						var $All = $('#allCheck');
+						$All.change(function() {
+							var $this = $(this);
+							var checked = $this.prop('checked'); // checked 문자열 참조(true, false)
+							// console.log(checked);
+							$('input[name="checkRow"]')
+									.prop('checked', checked);
 
+						});
 
-          var boxes = $('input[name="checkRow"]');
-          boxes.change(function () {
-       
-              var boxLength = boxes.length;
-              // 체크된 체크박스 갯수를 확인하기 위해 :checked 필터를 사용하여 체크박스만 선택한 후 length 프로퍼티를 확인
-              var checkedLength = $('input[name="checkRow"]:checked').length;
-              var selectAll = (boxLength == checkedLength);
+						var boxes = $('input[name="checkRow"]');
+						boxes
+								.change(function() {
 
-              $All.prop('checked', selectAll);
+									var boxLength = boxes.length;
+									// 체크된 체크박스 갯수를 확인하기 위해 :checked 필터를 사용하여 체크박스만 선택한 후 length 프로퍼티를 확인
+									var checkedLength = $('input[name="checkRow"]:checked').length;
+									var selectAll = (boxLength == checkedLength);
 
-          });
-          
-          //$("#sDelte").on("click", function() {
-       	  $("#sDelte").click(function(e) {
-       		  e.preventDefault();
-       		  console.log($("input[name=checkRow]:checked"));
-       		  var basketVal = new Array();
-       		$("input[name=checkRow]:checked").each(function(idx, item) {
-       			console.log($(item).val());
-       			basketVal.push($(item).val());
-       			
-       			
-       		});
-     		location.href="/member/shoppingBagListDelete?basketNo="+basketVal;
-          })
-          
-          
-          $("#delete").click(function(e){
-        	  e.preventDefault();
-        	  location.href="/member/shoppingBagEmpty";
-          });
-       	  
-			/* var sum = 0;
-		  	for(var i =0; i< 5; i++){
-		  		var num = parseInt($("#price"+i).text());
-    			sum += num;
-    		} 
+									$All.prop('checked', selectAll);
 
-       	  	$("#selProductPrice").html(sum+"원"); */
-       	  	var total = 0;
-       	 	$("input[name=checkRow]:checked").each(function(idx, item) {
-       	 		var num = $(item).parent().siblings().last().html();
-    			total += parseInt(num);
-    		});
-       	 $("#selProductPrice").html(total+"원");
-        });
-    </script>
+								});
+
+						//$("#sDelte").on("click", function() {
+						$("#sDelte").click(function(e) {
+											e.preventDefault();
+											console
+													.log($("input[name=checkRow]:checked"));
+											var basketVal = new Array();
+											$("input[name=checkRow]:checked")
+													.each(
+															function(idx, item) {
+																console.log($(item).val());
+																basketVal.push($(item).val());
+															});
+											location.href = "/member/shoppingBagListDelete?basketNo="+ basketVal;
+										})
+
+						$("#delete").click(function(e) {
+							e.preventDefault();
+							location.href = "/member/shoppingBagEmpty";
+						});
+
+						/* var sum = 0;
+						for(var i =0; i< 5; i++){
+							var num = parseInt($("#price"+i).text());
+							sum += num;
+						} 
+
+						 	$("#selProductPrice").html(sum+"원"); */
+						var total = 0;
+						$("input[name=checkRow]:checked").each(
+								function(idx, item) {
+									var num = $(item).parent().siblings()
+											.last().html();
+									total += parseInt(num);
+								});
+						$("#selProductPrice").html(total + "원");
+						
+						$("#total").html(total + parseInt(3000)+"원")
+					});
+</script>
 
 </head>
 <body>
@@ -107,15 +114,15 @@
 		<div id="nav_bar">
 			<div id="nav_bar_menu">
 				<ul>
-					<li><a href="#">Recommend</a></li>
-					<li><a href="#">Self</a></li>
-					<li><a href="#">Other</a></li>
-					<li><a href="#">Used Deal</a></li>
-					<li><a href="#">Community</a></li>
+					<li><a href="/recommend/listview">Recommend</a></li>
+                    <li><a href="/getit/Component">Self</a></li>
+                    <li><a href="/other/allList">Other</a></li>
+                    <li><a href="/deal/main">Used Deal</a></li>
+                    <li><a href="/review/main">Community</a></li>
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
-				<a href="#">Assemble</a>
+				<a href="/mainpage/view">Assemble</a>
 			</div>
 			<div id="nav_bar_other">
 				<div id="wrap">
@@ -125,13 +132,71 @@
 							value="Rechercher" type="submit">
 					</form>
 				</div>
-				<div id="cart">
-					<a href="#" class="fas fa-shopping-cart fa-lg"
-						style="color: black;"></a>
-				</div>
-				<div id="login">
-					<a href="#" class="fas fa-user fa-lg" style="color: black;"></a>
-				</div>
+
+				<c:if test="${ sessionScope.member eq null }">
+					<div id="cart">
+
+						<a href="#"><i class="fas fa-shopping-cart fa-lg"
+							style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
+					</div>
+				</c:if>
+
+				<c:if test="${ sessionScope.member ne null }">
+					<div id="cart">
+
+						<a
+							href="/member/shoppingbag?userId=${sessionScope.member.memberId }"><i
+							class="fas fa-shopping-cart fa-lg"
+							style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
+					</div>
+				</c:if>
+
+				<c:if test="${ sessionScope.member eq null }">
+					<!-- 로그인x -->
+					<div id="login">
+						<div class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <i
+								class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="/login.html">Log In</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/enroll.jsp">회원가입</a>
+							</div>
+						</div>
+					</div>
+				</c:if>
+
+				<c:if test="${ sessionScope.member ne null }">
+					<!-- 로그인o -->
+					<div id="login">
+						<div class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <i
+								class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item"
+									href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a>
+								<a class="dropdown-item"
+									href="/order/info?userId=${sessionScope.member.memberId }">Order
+									Info</a>
+
+								<c:if test="${ sessionScope.member.memberId eq 'admin'}">
+									<a class="dropdown-item"
+										href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
+								</c:if>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/member/logout">LogOut</a>
+							</div>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</header>
@@ -148,19 +213,20 @@
 						<table class="table" id="basket_1">
 							<thead class="thead-dark">
 								<tr>
-									<th scope="col" style="width: 5%;"><input type="checkbox" id="allCheck" onClick="checkAll();" ></th>
+									<th scope="col" style="width: 5%;"><input type="checkbox"
+										id="allCheck" onClick="checkAll();"></th>
 									<th scope="col" style="width: 60%;">상품명/구성</th>
 									<th scope="col" style="width: 10%;">수량</th>
 									<th scope="col" style="width: 25%;">상품금액</th>
 								</tr>
 							</thead>
-							
+
 							<tbody style="border-bottom: 1px solid black;">
-							
+
 								<c:forEach items="${sList }" var="shopping" varStatus="status">
 									<tr>
-										<th scope="row">
-											<input type="checkbox" name="checkRow" id="checkRow" value="${shopping.basketNo }" checked>
+										<th scope="row"><input type="checkbox" name="checkRow"
+											id="checkRow" value="${shopping.basketNo }" checked>
 										</th>
 										<td>${shopping.pName }</td>
 										<td>${shopping.pAccount }</td>
@@ -168,7 +234,7 @@
 									</tr>
 
 								</c:forEach>
-								
+
 
 								<!--  <tr>
                               <th scope="row"><input type="checkbox"></th>
@@ -198,8 +264,12 @@
 						</table>
 					</div>
 					<div div style="text-align: right; width: 100%;">
-						<button class="fas fa-trash-alt fa-2x" style="background-color: white; font-size: 15px; height: 100%; border: 1px;" id="sDelte">선택상품 삭제</button>
-						<button class="fas fa-dumpster-fire fa-2x" style="background-color: white; font-size: 15px; height: 100%; border: 1px;" id="delete">장바구니 비우기</button>
+						<button class="fas fa-trash-alt fa-2x"
+							style="background-color: white; font-size: 15px; height: 100%; border: 1px;"
+							id="sDelte">선택상품 삭제</button>
+						<button class="fas fa-dumpster-fire fa-2x"
+							style="background-color: white; font-size: 15px; height: 100%; border: 1px;"
+							id="delete">장바구니 비우기</button>
 					</div>
 					<br>
 					<div style="width: 100%">
@@ -217,8 +287,8 @@
 								<tr>
 									<th scope="row">판매 최적가</th>
 									<td id="selProductPrice">0원</td>
-									<td>0원</td>
-									<td name="allPrice">10000원</td>
+									<td>3000원</td>
+									<td name="allPrice" id="total">0</td>
 								</tr>
 							</tbody>
 						</table>
@@ -241,7 +311,7 @@
 									<tr>
 										<th scope="row"
 											style="color: white; background-color: #343A40; width: 15%; text-align: right;">이메일</th>
-										<td>${ member.email} }</td>
+										<td>${ member.email}}</td>
 									</tr>
 									<tr>
 										<th scope="row"
@@ -251,7 +321,7 @@
 									<tr>
 										<th scope="row"
 											style="color: white; background-color: #343A40; width: 15%; text-align: right;">배송주소</th>
-										<td>${ member.address } ${member.detailAddress}</td>
+										<td>${ member.address }${member.detailAddress}</td>
 									</tr>
 									<tr>
 										<th scope="row"
@@ -366,7 +436,8 @@
 					<br>
 					<div style="width: 100%; font-size: 14px; text-align: center;">
 
-						<button type="submit" class="btn btn-secondary"	style="background-color: #343A40; color: white;" id="orderButton">결제하기</button>
+						<button type="submit" class="btn btn-secondary"
+							style="background-color: #343A40; color: white;" id="orderButton">결제하기</button>
 					</div>
 				</form>
 				<br> <br>
@@ -417,6 +488,6 @@
 		</div>
 		<div id="empty_space2"></div>
 	</footer>
-	
+
 </body>
 </html>

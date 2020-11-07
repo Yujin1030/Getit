@@ -1,6 +1,8 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,20 +35,24 @@ public class UpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		Member member = new Member();	
+		member.setMemberId(request.getParameter("userId"));
 		member.setMemberPwd(request.getParameter("userPwdRe"));
 		member.setPhone(request.getParameter("phone"));
 		member.setZipcode(request.getParameter("zipcode"));
 		member.setAddress(request.getParameter("address"));
 		member.setDetailAddress(request.getParameter("detailAddress"));
 		
-		
+		System.out.println(member);
 		int result = new MemberService().updateMember(member);
 		
 		if(result > 0) {
 			request.getRequestDispatcher("/WEB-INF/views/main/index.jsp").forward(request, response);
 			
 		}else {
-			request.getRequestDispatcher("/WEB-INF/views/member/memberError.html").forward(request, response);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('수정 오류, 조건에 맞도록 작성 부탁드립니다.'); location.href='/WEB-INF/views/main/index.jsp';</script>"); 
+			writer.close();
 	
 		}
 	}

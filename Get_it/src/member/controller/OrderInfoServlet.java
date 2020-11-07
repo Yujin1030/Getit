@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.service.MemberService;
+import member.vo.Member;
 import member.vo.OrderList;
+import member.vo.ShoppingBag;
 
 /**
  * Servlet implementation class OrderInfoSevlet
@@ -31,9 +34,12 @@ public class OrderInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("userId");
+		HttpSession session = request.getSession();
+		String userId = ((Member) session.getAttribute("member")).getMemberId();
+
 		ArrayList<OrderList> oList = new MemberService().orderList(userId);
 		System.out.println(oList);
 
@@ -42,8 +48,9 @@ public class OrderInfoServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/member/orderInfo.jsp").forward(request, response);
 
 		} else {
-			request.getRequestDispatcher("/WEB-INF/views/member/memberError.html").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/member/orderInfo.jsp").forward(request, response);
 		}
+
 	}
 
 	/**
