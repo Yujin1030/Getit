@@ -27,7 +27,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <script>
         $(document).ready(function() {
@@ -58,6 +59,7 @@
                     <li><a href="/other/allList">Other</a></li>
                     <li><a href="/deal/main">Used Deal</a></li>
                     <li><a href="/review/main">Community</a></li>
+
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
@@ -65,9 +67,9 @@
 			</div>
 			<div id="nav_bar_other">
 				<div id="wrap">
-					<form action="#" autocomplete="on">
+					<form action="" autocomplete="on">
 						<input id="search" name="search" type="text"
-							placeholder="검색어를 입력하세요."> <input id="search_submit"
+							placeholder="검색어를 입력하세요."><input id="search_submit"
 							value="Rechercher" type="submit">
 					</form>
 				</div>
@@ -92,7 +94,7 @@
             <c:if test="${ sessionScope.member eq null }">
                <!-- 로그인x -->
                <div id="login">
-                  <div class="nav-item dropdown">
+                  <div class="nav-item dropdown" >
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                         role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"> <i
@@ -110,7 +112,7 @@
             <c:if test="${ sessionScope.member ne null }">
                <!-- 로그인o -->
                <div id="login">
-                  <div class="nav-item dropdown">
+                  <div class="nav-item dropdown" >
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                         role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"> <i
@@ -129,11 +131,10 @@
                   </div>
                </div>
             </c:if>
-            
 			</div>
 		</div>
 	</header>
-
+	
 	<section id="section">
 		<div id="main_image">
 				<img src="/img/recommendMain.gif" alt="..." style="width: 90%; height: 90%; padding-left:200px; padding-top: 0px;">
