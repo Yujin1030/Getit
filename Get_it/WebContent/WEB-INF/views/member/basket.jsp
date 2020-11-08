@@ -96,15 +96,16 @@
 
 						 	$("#selProductPrice").html(sum+"원"); */
 						var total = 0;
-						$("input[name=checkRow]:checked").each(
+						$("input[name=basketNo]:checked").each(
 								function(idx, item) {
 									var num = $(item).parent().siblings()
 											.last().html();
 									total += parseInt(num);
 								});
 						$("#selProductPrice").html(total + "원");
-						
-						$("#total").html(total + parseInt(3000)+"원")
+						var realTotal = total + parseInt(3000);
+						$("#total").html(realTotal+"원")
+						$("#allPrice").val(realTotal);
 					});
 </script>
 
@@ -207,7 +208,8 @@
 			<div class="container" id="section_contents_write">
 				<br> <br> <br> <br>
 				<form action="/memeber/shoppingPay" method="post">
-					<h2>Basket(3)</h2>
+				
+					<h2>Basket(${size})</h2>
 					<br>
 					<div style="width: 100%">
 						<table class="table" id="basket_1">
@@ -226,13 +228,15 @@
 								<c:forEach items="${sList }" var="shopping" varStatus="status">
 									<tr>
 										<th scope="row"><input type="checkbox" name="checkRow"
-											id="checkRow" value="${shopping.basketNo }" checked>
+											id="checkRow" value="${shopping.pCode }" checked>
+											
+											<input type="hidden" name="basketNo"
+											id="basketNo" value="${shopping.basketNo }">
 										</th>
 										<td>${shopping.pName }</td>
 										<td>${shopping.pAccount }</td>
 										<td id="price${status.index}">${shopping.pPrice }</td>
 									</tr>
-
 								</c:forEach>
 
 
@@ -264,10 +268,10 @@
 						</table>
 					</div>
 					<div div style="text-align: right; width: 100%;">
-						<button class="fas fa-trash-alt fa-2x"
+						<button class=""
 							style="background-color: white; font-size: 15px; height: 100%; border: 1px;"
 							id="sDelte">선택상품 삭제</button>
-						<button class="fas fa-dumpster-fire fa-2x"
+						<button class=""
 							style="background-color: white; font-size: 15px; height: 100%; border: 1px;"
 							id="delete">장바구니 비우기</button>
 					</div>
@@ -288,11 +292,13 @@
 									<th scope="row">판매 최적가</th>
 									<td id="selProductPrice">0원</td>
 									<td>3000원</td>
-									<td name="allPrice" id="total">0</td>
+									<td id="total">0</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
+					<input type="hidden" name="allPrice" id="allPrice">
+					
 					<br> <br>
 					<h6 style="font-weight: bold;">구매자 정보</h6>
 					<input type="checkBox" id="memberAddr" name="memberInfo"><label>주문자
