@@ -418,7 +418,7 @@ public class MemberDAO {
 
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT ALL INTO PAY VALUES (PAY_SEQ.NEXTVAL, SYSDATE,?,?,?,?, PAYBASKET_SEQ.NEXTVAL) INTO ORDER_INFO VALUES (ORDER_INFO_SEQ.NEXTVAL, 'N', null,null, 'N', null,null,?,null,'B',PAY_SEQ.NEXTVAL) SELECT * FROM DUAL";
+		String query = "INSERT ALL INTO PAY VALUES (PAY_SEQ.NEXTVAL, SYSDATE,?,?,?,?, PAYBASKET_SEQ.NEXTVAL) INTO ORDER_INFO VALUES (ORDER_INFO_SEQ.NEXTVAL, 'N', null,null, 'N', null,null,?,'N',null,PAY_SEQ.NEXTVAL) SELECT * FROM DUAL";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -444,7 +444,7 @@ public class MemberDAO {
 
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT ALL INTO PAY VALUES (PAY_SEQ.NEXTVAL, SYSDATE,?,?,?,?, PAYBASKET_SEQ.CURRVAL) INTO ORDER_INFO VALUES (ORDER_INFO_SEQ.NEXTVAL, 'N', null,null, 'N', null,null,?,null,'B',PAY_SEQ.NEXTVAL) SELECT * FROM DUAL";
+		String query = "INSERT ALL INTO PAY VALUES (PAY_SEQ.NEXTVAL, SYSDATE,?,?,?,?, PAYBASKET_SEQ.CURRVAL) INTO ORDER_INFO VALUES (ORDER_INFO_SEQ.NEXTVAL, 'N', null,null, 'N', null,null,?,'N',null,PAY_SEQ.NEXTVAL) SELECT * FROM DUAL";
 
 		try {
 			pstmt = conn.prepareStatement(query);
