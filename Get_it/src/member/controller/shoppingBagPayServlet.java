@@ -40,7 +40,6 @@ public class shoppingBagPayServlet extends HttpServlet {
 		 String address=((Member)session.getAttribute("member")).getAddress();
 		 String detailAddress =((Member)session.getAttribute("member")).getDetailAddress();
 		 String zipcode =((Member)session.getAttribute("member")).getZipcode();
-		 
 		 StringBuilder sb = new StringBuilder();
 		 sb.append(address);
 		 sb.append(detailAddress);
@@ -52,8 +51,10 @@ public class shoppingBagPayServlet extends HttpServlet {
 		 String pCode = request.getParameter("pCode");
 		 // 총 금액
 		 int allPrice = Integer.parseInt(request.getParameter("allPrice"));
+		 // 배송 메세지
+		 String dMessage = request.getParameter("dMessage");
 		 // 결과값 받기
-		 int result = new MemberService().shoppingPayInsert(sb,userId,pCode,allPrice);
+		 int result = new MemberService().shoppingPayInsert(sb,userId,pCode,allPrice,dMessage);
 		 if(result>0) {
 			
 			 response.setContentType("text/html; charset=UTF-8");

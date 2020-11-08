@@ -2,20 +2,21 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
+
 
 
 body {
-	
-	
     width:1890px;
     font-family: 'Sawarabi Gothic', sans-serif;
+    
 }
 
 
 
 div {
-    border : 1px solid #FFFF;
-/*    border : 1px solid black;*/
+ border : 1px solid #FFFF;
+	/* border : 1px solid black; */
 }
 
 
@@ -110,8 +111,8 @@ header {
   height:100%;
   width:57%;
 }
-/* 
-input[type="text"] {
+
+/* #search {
   height: 40px;
   font-size: 16px;
   display: inline-block;
@@ -130,19 +131,19 @@ input[type="text"] {
   z-index: 3;
   transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
   cursor: pointer;
-}
+} */
 
-input[type="text"]:focus:hover {
+/* #search:focus:hover {
   border-bottom: 1px solid black;
 }
 
-input[type="text"]:focus {
+#search:focus {
   width: 200px;
   z-index: 1;
   border-bottom: 1px solid black;
   cursor: text;
 }
-input[type="submit"] {
+#search {
   margin-top: 3px;
   height: 40px;
   width: 40px;

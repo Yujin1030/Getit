@@ -134,7 +134,8 @@ public class MemberDAO {
 	public int updateMember(Connection conn, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "UPDATE MEMBER_TBL SET PASSWORD=? PHONE=? ZIPCODE=? ADDRESS=? DETAILADDRESS=? WHERE MEMBER_ID=?";
+		String query = "UPDATE MEMBER_TBL SET PASSWORD=?, PHONE=?, ZIPCODE=?, ADDRESS=?, DETAILADDRESS=? WHERE MEMBER_ID=?";
+		
 		
 		
 		try {
@@ -424,20 +425,21 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public int shoppingPayInsert(Connection conn, StringBuilder sb, String userId, String pCode, int allPrice) {
+	public int shoppingPayInsert(Connection conn, StringBuilder sb, String userId, String pCode, int allPrice, String dMessage) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "INSERT INTO PAY VALUE (PAY_SEQ.NEXTVAL, SYSDATE, P_CODE=?, MEMBER_ID=?, ALLPRICE=? DELIVERY_ADDRESS=?";
+		String query = " INSERT ALL INTO PAY VALUES (PAY_SEQ.NEXTVAL, SYSDATE,?,?,?,?) \r\n" + 
+				" INTO ORDER_INFO VALUES (ORDER_INFO_SEQ.NEXTVAL, 'N', null,null, 'N', null,null,?,null,'B',PAY_SEQ.NEXTVAL) SELECT*FROM DUAL;";
 		
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, pCode);
-			pstmt.setString(2, userId);
-			pstmt.setInt(3, allPrice);
-			pstmt.setString(4, sb.toString());
-			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, pCode);
+			pstmt.setString(3,sb.toString());
+			pstmt.setInt(4, allPrice);
+			pstmt.setString(5, dMessage);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

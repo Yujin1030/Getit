@@ -24,8 +24,6 @@ public class Member {
 		
 	}
 
-
-
 	public String getMemberId() {
 		return memberId;
 	}

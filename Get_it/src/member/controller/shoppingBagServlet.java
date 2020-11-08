@@ -41,8 +41,6 @@ public class shoppingBagServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("member");
 		
-		System.out.println("fsafffffffffffffffffffffffffffffffffffffffffffffffff"+userId);
-		
 		if(!sList.isEmpty()) {
 			request.setAttribute("sList", sList);
 			request.setAttribute("member", member);
@@ -52,7 +50,6 @@ public class shoppingBagServlet extends HttpServlet {
 			request.setAttribute("sList", sList);
 			request.setAttribute("member", member);
 			request.getRequestDispatcher("/WEB-INF/views/member/basket.jsp").forward(request, response);
-			//request.getRequestDispatcher("/WEB-INF/views/member/memberError.html").forward(request, response);
 		}
 		
 	

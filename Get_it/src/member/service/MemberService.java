@@ -53,12 +53,11 @@ public class MemberService {
 	}
 	public int updateMember(Member member) {
 		int result = 0;
-		Connection conn;
+		Connection conn=null;
 
 		try {
 			conn = factory.createConnection();
 			result = new MemberDAO().updateMember(conn, member);
-			JDBCTemplate.close(conn);
 
 			if(result >0) {
 				JDBCTemplate.commit(conn);
@@ -69,6 +68,8 @@ public class MemberService {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+		JDBCTemplate.close(conn);
 		}
 		return result;
 
@@ -224,24 +225,28 @@ public class MemberService {
 
 		return result;
 	}
-	public int shoppingPayInsert(StringBuilder sb, String userId, String pCode, int allPrice){
+	public int shoppingPayInsert(StringBuilder sb, String userId, String pCode, int allPrice,String dMessage){
 		int result = 0;
-
+		Connection conn =null;
 		try {
-			Connection conn = factory.createConnection();
-			result = new MemberDAO().shoppingPayInsert(conn, sb, userId, pCode, allPrice);
+			conn = factory.createConnection();
+			result = new MemberDAO().shoppingPayInsert(conn, sb, userId, pCode, allPrice, dMessage);
 			
-			if(result>0) {
+			if (result > 0) {
 				JDBCTemplate.commit(conn);
+
 			}else {
 				JDBCTemplate.rollback(conn);
+
 			}
-			
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);			
 		}
-		
+
+
 		return result;
 	}
 	
