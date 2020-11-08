@@ -3,11 +3,12 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인페이지</title>
+<title>반품신청</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -24,10 +25,12 @@
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/member/index.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/admin/depositWating.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <script>
 	$(document).ready(function() {
@@ -51,42 +54,42 @@
 		<div id="nav_bar">
 			<div id="nav_bar_menu">
 				<ul>
-					<li><a href="#">Recommend</a></li>
-					<li><a href="#">Self</a></li>
-					<li><a href="#">Other</a></li>
-					<li><a href="#">Used Deal</a></li>
-					<li><a href="#">Community</a></li>
+					<li><a href="/recommend/listview">Recommend</a></li>
+					<li><a href="/getit/Component">Self</a></li>
+					<li><a href="/other/allList">Other</a></li>
+					<li><a href="/deal/main">Used Deal</a></li>
+					<li><a href="/review/main">Community</a></li>
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
-				<a href="#">Assemble</a>
+				<a href="/mainpage/view">Assemble</a>
 			</div>
 			<div id="nav_bar_other">
 				<div id="wrap">
-					<form action="" autocomplete="on">
+					<!-- <form action="" autocomplete="on">
 						<input id="search" name="search" type="text"
 							placeholder="검색어를 입력하세요."><input id="search_submit"
 							value="Rechercher" type="submit">
-					</form>
+					</form> -->
 				</div>
-				
-				
 				<c:if test="${ sessionScope.member eq null }">
-				<div id="cart">
-					
-					<a href="#"><i class="fas fa-shopping-cart fa-lg"
-						style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+					<div id="cart">
 
-				</div>
+						<a href="#"><i class="fas fa-shopping-cart fa-lg"
+							style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
+					</div>
 				</c:if>
-				
-				<c:if test="${ sessionScope.member ne null }">
-				<div id="cart">
-					
-					<a href="/member/shoppingbag?userId=${sessionScope.member.memberId }"><i class="fas fa-shopping-cart fa-lg"
-						style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
 
-				</div>
+				<c:if test="${ sessionScope.member ne null }">
+					<div id="cart">
+
+						<a
+							href="/member/shoppingbag?userId=${sessionScope.member.memberId }"><i
+							class="fas fa-shopping-cart fa-lg"
+							style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
+
+					</div>
 				</c:if>
 
 				<c:if test="${ sessionScope.member eq null }">
@@ -100,7 +103,7 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="/login.html">Log In</a>
-									<div class="dropdown-divider"></div>
+								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/enroll.jsp">회원가입</a>
 							</div>
 						</div>
@@ -117,11 +120,15 @@
 								class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a> 
-								<a class="dropdown-item" href="/order/info?userId=${sessionScope.member.memberId }">Order Info</a>
-								
+								<a class="dropdown-item"
+									href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a>
+								<a class="dropdown-item"
+									href="/order/info?userId=${sessionScope.member.memberId }">Order
+									Info</a>
+
 								<c:if test="${ sessionScope.member.memberId eq 'admin'}">
-								<a class="dropdown-item" href="/member/admin">Admin Page</a>
+									<a class="dropdown-item"
+										href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
 								</c:if>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/member/logout">LogOut</a>
@@ -133,23 +140,55 @@
 		</div>
 	</header>
 	<section>
-		<div id="main_image">
-			<img src="/img/%EB%A9%94%EC%9D%B8.PNG"
-				style="height: 100%; width: 100%;">
-		</div>
-		<div id="section_title">
-			<p>Recommend</p>
-		</div>
-		<div id="empty_space"></div>
+		<div id="section_empty"></div>
 		<div id="section_contents">
-	
-			<div id="section_contents_inner_empty"></div>
-			<div id="section_contents_inner">
-				<a href="#" style="color: black;">
-					<div class="card" style="width: 20.6rem;">
-						
-		<div id="empty_space"></div>
-		<div id="empty_space1"></div>
+			<div id="section_contents_empty"></div>
+			<div class="container" id="section_contents_write">
+				<br> <br> <br> <br>
+
+
+				<form action="/member/returnSend" method="post">
+					<div
+						style="transform: translate(-50%, 0%); padding: 50px; position: relative; top: 50%; left: 50%; text-align: center; width: 1200px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+
+						<h1 style="text-align: left;">입금대기</h1>
+                        <br><br>
+						<table width:150 border="0">
+							<tr>
+								<th>주문날짜</th>
+								
+								<th>고객명</th>
+								<th>연락처</th>
+								<th>상품 상세정보</th>
+								<th>주소</th>
+								<th>배송 요청사항</th>
+                                <th>결제 완료</th>
+							</tr>
+
+							<c:forEach items="${dList}" var="deposit" varStatus="index">
+								<tr>
+									<td>${deposit.payDate }</td>
+									<!-- 하나의 게시글에 대한 내용을 검색하기 위해서 noticeNo를 서블릿으로 넘겨줌-->
+									
+									<td>${deposit.memberName }</td>
+									<td>${deposit.phone }</td>
+									<td>${deposit.pName }</td>
+									<td>${deposit.deliveryAddress }</td>
+									<td>${deposit.dMessage }</td>
+                                    <td><button type="button" onclick="location.href='/payComplete' " style="background-color:  #0c4237; border-radius: 8px; color:whitesmoke; font-weight: bolder;">결제완료</button> </td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				</form>
+				<br> <br> <br> <br> <br> <br> <br>
+
+			</div>
+			<br> <br>
+		</div>
+
+
+
 	</section>
 	<footer>
 		<div id="empty_space2"></div>

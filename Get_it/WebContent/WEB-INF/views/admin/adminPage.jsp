@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문내역조회</title>
+<title>반품신청</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -25,10 +25,13 @@
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/member/orderList.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/member/depositWating.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
 <script>
 	$(document).ready(function() {
 		$(window).scroll(function() {
@@ -44,11 +47,7 @@
 		})
 	})
 </script>
-   <style>
-       *{
-           border: 1px solid white;
-       }
-    </style>
+
 </head>
 <body>
 	<header>
@@ -56,10 +55,10 @@
 			<div id="nav_bar_menu">
 				<ul>
 					<li><a href="/recommend/listview">Recommend</a></li>
-                    <li><a href="/getit/Component">Self</a></li>
-                    <li><a href="/other/allList">Other</a></li>
-                    <li><a href="/deal/main">Used Deal</a></li>
-                    <li><a href="/review/main">Community</a></li>
+					<li><a href="/getit/Component">Self</a></li>
+					<li><a href="/other/allList">Other</a></li>
+					<li><a href="/deal/main">Used Deal</a></li>
+					<li><a href="/review/main">Community</a></li>
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
@@ -67,7 +66,7 @@
 			</div>
 			<div id="nav_bar_other">
 				<div id="wrap">
-				<!-- 	<form action="" autocomplete="on">
+					<!-- <form action="" autocomplete="on">
 						<input id="search" name="search" type="text"
 							placeholder="검색어를 입력하세요."><input id="search_submit"
 							value="Rechercher" type="submit">
@@ -144,92 +143,98 @@
 		<div id="section_empty"></div>
 		<div id="section_contents">
 			<div id="section_contents_empty"></div>
-			
+			<div class="container" id="section_contents_write">
 				<br> <br> <br> <br>
+
+				<div
+					style="transform: translate(-50%, 0%); padding: 50px; position: relative; top: 50%; left: 50%; text-align: center; width: 700px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); border-radius: 5px;">
+
+
+					<h2
+						style="text-align: center; font-family: 'Libre Baskerville', serif; font-weight: bolder; font-size: 40px; color: #0c4237">Order
+						Management</h2>
+                    <hr>
+					<div class="order">
+						<h2 style="text-align: left; margin-left:20px;">
+							<i class="fas fa-dolly-flatbed" style="background-color: lightgray; border-radius: 8px; padding: 20px 15px 20px 15px;"></i> 주문
+						</h2>
+                        
+                        <br><br>
+
+						<ul style="list-style: none; ">
+							<li style="float:left; font-size: 20px;" ><i class="far fa-pause-circle"></i><a href="/admin/deopositWaiting" style="color: #0c4237; text-decoration: none; font-weight: borlder;">     입금
+									대기</a></li>
+							<li style="text-align: right; margin-right:50px; font-size: 20px; color: #0c4237; font-weight: borlder;">${depositC}개</li>
+							<br>
+							<li style="float:left; font-size: 20px;"><i class="fas fa-credit-card"></i><a href="/admin/paymentCompleted" style="color: #0c4237; text-decoration: none; font-weight: borlder;">     결제
+									완료</a></li>
+							<li style="text-align: right; margin-right:50px; font-size: 20px; color: #0c4237; font-weight: borlder;">${payC}개</li>
+							<br>
+							<li style="float:left; font-size: 20px;"><i class="fas fa-dolly"></i><a href="/admin/readyfordelivery" style="color:  #0c4237; text-decoration: none; font-weight: borlder;">     배송
+									준비</a></li>
+							<li style="text-align: right; margin-right:50px; font-size: 20px; color: #0c4237; font-weight: borlder;">${rfd }개</li>
+							<br>
+							<li style="float:left; font-size: 20px;"><i class="fas fa-shipping-fast"></i><a href="/admin/delivering" style="color: #0c4237; text-decoration: none;font-weight: borlder;">     배송 중</a></li>
+							<li style="text-align: right; margin-right:50px; font-size: 20px; color: #0c4237; font-weight: borlder;">${deliveryC }개</li>
+							<br>
+							<li style="float:left; font-size: 20px;"><i class="far fa-thumbs-up"></i><a href="/admin/deliveryCompelete" style="color: #0c4237; text-decoration: none;font-weight: borlder;">     배송 중</a></li>
+							<li style="text-align: right; margin-right:50px; font-size: 20px; color: #0c4237; font-weight: borlder;">${deliveryC }개</li>
+							<br>
+                            <hr style="margin-left: -40px; ">
+                            <br>
+							<li style="float:left; font-size: 20px;"><i class="far fa-window-close"></i><a href="/admin/return" style="color: #0c4237; text-decoration: none;font-weight: borlder;">     취소 요청</a></li>
+							<li style="text-align: right; margin-right:50px; font-size: 20px; color: #0c4237; font-weight: borlder;">${returnC }개</li>
+							<br>
+							<li style="float:left; font-size: 20px;"><i class="fas fa-undo"></i><a href="/admin/exchange " style="color: #0c4237; text-decoration: none;font-weight: borlder;">     반품 요청</a></li>
+							<li style="text-align: right; margin-right:50px; font-size: 20px; color: #0c4237; font-weight: borlder;">${changeC}개</li>
+							<br>
+						</ul>
+					</div>
+
+				</div>
 				
-                
-                <c:forEach items="${oList }" var="order" varStatus="status">
-                    <div style="transform: translate(-50%, 0%); padding: 50px 50px 10px 50px; position: relative; top: 50%; left: 50%; text-align: center; width: 700px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); border-radius: 8px;"> 
-                    
-                        <div style="float:left; text-align:left;  width:50%; margin-left:-30px; margin-top:-45px;">${order.payDate }</div>
-                        <div style="text-align:right; margin-right:-30px; margin-top:-45px; "><a href="#" style="text-decoration:none;">주문 상세보기 > </a></div>
-                        
-                        <div style="list-style:none; transform: translate(-50%, 0%); padding: 15px; position: relative; top: 50%; left: 50%; text-align: center; width: 650px; height: 230px; border: 1px solid lightgray; border-radius: 8px; margin: 5px;" >
-                        
-                            <div style="text-align: left; width:100%;">
-                            			<c:if
-											test="${order.payYN eq 'N' && order.dStatus eq null }">
-											<div>입금 전</div>
-										</c:if>
-										<c:if
-											test="${order.payYN eq 'Y' && order.dStatus eq null }">
-											<div>결제 완료</div>
-										</c:if>
-										<c:if
-											test="${order.dStatus eq 'B' && order.payYN eq 'Y' }">
-											<div>배송 준비</div>
-										</c:if>
-										<c:if
-											test="${order.dStatus eq 'D' && order.payYN eq 'Y' }">
-											<div>배송 중</div>
-										</c:if>
+				<br><br>
 
-										<c:if test="${order.dStatus eq 'C' && order.payYN eq 'Y' }">
-											<div>배송 완료</div>
-										</c:if>
 
-										<c:if
-											test="${order.dStatus eq 'C' && order.returnYN eq 'Y' }">
-											<div>반품신청</div>
-										</c:if>
-										<c:if
-											test="${order.dStatus eq 'C' && order.changeYN eq 'Y' }">
-											<div>교환신청</div>
-										</c:if>
-                            </div>
-                                <div style="text-align: center;">
-                                    <div style="width:25%; height:100%; padding:10px; float: left;">${order.pFileName}</div>
+				<%-- <div class="product">
+					<h2>
+						<img src=""> 상품
+					</h2>
+					<ul>
+						<li><img src=""><a href="/admin/sale">판매 중</a></li>
+						<li>${ }개</li>
+						<br>
+						<li><img src=""><a href="/admin/outofstock">품절</a></li>
+						<li>${ }개</li>
+						<br>
+						<li><img src=""><a href="/admin/inventory">재고 관리</a></li>
+						<li>${ }개</li>
+						<br>
+					</ul>
+				</div>
+				<div class="board">
+					<h2>
+						<img src=""> 게시글
+					</h2>
+					<ul>
+						<li><img src=""><a href="/admin/qa">Q&A</a></li>
+						<li>${ }개</li>
+						<br>
+						<li><img src=""><a href="/admin/usertrade">중고 거래</a></li>
+						<li>${ }개</li>
+						<br>
+						<li><img src=""><a href="/admin/reviews">Review</a></li>
+						<li>${ }개</li>
+						<br>
 
-                                    <div style="width:75%; padding:10px; text-align: left; float: left;">
-                                                <ul style="list-style:none;">
-                                                    <li style="font-weight: bolder; font-size: 20px; ">${order.pName}</li>
-                                                    <li style="color:dimgray;">${order.pContents}</li>
-                                                    <li style="text-align: right; color:gray; font-size: 12px;">${order.pPrice}원 · ${order.pAccount }개 </li>
+					</ul>
+				</div>  --%>
 
-                                                </ul>
-                                    </div>
-                                </div>
-                            
-                             <div style="list-style:none; width:100%; text-align:center; ">
-                                            <div style=" padding: 5px 30px 5px 30px; float:left; border: 1px solid lightgray; margin:5px 5px 5px 100px;border-radius: 8px; "><a
-                                                href="/member/change?orderNo=${order.orderNo}" style="text-decoration:none;">교환신청</a></div>
-                                            <div style=" padding: 5px 30px 5px 30px; float:left; border: 1px solid lightgray; margin:5px;border-radius: 8px;"><a href="/member/return?orderNo=${order.orderNo }" style="text-decoration:none;">반품신청</a></div>
-                                            <div style="padding: 5px 30px 5px 30px; float:left; border: 1px solid lightgray; margin:5px;border-radius: 8px;"><a href="" style="text-decoration:none;">배송조회</a></div>
-				            </div>
-                            	
-                            
-                        </div>
-                        
-                
-                        <div style="transform:translate(-50%, 50%); padding:5px; position:relative;
-                        top: 50%;
-                        left: 50%;
-                        width:250px;
-                        border: 1px solid lightgray; 
-                        border-radius: 8px;
-                        text-align:center;" >
-				        <a href="/review/writeform" style="text-decoration:none; ">구매후기 쓰기</a>
-                        </div>
-                        
-                    <br>
-                    </div>
-                    <br><br>
-                </c:forEach>
-        </div>
+			</div>
+		</div>
 
-			
-		
-		
+
+
 
 	</section>
 	<footer>
@@ -273,9 +278,7 @@
 		</div>
 		<div id="empty_space2"></div>
 	</footer>
-
-
-
-
 </body>
 </html>
+
+

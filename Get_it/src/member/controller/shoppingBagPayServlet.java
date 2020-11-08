@@ -33,10 +33,14 @@ public class shoppingBagPayServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String userId= request.getParameter("userId");
+		
 		
 		// 장바구니 거치고 결제
 		 HttpSession session = request.getSession(); 
+		 String userId = ((Member)session.getAttribute("member")).getMemberId();
+		 
+		 
+		 
 		 String address=((Member)session.getAttribute("member")).getAddress();
 		 String detailAddress =((Member)session.getAttribute("member")).getDetailAddress();
 		 String zipcode =((Member)session.getAttribute("member")).getZipcode();
@@ -48,13 +52,20 @@ public class shoppingBagPayServlet extends HttpServlet {
 		 // 배송주소
 		 sb.toString(); 
 		 // 상품코드
-		 String pCode = request.getParameter("pCode");
+		 String [] pCode = request.getParameterValues("checkRow");
 		 // 총 금액
 		 int allPrice = Integer.parseInt(request.getParameter("allPrice"));
 		 // 배송 메세지
 		 String dMessage = request.getParameter("dMessage");
 		 // 결과값 받기
-		 int result = new MemberService().shoppingPayInsert(sb,userId,pCode,allPrice,dMessage);
+		 int result = 0;
+		 for (int i = 0; i < pCode.length; i++) {
+			 if(i==0) {
+				 result = new MemberService().shoppingPayInsert(sb,userId,pCode[i],allPrice,dMessage);
+			 }else {
+				 result = new MemberService().shoppingPayInsertCurr(sb,userId,pCode[i],allPrice,dMessage);
+			 }
+		 }
 		 if(result>0) {
 			
 			 response.setContentType("text/html; charset=UTF-8");

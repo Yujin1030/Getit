@@ -23,6 +23,8 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/member/basket.css">
 <link rel="stylesheet"
@@ -30,9 +32,7 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 <script>
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function(){
 						$(window).scroll(function() {
 							var scroll = $(window).scrollTop();
 							if (scroll > 1) {
@@ -102,11 +102,68 @@
 											.last().html();
 									total += parseInt(num);
 								});
+						
 						$("#selProductPrice").html(total + "원");
 						var realTotal = total + parseInt(3000);
 						$("#total").html(realTotal+"원")
 						$("#allPrice").val(realTotal);
+						
+						$("#memberInfo").change(function() {
+							if($("#memberInfo").is(":checked")) {
+								$("#deliveryInfo").show();
+								$("#receiverInfo").hide();
+							}else{
+								$("#deliveryInfo").hide();
+								$("#receiverInfo").show();
+							}
+						})
 					});
+	 function execDaumPostcode(){
+         new daum.Postcode({
+             oncomplete: function(data) {
+                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                 var addr = ''; // 주소 변수
+                 var extraAddr = ''; // 참고항목 변수
+
+                 //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                     addr = data.roadAddress;
+                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                     addr = data.jibunAddress;
+                 }
+
+                 // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                 if(data.userSelectedType === 'R'){
+                     // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                     // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                     if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                         extraAddr += data.bname;
+                     }
+                     // 건물명이 있고, 공동주택일 경우 추가한다.
+                     if(data.buildingName !== '' && data.apartment === 'Y'){
+                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                     }
+                     // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                     if(extraAddr !== ''){
+                         extraAddr = ' (' + extraAddr + ')';
+                     }
+                     // 조합된 참고항목을 해당 필드에 넣는다.
+                    
+                 
+                 }
+
+                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                 document.getElementById("postcode").value = data.zonecode;
+                 document.getElementById("address").value = addr;
+                 // 커서를 상세주소 필드로 이동한다.
+                 document.getElementById("detailAddress").focus();
+             }
+         }).open();
+     }
+					
 </script>
 
 </head>
@@ -116,10 +173,10 @@
 			<div id="nav_bar_menu">
 				<ul>
 					<li><a href="/recommend/listview">Recommend</a></li>
-                    <li><a href="/getit/Component">Self</a></li>
-                    <li><a href="/other/allList">Other</a></li>
-                    <li><a href="/deal/main">Used Deal</a></li>
-                    <li><a href="/review/main">Community</a></li>
+					<li><a href="/getit/Component">Self</a></li>
+					<li><a href="/other/allList">Other</a></li>
+					<li><a href="/deal/main">Used Deal</a></li>
+					<li><a href="/review/main">Community</a></li>
 				</ul>
 			</div>
 			<div id="nav_bar_logo">
@@ -127,11 +184,11 @@
 			</div>
 			<div id="nav_bar_other">
 				<div id="wrap">
-					<form action="" autocomplete="on">
+					<!-- <form action="" autocomplete="on">
 						<input id="search" name="search" type="text"
 							placeholder="검색어를 입력하세요."><input id="search_submit"
 							value="Rechercher" type="submit">
-					</form>
+					</form> -->
 				</div>
 
 				<c:if test="${ sessionScope.member eq null }">
@@ -208,7 +265,7 @@
 			<div class="container" id="section_contents_write">
 				<br> <br> <br> <br>
 				<form action="/memeber/shoppingPay" method="post">
-				
+
 					<h2>Basket(${size})</h2>
 					<br>
 					<div style="width: 100%">
@@ -228,50 +285,23 @@
 								<c:forEach items="${sList }" var="shopping" varStatus="status">
 									<tr>
 										<th scope="row"><input type="checkbox" name="checkRow"
-											id="checkRow" value="${shopping.pCode }" checked>
-											
-											<input type="hidden" name="basketNo"
-											id="basketNo" value="${shopping.basketNo }">
-										</th>
+											id="checkRow" value="${shopping.pCode }" checked> <input
+											type="hidden" name="basketNo" id="basketNo"
+											value="${shopping.basketNo }"></th>
 										<td>${shopping.pName }</td>
 										<td>${shopping.pAccount }</td>
 										<td id="price${status.index}">${shopping.pPrice }</td>
 									</tr>
 								</c:forEach>
 
-
-								<!--  <tr>
-                              <th scope="row"><input type="checkbox"></th>
-                                <td>	
-                                이엠텍 지포스 GTX 1660 SUPER STORM X Dual OC D6 6GB
-                                </td>
-                                <td>1</td>
-                                <td>278,000원</td>
-                            </tr>
-                            <tr>
-                              <th scope="row"><input type="checkbox"></th>
-                                <td>	
-                                이엠텍 지포스 GTX 1660 SUPER STORM X Dual OC D6 6GB
-                                </td>
-                                <td>1</td>
-                                <td>278,000원</td>
-                            </tr>
-                            <tr>
-                              <th scope="row"><input type="checkbox"></th>
-                                <td>	
-                                이엠텍 지포스 GTX 1660 SUPER STORM X Dual OC D6 6GB
-                                </td>
-                                <td>1</td>
-                                <td>278,000원</td>
-                            </tr> -->
 							</tbody>
 						</table>
 					</div>
 					<div div style="text-align: right; width: 100%;">
-						<button class=""
+						<button class="btn btn-secondary"
 							style="background-color: white; font-size: 15px; height: 100%; border: 1px;"
 							id="sDelte">선택상품 삭제</button>
-						<button class=""
+						<button class="btn btn-secondary"
 							style="background-color: white; font-size: 15px; height: 100%; border: 1px;"
 							id="delete">장바구니 비우기</button>
 					</div>
@@ -297,74 +327,97 @@
 							</tbody>
 						</table>
 					</div>
-					<input type="hidden" name="allPrice" id="allPrice">
-					
-					<br> <br>
+					<input type="hidden" name="allPrice" id="allPrice"> <br>
+					<br>
 					<h6 style="font-weight: bold;">구매자 정보</h6>
-					<input type="checkBox" id="memberAddr" name="memberInfo"><label>주문자
+					<input type="checkBox" id="memberInfo" name="memberInfo" checked><label>주문자
 						정보와 동일</label>
 					<div style="width: 100%;">
 						<table class="table" id="basket_3">
-							<tbody>
-								<c:if test="${ member ne null }">
-									<!--만약 체크 되어진다면 회원 정보에 저장된 이름, 메일 , 연락처 , 주소지 를 가져오고
+							<tbody id="deliveryInfo" style="display: none;" c>
+								<!--만약 체크 되어진다면 회원 정보에 저장된 이름, 메일 , 연락처 , 주소지 를 가져오고
                           	체크가 안될경우 따로 input 에 입력해서 그 값을 결제정보에 넘기기  -->
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">이름</th>
-										<td>${ member.memberName}</td>
-									</tr>
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">이메일</th>
-										<td>${ member.email}}</td>
-									</tr>
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">연락처</th>
-										<td>${ member.phone }</td>
-									</tr>
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">배송주소</th>
-										<td>${ member.address }${member.detailAddress}</td>
-									</tr>
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">배송요청사항</th>
-										<td><select name="dMessage">
-												<option>부재 시 문앞에 놔주세요.</option>
-												<option>배송 전 연락부탁드립니다.</option>
-												<option>문앞에 사나운 강아지가 있습니다.주의하세요.</option>
-										</select></td>
-									</tr>
-								</c:if>
+								<tr>
+									<th scope="row"
+										style="color: white; background-color: #343A40; width: 15%; text-align: right;">이름</th>
+									<td>${ member.memberName}</td>
+								</tr>
+								<tr>
+									<th scope="row"
+										style="color: white; background-color: #343A40; width: 15%; text-align: right;">이메일</th>
+									<td>${ member.email}</td>
+								</tr>
+								<tr>
+									<th scope="row"
+										style="color: white; background-color: #343A40; width: 15%; text-align: right;">연락처</th>
+									<td>${ member.phone }</td>
+								</tr>
+								<tr>
+									<th scope="row"
+										style="color: white; background-color: #343A40; width: 15%; text-align: right;">배송주소</th>
+									<td>${ member.address }${member.detailAddress}</td>
+								</tr>
+								<tr>
+									<th scope="row"
+										style="color: white; background-color: #343A40; width: 15%; text-align: right;">배송요청사항</th>
+									<td><select name="dMessage">
+											<option>부재 시 문앞에 놔주세요.</option>
+											<option>배송 전 연락부탁드립니다.</option>
+											<option>문앞에 사나운 강아지가 있습니다.주의하세요.</option>
+									</select></td>
+								</tr>
+							</tbody>
+							<!--만약 체크 되어진다면 회원 정보에 저장된 이름, 메일 , 연락처 , 주소지 를 가져오고
+                          		체크가 안될경우 따로 input 에 입력해서 그 값을 결제정보에 넘기기  -->
+							<tbody id="receiverInfo">
+								<tr>
+									<th scope="row"
+										style="color: white; background-color: #343A40; width: 15%; text-align: right;">이름</th>
+									<td><input type="name" name="userName"
+										placeholder="이름을 입력하세요"></td>
+								</tr>
+								<tr>
+									<th scope="row"
+										style="color: white; background-color: #343A40; width: 15%; text-align: right;">이메일</th>
+									<td><input type="email" name="email"
+										placeholder="이메일을 입력하세요"></td>
+								</tr>
+								<tr>
+									<th scope="row"
+										style="color: white; background-color: #343A40; width: 15%; text-align: right;">연락처</th>
+									<td><input type="phone" name="phone"
+										placeholder="핸드폰 번호를 입력하세요"></td>
+								</tr>
+								<tr>
+									<th rowspan="4" scope="row"
+										style="color: white; background-color: #343A40; width: 15%; height: 100px; text-align: right;">배송주소</th>
 
 
-								<c:if test="${ member eq null}">
-									<!--만약 체크 되어진다면 회원 정보에 저장된 이름, 메일 , 연락처 , 주소지 를 가져오고
-                          	체크가 안될경우 따로 input 에 입력해서 그 값을 결제정보에 넘기기  -->
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">이름</th>
-										<td><input type="text" name="userName"
-											placeholder="이름을 입력하세요"></td>
-									</tr>
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">이메일</th>
-										<td><input type="email" name="email"
-											placeholder="이메일을 입력하세요"></td>
-									</tr>
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">연락처</th>
-										<td><input type="phone" name="phone"
-											placeholder="폰 번호를 입력하세요"></td>
-									</tr>
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">배송주소</th>
+									<td rowspan="4">
+										<input type="name" class="form-control"
+										aria-describedby="emailHelp" id="postcode" placeholder="우편번호"
+										name="zipcode" style="width:100px; float:left;">
+									
+									<input type="button" onclick="execDaumPostcode()"
+										value="우편번호 찾기" style="font-size: 12px; padding: 9px 3px 9px 3px;"
+										class="btn btn-secondary">
+									<br>
+									
+									<input type="name" class="form-control"
+										aria-describedby="emailHelp" id="address" name="address"
+										placeholder="주소" style="width: 100%; text-align:left;">
+									
+									<input type="name" class="form-control"
+										aria-describedby="emailHelp" id="detailAddress"
+										name="detailAddress" placeholder="상세주소" required
+										style="width: 100%;"></td>
+								</tr>
+								<tr></tr>
+								<tr></tr>
+								<tr></tr>
+
+
+								<!-- 
 										<td><input type="text" id="postcode" placeholder="우편번호"
 											name="zipcode"></td>
 										<td><input type="button" onclick="execDaumPostcode()"
@@ -372,18 +425,17 @@
 										<td><input type="text" id="address" name="address"
 											placeholder="주소"><br></td>
 										<td><input type="text" id="detailAddress"
-											name="detailAddress" placeholder="상세주소" required></td>
-									</tr>
-									<tr>
-										<th scope="row"
-											style="color: white; background-color: #343A40; width: 15%; text-align: right;">배송요청사항</th>
-										<td><select name="dMessage">
-												<option>부재 시 문앞에 놔주세요.</option>
-												<option>배송 전 연락부탁드립니다.</option>
-												<option>문앞에 사나운 강아지가 있습니다.주의하세요.</option>
-										</select></td>
-									</tr>
-								</c:if>
+											name="detailAddress" placeholder="상세주소" required></td> -->
+
+								<tr>
+									<th scope="row"
+										style="color: white; background-color: #343A40; width: 15%; text-align: right;">배송요청사항</th>
+									<td><select name="dMessage">
+											<option>부재 시 문앞에 놔주세요.</option>
+											<option>배송 전 연락부탁드립니다.</option>
+											<option>문앞에 사나운 강아지가 있습니다.주의하세요.</option>
+									</select></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

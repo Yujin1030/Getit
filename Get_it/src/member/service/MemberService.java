@@ -249,6 +249,30 @@ public class MemberService {
 
 		return result;
 	}
+	public int shoppingPayInsertCurr(StringBuilder sb, String userId, String pCode, int allPrice,String dMessage){
+		int result = 0;
+		Connection conn =null;
+		try {
+			conn = factory.createConnection();
+			result = new MemberDAO().shoppingPayInsertCurr(conn, sb, userId, pCode, allPrice, dMessage);
+			
+			if (result > 0) {
+				JDBCTemplate.commit(conn);
+
+			}else {
+				JDBCTemplate.rollback(conn);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);			
+		}
+
+
+		return result;
+	}
 	
 	public int insertPay(String pCode , String userId , StringBuilder sb , int allPrice) {
 		int result = 0;
