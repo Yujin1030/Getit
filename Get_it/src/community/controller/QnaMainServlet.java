@@ -1,6 +1,7 @@
-package product.controller;
+package community.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,17 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import community.model.service.CommunityService;
+import community.model.vo.QnA;
+import community.model.vo.QnaPageData;
+
 /**
- * Servlet implementation class reviewUpdateView
+ * Servlet implementation class ReviewMainServlet
  */
-@WebServlet("/recommend/review/update")
-public class reviewUpdateView extends HttpServlet {
+@WebServlet("/qna/main")
+public class QnaMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reviewUpdateView() {
+    public QnaMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,16 +33,22 @@ public class reviewUpdateView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-//		System.out.println(reviewNo);
-		String pCode = request.getParameter("pCode");
-		String pFilename = request.getParameter("pFilename");
-//		System.out.println(pCode);
-		request.setAttribute("pFilename", pFilename);
-		request.setAttribute("reviewNo", reviewNo);
-		request.setAttribute("pCode", pCode);
-		request.getRequestDispatcher("/WEB-INF/views/recommend/recommendUpdate.jsp").forward(request,response);
-
+		int currentPage =0;
+		if(request.getParameter("currnetPage")==null) {
+			currentPage =1;
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		QnaPageData pagedata = new CommunityService().selectQnaAll(currentPage);
+		ArrayList<QnA> qnaList = pagedata.getQnaList();
+		if(!qnaList.isEmpty()&&qnaList!=null) {
+			request.setAttribute("qnaList", qnaList);
+			request.setAttribute("pageNavi", pagedata.getPageNavi());
+			request.getRequestDispatcher("/WEB-INF/views/community/qnaReview.jsp").forward(request, response);
+		}else {
+			System.out.println("오류");
+		}
+		
 	}
 
 	/**

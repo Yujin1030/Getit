@@ -5,7 +5,7 @@
 /* 검색창 css 부분 */
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'); 
 
 
 body {
@@ -15,12 +15,12 @@ body {
     box-sizing: border-box;
 }
 
-/*
+
 
  div {
     border: 1px solid black;
 } 
-*/
+
 
 
 header {
@@ -322,13 +322,11 @@ section {
     position: absolute;
     height: 0px;
     overflow: hidden;
-/*
-    transition: height .2s;
+   	transition: height .2s;
     -webkit-transition: height .2s;
     -moz-transition: height .2s;
     -o-transition: height .2s;
-*/
-    width: 574px;
+    width: 574px; 
     /* [변경] 가로 드랍다운 메뉴의 넓이 */
 }
 
@@ -408,6 +406,7 @@ section {
 
 .card img:hover{
 	transform: scale(1.1);
+	transition: all 0.3s ease-in-out; 
 }
 
 #section_contents_inner img {

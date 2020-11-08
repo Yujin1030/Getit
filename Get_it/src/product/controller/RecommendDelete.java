@@ -1,7 +1,6 @@
-package product.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import member.vo.Member;
-import product.model.service.RecommendService;
+import member.model.vo.Member;
+import product.model.service.recommend.RecommendService;
 
 /**
  * Servlet implementation class reviewdelete
  */
-@WebServlet("/review/delete")
-public class reviewdelete extends HttpServlet {
+@WebServlet("/recommend/delete")
+public class RecommendDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reviewdelete() {
+    public RecommendDelete() {
         super();
         // TODO Auto-generated constructor stub
     }

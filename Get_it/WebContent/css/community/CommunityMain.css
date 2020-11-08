@@ -4,26 +4,20 @@
 
 body {
     width:1890px;
-    height: 3500px;
-    /*height: 3500px;*/
+    height:1500px;
     font-family: 'Sawarabi Gothic', sans-serif;
 }
 
-form {
- 	display: inline;
-}
 
-
- 
-/*  div {
+/* div {
     border : 1px solid black;
-    border box-sizing: border-box; 
-}  */
- 
+} */
+
+
 
 header {
     width:100%;
-    height:1.3%;
+    height:2%;
 }
 
 #nav_bar {
@@ -37,6 +31,15 @@ header {
     width:33.33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333%;
     height:100%;
     float: left;
+}
+
+#card-body {
+	height: 110px;
+}
+
+#card-title {
+	font-size: 15px;
+	font-weight: bold;
 }
 
 #nav_bar_menu ul li {
@@ -162,16 +165,16 @@ input[type="submit"] {
 
 section {
     width:100%;
-    height:96%;
+    height:88%;
 }
 
 #main_image {
     width:100%;
-    height:30%;
+    height:60%;
     float:left;
 }
 
-/*#section_title {
+#section_title {
     width:100%;
     height:3%;
     float:left;
@@ -179,7 +182,60 @@ section {
     font-family: 'Sawarabi Gothic', sans-serif;
     text-align: center;
     font-weight: bold;
-}*/
+}
+
+#section_title2 {
+    width:100%;
+    height:12%;
+    float:left;
+    font-size: 17px;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    text-align: center;
+  
+    /* font-weight: bold; */
+}
+#section_title3{
+ 	width:100%;
+    height:10%;
+    float:left;
+    font-size: 17px;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    text-align: center;
+}
+
+.section_title3_left{
+	width:70%;
+    height:100%;
+    float:left;
+    padding-left:550px;
+    line-height: 100px;
+}
+.section_title3_right{
+	width:30%;
+    height:100%;
+    float:left;
+    padding-left:110px;
+    line-height: 100px;
+}
+#section_title2 p a {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
+#section_title2 p a:hover {
+	font-size: 22px;
+	display: inline-block;
+}
+
+#wrap2 {
+  	position: relative;
+  	float: right;
+  	height:30%;
+  	width:20%;
+  	margin-right: 10%;
+  	margin-bottom: 30%;
+}
 
 #section_title p {
     margin-top: 9px;
@@ -198,7 +254,7 @@ section {
 }
 
 #section_contents_inner{
-    width:25%;
+    width:22%;
     height: 100%;
     float:left;
 }
@@ -209,15 +265,22 @@ section {
     font-family: 'Sawarabi Gothic', sans-serif;
 }
 
-#card {
-    padding-left: 7%;
-}
-
 #section_contents_inner img {
-    width:325px;
+    width:328px;
     height:260px;
 }
 
+#section_contents_inner_empty {
+    width:4%;
+    height: 100%;
+    float:left;
+}
+
+#tb-list {
+    width: 80%; 
+    margin: 0 auto;
+    text-align: center;
+}
 
 #empty_space1{
     width:100%;
@@ -227,208 +290,32 @@ section {
 
 #empty_space2 {
     width:10%;
-    height : 25%;
+    height : 100%;
     float:left
 }
 
-
-
-
-
-
-/* SECTION CONTENT*/
-/*.secContentArea{
-    margin: 100px;
-    width: 100%;
-    height: 78%;
-    float: left; ㅅㅂ
-}*/
-
-hr{
-   border: 0.5px solid gray;
+#paging {
+	display: inline-block;
+	margin: 0px auto;
 }
 
-.selfsection {
-    width: 100%;
-    height: 100%;
-    float: left;
+.pagination li {
+	padding: 5px;
 }
 
-.secHeader {
-    width: 100%;
-    height: 10%;
-    float: left;
+.pagination li a {
+	color: black;
+	background-color: #efeff5;
 }
 
-.sectextLine {
-    margin-top: 100px;
-    margin-left: 95px;
-    text-align: left;
-    font-size: 25px;
-    width: 100%;
-    height: 60%;
-    float: left;
-}
-
-.sectextLineMiddle {
-    width: 100%;
-    height: 10%;
-    float: left;
-    text-align: center;
-    font-size: 40px;
-    font-style: oblique;
-}
-
-
-/* 섹션 컨탠츠 라인*/
-
-.selfsectionContent {
-    width: 100%;
-    height: 60%;
-    padding-left: 100px;
-    padding-right: 100px;
-    float: left;
-}
-
-.componentArea {
-    width: 100%;
-    height: 60%;
-    float: left;
-}
-
-
-.componentAreaTopTitle {
-    width: 100%;
-    height: 7%;
-    padding-top: 20px;
-    float: left;
-}
-
-/*.Component {
-    height: 5%;
-    width: 100%;
-    float: left;
-}*/
-
-
-.componenMenu{
-    width: 100%;
-    height: 5%;
-    float: left;
-}
-.productListTop{
-    width: 100%;
-    height: 3%;
-    float: left;
-}
-.productList {
-    width: 100%;
-    height: 9%;
-    float: left;
-    
-}
-.productList2 {
-    width: 100%;
-    height: 14.4%;
-    float: left;
-}
-
-.productButton,
-.componentMenuBar{
-    width: 15%;
-    height: 100%;
-    float: left;
-    text-align: center;
-}
-
-.productName{
-    width: 40%;
-    height: 100%;
-    float: left;
-    text-align: left;
-    font-size: 17px;
-    font-family: 'Sawarabi Gothic', sans-serif;
-    font-weight:bold;
-}
-
-.componentMenuBarTwo{
-    width: 40%;
-    height: 100%;
-    float: left;
-    text-align: center;
-}
-
-.productCount,
-.componentMenuBarThree{
-    width: 20%;
-    height: 100%;
-    float: left;
-    text-align: right;
-}
-.productPrice,
-.componentMenuBarFour{
-    width: 20%;
-    height: 100%;
-    float: left;
-    text-align: right;
-}
-.productDelete {
-    width: 5%;
-    height: 100%;
-    float: left;
-    text-align: center;
-}
-
-/* 기타 영역*/
-.componentAreaTwo {
-    width: 100%;
-    height: 30%;
-    /*border: 1px solid black;*/
-    float: left;
-}
-.componentAreaTopTitleTwo {
-    width: 100%;
-    height: 11%;
-    padding-top: 20px;
-    float: left;
-}
-.nullArea {
-    float: left;
-    width: 100%;
-    height: 5%;
-}
-.BuyCartArea{
-    width: 100%;
-    height: 2%;
-    text-align: center;
-    float: left;
-}
-
-
-button {
-    outline: 0;
-    border: 0;
-    background-color: white;
-} 
-.productButton img {
-    width: 60px;
-    height: 60px;
-}
-
-
-
-
-
-
-#empty_space2 {
-    width:10%;
-    height :25%;
-    float:left;
+.pagination li a:hover {
+	background-color: #595959;
+	color: white;
 }
 
 footer {
     width:100%;
-    height:1.5%;
+    height:10%;
 }
 
 #footer_icon {
@@ -452,18 +339,18 @@ footer {
 
 #footer_empty {
     width:100%;
-    height:100%;
+    height:20%;
     float: left;
 }
 
 #footer_icon_split {
     width:100%;
-    height:100%;
+    height:40%;
     float: left;
 }
 
 #footer_contents1 {
     width:100%;
-    height:100%;
+    height:40%;
     float: left;
 }

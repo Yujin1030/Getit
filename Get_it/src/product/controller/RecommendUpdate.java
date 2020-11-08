@@ -1,4 +1,4 @@
-package community.controller;
+package product.controller.recommend;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,20 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import community.model.service.CommunityService;
+import member.model.vo.Member;
+import product.model.service.recommend.RecommendService;
 
 /**
- * Servlet implementation class QnaUpdate
+ * Servlet implementation class reviewupdate
  */
-@WebServlet("/qna/update")
-public class QnaUpdate extends HttpServlet {
+@WebServlet("/recommend/update")
+public class RecommendUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaUpdate() {
+    public RecommendUpdate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +31,25 @@ public class QnaUpdate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		HttpSession session = request.getSession();
+		String pCode = request.getParameter("pCode");
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
+		String pFilename = request.getParameter("pFilename");
+		int result =0;
+		int reviewNo =0;
+		String memberId ="";
+		//if(((Member)session.getAttribute("memeber")!=null)) {
+		reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		memberId = ((Member)session.getAttribute("member")).getMemberId(); 
+		result = new RecommendService().reviewUpdate(memberId,pCode,title,contents,reviewNo);
+		//}
 		
-		int result = new CommunityService().qnaUpdate(qnaNo,title,contents);
-		if(result>0) {
-			request.setAttribute("qnaNo", qnaNo);
-			request.getRequestDispatcher("/qna/detail").forward(request, response);
-		}
+		  if(result>0) { request.setAttribute("pFilename", pFilename);
+		  request.setAttribute("pCode", pCode);
+		  request.getRequestDispatcher("/recommend/detail").forward(request, response);
+		  }else { response.sendRedirect("서비스요청실패"); }
+		 
 	}
 
 	/**
