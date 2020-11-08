@@ -22,7 +22,7 @@ public class OrderList {
 	private int serialNo;
 	private String sepCode;
 	private String pName;
-	private String pPrice;
+	private int pPrice;
 	private int pAccount;
 	private String pContents;
 	private String pCategory;
@@ -185,11 +185,11 @@ public class OrderList {
 		this.pName = pName;
 	}
 
-	public String getpPrice() {
+	public int getpPrice() {
 		return pPrice;
 	}
 
-	public void setpPrice(String pPrice) {
+	public void setpPrice(int pPrice) {
 		this.pPrice = pPrice;
 	}
 
@@ -249,7 +249,4 @@ public class OrderList {
 		this.relatedProduct = relatedProduct;
 	}
 
-	
-	
-	
 }

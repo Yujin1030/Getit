@@ -248,7 +248,7 @@ public class MemberDAO {
 					orderList.setSerialNo(rset.getInt("SERIAL_NO"));
 					orderList.setSepCode(rset.getString("SEP_CODE"));
 					orderList.setpName(rset.getString("P_NAME"));
-					orderList.setpPrice(rset.getString("P_PRICE"));
+					orderList.setpPrice(rset.getInt("P_PRICE"));
 					orderList.setpAccount(rset.getInt("P_ACCOUNT"));
 					orderList.setpContents(rset.getString("P_CONTENTS"));  
 					orderList.setpCategory(rset.getString("P_CATEGORY"));
@@ -351,10 +351,12 @@ public class MemberDAO {
 				orderList.setdStatus(rset.getString("D_STATUS"));
 				orderList.setPayDate(rset.getDate("PAY_DATE"));
 				orderList.setMemberId(rset.getString("MEMBER_ID"));
+				orderList.setDeliveryAddress(rset.getString("DELIVERY_ADDRESS"));
+				orderList.setAllPrice(rset.getInt("ALLPRICE"));
 				orderList.setSerialNo(rset.getInt("SERIAL_NO"));
 				orderList.setSepCode(rset.getString("SEP_CODE"));
 				orderList.setpName(rset.getString("P_NAME"));
-				orderList.setpPrice(rset.getString("P_PRICE"));
+				orderList.setpPrice(rset.getInt("P_PRICE"));
 				orderList.setpAccount(rset.getInt("P_ACCOUNT"));
 				orderList.setpContents(rset.getString("P_CONTENTS"));
 				orderList.setpCategory(rset.getString("P_CATEGORY"));
