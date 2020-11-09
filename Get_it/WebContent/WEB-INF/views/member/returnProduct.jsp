@@ -120,7 +120,7 @@
 								<a class="dropdown-item" href="/order/info?userId=${sessionScope.member.memberId }">Order Info</a>
 								
 								<c:if test="${ sessionScope.member.memberId eq 'admin'}">
-								<a class="dropdown-item" href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
+								<a class="dropdown-item" href="/member/admin">Admin Page</a>
 								</c:if>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/member/logout">LogOut</a>
@@ -172,10 +172,10 @@
 					  <div class="card" style="width: 100%; padding:20px 27px 20px 27px;">
 					<h6 style="font-weight: bold;text-align: left; font-size:18px; ">반품사유</h6>
 					
-						<select>
-							<option>단순변심 - 상품이 마음에 들지않음</option>
-							<option>상품이 설명과 다름</option>
-							<option>상품 파손 및 불량품 배송</option>
+						<select name="returnRE">
+							<option value="dsbs">단순변심 - 상품이 마음에 들지않음</option>
+							<option value="diff">상품이 설명과 다름</option>
+							<option value="faulty">상품 파손 및 불량품 배송</option>
 						</select>
 					</div>
 					<br>

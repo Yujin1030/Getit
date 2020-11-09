@@ -119,7 +119,7 @@
 								<a class="dropdown-item" href="/order/info?userId=${sessionScope.member.memberId }">Order Info</a>
 								
 								<c:if test="${ sessionScope.member.memberId eq 'admin'}">
-								<a class="dropdown-item" href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
+								<a class="dropdown-item" href="/member/admin">Admin Page</a>
 								</c:if>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/member/logout">LogOut</a>
@@ -146,17 +146,17 @@
                     <h2 style="text-align: center; font-family: 'Libre Baskerville', serif; font-weight: bolder; font-size: 40px; color:#0c4237">Change</h2>
 					
 					<br>
-					<h6 style="font-weight: bold; text-align: left;">${rOder.payDate}</h6>
+					<h6 style="font-weight: bold; text-align: left;">${cOrder.payDate}</h6>
 					<div class="card" style="width: 100%;">
 					   	<div class="card-body" style="width: 100%; float:left;">
                             <div style="width:25%; padding:10px; float: left;">
-								${rOrder.pFileName}
+								${cOrder.pFileName}
 							</div>
 							<div style="width:75%; padding:10px; text-align: left; float: left; text-decoration: none;">
-								<ul style="text-decoration: none;">
-									<li style="font-weight: bolder; font-size: 20px; ">${rOrder.pName}</li>
-									<li style="color:dimgray;">${rOrder.pContents}</li>
-									<li style="text-align: right; color:gray; font-size: 12px;">${rOrder.pPrice} · ${rOrder.pAccount } </li>
+								<ul style="list-style: none;">
+									<li style="font-weight: bolder; font-size: 20px; ">${cOrder.pName}</li>
+									<li style="color:dimgray;">${cOrder.pContents}</li>
+									<li style="text-align: right; color:gray; font-size: 12px;">${cOrder.pPrice}원 · ${cOrder.pAccount }개 </li>
 									
 								</ul>
 							</div>

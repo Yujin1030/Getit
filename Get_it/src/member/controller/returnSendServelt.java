@@ -1,6 +1,8 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,13 +49,28 @@ public class returnSendServelt extends HttpServlet {
 		int result = new MemberService().updateReturn(orderList);
 		
 		if(result>0) {
-			request.getRequestDispatcher("/WEB-INF/views/main/index.jsp").forward(request, response);
+			 response.setContentType("text/html; charset=UTF-8");
+				PrintWriter writer = response.getWriter();
+				writer.println("<script>alert('반품신청이 완료 되었습니다.'); location.href='/mainpage/view';</script>"); 
+				writer.close();
+			/*request.getRequestDispatcher("/WEB-INF/views/main/index.jsp").forward(request, response);*/
 			
 		}
 		else {
 			request.getRequestDispatcher("/WEB-INF/views/member/memberError.html").forward(request, response);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('반품 실패! 고객센터로 연락주세요.'); location.href='/mainpage/view';</script>"); 
+			writer.close();
 		}
 		
+		
+		 
+	
+		
+		 
+		 
+	 
 	}
 
 	/**

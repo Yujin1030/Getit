@@ -33,24 +33,31 @@ public class shoppingBagPayServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
-		
 		// 장바구니 거치고 결제
 		 HttpSession session = request.getSession(); 
 		 String userId = ((Member)session.getAttribute("member")).getMemberId();
 		 
-		 
-		 
-		 String address=((Member)session.getAttribute("member")).getAddress();
-		 String detailAddress =((Member)session.getAttribute("member")).getDetailAddress();
-		 String zipcode =((Member)session.getAttribute("member")).getZipcode();
 		 StringBuilder sb = new StringBuilder();
-		 sb.append(address);
-		 sb.append(detailAddress);
-		 sb.append(zipcode);
+		 String otherAddr = request.getParameter("address");
+		 String otherDetailAddr = request.getParameter("detailAddress");
+		 String otherZipcode = request.getParameter("zipcode");
 		 
-		 // 배송주소
-		 sb.toString(); 
+		 if ( otherAddr == "" && otherDetailAddr == "" && otherZipcode == "") {
+			 String address=((Member)session.getAttribute("member")).getAddress();
+			 String detailAddress =((Member)session.getAttribute("member")).getDetailAddress();
+			 String zipcode =((Member)session.getAttribute("member")).getZipcode();
+			// 배송주소
+			 sb.append(address);
+			 sb.append(detailAddress);
+			 sb.append(zipcode);
+		 }else {
+			 sb.append(otherAddr);
+			 sb.append(otherDetailAddr);
+			 sb.append(otherZipcode);
+		 }
+		 
+		 
+		 
 		 // 상품코드
 		 String [] pCode = request.getParameterValues("checkRow");
 		 // 총 금액

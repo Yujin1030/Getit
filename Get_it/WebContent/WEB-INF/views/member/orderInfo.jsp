@@ -74,23 +74,21 @@
 					</form> -->
 				</div>
 				<c:if test="${ sessionScope.member eq null }">
-					<div id="cart">
+				<div id="cart">
+					
+					<a href="#"><i class="fas fa-shopping-cart fa-lg"
+						style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
 
-						<a href="#"><i class="fas fa-shopping-cart fa-lg"
-							style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
-
-					</div>
+				</div>
 				</c:if>
-
+				
 				<c:if test="${ sessionScope.member ne null }">
-					<div id="cart">
+				<div id="cart">
+					
+					<a href="/member/shoppingbag?userId=${sessionScope.member.memberId }"><i class="fas fa-shopping-cart fa-lg"
+						style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
 
-						<a
-							href="/member/shoppingbag?userId=${sessionScope.member.memberId }"><i
-							class="fas fa-shopping-cart fa-lg"
-							style="color: #3d3d3d; margin-top: 12px; margin-left: 8px;"></i></a>
-
-					</div>
+				</div>
 				</c:if>
 
 				<c:if test="${ sessionScope.member eq null }">
@@ -104,7 +102,7 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="/login.html">Log In</a>
-								<div class="dropdown-divider"></div>
+									<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/enroll.jsp">회원가입</a>
 							</div>
 						</div>
@@ -121,15 +119,11 @@
 								class="fas fa-lg fa-user-astronaut" style='color: #3d3d3d;'></i>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item"
-									href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a>
-								<a class="dropdown-item"
-									href="/order/info?userId=${sessionScope.member.memberId }">Order
-									Info</a>
-
+								<a class="dropdown-item" href="/member/mypage?userId=${sessionScope.member.memberId }">MyPage</a> 
+								<a class="dropdown-item" href="/order/info?userId=${sessionScope.member.memberId }">Order Info</a>
+								
 								<c:if test="${ sessionScope.member.memberId eq 'admin'}">
-									<a class="dropdown-item"
-										href="/WEB-INF/views/admin/adminPage.jsp">Admin Page</a>
+								<a class="dropdown-item" href="/member/admin">Admin Page</a>
 								</c:if>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/member/logout">LogOut</a>
@@ -152,7 +146,7 @@
                     <div style="transform: translate(-50%, 0%); padding: 50px 50px 10px 50px; position: relative; top: 50%; left: 50%; text-align: center; width: 700px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); border-radius: 8px;"> 
                     
                         <div style="float:left; text-align:left;  width:50%; margin-left:-30px; margin-top:-45px;">${order.payDate }</div>
-                        <div style="text-align:right; margin-right:-30px; margin-top:-45px; "><a href="#" style="text-decoration:none;">주문 상세보기 > </a></div>
+                        <div style="text-align:right; margin-right:-30px; margin-top:-45px; "><a href="#" style="text-decoration:none;"><!-- 주문 상세보기 > --> </a></div>
                         
                         <div style="list-style:none; transform: translate(-50%, 0%); padding: 15px; position: relative; top: 50%; left: 50%; text-align: center; width: 650px; height: 230px; border: 1px solid lightgray; border-radius: 8px; margin: 5px;" >
                         
@@ -202,7 +196,7 @@
                             
                              <div style="list-style:none; width:100%; text-align:center; ">
                                             <div style=" padding: 5px 30px 5px 30px; float:left; border: 1px solid lightgray; margin:5px 5px 5px 100px;border-radius: 8px; "><a
-                                                href="/member/change?orderNo=${order.orderNo}" style="text-decoration:none;">교환신청</a></div>
+                                                href="/member/change?orderNo=${order.orderNo }" style="text-decoration:none;">교환신청</a></div>
                                             <div style=" padding: 5px 30px 5px 30px; float:left; border: 1px solid lightgray; margin:5px;border-radius: 8px;"><a href="/member/return?orderNo=${order.orderNo }" style="text-decoration:none;">반품신청</a></div>
                                             <div style="padding: 5px 30px 5px 30px; float:left; border: 1px solid lightgray; margin:5px;border-radius: 8px;"><a href="" style="text-decoration:none;">배송조회</a></div>
 				            </div>
