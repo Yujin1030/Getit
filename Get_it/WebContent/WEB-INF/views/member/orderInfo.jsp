@@ -153,34 +153,35 @@
                             <div style="text-align: left; width:100%;">
                             			<c:if
 											test="${order.payYN eq 'N' && order.dStatus eq null }">
-											<div>입금 전</div>
+											<div style="float:left">입금 전 　</div>
 										</c:if>
 										<c:if
 											test="${order.payYN eq 'Y' && order.dStatus eq null }">
-											<div>결제 완료</div>
+											<div style="float:left">결제 완료　</div>
 										</c:if>
 										<c:if
 											test="${order.dStatus eq 'B' && order.payYN eq 'Y' }">
-											<div>배송 준비</div>
+											<div style="float:left">배송 준비　</div>
 										</c:if>
 										<c:if
 											test="${order.dStatus eq 'D' && order.payYN eq 'Y' }">
-											<div>배송 중</div>
+											<div style="float:left">배송 중　</div>
 										</c:if>
 
 										<c:if test="${order.dStatus eq 'C' && order.payYN eq 'Y' }">
-											<div>배송 완료</div>
+											<div style="float:left">배송 완료　</div>
 										</c:if>
 
 										<c:if
 											test="${order.dStatus eq 'C' && order.returnYN eq 'Y' }">
-											<div>반품신청</div>
+											<div style="float:left">반품신청　</div>
 										</c:if>
 										<c:if
 											test="${order.dStatus eq 'C' && order.changeYN eq 'Y' }">
-											<div>교환신청</div>
+											<div style="float:left">교환신청　</div>
 										</c:if>
                             </div>
+                            <br>
                                 <div style="text-align: center;">
                                     <div style="width:25%; height:100%; padding:10px; float: left;">${order.pFileName}</div>
 
