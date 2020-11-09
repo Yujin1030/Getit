@@ -36,11 +36,6 @@ public class depositWaitingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
-		/*
-		 * HttpSession session = request.getSession(); String userId = ((Member)
-		 * session.getAttribute("member")).getMemberId();
-		 */
 
 		ArrayList<OrderM> dList = new AdminService().depositSearch();
 		System.out.println(dList);

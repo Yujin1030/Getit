@@ -1,7 +1,7 @@
 package adminPage.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import adminPage.service.AdminService;
-import adminPage.vo.OrderM;
 
 /**
- * Servlet implementation class DeliveryCompeleteServlet
+ * Servlet implementation class SendDeliveringServlet
  */
-@WebServlet("/admin/deliveryCompelete")
-public class DeliveryCompeleteServlet extends HttpServlet {
+@WebServlet("/send/delivering")
+public class SendDeliveringServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeliveryCompeleteServlet() {
+    public SendDeliveringServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +31,23 @@ public class DeliveryCompeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-
-		ArrayList<OrderM> dcList = new AdminService().dCompletedSearch();
-		System.out.println(dcList);
-
-		if (!dcList.isEmpty()) {
-			request.setAttribute("dcList", dcList);
-			request.getRequestDispatcher("/WEB-INF/views/admin/deliveringComplete.jsp").forward(request, response);
-
-		} else {
-			request.getRequestDispatcher("/WEB-INF/views/admin/deliveringComplete.jsp").forward(request, response);
-		}
+		int orderNo = Integer.parseInt(request.getParameter("orderNo"));
+		
+		int result = new AdminService().sendDelivering(orderNo);
+		
+		if(result>0) {
+			
+			 response.setContentType("text/html; charset=UTF-8");
+				PrintWriter writer = response.getWriter();
+				writer.println("<script>alert('결제가 완료처리 성공!'); location.href='/admin/readyfordelivery';</script>"); 
+				writer.close();
+			 
+		 }else {
+			 response.setContentType("text/html; charset=UTF-8");
+				PrintWriter writer = response.getWriter();
+				writer.println("<script>alert('결제 완료처리 실패!'); location.href='/admin/readyfordelivery.jsp';</script>"); 
+				writer.close();
+		 }
 	}
 
 	/**
